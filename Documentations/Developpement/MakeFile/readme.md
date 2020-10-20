@@ -14,7 +14,13 @@ Makefile
 ```Makefile
 # ------------------------------------------------
 # Generic Makefile
-# Date : 27/02/2020
+# Date : 19/10/2020
+#
+# Memo debug Makefile :
+# From https://www.gnu.org/software/make/manual/make.html#Make-Control-Functions
+# $(error   VAR is $(VAR))
+# $(warning VAR is $(VAR))
+# $(info    VAR is $(VAR))
 # ------------------------------------------------
 
 # Project configuration
