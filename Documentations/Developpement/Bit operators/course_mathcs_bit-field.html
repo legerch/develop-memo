@@ -1,0 +1,850 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><meta http-equiv="expires" content="0">
+
+
+
+<style type="text/css">
+table {font-size: 100%;}
+</style>
+</head>
+
+<body vlink="#f00000" text="#000000" link="#00ff00" bgcolor="#ffffff">
+
+<h3>
+<hr>
+Bit fields
+<hr>
+</h3>
+<ul>
+<p>
+</p><li> <font color="darkmagenta"><b>
+     Bit fields
+     </b></font>
+<p>
+ </p><ul>
+ <li> <b>Bit fields:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="blue"><b>Bit field</b></font> =
+      a <b><i>uniquely</i> C programming language feature</b> to
+      assign <font color="red"><b>names</b></font> to
+      <b>certain <i>bit positions</i></b>
+      in an <font color="blue"><b><tt>int</tt> typed variable</b></font>.
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <b>Example</b> on <font color="red"><b>how to</b></font>
+      use <font color="blue"><b>bit fields</b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+ <ul>
+  <li> Suppose a <font color="blue"><b>32 bits register</b></font> 
+     of a <font color="red"><b>hard disk device</b></font>  is
+    <b>partitioned (organized)</b> as follows:
+<p>
+</p><ul>
+<table border="5">
+
+<tbody><tr> <td>
+<img src="course_mathcs_bit-field_fichiers/bit-field1.gif">
+</td> </tr>
+
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> The following
+    <font color="blue"><b>bit field structure definition</b></font>
+    represents the <b>above structure</b>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   struct Disk_Register
+   {
+      <font color="red">unsigned int</font>  ready<font color="red">:1</font> ;     <font color="red">    // 1 bit field named "ready"</font>
+      <font color="red">unsigned int</font>  error<font color="red">:1</font> ;     <font color="red">    // 1 bit field named "error"</font>
+      <font color="red">unsigned int</font>  wr_prot<font color="red">:1</font> ;    
+      <font color="red">unsigned int</font>  dsk_spinning<font color="red">:1</font> ;  
+      <font color="red">unsigned int</font>  command<font color="red">:4</font> ;      <font color="red"> // 4 bits field named "command"</font>
+      <font color="red">unsigned int</font>  error_code<font color="red">:8</font> ;
+      <font color="red">unsigned int</font>  sector_no<font color="red">:16</font> ; 
+   };
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+You can then use the above
+  <font color="blue"><b>bit field structure definition</b></font> to
+  define <font color="red"><b>bit field variables</b></font>
+  (see example below)
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+
+     
+ </p></li></ul>
+
+<p>
+</p><hr>
+<hr>
+<p>
+</p><hr>
+<hr>
+<p>
+</p></li><li> <font color="darkmagenta"><b>
+     Example: bit field variables
+     </b></font>
+<p>
+</p><ul>
+<li> <b>Fact:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="blue"><b>Bit fields</b></font> are 
+    <font color="red"><b>much easier</b></font> to use than
+    <font color="magenta"><b>bit operations</b></font> with
+    <font color="blue"><b><tt>&amp;</tt></b></font> and
+    <font color="blue"><b><tt>|</tt></b></font> operators
+    because:
+<p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+ <ul>
+ <li> We can <b>access</b> the field by using
+       the <font color="red"><b>field name</b></font> !
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+(In contrats, using
+  <font color="blue"><b><tt>&amp;</tt></b></font> and
+  <font color="blue"><b><tt>|</tt></b></font> operations, you
+  need to use the
+  <font color="red"><b>bit position</b></font>
+  (a numeric value - which is harder to work with))
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <b>Example:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   struct Disk_Register
+   {
+      unsigned int  ready:1 ;         // 1 bit field named "ready"
+      unsigned int  error:1 ;         // 1 bit field named "error"
+      unsigned int  wr_prot:1 ;       
+      unsigned int  dsk_spinning:1 ;  
+      unsigned int  command:4 ;       // 4 bits field named "command"
+      unsigned int  error_code:8 ;
+      unsigned int  sector_no:16 ; 
+   };
+    
+   int main( int argc, char* argv[] )
+   {
+      struct Disk_Register  r;
+    
+      printf( "sizeof(r) = %d\n", sizeof(r) );    // 4 bytes (32 bits)
+    
+      int* <font color="red">p</font> = (int *) <font color="red">&amp;r</font>;      // Access r as in int through pointer p       
+    <font color="red">
+      *p = 0;                   // Clear all 32 bits in r !</font>
+    <font color="magenta">
+      r.error = 1;  </font>          <font color="red">  // Set the error bit (bit #30)    </font>
+      printBits( *p );          // Call the printBits() function 
+      putchar('\n');
+
+      <font color="magenta">r.dsk_spinning = 1;</font>      <font color="red"> // Set the dsk_spinning bit (bit #28)</font>
+      printBits( *p );          // Call the printBits() function 
+      putchar('\n');
+   }
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>Output:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   <font color="red">sizeof(r) = 4</font>
+   01000000000000000000000000000000
+   01010000000000000000000000000000              
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+ </p><p>
+ </p><hr>
+ <p>
+ </p></li><li> <font color="#00a000"><b> Example Program: </b></font>
+      (Demo above code)
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <sub><sub><sub>
+        <img src="course_mathcs_bit-field_fichiers/Example.jpg">
+        </sub></sub></sub>
+  <p>
+  </p><ul>
+  <li> Prog file:
+       <a href="http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/2-C-adv-data/Progs/bit-field1.c"> click here </a>
+  </li></ul>
+<p>
+ <b>How to run the program:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="blue"><b>Right click</b></font> on link(s) and
+      <font color="red"><b>save</b></font> in a scratch directory
+ <p>
+ </p></li><li> To compile: 
+  &nbsp; <font color="red"><b><tt>gcc bit-field1.c</tt></b></font>
+ </li><li> To run: 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <font color="red"><b><tt>./a.out</tt></b></font>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+</p></li></ul>
+
+
+<p>
+</p><hr>
+<hr>
+<p>
+</p><hr>
+<hr>
+<p>
+</p><hr>
+<hr>
+<p>
+</p></li><li> <font color="darkmagenta"><b>
+     <i>Re-mapping</i> the bits in bit fields
+     </b></font>
+<p>
+</p><ul>
+<li> <b>Programming trick:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> In the <b>above example</b>, I used
+      a <font color="red"><b>C programming trick</b></font> to
+       <font color="blue"><b>clear all 32 bits</b></font> in
+       the <font color="red"><b>bit field variable</b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   <font color="magenta">int*</font> p = <font color="magenta">(int *)</font> <font color="red">&amp;r</font>;  // We need to <font color="red">CAST</font> the 
+                         // "address of <font color="red">struct DiskRegister</font>"  
+			 // to an "address of int (int *)"
+    
+   <font color="red">*p</font> = 0;               // Clear all 32 bits in r !
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> A <font color="red"><b><i>cleaner</i> way</b></font> is to
+   use a <font color="blue"><b><tt>union</tt></b></font> to
+   <font color="red"><b>re-map</b></font> the
+   <b><i>same</i> 32 bits</b> onto an
+   <font color="blue"><b><tt>int</tt> typed component</b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   /* -------------------------------------------------------
+      Define the mapping of the 32 bits in the Disk Register
+      ------------------------------------------------------- */
+   struct Disk_Register
+   {
+      unsigned int  ready:1 ;         // 1 bit field named "ready"
+      unsigned int  error:1 ;         // 1 bit field named "error"
+      unsigned int  wr_prot:1 ;
+      unsigned int  dsk_spinning:1 ;
+      unsigned int  command:4 ;       // 4 bits field named "command"
+      unsigned int  error_code:8 ;
+      unsigned int  sector_no:16 ;
+   };
+  <font color="red"> 
+   /* ==========================================================
+      Re-map the 32 bits Disk Register AND a integer together
+      ========================================================== */</font>
+   union U_Disk_Register
+   {<font color="magenta">
+      struct Disk_Register  Reg;        // (1) 32 bits mapped as struct Disk_Register</font><font color="red">
+      int                   Whole_Reg;  // (2) 32 bits as one int</font>
+   };
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>Notice that:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+ <ul>
+ <li> The union <font color="red"><b><tt>union U_Disk_Register</tt></b></font>
+     has <font color="blue"><b>2 components</b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ol>
+ <li> <font color="blue"><b><tt>struct Disk_Register  Reg</tt></b></font>
+ </li><li> <font color="red"><b><tt>int Whole_Reg</tt></b></font>
+ </li></ol>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <b>Facts:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="red"><b><i>Both</i> variables</b></font>
+      (<font color="blue"><b><tt>Reg</tt></b></font> and
+      <font color="blue"><b><tt>Whole_Reg</tt></b></font>)
+      are <font color="red"><b>32 bites</b></font> in length
+ <p>
+ </p></li><li> <b>Because</b> it is a <font color="blue"><b><tt>union</tt></b></font>,
+      <font color="red"><b><i>both</i> variables</b></font>
+      (<font color="blue"><b><tt>Reg</tt></b></font> and
+      <font color="blue"><b><tt>Whole_Reg</tt></b></font>)
+      are <font color="red"><b>located in the <i>same</i> address</b></font>
+     in <b>memory</b>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+We have <b><i>effectively</i></b>
+ <font color="red"><b>re-mapped</b></font>
+ the <font color="blue"><b>32 bits</b></font> in a
+  <font color="red"><b><tt>struct Disk_Register</tt></b></font>
+  onto the <font color="blue"><b>32 bits</b></font> in an
+  <font color="red"><b><tt>int</tt></b></font> variable 
+  (these 2 variables occupy the <b>same memory cells</b>) !!!
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+</p><p>
+</p><hr>
+<p>
+</p></li><li> We can <b>now</b> <font color="blue"><b>access all 32 bits</b></font>
+     through the <font color="red"><b><tt>int</tt> type</b></font>
+     <b><i>component</i></b>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+<font color="red">
+<b>
+<pre>     Whole_Reg       
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>Example:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   struct Disk_Register
+   {
+      unsigned int  ready:1 ;         // 1 bit field named "ready"
+      unsigned int  error:1 ;         // 1 bit field named "error"
+      unsigned int  wr_prot:1 ;
+      unsigned int  dsk_spinning:1 ;
+      unsigned int  command:4 ;       // 4 bits field named "command"
+      unsigned int  error_code:8 ;
+      unsigned int  sector_no:16 ;
+   };
+  <font color="red"> 
+   /* ==========================================================
+      Re-map the 32 bits Disk Register AND a integer together
+      ========================================================== */</font>
+   union U_Disk_Register
+   {<font color="magenta">
+      struct Disk_Register  Reg;        // (1) 32 bits mapped as struct Disk_Register</font><font color="red">
+      int                   Whole_Reg;  // (2) 32 bits as one int</font>
+   };
+
+   int main( int argc, char* argv[] )
+   {<font color="red">
+      union U_Disk_Register  r; </font>
+    
+      printf( "sizeof(r) = %d\n", <font color="red">sizeof(r)</font> );   <font color="red">// Still 4 bytes !!!</font>
+    
+      <font color="red">r.Whole_Reg = 0</font>;          <font color="red">// Clear all 32 bits</font>
+    
+      r.Reg.error = 1;          // Set the error bit (bit #30)
+      printBits( <font color="red">r.Whole_Reg</font> ); // Call the printBits() function
+      putchar('\n');
+    
+      r.Reg.dsk_spinning = 1;   // Set the dsk_spinning bit (bit #28)
+      printBits( <font color="red">r.Whole_Reg</font> ); // Call the printBits() function
+      putchar('\n');
+   }
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>Output:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>  <font color="red">sizeof(r) = 4</font>			
+  01000000000000000000000000000000
+  01010000000000000000000000000000
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+ </p><p>
+ </p><hr>
+ <p>
+ </p></li><li> <font color="#00a000"><b> Example Program: </b></font>
+      (Demo above code)
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <sub><sub><sub>
+        <img src="course_mathcs_bit-field_fichiers/Example.jpg">
+        </sub></sub></sub>
+  <p>
+  </p><ul>
+  <li> Prog file:
+       <a href="http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/2-C-adv-data/Progs/bit-field2.c"> click here </a>
+  </li></ul>
+<p>
+ <b>How to run the program:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="blue"><b>Right click</b></font> on link(s) and
+      <font color="red"><b>save</b></font> in a scratch directory
+ <p>
+ </p></li><li> To compile: 
+  &nbsp; <font color="red"><b><tt>gcc bit-field2.c</tt></b></font>
+ </li><li> To run: 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <font color="red"><b><tt>./a.out</tt></b></font>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <b>Note:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+ <ul>
+ <li> A more <b>complex</b> re-mapping scheme is used
+      in <font color="red"><b>network programming</b></font>
+      (using <font color="blue"><b><i>multiple</i>
+    <tt>struct</tt>'s</b></font> inside the
+    <font color="red"><b><tt>union</tt> definition</b></font>).
+ <p>
+  We won't discuss this complex  re-mapping here....
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+</p></li></ul>
+
+<p>
+</p><hr>
+<hr>
+<p>
+</p><hr>
+<hr>
+<p>
+</p></li><li> <font color="darkmagenta"><b>
+     Warning: <i>portability problems</i> with bit fields
+     </b></font>
+<p>
+</p><ul>
+<li> <b>Portability problem:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+ <ul>
+ <li> When the <font color="blue"><b>same C program</b></font> is
+      <b>compiled</b> on
+      <font color="red"><b><i>different</i> systems</b></font>,
+      the <b>C program</b> may 
+      <font color="blue"><b><i>not</i> work properly</b></font>
+      when you use
+      <font color="red"><b>bit fields</b></font>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <b>Some portability problems:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="red"><b>Limit</b></font> on the
+       <font color="blue"><b>number of bits</b></font> in the
+       <b>bit field</b> structure.
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> Some compilers use <font color="blue"><b>32 bits</b></font>,
+     others may use <font color="red"><b>16 bits</b></font> !
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <font color="red"><b>Ordering</b></font> of the <b>bits</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> Some C compilers use the 
+    <font color="blue"><b>left to right</b></font> order, while
+      other C compiler use the
+      <font color="red"><b>right to left</b></font> order
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <b>Example:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   struct MyMap
+   {
+      unsigned int  b31:1;
+      unsigned int  b30:1;
+      unsigned int  b29:1;
+      unsigned int  b28:1;
+      unsigned int  b27:1;
+      unsigned int  b26:1;
+      unsigned int  b25:1;
+      unsigned int  b24:1;
+      unsigned int  b23:1;
+      unsigned int  b22:1;
+      unsigned int  b21:1;
+      unsigned int  b20:1;
+      unsigned int  b19:1;
+      unsigned int  b18:1;
+      unsigned int  b17:1;
+      unsigned int  b16:1;
+      unsigned int  b15:1;
+      unsigned int  b14:1;
+      unsigned int  b13:1;
+      unsigned int  b12:1;
+      unsigned int  b11:1;
+      unsigned int  b10:1;
+      unsigned int  b9:1;
+      unsigned int  b8:1;
+      unsigned int  b7:1;
+      unsigned int  b6:1;
+      unsigned int  b5:1;
+      unsigned int  b4:1;
+      unsigned int  b3:1;
+      unsigned int  b2:1;
+      unsigned int  b1:1;
+      unsigned int  b0:1;
+   };
+    
+   int main( int argc, char* argv[] )
+   {
+      struct MyMap r;
+    
+      printf( "sizeof(r) = %lu\n", sizeof(r) );
+    
+      int *p = (int *) &amp;r;        // Make p point to r
+    
+      *p = 0;                     // Clear all 32 bits in r                 
+      printBits( *p );            // Print the bits in r
+      putchar('\n');
+    
+      r.b0 = 1;
+      printBits( *p );            // Print the bits in r
+      putchar('\n');
+    
+      r.b8 = 1;
+      r.b9 = 1;
+      printBits( *p );            // Print the bits in r
+      putchar('\n');
+    
+      r.b16 = 1;
+      r.b17 = 1;
+      r.b18 = 1;
+      printBits( *p );            // Print the bits in r
+      putchar('\n');
+    
+      r.b30 = 1;
+      printBits( *p );            // Print the bits in r
+      putchar('\n');
+    
+   }
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>When run</b> on
+  <font color="red"><b>solar</b></font>:
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>  sizeof(r) = 4			
+  00000000000000000000000000000000          (left to right order)     
+  00000000000000000000000000000001
+  00000000000000000000001100000001
+  00000000000001110000001100000001
+  01000000000001110000001100000001
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>When run</b> on a <font color="blue"><b>lab machine (linux)</b></font>:
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>  sizeof(r) = 4			
+  00000000000000000000000000000000       (right to left order !)    
+  10000000000000000000000000000000
+  10000000110000000000000000000000
+  10000000110000001110000000000000
+  10000000110000001110000000000010
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+ </p><p>
+ </p><hr>
+ <p>
+ </p></li><li> <font color="#00a000"><b> Example Program: </b></font>
+      (Demo above code)
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <sub><sub><sub>
+        <img src="course_mathcs_bit-field_fichiers/Example.jpg">
+        </sub></sub></sub>
+  <p>
+  </p><ul>
+  <li> Prog file:
+       <a href="http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/2-C-adv-data/Progs/bit-field3.c"> click here </a>
+  </li></ul>
+<p>
+ <b>How to run the program:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="blue"><b>Right click</b></font> on link(s) and
+      <font color="red"><b>save</b></font> in a scratch directory
+ <p>
+ </p></li><li> To compile: 
+  &nbsp; <font color="red"><b><tt>gcc bit-field3.c</tt></b></font>
+ </li><li> To run: 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <font color="red"><b><tt>./a.out</tt></b></font>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+</p></li></ul>
+
+
+
+<p>
+</p></li></ul>
+<p>
+</p><hr>
+<hr>
+<hr>
+<hr>
+
+</body></html>

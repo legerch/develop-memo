@@ -1,0 +1,565 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><meta http-equiv="expires" content="0">
+
+
+
+<style type="text/css">
+table {font-size: 100%;}
+</style>
+</head>
+
+<body vlink="#f00000" text="#000000" link="#00ff00" bgcolor="#ffffff">
+
+<h3>
+<hr>
+Array of <i>bits</i>
+<hr>
+</h3>
+<ul>
+<p>
+</p><li> <font color="darkmagenta"><b>
+     Bit arrays
+     </b></font>
+<p>
+ </p><ul>
+ <li> <b>Fact:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> The <b>C programming language</b> does
+     <font color="red"><b><i>not</i></b></font> provide support
+     for <font color="blue"><b>array of <i>bits</i></b></font>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>However:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+ <ul>
+ <li> The <b>C programming language</b> provides
+      <font color="red"><b><i>all</i> the necessary operations</b></font>
+      to allow the <b>programmer (= <i>you</i>)</b>
+      to <font color="blue"><b>implement</b></font> 
+      an 
+    <font color="red"><b>"array of bits" data structure</b></font>.
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+ </p></li></ul>
+
+<p>
+</p><hr>
+<hr>
+<p>
+</p><hr>
+<hr>
+<p>
+</p></li><li> <font color="darkmagenta"><b>
+     Implementing an array of <i>bits</i>
+     </b></font>
+<p>
+</p><ul>
+<li> <b>What</b> is an <font color="blue"><b>array of bits</b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+ <ul>
+ <li> An <b>array of <i>bits</i></b> <font color="red"><b>A</b></font>
+      is an <b>array</b> where:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="red"><b><tt>A[i]</tt></b></font> = 
+      <font color="blue"><b>0</b></font> or
+      <font color="blue"><b>1</b></font>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <font color="red"><b><i>Trivial</i></b></font>
+      <b> implementation:</b>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+ <ul>
+ <li> Use an <font color="blue"><b>array of <tt>int</tt></b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>     int A[100];      // A[i] = 0 means false, A[i] = 1 means true       
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+ <p>
+ </p></li><li> <font color="red"><b>Disadvantage:</b></font>
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> Each <font color="red"><b><tt>int</tt></b></font> variable
+     is <font color="blue"><b>32 bits</b></font>
+ <p>
+ </p></li><li> We <font color="blue"><b>only</b></font> need
+     <font color="red"><b>1 bit</b></font> to represent
+     <font color="blue"><b>true/false</b></font>
+<p>
+
+ </p></li><li> We are  <b> wasting</b>
+     <font color="red"><b>31/32 (96.875%)</b></font> of the
+    <font color="blue"><b>memory space</b></font> !!!
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<hr>
+<hr>
+<p>
+</p></li><li> An <font color="red"><b><i>Efficient</i></b></font>
+      <b> implementation</b> of
+      <font color="blue"><b>bit arrays</b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+ <ul>
+ <li> Use an <font color="red"><b>array of <tt>int</tt></b></font>
+      (<b>because</b> the <b><i>most cost efficient</i></b> access to
+      <font color="blue"><b>memory</b></font> is accessing
+      <font color="red"><b><tt>int</tt> sized data</b></font>):
+<p>
+</p><ul>
+<table border="5">
+
+<tbody><tr> <td>
+<img src="course_matchcs_bit-array_fichiers/bit-array1.gif">
+</td> </tr>
+
+</tbody></table>
+</ul>
+<p>
+
+ </p><p>
+</p><hr>
+<p>
+ </p></li><li> <font color="blue"><b>Map</b></font> the
+      <font color="red"><b>bit array</b></font> onto
+      the <b>array of integer</b> as follows:
+<p>
+</p><ul>
+<table border="5">
+
+<tbody><tr> <td>
+<img src="course_matchcs_bit-array_fichiers/bit-array1a.gif">
+</td> </tr>
+
+</tbody></table>
+</ul>
+<p>
+</p><hr>
+<p>
+</p></li><li> <font color="blue"><b>Mapping function</b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <b>Element</b> with index <font color="red"><b><tt>k</tt></b></font> in
+       the <font color="blue"><b>bit array</b></font> is:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <b>bit <i>position</i></b>
+      <font color="blue"><b>k % 32 </b></font>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in the
+ </li><li> <b>array element</b> with index
+    <font color="red"><b>k/32</b></font>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+ </p></li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+</p></li></ul>
+
+
+<p>
+</p><hr>
+<hr>
+<p>
+</p><hr>
+<hr>
+<p>
+</p><hr>
+<hr>
+<p>
+</p></li><li> <font color="darkmagenta"><b>
+     Setting the <i>k</i><sup>th</sup> bit in array A
+     </b></font>
+<p>
+</p><ul>
+<li> <b>SetBit(A, k)</b>:
+     <font color="red"><b>set</b></font> the
+     <font color="blue"><b><i>k<sup>th</sup></i></b></font> bit
+     in the <font color="red"><b>bit array <tt>A</tt></b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>  <font color="red">Step-by-step:</font>
+
+      int i = <font color="red">k/32</font>;            // i = array index (use: A[i])
+      int pos = <font color="red">k%32</font>;          // pos = bit position in A[i]
+
+      unsigned int flag = 1;   // flag = 0000.....00001
+
+      flag = <font color="red">flag &lt;&lt; pos</font>;      // flag = 0000...010...000   (shifted k positions)
+
+      A[i] = <font color="red">A[i] | flag</font>;      // Set the bit at the k-th position in A[i]
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>"Professional" version:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   SetBit( A[ ],  k ):
+   
+      <font color="red">A[k/32] |= 1 &lt;&lt; (k%32)</font>;  // Set the bit at the k-th position in A[i]
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>In C macro definition:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   #define SetBit(A,k)     ( A[(k/32)] |= (1 &lt;&lt; (k%32)) )         
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p></li></ul>
+<p>
+</p><hr>
+<hr>
+<hr>
+<hr>
+<p>
+</p></li><li> <font color="darkmagenta"><b>
+      Clearing the <i>k</i><sup>th</sup> bit in array A
+     </b></font>
+<p>
+</p><ul>
+
+<li> <b>ClearBit(A, k)</b>:
+     <font color="red"><b>clear</b></font> the
+     <font color="blue"><b><i>k<sup>th</sup></i></b></font> bit
+     in the <font color="red"><b>bit array <tt>A</tt></b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>  <font color="red">Step-by-step:</font>
+
+      int i = <font color="red">k/32</font>;
+      int pos = <font color="red">k%32</font>;
+
+      unsigned int flag = 1;  // flag = 0000.....00001
+
+      flag = <font color="red">flag &lt;&lt; pos</font>;     // flag = 0000...010...000   (shifted k positions)
+      <font color="magenta"><b>flag = ~flag;</b></font><b>           // flag = 1111...101..111
+
+      A[i] = <font color="red">A[i] &amp; flag</font>;     // RESET the bit at the k-th position in A[i]
+</b></pre><b>
+</b>
+</b></font><b>
+
+</b></td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>Pro version:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   ClearBit(A, k): 
+<font color="red">
+      A[k/32] &amp;= ~(1 &lt;&lt; (k%32))</font>;                
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>In C macro definition:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="lightyellow">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>    #define ClearBit(A,k)   ( A[(k/32)] &amp;= ~(1 &lt;&lt; (k%32)) )         
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+</p></li></ul>
+<p>
+</p><p>
+</p><hr>
+<hr>
+<hr>
+<hr>
+<p>
+</p></li><li> <font color="darkmagenta"><b>
+     Testing the <i>k</i><sup>th</sup> bit in array A
+     </b></font>
+<p>
+</p><ul>
+
+<li> <b>TestBit(A, k)</b>:
+     <font color="red"><b>test</b></font> the
+     <font color="blue"><b><i>k<sup>th</sup></i></b></font> bit
+     in the <font color="red"><b>bit array <tt>A</tt></b></font>:
+<p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>  <font color="red">Step-by-step:</font>
+
+      int i = <font color="red">k/32</font>;
+      int pos = <font color="red">k%32</font>;
+
+      unsigned int flag = 1;  // flag = 0000.....00001
+
+      flag = <font color="red">flag &lt;&lt; pos</font>;     // flag = 0000...010...000   (shifted k positions)
+
+      if ( <font color="red">A[i] &amp; flag</font> )      // Test the bit at the k-th position in A[i]
+         // k-th bit is 1
+      else
+         // k-th bit is 0
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>Pro version:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#FFEEEE">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>   TestBit( A,  k ):
+  
+      if ( <font color="red">(A[k/32] &amp; (1 &lt;&lt; (k%32) )) != 0</font> )       
+         // k-th bit is 1
+      else
+         // k-th bit is 0   
+
+  Or:
+      if ( <font color="red">(A[k/32] &amp; (1 &lt;&lt; (k%32) )) </font> )    // value != 0 is "true" in C !    
+         // k-th bit is 1
+      else
+         // k-th bit is 0  
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+<b>In C macro definition:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="lightcyan">
+<tbody><tr> <td>
+
+<font color="blue">
+<b>
+<pre>    #define TestBit(A,k)    ( A[(k/32)] &amp; (1 &lt;&lt; (k%32)) )               
+</pre>
+</b>
+</font>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+ </p><p>
+</p><p>
+ </p><hr>
+ <p>
+ </p></li><li> <font color="#00a000"><b> Example Program: </b></font>
+      (Demo above code)
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <sub><sub><sub>
+        <img src="course_matchcs_bit-array_fichiers/Example.jpg">
+        </sub></sub></sub>
+  <p>
+  </p><ul>
+  <li> The <font color="red"><b>bit manipulation macros header</b></font>
+        file:
+       <a href="http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/1-C-intro/Progs/bit-ops.h"> click here </a>
+  </li><li> <b>Test</b> Prog file:
+       <a href="http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/1-C-intro/Progs/bit-array2.c"> click here </a>
+  </li></ul>
+<p>
+ <b>How to run the program:</b>
+</p><p>
+</p><ul>
+<table border="5" bgcolor="#CCFFCC">
+<tbody><tr> <td>
+
+ <ul>
+ <li> <font color="blue"><b>Right click</b></font> on link and
+      <font color="red"><b>save</b></font> in a scratch directory
+ <p>
+ </p></li><li> To compile: 
+  &nbsp; <font color="red"><b><tt>gcc bit-array2.c</tt></b></font>
+ </li><li> To run: 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <font color="red"><b><tt>a.out</tt></b></font>
+ </li></ul>
+
+</td> </tr>
+</tbody></table>
+</ul>
+<p>
+
+</p></li></ul>
+
+</li></ul>
+
+
+
+<p>
+
+</p><p>
+</p><hr>
+<hr>
+<hr>
+<hr>
+
+</body></html>
