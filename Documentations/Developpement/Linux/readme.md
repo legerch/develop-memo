@@ -38,6 +38,23 @@ htop
 watch -d grep -e Dirty: -e Writeback: /proc/meminfo
 ```
 
+- Reload `inittab` file :
+1. Via `init`
+```shell
+init q
+```
+
+  2. Via `telinit` :
+```shell
+telinit q
+```
+
+  3. By sending signal **SIGHUP** to the init process (PID 1) :
+```shell
+kill -1 1
+kill -SIGHUP 1
+```
+
 ## <a name="devices" /> Devices
 - List all devices :
 ```shell
