@@ -1,15 +1,16 @@
 # Linux tips
 
 Table of contents :
-1. [Hardware properties](#hardware_properties)
-2. [Process](#process)
-3. [Devices](#devices)
-4. [Directories](#directories)
-5. [Compilation](#compilation)
-6. [Modules](#modules)
-7. [Custom terminal commands](#custom_terminal_cmds)
+- [Linux tips](#linux-tips)
+  - [Hardware properties](#hardware-properties)
+  - [Process](#process)
+  - [Devices](#devices)
+  - [Directories](#directories)
+  - [Compilation](#compilation)
+  - [Modules](#modules)
+  - [Custom terminal commands](#custom-terminal-commands)
 
-## <a name="hardware_properties" /> Hardware properties 
+## Hardware properties 
 - List hardwares properties and driver informations
 ```shell
 lshw -h
@@ -21,7 +22,7 @@ lshw -C network
 - https://www.binarytides.com/linux-lshw-command/
 - https://www.geeksforgeeks.org/lshw-command-in-linux-with-examples/
 
-## <a name="process" /> Process
+## Process
 - Watch processus :
 ```shell
 watch -n 0.1 cat /pro/interrupts
@@ -55,13 +56,13 @@ kill -1 1
 kill -SIGHUP 1
 ```
 
-## <a name="devices" /> Devices
+## Devices
 - List all devices :
 ```shell
 cat /proc/bus/input/devices
 ```
 
-## <a name="directories" /> Directories
+## Directories
 - List all partitions
 ```shell
 lsblk
@@ -92,7 +93,7 @@ hexdump -C <fileName>
 mount -o loop <name> /mnt/
 ```
 
-## <a name="compilation" /> Compilation
+## Compilation
 - Get compilation/installation informations :
 ```shell 
 uname -a
@@ -108,13 +109,13 @@ strings <filename>
 make sdk
 ```
 
-## <a name="modules" /> Modules
+## Modules
 - List all availables modules
 ```shell
 find /lib/modules/$(uname -r) -type f -name '*.ko*'
 ```
 
-## <a name="custom_terminal_cmds" /> Custom terminal commands
+## Custom terminal commands
 
 Linux operating system allows users to create commands. To create custom commands :
 1. Check that `~/.bashrc` have routine to load custom commands :
