@@ -1,6 +1,6 @@
 # Instructions de débuggage
 
-Dans ce dossier se trouve des élements de documentation liés au DEBUG sous un environnement linux
+Dans ce dossier se trouve des élements de documentation liés au DEBUG sous un environnement linux.
 
 ## Configuration de la cible
 
@@ -78,11 +78,11 @@ Cas particuliers rencontrés :
 
 ### Utilisation de GDB
 
-Les principales commandes :
+Les **principales** commandes :
 - Backtrace : `backtrace` ou `bt` (`bt full` pour une backtrace détaillée)
 Permet d'obtenir une trace de la mémoire au moment du crash (_stack trace_).  
 Chaque invocation de fonctions comportera un identifiant, il est possible d'utiliser `frame <identifiant>` pour sélectionner une fonction particulière.  
-Il est ensuite possible d'utiliser `list` pour voir le code associé et `info locals``pour voir les variables locales.  
+Il est ensuite possible d'utiliser `list` pour voir le code associé et `info locals``pour voir les variables locales. 
 
 - Afficher la valeur d'une variable : `print <nomVariable>` ou `p <nomVariable>`
 - Lister les fonctions du programme : `info functions`
@@ -93,6 +93,11 @@ Il est ensuite possible d'utiliser `list` pour voir le code associé et `info lo
 - Afficher l'aide : `help`
 - Quitter GDB : `quit` ou `q`
 
+Les **breakpoints**, via le mot-clé `break` ou `b` :
+- `break <function>` : Placer un breakpoint sur une fonction
+- `break <linenum>` : Placer un breakpoint à un numéro de ligne
+- `break <filename:linenum>` : Placer un breakpoint à un numéro de ligne d'un fichier (utile lors du débuggage d'une application utilisant une librairie par exemple) 
+> Pour plus de commandes liées au breakpoint, voir : https://ftp.gnu.org/old-gnu/Manuals/gdb/html_node/gdb_28.html#SEC29
 
 > Docs :  
 > - https://visualgdb.com/gdbreference/commands/
