@@ -1,16 +1,15 @@
-# Linux tips
+**Table of contents :**
 
 Table of contents :
-- [Linux tips](#linux-tips)
-  - [Hardware properties](#hardware-properties)
-  - [Process](#process)
-  - [Devices](#devices)
-  - [Directories](#directories)
-  - [Compilation](#compilation)
-  - [Modules](#modules)
-  - [Custom terminal commands](#custom-terminal-commands)
+- [1. Hardware properties](#1-hardware-properties)
+- [2. Process](#2-process)
+- [3. Devices](#3-devices)
+- [4. Directories](#4-directories)
+- [5. Compilation](#5-compilation)
+- [6. Modules](#6-modules)
+- [7. Custom terminal commands](#7-custom-terminal-commands)
 
-## Hardware properties 
+# 1. Hardware properties 
 - List hardwares properties and driver informations
 ```shell
 lshw -h
@@ -22,10 +21,15 @@ lshw -C network
 - https://www.binarytides.com/linux-lshw-command/
 - https://www.geeksforgeeks.org/lshw-command-in-linux-with-examples/
 
-## Process
+# 2. Process
 - Watch processus :
 ```shell
 watch -n 0.1 cat /pro/interrupts
+```
+
+- Watch PID of an application (here we search application _app_ and _memcheck_)
+```shell
+watch -d "ps -a | grep 'app\|memcheck'"
 ```
 
 - Watch ressources used :
@@ -56,13 +60,13 @@ kill -1 1
 kill -SIGHUP 1
 ```
 
-## Devices
+# 3. Devices
 - List all devices :
 ```shell
 cat /proc/bus/input/devices
 ```
 
-## Directories
+# 4. Directories
 - List all partitions
 ```shell
 lsblk
@@ -93,7 +97,7 @@ hexdump -C <fileName>
 mount -o loop <name> /mnt/
 ```
 
-## Compilation
+# 5. Compilation
 - Get compilation/installation informations :
 ```shell 
 uname -a
@@ -109,13 +113,13 @@ strings <filename>
 make sdk
 ```
 
-## Modules
+# 6. Modules
 - List all availables modules
 ```shell
 find /lib/modules/$(uname -r) -type f -name '*.ko*'
 ```
 
-## Custom terminal commands
+# 7. Custom terminal commands
 
 Linux operating system allows users to create commands. To create custom commands :
 1. Check that `~/.bashrc` have routine to load custom commands :
@@ -158,6 +162,7 @@ function set-title(){
 # To perform host updates
 alias maj='sudo apt update && sudo apt full-upgrade'
 ```
+> Find complete custom `bash_aliases` here : ["Custom bash aliases"](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux/custom_bash_aliases.md)
 
 4. To reload `~/.bashrc` file :
 - Open new tab
