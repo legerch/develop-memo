@@ -30,8 +30,6 @@ fprintf(stream, "size_t value : zd", 42);
 ```
 > More details here : https://www.gnu.org/software/libc/manual/html_node/Integer-Conversions.html
 
-- Display hexadecimal values :
-
 ## 1.2. Enum errors
 
 In this case, we want negative errors value. This way, for function using this enums as returned value, if value is positive, operation is successful, otherwise, it failed.
@@ -59,9 +57,9 @@ typedef enum{
 ```
 
 - Define array to store string equivalent (prefer static memory). Enum values are use like index array :
-```
+```C
 static const char *arrayEnumNetErrorToString[] = {
-	"No error",			                            /* NETM_ERR_NO_ERROR */
+    "No error",			                            /* NETM_ERR_NO_ERROR */
     "File descriptor opening error",                /* NETM_ERR_FD_OPEN */
     "File descriptor setting property error",       /* NETM_ERR_FD_PROPERTY */
     "Socket configuration error",                   /* NETM_ERR_SOCKET_CFG */
@@ -76,7 +74,7 @@ static const char *arrayEnumNetErrorToString[] = {
     "Maximum number of client is already reached",  /* NETM_ERR_CLI_MAX */
     "Failed to connect to client",                  /* NETM_ERR_CLI_CONNECT_FAILED */
     "Error with current client",                    /* NETM_ERR_CLI_CUR_SELECTED */
-	"Unknown error",	                            /* NETM_ERR_NB_ERRORS */
+    "Unknown error",	                            /* NETM_ERR_NB_ERRORS */
 };
 ```
 
@@ -93,12 +91,12 @@ static const char *arrayEnumNetErrorToString[] = {
 /*----------------------------------------------------------------------------*/
 const char *NETM_enuErrors_getString(NETM_enuErrors enuError)
 {
-	int valueError = -enuError;
+    int valueError = -enuError;
     if(valueError >= (-NETM_ERR_NB_ERRORS) || valueError < 0){
-		return arrayEnumNetErrorToString[(-NETM_ERR_NB_ERRORS)];
-	}
+        return arrayEnumNetErrorToString[(-NETM_ERR_NB_ERRORS)];
+    }
 
-	return arrayEnumNetErrorToString[valueError];
+    return arrayEnumNetErrorToString[valueError];
 }
 ```
 
@@ -135,7 +133,7 @@ void HTOOLS_vPrintByteByByteValue(void *value, size_t sizeOfValue, FILE *fdOutpu
     }
 
     fprintf(fdOutput, "\n");
-	fflush(fdOutput);
+    fflush(fdOutput);
 }
 ```
 
@@ -173,7 +171,7 @@ We can use those functions or define own implementations :
 /*---------------------------------------------------------------------------*/
 ci_int32_t HTOOLS_asprintf(ci_char_t **pStr, const ci_char_t *formatStr, ...)
 {
-	ci_int32_t s32Result = 0;
+    ci_int32_t s32Result = 0;
     va_list argList;
 
     va_start(argList, formatStr);
@@ -212,41 +210,41 @@ ci_int32_t HTOOLS_asprintf(ci_char_t **pStr, const ci_char_t *formatStr, ...)
 /*---------------------------------------------------------------------------*/
 ci_int32_t HTOOLS_vasprintf(ci_char_t **pStr, const ci_char_t *formatStr, va_list argList)
 {
-	ci_int32_t s32StrLen = 0;
-	ci_int32_t s32StrLenWrite = 0;
-	ci_char_t *str = NULL;
-	va_list argListCopy;
+    ci_int32_t s32StrLen = 0;
+    ci_int32_t s32StrLenWrite = 0;
+    ci_char_t *str = NULL;
+    va_list argListCopy;
     
-	/* Count how many char we need to store string */
-	va_copy(argListCopy, argList);
-	s32StrLen = vsnprintf(NULL, 0, formatStr, argListCopy);
-	va_end(argListCopy);
+    /* Count how many char we need to store string */
+    va_copy(argListCopy, argList);
+    s32StrLen = vsnprintf(NULL, 0, formatStr, argListCopy);
+    va_end(argListCopy);
     if(s32StrLen < 0){
-    	goto error_return;
-	}
+        goto error_return;
+    }
 
-	/* Allocate string buffer */
-	str = calloc(s32StrLen +1, sizeof(ci_char_t));
+    /* Allocate string buffer */
+    str = calloc(s32StrLen +1, sizeof(ci_char_t));
     if(!str){
         goto error_return;
-	}
+    }
 
-	/* Fill buffer with formatted string */
+    /* Fill buffer with formatted string */
     s32StrLenWrite = vsnprintf(str, s32StrLen +1, formatStr, argList);
     if(s32StrLenWrite < 0 || s32StrLenWrite >= (s32StrLen +1)) {
         goto free_mem;
     }
 
-	/* Success return */
+    /* Success return */
     *pStr = str;
     return s32StrLenWrite;
 
-	/* Error return */
+    /* Error return */
 free_mem:
-	free(str);
-	*pStr = NULL;
+    free(str);
+    *pStr = NULL;
 error_return:
-	return -1;
+    return -1;
 }
 ```
 
