@@ -3,11 +3,13 @@
 Table of contents :
 - [1. Hardware properties](#1-hardware-properties)
 - [2. Process](#2-process)
-- [3. Devices](#3-devices)
-- [4. Directories](#4-directories)
-- [5. Compilation](#5-compilation)
-- [6. Modules](#6-modules)
-- [7. Custom terminal commands](#7-custom-terminal-commands)
+- [3. Checksum](#3-checksum)
+- [4. Devices](#4-devices)
+- [5. Directories](#5-directories)
+- [6. Compilation](#6-compilation)
+- [7. Modules](#7-modules)
+- [8. Custom terminal commands](#8-custom-terminal-commands)
+- [Ressources](#ressources)
 
 # 1. Hardware properties 
 - List hardwares properties and driver informations
@@ -49,24 +51,46 @@ watch -d grep -e Dirty: -e Writeback: /proc/meminfo
 init q
 ```
 
-  2. Via `telinit` :
+2. Via `telinit` :
 ```shell
 telinit q
 ```
 
-  3. By sending signal **SIGHUP** to the init process (PID 1) :
+3. By sending signal **SIGHUP** to the init process (PID 1) :
 ```shell
 kill -1 1
 kill -SIGHUP 1
 ```
 
-# 3. Devices
+# 3. Checksum
+
+- Get MD5 of a file :
+```shell
+md5sum file.txt
+```
+
+- Checksum of multiple files :
+```shell
+# Get all checksum in a file
+md5sum * > check.chk
+# Verify checksum
+md5sum -c checklist.chk
+
+# Get all checksum with sub-directories in a file with filters
+find -type f -not -name "*.data*" -not -name "*.bin*" -not -name "*.ppm*" -exec md5sum "{}" + > checklist.chk
+# Get all checksum with sub-directories in a file with filters and alphabetically sorted
+find -type f -not -name "*.data*" -not -name "*.bin*" -not -name "*.ppm*" -not -name "*.ods*" -not -name "*trace*" -not -name "*chk*" -print0 | sort -z | xargs -r0 md5sum > checklist.chk
+```
+
+- 
+
+# 4. Devices
 - List all devices :
 ```shell
 cat /proc/bus/input/devices
 ```
 
-# 4. Directories
+# 5. Directories
 - List all partitions
 ```shell
 lsblk
@@ -97,7 +121,7 @@ hexdump -C <fileName>
 mount -o loop <name> /mnt/
 ```
 
-# 5. Compilation
+# 6. Compilation
 - Get compilation/installation informations :
 ```shell 
 uname -a
@@ -113,13 +137,13 @@ strings <filename>
 make sdk
 ```
 
-# 6. Modules
+# 7. Modules
 - List all availables modules
 ```shell
 find /lib/modules/$(uname -r) -type f -name '*.ko*'
 ```
 
-# 7. Custom terminal commands
+# 8. Custom terminal commands
 
 Linux operating system allows users to create commands. To create custom commands :
 1. Check that `~/.bashrc` have routine to load custom commands :
@@ -167,3 +191,9 @@ alias maj='sudo apt update && sudo apt full-upgrade'
 4. To reload `~/.bashrc` file :
 - Open new tab
 - Or : `source ~/.bashrc`
+
+# Ressources
+
+- https://askubuntu.com/questions/318530/generate-md5-checksum-for-all-files-in-a-directory
+- https://stackoverflow.com/questions/1341467/find-filenames-not-ending-in-specific-extensions-on-unix
+- https://askubuntu.com/questions/662339/sort-files-alphabetically-before-processing
