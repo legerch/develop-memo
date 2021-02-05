@@ -20,7 +20,7 @@
    3. Passerelle : Peut être vide
 5. Valider la configuration
 
-L'addrese statique est désormais configurée pour toute l'interface, sous windows, il est possible que si une nouvelle interface est ajoutée, ces options de configurPasserelle : Peut être videations soient effacées.  
+L'addrese statique est désormais configurée pour toute l'interface, sous windows, il est possible que si une nouvelle interface est ajoutée, ces options de configurations soient effacées.  
 Il faudra donc réitérer la procédure.  
 
 De plus, la configuration sera appliquée pour tous les réseaux auxquels l'interface se connectera.
@@ -32,7 +32,7 @@ De plus, la configuration sera appliquée pour tous les réseaux auxquels l'inte
 
 ## Linux
 
-Sous linux, une configuration est associé à une interface et à un réseau, c'est à dire qu'il est possible pour une même interface de se connecter à un réseau A via DHCP et à un réseau B via une adresse IP statique, ce qui n'est pas le cas sous windows.
+Sous linux, une configuration est associée à une interface et à un réseau, c'est à dire qu'il est possible pour une même interface de se connecter à un réseau A via DHCP et à un réseau B via une adresse IP statique, ce qui n'est pas le cas sous windows.
 
 1. Se connecter une première fois au réseau souhaité (la configuration ne peut pas se faire si le mot de passe n'a pas été entré, c'est pourquoi on se connecte une 1ere fois automatiquement)
 2. Cliquer sur l'icône `Paramètre` représenté par une _roulette_
