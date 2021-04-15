@@ -3,6 +3,7 @@
 - [Configuration d'une IP statique](#configuration-dune-ip-statique)
   - [Windows](#windows)
   - [Linux](#linux)
+  - [Android](#android)
 - [Contrôle des paramètres WIFI via les API systèmes](#contrôle-des-paramètres-wifi-via-les-api-systèmes)
   - [API système](#api-système)
   - [Solution existante](#solution-existante)
@@ -48,6 +49,20 @@ Sous linux, une configuration est associée à une interface et à un réseau, c
 > ```shell
 > ifconfig
 > ```
+
+## Android
+
+Une adresse statique est affectée pour un réseau (comme sous linux), cela n'affectera pas les autres connexions.
+
+1. Ouverture paramètre wifi pour lequel on souhaite se connecter
+2. Configurer les paramètres wifi :
+   1. Proxy : **Aucun**
+   2. Paramètres IP : `statique`
+   3. Adresse IP : `192.168.0.157`
+   4. Longueur du préfixe réseau : `24` (c'est le _mask_ réseau : `/24` étant équivalent à `255.255.255.0`)
+   5. Passerelle : `192.168.0.5` (ici, on utilise l'adresse hôte car c'est un champs obligatoire mais on ne s'en sert pas)
+   6. DNS 1 : `8.8.8.8` (de même, champs obligatoire donc utilisation du _DNS Google_)
+3. Valider la configuration
 
 # Contrôle des paramètres WIFI via les API systèmes
 
