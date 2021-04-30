@@ -32,7 +32,7 @@ Interesting options :
 - `--show-leak-kinds`
 - `--track-origins`
 
-Options detailled below : [Particular case - false-positive]((#particular-case--false-positive))
+Options detailled below : [Particular case - false-positive](#particular-case--false-positive)
 - `--suppressions`
 - `--gen-suppression`
 
@@ -67,7 +67,7 @@ In this section, we gonna used an example, where all files can be found here : [
 Some libraries already have a suppression file :
 - GLib : `/usr/share/glib-2.0/valgrind/glib.supp`  (which is a library used by _GStreamer_ for example)
 
-2- Generate own _suppression file_ : be sure that those memory leaks are **REALLY** false-positive !
+2- Generate own _suppression file_ : be sure that those memory leaks are **REALLY** false-positive !  
 Run valgrind as usual, but with the extra option `--gen-suppressions=all`. This tells valgrind to print a suppression after every error it finds.  
 Example output :
 ```shell
@@ -169,6 +169,8 @@ This tools can used many options, please refer to [DRD documentation](https://va
 - Official documentation : 
   - Valgrind overview : https://valgrind.org/info/tools.html
   - Valgrind memcheck documentation : https://valgrind.org/docs/manual/mc-manual.html
+  - Valgrind helgrind documentation : https://valgrind.org/docs/manual/hg-manual.html
+  - Valgrind DRD documentation : https://valgrind.org/docs/manual/drd-manual.html
 - Tutorials
   - Valgrind : https://www.cprogramming.com/debugging/valgrind.html
   - Valgrind suppressions files : https://wiki.wxwidgets.org/Valgrind_Suppression_File_Howto
