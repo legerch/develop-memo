@@ -7,9 +7,10 @@ Table of contents :
 - [4. Devices](#4-devices)
 - [5. Directories](#5-directories)
 - [6. Compilation](#6-compilation)
-- [7. Modules](#7-modules)
-- [8. Custom terminal commands](#8-custom-terminal-commands)
-- [Ressources](#ressources)
+- [7. Libraries](#7-libraries)
+- [8. Modules](#8-modules)
+- [9. Custom terminal commands](#9-custom-terminal-commands)
+- [10. Ressources](#10-ressources)
 
 # 1. Hardware properties 
 - List hardwares properties and driver informations
@@ -82,8 +83,6 @@ find -type f -not -name "*.data*" -not -name "*.bin*" -not -name "*.ppm*" -exec 
 find -type f -not -name "*.data*" -not -name "*.bin*" -not -name "*.ppm*" -not -name "*.ods*" -not -name "*trace*" -not -name "*chk*" -print0 | sort -z | xargs -r0 md5sum > checklist.chk
 ```
 
-- 
-
 # 4. Devices
 - List all devices :
 ```shell
@@ -137,13 +136,24 @@ strings <filename>
 make sdk
 ```
 
-# 7. Modules
+# 7. Libraries
+
+In _dev_ phase, libraries are not always at their standard destination `/usr/lib` (because it's dev phase !), so to use an application which needed to be link to the library, we need to tell where to find this library. To do so, use :
+```shell
+# 1 library
+export LD_LIBRARY_PATH=../bin/
+
+# Multiple libraries (':' is the key character)
+export LD_LIBRARY_PATH=../../helper_tools/bin:../../custom_error/bin:../bin
+```
+
+# 8. Modules
 - List all availables modules
 ```shell
 find /lib/modules/$(uname -r) -type f -name '*.ko*'
 ```
 
-# 8. Custom terminal commands
+# 9. Custom terminal commands
 
 Linux operating system allows users to create commands. To create custom commands :
 1. Check that `~/.bashrc` have routine to load custom commands :
@@ -192,7 +202,7 @@ alias maj='sudo apt update && sudo apt full-upgrade'
 - Open new tab
 - Or : `source ~/.bashrc`
 
-# Ressources
+# 10. Ressources
 
 - https://askubuntu.com/questions/318530/generate-md5-checksum-for-all-files-in-a-directory
 - https://stackoverflow.com/questions/1341467/find-filenames-not-ending-in-specific-extensions-on-unix
