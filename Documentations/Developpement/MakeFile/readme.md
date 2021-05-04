@@ -272,14 +272,15 @@ RELEASE ?= 0
 DEBUG ?= 0
 
 # Application information
-APP_NAME = rp2_core
-APP_VERSION_SEMANTIC = 1.7.0
-APP_VERSION_BUILD = $(shell date +%s)
-APP_CFG_FILE_VERSION_SEMANTIC = 100
+APP_NAME := rp2_core
+APP_EXEC := $(APP_NAME)
+APP_VERSION_SEMANTIC := 1.7.0
+APP_VERSION_BUILD := $(shell date +%s)
+APP_CFG_FILE_VERSION_SEMANTIC := 100
 
 # flags
-FLAG_BOARD_CIELE = -DBOARD_CIELE
-FLAG_BOARD_ARMADEUS = -DBOARD_ARMADEUS
+FLAG_BOARD_CIELE := -DBOARD_CIELE
+FLAG_BOARD_ARMADEUS := -DBOARD_ARMADEUS
 
 # target
 ARCH ?= arm
@@ -416,33 +417,6 @@ LDLIBS        = $(BOARD_LDLIBS) \
 				-lz \
 
 #
-# Debug information
-#
-DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
-ifeq ($(DEBUG), 1)
-    CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
-endif
-
-#
-# Release information :
-# - Library version parsing
-#
-ifeq ($(RELEASE), 0)
-	APP_VERSION = $(APP_VERSION_SEMANTIC)-$(APP_VERSION_BUILD)
-else
-	APP_VERSION = $(APP_VERSION_SEMANTIC)
-endif
-
-#
-# Borea flags
-#
-CFLAGS += $(BOARD_FLAG)
-CFLAGS += -DRP2_CORE_APP_VERSION=\"$(APP_VERSION)\" -DRP2_CORE_APP_CFG_VERSION=$(APP_CFG_FILE_VERSION_SEMANTIC)
-ifeq ($(OPT_EXTENTED_FEATURES), 1)
-	CFLAGS += -DRP2_EXTENDED_FEATURES
-endif
-
-#
 # install
 #
 INSTALL_DIR ?= ./$(BOARD_BIN_DIR)
@@ -465,29 +439,54 @@ HDR = $(wildcard $(HDR_DIR)/*.h)
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 #
-# other information
+# Debug information
 #
-NAME    = $(APP_NAME)
-VERSION = $(APP_VERSION)
-EXEC    = $(APP_NAME)
+DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
+ifeq ($(DEBUG), 1)
+    CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
+endif
+
+#
+# Release information :
+# - Library version parsing
+#
+APP_VERSION_IN_FILE := version.in
+APP_VERSION_IN_PATH := $(BIN_DIR)/$(APP_VERSION_IN_FILE)
+APP_VERSION_IN_DATA := $(shell cat ${APP_VERSION_IN_PATH}) # $(file <$(APP_VERSION_IN_PATH)) | This command is only available for make >= 4.2
+ifeq ($(RELEASE), 0)
+	APP_VERSION := $(APP_VERSION_SEMANTIC)-$(APP_VERSION_BUILD)
+else
+	APP_VERSION := $(APP_VERSION_SEMANTIC)
+endif
+
+#
+# Borea flags
+#
+CFLAGS += $(BOARD_FLAG)
+CFLAGS += -DRP2_CORE_APP_VERSION=\"$(APP_VERSION)\" -DRP2_CORE_APP_CFG_VERSION=$(APP_CFG_FILE_VERSION_SEMANTIC)
+ifeq ($(OPT_EXTENTED_FEATURES), 1)
+	CFLAGS += -DRP2_EXTENDED_FEATURES
+endif
 
 
 #
 # Makefile rules
 #
 
-all: $(EXEC)
+all: $(APP_EXEC)
 
-$(EXEC): $(OBJ)
+$(APP_EXEC): $(OBJ)
 	@echo "Generate binary application"
 	$(CCPREFIX)$(CC) -pthread -o $(BIN_DIR)/$@ $^ $(LDFLAGS) $(LDLIBS)
+	@echo "Generate version file"
+	$(file >$(APP_VERSION_IN_PATH),$(APP_VERSION))
 
 $(OBJ_DIR)/%.o:  $(SRC_DIR)/%.c $(HDR)
 	@echo "Generate objects"
 	$(CCPREFIX)$(CC) -o $@ -c $< $(CFLAGS)
 
 install:
-	install -p -m 755 $(BIN_DIR)/$(EXEC) $(INSTALL_DIR)
+	install -p -m 755 $(BIN_DIR)/$(APP_EXEC) $(INSTALL_DIR)
 
 runtest:
 	./run_test.sh
@@ -498,13 +497,12 @@ clean:
 	rm -rf *~ $(SRC_DIR)/*.o $(SRC_DIR)/*~ $(BIN_DIR)/*~ $(BIN_DIR)/*.so $(BIN_DIR)/*.a $(OBJ_DIR)/* file.out
 
 realclean: clean
-	rm -rf $(EXEC) $(BIN_DIR)/$(EXEC) $(BIN_DIR)/file.out
+	rm -rf $(APP_EXEC) $(BIN_DIR)/$(APP_EXEC) $(BIN_DIR)/file.out
 
 mrproper: realclean
 
 version:
-	@echo $(NAME) v$(VERSION)
-
+	@echo $(APP_NAME) v$(APP_VERSION_IN_DATA)
 
 ```
 
@@ -921,7 +919,10 @@ Les précédants template ne permettaient d'obtenir le numéro de version dans l
 De plus, lorsque la librairie est compilée sans le flag `RELEASE=1`, un numéro de build est ajouté à la version :
 - `RELEASE=0` : `MAJOR.Minor.fix`
 - `RELEASE=1` : `MAJOR.MINOR.fix-build`  
-Cela permet de traquer les versions exactes d'une librarie, même en cycle de développement ou de tests.
+Cela permet de traquer les versions exactes d'une librarie, même en cycle de développement ou de tests.  
+Etant donné que le numéro de build est basé sur un timestamp, celui sera différent entre un `make build` et un `make version`, afin de palier cela, un fichier `bin/version.in` est créé à chaque compilation de la librairie _shared_, on se base donc sur ce fichier lors de :
+- `make install`
+- `make version`
 
 ```Makefile
 # ------------------------------------------------
@@ -959,9 +960,9 @@ DEBUG ?= 0
 RELEASE ?= 0
 
 # Library information
-LIB_NAME = libnetworkmanager
-LIB_VERSION_SEMANTIC = 0.0.1
-LIB_VERSION_BUILD = $(shell date +%s)
+LIB_NAME := libnetworkmanager
+LIB_VERSION_SEMANTIC := 0.0.1
+LIB_VERSION_BUILD := $(shell date +%s)
 
 # target
 ARCH ?= arm
@@ -1015,41 +1016,6 @@ LDFLAGS      =
 LDLIBS       = 
 
 #
-# Debug information
-#
-DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
-ifeq ($(DEBUG), 1)
-    CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
-endif
-
-#
-# Release information :
-# - Library version parsing
-#
-ifeq ($(RELEASE), 0)
-	LIB_VERSION = $(LIB_VERSION_SEMANTIC)-$(LIB_VERSION_BUILD)
-else
-	LIB_VERSION = $(LIB_VERSION_SEMANTIC)
-endif
-
-#
-# Borea flags
-#
-CFLAGS += $(BOARD_FLAG)
-CFLAGS += -DLIB_VERSION=\"$(LIB_VERSION)\"
-
-#
-# Coverage information
-#
-COVERAGE ?= 0
-ifeq ($(COVERAGE), 1)
-    COVERAGE_CFLAGS = -fprofile-arcs -ftest-coverage
-    CFLAGS += -g $(COVERAGE_CFLAGS)
-    LDLIBS += -lgcov
-endif
-
-
-#
 #
 # install
 #
@@ -1073,6 +1039,43 @@ SRC = $(wildcard $(SRC_DIR)/*.c)
 HDR = $(wildcard $(HDR_DIR)/*.h)
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
+#
+# Debug information
+#
+DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
+ifeq ($(DEBUG), 1)
+    CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
+endif
+
+#
+# Release information :
+# - Library version parsing
+#
+LIB_VERSION_IN_FILE := version.in
+LIB_VERSION_IN_PATH := $(BIN_DIR)/$(LIB_VERSION_IN_FILE)
+LIB_VERSION_IN_DATA := $(shell cat ${LIB_VERSION_IN_PATH}) # $(file <$(LIB_VERSION_IN_PATH)) | This command is only available for make >= 4.2
+ifeq ($(RELEASE), 0)
+	LIB_VERSION := $(LIB_VERSION_SEMANTIC)-$(LIB_VERSION_BUILD)
+else
+	LIB_VERSION := $(LIB_VERSION_SEMANTIC)
+endif
+
+#
+# Borea flags
+#
+CFLAGS += $(BOARD_FLAG)
+CFLAGS += -DLIB_VERSION=\"$(LIB_VERSION)\"
+
+#
+# Coverage information
+#
+COVERAGE ?= 0
+ifeq ($(COVERAGE), 1)
+    COVERAGE_CFLAGS = -fprofile-arcs -ftest-coverage
+    CFLAGS += -g $(COVERAGE_CFLAGS)
+    LDLIBS += -lgcov
+endif
+
 
 #
 # Makefile rules
@@ -1095,16 +1098,18 @@ shared: $(HDR)
 	$(CCPREFIX)$(CC) -shared -o $(BIN_DIR)/$(LIB_NAME).so.$(LIB_VERSION) $(OBJ)
 	ln -sf $(LIB_NAME).so.$(LIB_VERSION) $(BIN_DIR)/$(LIB_NAME).so
 	du -sh $(BIN_DIR)/$(LIB_NAME).so.$(LIB_VERSION)
+	@echo "Generate version file at : $(LIB_VERSION_IN_PATH)"
+	$(file >$(LIB_VERSION_IN_PATH),$(LIB_VERSION))
 
 install_static:
 	install -p -m 755 $(BIN_DIR)/$(LIB_NAME).a $(INSTALL_DIR)
 
 install_shared:
-	install -p -m 755 $(BIN_DIR)/$(LIB_NAME).so.$(LIB_VERSION) $(INSTALL_DIR)
-	@echo "Don't forget to run 'ln -sf $(LIB_NAME).so.$(LIB_VERSION) \
+	install -p -m 755 $(BIN_DIR)/$(LIB_NAME).so.$(LIB_VERSION_IN_DATA) $(INSTALL_DIR)
+	@echo "Don't forget to run 'ln -sf $(LIB_NAME).so.$(LIB_VERSION_IN_DATA) \
 	$(LIB_NAME).so' on '/usr/lib' from target after manual deployment \
 	to allow the application to find dynamic library at execution !"
-	ln -sf $(LIB_NAME).so.$(LIB_VERSION) $(INSTALL_DIR)/$(LIB_NAME).so
+	ln -sf $(LIB_NAME).so.$(LIB_VERSION_IN_DATA) $(INSTALL_DIR)/$(LIB_NAME).so
 
 install: install_shared
 
@@ -1143,6 +1148,10 @@ realclean: coverageclean clean gendocclean
 mrproper: realclean
 
 version:
-	@echo $(LIB_NAME) v$(LIB_VERSION)
+	@echo $(LIB_NAME) v$(LIB_VERSION_IN_DATA)
 
 ```
+
+> Notes : `make` possède une commande interne afin d'écrire et de lire depuis un fichier ([documentation](https://www.gnu.org/software/make/manual/html_node/File-Function.html)).  
+> L'écriture a été introduite avec `make >= 4.0`  
+> La lecture a été introduite avec `make >= 4.2` 
