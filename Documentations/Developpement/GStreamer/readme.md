@@ -95,6 +95,9 @@ LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=192.168.0.157 port=1234 c
 
 # 2nde version : la commande peut être lente due au fait que le "caps" est "parsé" par GStreamer, en utilisant les éléments drectement, on gagne en performance
 LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=192.168.0.157 port=1234 ! application/x-rtp,media=video,clock-rate=90000,encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
+
+# 3eme version basée sur la 2nde en n'étant plus dépendant de l'adresse IP cliente
+LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=0.0.0.0 port=1234 ! application/x-rtp,media=video,clock-rate=90000,encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
 ```
 > Le paramètre `LIBVA_DRIVER_NAME=iHD` peut être nécessaire si présence de 2 cartes graphiques sur le PC récepteur.  
 > Ici, on demande à utiliser la carte graphique Intel.
