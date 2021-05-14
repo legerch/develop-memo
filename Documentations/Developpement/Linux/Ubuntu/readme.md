@@ -5,7 +5,7 @@
   - [2.2. Usage](#22-usage)
     - [2.2.1. Terminal](#221-terminal)
     - [2.2.2. Graphical interface](#222-graphical-interface)
-  - [2.3. Softawares](#23-softawares)
+  - [2.3. Softwares](#23-softwares)
 - [3. Ressources](#3-ressources)
 
 # 1. Introduction
@@ -52,7 +52,7 @@ A graphical interface solution is available for easily manage **PPA** repository
 > - https://www.addictivetips.com/ubuntu-linux-tips/update-ubuntu-ppa-to-20-04-release/
 > - https://launchpad.net/~webupd8team/+archive/ubuntu/y-ppa-manager
 
-## 2.3. Softawares
+## 2.3. Softwares
 
 List of softwares using PPA repository :
 - [Gimp](https://doc.ubuntu-fr.org/gimp)
