@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from PC-CHARLIE - Ubuntu 18.04 - Kernel 5.4.0-64-generic - 27/01/2021 :
+Save from PC-CHARLIE - Ubuntu 18.04 - Kernel 5.4.0-73-generic - 14/05/2021 :
 
 ```shell
 ##
@@ -30,6 +30,9 @@ alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
 alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes'
 alias vg-helgrind='valgrind --tool=helgrind'
 
+# Go to Qt worspace
+alias qt-workspace='cd /home/charlie/Documents/workspaces/workspaceQT'
+
 ##
 # Cobra specific aliases
 ##
@@ -55,5 +58,5 @@ alias cobra-load-gcc-arm32='source ~/Documents/CobraWorkspaces/Cobra-application
 alias cobra-load-gcc-aarch64='source ~/Documents/CobraWorkspaces/Cobra-applicationLayer/env_aarch64.sh'
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
-alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=192.168.0.157 port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
+alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=0.0.0.0 port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
 ```
