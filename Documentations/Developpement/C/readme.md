@@ -1,16 +1,35 @@
 **Table of contents :**
 
-- [1. Tips](#1-tips)
-  - [1.1. Printf](#11-printf)
-  - [1.2. Enum errors](#12-enum-errors)
-  - [1.3. Buffer](#13-buffer)
-  - [1.4. String](#14-string)
-- [2. Useful links](#2-useful-links)
+- [1. Limits](#1-limits)
+- [2. Tips](#2-tips)
+  - [2.1. Printf](#21-printf)
+  - [2.2. Enum errors](#22-enum-errors)
+  - [2.3. Buffer](#23-buffer)
+  - [2.4. String](#24-string)
+- [3. Useful links](#3-useful-links)
 
+# 1. Limits
 
-# 1. Tips
+**Memo :** 1 byte = 8 bits
 
-## 1.1. Printf
+| Type | 32-bit size (in bytes) | 64-bit size (in bytes) | Minimum value | Maximum value |
+|:-:|:-:|:-:|:-:|:-:|
+|`char` | 1 | 1 | -128 | 128 |
+|`unsigned char` | 1 | 1 | 0 | 255 |
+|`short int` | 2 | 2 | -32 768 | 32 767 |
+|`unsigned short int` | 2 | 2 | 0 | 65 535 |
+|`int` | 4 | 4 | -2 147 483 648 | 2 147 483 647 |
+|`unsigned int` | 4 | 4 | 0 | 4 294 967 295 |
+|`long int` | 4 | 8 | -9 223 372 036 854 775 808 | 9 223 372 036 854 775 807 |
+|`unsigned long int` | 4 | 8 | 0 | 18 446 744 073 709 551 615 |
+
+> Those informations are **theorical** and **platform dependant** :
+> - Use header `limits.h` for application ([official-c++](https://www.cplusplus.com/reference/climits/), [official2](https://devdocs.io/c/types/limits), [tutorial](https://www.tutorialspoint.com/c_standard_library/limits_h.htm))
+> - Use header `stdint.h` if exact byte size is needed ([official1](https://www.cplusplus.com/reference/cstdint/), [official2](https://devdocs.io/c/types/integer))
+
+# 2. Tips
+
+## 2.1. Printf
 
 - Indent output :
 ```C
@@ -30,7 +49,7 @@ fprintf(stream, "size_t value : zd", 42);
 ```
 > More details here : https://www.gnu.org/software/libc/manual/html_node/Integer-Conversions.html
 
-## 1.2. Enum errors
+## 2.2. Enum errors
 
 In this case, we want negative errors value. This way, for function using this enums as returned value, if value is positive, operation is successful, otherwise, it failed.
 
@@ -100,7 +119,7 @@ const char *NETM_enuErrors_getString(NETM_enuErrors enuError)
 }
 ```
 
-## 1.3. Buffer
+## 2.3. Buffer
 
 - Print all buffer values at hexadecimal format :
 ```C
@@ -137,7 +156,7 @@ void HTOOLS_vPrintByteByByteValue(void *value, size_t sizeOfValue, FILE *fdOutpu
 }
 ```
 
-## 1.4. String
+## 2.4. String
 
 Functions [`asprintf`](https://linux.die.net/man/3/vasprintf) and [`vasprintf`](https://linux.die.net/man/3/asprintf) are GNU extensions, not in C or POSIX.  
 We can use those functions or define own implementations :
@@ -248,5 +267,5 @@ error_return:
 }
 ```
 
-# 2. Useful links
+# 3. Useful links
 - https://stackoverflow.com/questions/293438/left-pad-printf-with-spaces
