@@ -2,14 +2,14 @@
 
 - [1. Introduction](#1-introduction)
 - [2. Templates pour une application](#2-templates-pour-une-application)
-	- [2.1. Template 1 : simple](#21-template-1--simple)
-	- [2.2. Template 3 : Deux boards possédant une architecture différente](#22-template-3--deux-boards-possédant-une-architecture-différente)
-	- [2.3. Template 3 : Deux boards avec une architecture différente et une gestion de version plus avancée](#23-template-3--deux-boards-avec-une-architecture-différente-et-une-gestion-de-version-plus-avancée)
-	- [2.4. Template 4 : générique](#24-template-4--générique)
+  - [2.1. Template 1 : simple](#21-template-1--simple)
+  - [2.2. Template 3 : Deux boards possédant une architecture différente](#22-template-3--deux-boards-possédant-une-architecture-différente)
+  - [2.3. Template 3 : Deux boards avec une architecture différente et une gestion de version plus avancée](#23-template-3--deux-boards-avec-une-architecture-différente-et-une-gestion-de-version-plus-avancée)
+  - [2.4. Template 4 : générique](#24-template-4--générique)
 - [3. Template pour une librairie](#3-template-pour-une-librairie)
-	- [3.1. Template 1 : Deux boards d'architecture différente possédant une seule paire header/source](#31-template-1--deux-boards-darchitecture-différente-possédant-une-seule-paire-headersource)
-	- [3.2. Template 2 : Deux boards d'architecture différente possédant plusieurs paires header/source](#32-template-2--deux-boards-darchitecture-différente-possédant-plusieurs-paires-headersource)
-	- [3.3. Template 3 : Deux boards d'architecture différente possédant plusieurs paires header/source avec gestion de version avancée](#33-template-3--deux-boards-darchitecture-différente-possédant-plusieurs-paires-headersource-avec-gestion-de-version-avancée)
+  - [3.1. Template 1 : Deux boards d'architecture différente possédant une seule paire header/source](#31-template-1--deux-boards-darchitecture-différente-possédant-une-seule-paire-headersource)
+  - [3.2. Template 2 : Deux boards d'architecture différente possédant plusieurs paires header/source](#32-template-2--deux-boards-darchitecture-différente-possédant-plusieurs-paires-headersource)
+  - [3.3. Template 3 : Deux boards d'architecture différente possédant plusieurs paires header/source avec gestion de version avancée](#33-template-3--deux-boards-darchitecture-différente-possédant-plusieurs-paires-headersource-avec-gestion-de-version-avancée)
 
 # 1. Introduction
 
@@ -452,7 +452,7 @@ endif
 #
 APP_VERSION_IN_FILE := version.in
 APP_VERSION_IN_PATH := $(BIN_DIR)/$(APP_VERSION_IN_FILE)
-APP_VERSION_IN_DATA := $(shell cat ${APP_VERSION_IN_PATH}) # $(file <$(APP_VERSION_IN_PATH)) | This command is only available for make >= 4.2
+APP_VERSION_IN_DATA := $(file <$(APP_VERSION_IN_PATH)) # $(shell cat ${APP_VERSION_IN_PATH}) | This is alternative for make version < 4.2
 ifeq ($(RELEASE), 0)
 	APP_VERSION := $(APP_VERSION_SEMANTIC)-$(APP_VERSION_BUILD)
 else
@@ -1053,7 +1053,7 @@ endif
 #
 LIB_VERSION_IN_FILE := version.in
 LIB_VERSION_IN_PATH := $(BIN_DIR)/$(LIB_VERSION_IN_FILE)
-LIB_VERSION_IN_DATA := $(shell cat ${LIB_VERSION_IN_PATH}) # $(file <$(LIB_VERSION_IN_PATH)) | This command is only available for make >= 4.2
+LIB_VERSION_IN_DATA := $(file <$(LIB_VERSION_IN_PATH)) # $(shell cat ${LIB_VERSION_IN_PATH}) | This is alternative for make version < 4.2
 ifeq ($(RELEASE), 0)
 	LIB_VERSION := $(LIB_VERSION_SEMANTIC)-$(LIB_VERSION_BUILD)
 else
