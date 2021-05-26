@@ -58,6 +58,7 @@ List of softwares using PPA repository :
 - [Gimp](https://doc.ubuntu-fr.org/gimp)
 - [lazygit](https://github.com/jesseduffield/lazygit)
 - [node](https://doc.ubuntu-fr.org/nodejs)
+- [copyq](https://copyq.readthedocs.io/en/latest/installation.html)
 - [teamviewer](https://community.teamviewer.com/English/kb/articles/30666-how-to-update-teamviewer-on-linux-via-repository)
 - [thunderbird](https://doc.ubuntu-fr.org/thunderbird)
 - [vscode](https://code.visualstudio.com/docs/setup/linux)
