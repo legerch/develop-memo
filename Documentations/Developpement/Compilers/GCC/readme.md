@@ -55,7 +55,7 @@ This option refers to _1989 ANSI C Standard_ (or equivalently the _1990 ISO C st
     > **Note :** In C++, `-ansi` is equivalent to `-std=c++98`
 
 - `-std=`  
-Refer to official documnetation for more information about this option : [GCC dialect option](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html).  
+Refer to official documentation for more information about this option : [GCC dialect option](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html).  
 Standard value can be found at : [GCC Standard](https://gcc.gnu.org/onlinedocs/gcc/Standards.html#Standards)
     > Currently (05/2021), `-std=` default value is :
     > - **C** : `-std=gnu17`
@@ -168,3 +168,4 @@ GCC provide somes predefined macros ([GCC common predefined macros](https://gcc.
   - [`Werror` is not your friend](https://embeddedartistry.com/blog/2017/05/22/werror-is-not-your-friend/)
 - Thread
   - https://stackoverflow.com/questions/45129741/gcc-7-wimplicit-fallthrough-warnings-and-portable-way-to-clear-them
+  - https://stackoverflow.com/questions/2855121/what-is-the-purpose-of-using-pedantic-in-gcc-g-compiler/40580407
