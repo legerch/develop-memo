@@ -6,6 +6,8 @@
   - [2.2. Enum errors](#22-enum-errors)
   - [2.3. Buffer](#23-buffer)
   - [2.4. String](#24-string)
+    - [2.4.1. Allocations](#241-allocations)
+    - [2.4.2. Conversions](#242-conversions)
 - [3. Useful links](#3-useful-links)
 
 # 1. Limits
@@ -158,6 +160,8 @@ void HTOOLS_vPrintByteByByteValue(void *value, size_t sizeOfValue, FILE *fdOutpu
 
 ## 2.4. String
 
+### 2.4.1. Allocations
+
 Functions [`asprintf`](https://linux.die.net/man/3/vasprintf) and [`vasprintf`](https://linux.die.net/man/3/asprintf) are GNU extensions, not in C or POSIX.  
 We can use those functions or define own implementations :
 
@@ -165,7 +169,7 @@ We can use those functions or define own implementations :
 ```C
 /*---------------------------------------------------------------------------*/
 /**
- * \brief      Use to allocate a string into a buffer with additional arguments
+ * \brief Use to allocate a string into a buffer with additional arguments
  * \details    
  * This function is analog of \c sprintf(), except that it allocate a string large enough to hold the output including the terminating null byte, 
  * and return a pointer to it via the first argument. \n
@@ -173,31 +177,34 @@ We can use those functions or define own implementations :
  * 
  * You can also use \c asprintf() function, which is available in GNU Extensions, we can found here : https://linux.die.net/man/3/asprintf
  *             
- * \param[in] const ci_char_t *formatStr
- * 	C string that contains a format string that follows the same specifications as format in printf. \n
- * 	This value must be not NULL.
+ * \param[in] formatStr
+ * C string that contains a format string that follows the same specifications as format in printf. \n
+ * This value must be not NULL.
  * \param[in] ... (additional arguments)
- * 	Depending on the format string, the function may expect a sequence of additional arguments, each containing a value to be used to replace a format specifier in the format string. \n
- *	There should be at least as many of these arguments as the number of values specified in the format specifiers. Additional arguments are ignored by the function.
+ * Depending on the format string, the function may expect a sequence of additional arguments, each containing a value to be used to replace a format specifier in the format string. \n
+ * There should be at least as many of these arguments as the number of values specified in the format specifiers. Additional arguments are ignored by the function.
  *
- * \param[out] ci_char_t ci_char_t **pStr : Pointer to string buffer destination. \n
+ * \param[out] char char **pStr
+ * Pointer to string buffer destination. \n
  * This value is set to NULL if function failed, otherwise the buffer is allocated, filled with \c formatStr value and always null-terminated.
  * 
- * \return     ci_int32_t : -1 in case of error, else 0 
- *
- * \warning    The return pointer must be \c free() to release the allocated storage when it is no longer needed.
+ * \warning
+ * The return pointer must be \c free() to release the allocated storage when it is no longer needed.
+ * 
+ * \return
+ * Returns -1 in case of error, else 0 
  */
 /*---------------------------------------------------------------------------*/
-ci_int32_t HTOOLS_asprintf(ci_char_t **pStr, const ci_char_t *formatStr, ...)
+int HTOOLS_asprintf(char **pStr, const char *formatStr, ...)
 {
-    ci_int32_t s32Result = 0;
+	int sResult = 0;
     va_list argList;
 
     va_start(argList, formatStr);
-    s32Result = HTOOLS_vasprintf(pStr, formatStr, argList);
+    sResult = HTOOLS_vasprintf(pStr, formatStr, argList);
     va_end(argList);
 
-    return s32Result;
+    return sResult;
 }
 ```
 
@@ -205,7 +212,7 @@ ci_int32_t HTOOLS_asprintf(ci_char_t **pStr, const ci_char_t *formatStr, ...)
 ```C
 /*---------------------------------------------------------------------------*/
 /**
- * \brief      Use to allocate a string into a buffer with list of arguments
+ * \brief Use to allocate a string into a buffer with list of arguments
  * \details    
  * This function is analog of \c vsprintf(), except that it allocate a string large enough to hold the output including the terminating null byte, 
  * and return a pointer to it via the first argument. \n
@@ -213,57 +220,224 @@ ci_int32_t HTOOLS_asprintf(ci_char_t **pStr, const ci_char_t *formatStr, ...)
  * 
  * You can also use \c vasprintf() function, which is available in GNU Extensions, we can found here : https://linux.die.net/man/3/vasprintf
  *             
- * \param[in] const ci_char_t *formatStr
- * 	C string that contains a format string that follows the same specifications as format in printf. \n
- * 	This value must be not NULL.
- * \param[in] va_list argList : List of argument to use with \c formatStr \n
+ * \param[in] formatStr
+ * C string that contains a format string that follows the same specifications as format in printf. \n
+ * This value must be not NULL.
+ * \param[in] argList
+ * List of argument to use with \c formatStr \n
  * See https://koor.fr/C/cstdarg/cstdarg.wp for more details.
  *
- * \param[out] ci_char_t ci_char_t **pStr : Pointer to string buffer destination. \n
+ * \param[out] char char **pStr
+ * Pointer to string buffer destination. \n
  * This value is set to NULL if function failed, otherwise the buffer is allocated, filled with \c formatStr value and always null-terminated.
  * 
- * \return     ci_int32_t : -1 in case of error, else 0 
- *
- * \warning    The return pointer must be \c free() to release the allocated storage when it is no longer needed.
+ * \warning
+ * The return pointer must be \c free() to release the allocated storage when it is no longer needed.
+ * 
+ * \return
+ * Returns -1 in case of error, else 0 
  */
 /*---------------------------------------------------------------------------*/
-ci_int32_t HTOOLS_vasprintf(ci_char_t **pStr, const ci_char_t *formatStr, va_list argList)
+int HTOOLS_vasprintf(char **pStr, const char *formatStr, va_list argList)
 {
-    ci_int32_t s32StrLen = 0;
-    ci_int32_t s32StrLenWrite = 0;
-    ci_char_t *str = NULL;
-    va_list argListCopy;
+	int sStrLen = 0;
+	int sStrLenWrite = 0;
+	char *str = NULL;
+	va_list argListCopy;
     
-    /* Count how many char we need to store string */
-    va_copy(argListCopy, argList);
-    s32StrLen = vsnprintf(NULL, 0, formatStr, argListCopy);
-    va_end(argListCopy);
-    if(s32StrLen < 0){
-        goto error_return;
-    }
+	/* Count how many char we need to store string */
+	va_copy(argListCopy, argList);
+	sStrLen = vsnprintf(NULL, 0, formatStr, argListCopy);
+	va_end(argListCopy);
+    if(sStrLen < 0){
+    	goto error_return;
+	}
 
-    /* Allocate string buffer */
-    str = calloc(s32StrLen +1, sizeof(ci_char_t));
+	/* Allocate string buffer */
+	str = calloc(sStrLen +1, sizeof(char));
     if(!str){
         goto error_return;
-    }
+	}
 
-    /* Fill buffer with formatted string */
-    s32StrLenWrite = vsnprintf(str, s32StrLen +1, formatStr, argList);
-    if(s32StrLenWrite < 0 || s32StrLenWrite >= (s32StrLen +1)) {
+	/* Fill buffer with formatted string */
+    sStrLenWrite = vsnprintf(str, sStrLen +1, formatStr, argList);
+    if(sStrLenWrite < 0 || sStrLenWrite >= (sStrLen +1)) {
         goto free_mem;
     }
 
-    /* Success return */
+	/* Success return */
     *pStr = str;
-    return s32StrLenWrite;
+    return sStrLenWrite;
 
-    /* Error return */
+	/* Error return */
 free_mem:
-    free(str);
-    *pStr = NULL;
+	free(str);
+	*pStr = NULL;
 error_return:
-    return -1;
+	return -1;
+}
+```
+
+### 2.4.2. Conversions
+
+Methods used to convert any string to appropriate types safely :
+
+- **stringToBoolean :**
+```C
+/*---------------------------------------------------------------------------*/
+/**
+ * \brief Use to convert string value to boolean.
+ * \details
+ * This method set boolean to \c true only if \c str contains "true" (no case sensitive)
+ * or if \c str is "1". All others values are considered as \c false.
+ * 
+ * \param[in] str
+ * String buffer to convert, must be <b>NOT NULL</b>.
+ * 
+ * \param[out] pBool
+ * Pointer to boolean value to set. If method failed, this value is set to \c false.
+ *
+ * \return 
+ * Returns HTOOLS_ERR_NO_ERROR if succeed, otherwise see HTOOLS_enuErrors for more
+ * details.
+ */
+/*---------------------------------------------------------------------------*/
+int HTOOLS_stringToBoolean(const char *str, bool *pBool)
+{
+	HTOOLS_enuErrors htoolsErr;
+	int tmpInt = 0;
+
+	/* Set value to false by default */
+	*pBool = false;
+
+	/* Check if string value */
+	if(strncasecmp("true", str, 4) == 0){
+		*pBool = true;
+		return HTOOLS_ERR_NO_ERROR;
+	}
+
+	if(strncasecmp("false", str, 5) == 0){
+		return HTOOLS_ERR_NO_ERROR;
+	}
+	
+	/* Is int value, use method to convert integer */
+	htoolsErr = HTOOLS_stringToInteger(str, &tmpInt, 10);
+	if(HTOOLS_ERR_NO_ERROR != htoolsErr){
+		return htoolsErr;
+	}
+
+	/* Check that int value is 1 for true, all others value is false */
+	if(1 == tmpInt){
+		*pBool = true;
+	};
+
+	return HTOOLS_ERR_NO_ERROR;
+}
+```
+
+- **stringToInteger :**
+```C
+/*---------------------------------------------------------------------------*/
+/**
+ * \brief Use to convert string value to integer.
+ * 
+ * \param[in] str
+ * 	String buffer to convert, must be <b>NOT NULL</b>.
+ * \param[in] base
+ * 	Base of int to read, must be in range [2,36].
+ * 
+ * \param[out] pInt
+ * Pointer to integer value to set. If method failed, this value is set to 0. \n
+ * Must be in range [INT_MIN, INT_MAX], otherwise HTOOLS_ERR_STR2INT_UNDERFLOW or 
+ * HTOOLS_ERR_STR2INT_OVERFLOW are returned. \n
+ * Must not be started by any character, null-character or space, otherwise HTOOLS_ERR_STR2INT_INVALID
+ * is returned.
+ *
+ * \return 
+ * Returns HTOOLS_ERR_NO_ERROR if succeed, otherwise see HTOOLS_enuErrors for more
+ * details.
+ */
+/*---------------------------------------------------------------------------*/
+int HTOOLS_stringToInteger(const char *str, int *pInt, int base)
+{
+	char *strEnd;
+	*pInt = 0;
+
+	/* Check if first character is valid */
+    if(str[0] == '\0' || isspace(str[0])){
+		return HTOOLS_ERR_STR2INT_INVALID;
+	}
+
+	/* Convert string to long */
+	long longValue = strtol(str, &strEnd, base);
+
+	/* Check limits values of an integer and errno because (INT_MAX == LONG_MAX) is possible */
+    if( (longValue > INT_MAX) || (errno == ERANGE && longValue == LONG_MAX) ){
+		return HTOOLS_ERR_STR2INT_OVERFLOW;
+	}
+	if( (longValue < INT_MIN) || (errno == ERANGE && longValue == LONG_MIN) ){
+		return HTOOLS_ERR_STR2INT_UNDERFLOW;
+	}
+
+	/* Check if value convertion succeed */
+	if(str == strEnd){
+		return HTOOLS_ERR_STR2INT_INVALID;
+	}
+
+	/* Convertion succeed */
+	*pInt = longValue;
+	return HTOOLS_ERR_NO_ERROR;
+}
+```
+
+- **stringToUnsignedInteger :**
+```C
+/*---------------------------------------------------------------------------*/
+/**
+ * \brief Use to convert string value to integer.
+ * 
+ * \param[in] str
+ * 	String buffer to convert, must be <b>NOT NULL</b>.
+ * \param[in] base
+ * 	Base of int to read, must be in range [2,36].
+ * 
+ * \param[out] pUnsignedInt
+ * Pointer to unsigned integer value to set. If method failed, this value is set to 0. \n
+ * Must be in range [0, UINT_MAX], otherwise HTOOLS_ERR_STR2INT_OVERFLOW is returned. \n
+ * Must not be started by any character (included '-'), null-character or space, otherwise HTOOLS_ERR_STR2INT_INVALID
+ * is returned. 
+ *
+ * \return 
+ * Returns HTOOLS_ERR_NO_ERROR if succeed, otherwise see HTOOLS_enuErrors for more
+ * details.
+ */
+/*---------------------------------------------------------------------------*/
+int HTOOLS_stringToUnsignedInteger(const char *str, unsigned int *pUnsignedInt, int base)
+{
+	char *strEnd;
+	*pUnsignedInt = 0;
+
+	/* Check if first character is valid */
+    if(str[0] == '-' || str[0] == '\0' || isspace(str[0])){
+		return HTOOLS_ERR_STR2INT_INVALID;
+	}
+
+	/* Convert string to unsigned long */
+	unsigned long uLongValue = strtoul(str, &strEnd, base);
+
+	/* Check limits values of an unisgned integer and errno because (UINT_MAX == ULONG_MAX) is possible */
+    if( (uLongValue > UINT_MAX) || (errno == ERANGE && uLongValue == ULONG_MAX) ){
+		return HTOOLS_ERR_STR2INT_OVERFLOW;
+	}
+
+	/* Check if value convertion succeed */
+	if(str == strEnd){
+		return HTOOLS_ERR_STR2INT_INVALID;
+	}
+
+	/* Convertion succeed */
+	*pUnsignedInt = uLongValue;
+	return HTOOLS_ERR_NO_ERROR;
 }
 ```
 
