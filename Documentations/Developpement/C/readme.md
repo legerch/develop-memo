@@ -240,41 +240,41 @@ int HTOOLS_asprintf(char **pStr, const char *formatStr, ...)
 /*---------------------------------------------------------------------------*/
 int HTOOLS_vasprintf(char **pStr, const char *formatStr, va_list argList)
 {
-	int sStrLen = 0;
-	int sStrLenWrite = 0;
-	char *str = NULL;
-	va_list argListCopy;
-    
-	/* Count how many char we need to store string */
-	va_copy(argListCopy, argList);
-	sStrLen = vsnprintf(NULL, 0, formatStr, argListCopy);
-	va_end(argListCopy);
-    if(sStrLen < 0){
-    	goto error_return;
-	}
+    int sStrLen = 0;
+    int sStrLenWrite = 0;
+    char *str = NULL;
+    va_list argListCopy;
 
-	/* Allocate string buffer */
-	str = calloc(sStrLen +1, sizeof(char));
+    /* Count how many char we need to store string */
+    va_copy(argListCopy, argList);
+    sStrLen = vsnprintf(NULL, 0, formatStr, argListCopy);
+    va_end(argListCopy);
+    if(sStrLen < 0){
+        goto error_return;
+    }
+
+    /* Allocate string buffer */
+    str = calloc(sStrLen +1, sizeof(char));
     if(!str){
         goto error_return;
-	}
+    }
 
-	/* Fill buffer with formatted string */
+    /* Fill buffer with formatted string */
     sStrLenWrite = vsnprintf(str, sStrLen +1, formatStr, argList);
     if(sStrLenWrite < 0 || sStrLenWrite >= (sStrLen +1)) {
         goto free_mem;
     }
 
-	/* Success return */
+    /* Success return */
     *pStr = str;
     return sStrLenWrite;
 
-	/* Error return */
+    /* Error return */
 free_mem:
-	free(str);
-	*pStr = NULL;
+    free(str);
+    *pStr = NULL;
 error_return:
-	return -1;
+    return -1;
 }
 ```
 
@@ -304,34 +304,34 @@ Methods used to convert any string to appropriate types safely :
 /*---------------------------------------------------------------------------*/
 int HTOOLS_stringToBoolean(const char *str, bool *pBool)
 {
-	HTOOLS_enuErrors htoolsErr;
-	int tmpInt = 0;
+    HTOOLS_enuErrors htoolsErr;
+    int tmpInt = 0;
 
-	/* Set value to false by default */
-	*pBool = false;
+    /* Set value to false by default */
+    *pBool = false;
 
-	/* Check if string value */
-	if(strncasecmp("true", str, 4) == 0){
-		*pBool = true;
-		return HTOOLS_ERR_NO_ERROR;
-	}
+    /* Check if string value */
+    if(strncasecmp("true", str, 4) == 0){
+        *pBool = true;
+        return HTOOLS_ERR_NO_ERROR;
+    }
 
-	if(strncasecmp("false", str, 5) == 0){
-		return HTOOLS_ERR_NO_ERROR;
-	}
-	
-	/* Is int value, use method to convert integer */
-	htoolsErr = HTOOLS_stringToInteger(str, &tmpInt, 10);
-	if(HTOOLS_ERR_NO_ERROR != htoolsErr){
-		return htoolsErr;
-	}
+    if(strncasecmp("false", str, 5) == 0){
+        return HTOOLS_ERR_NO_ERROR;
+    }
 
-	/* Check that int value is 1 for true, all others value is false */
-	if(1 == tmpInt){
-		*pBool = true;
-	};
+    /* Is int value, use method to convert integer */
+    htoolsErr = HTOOLS_stringToInteger(str, &tmpInt, 10);
+    if(HTOOLS_ERR_NO_ERROR != htoolsErr){
+        return htoolsErr;
+    }
 
-	return HTOOLS_ERR_NO_ERROR;
+    /* Check that int value is 1 for true, all others value is false */
+    if(1 == tmpInt){
+        *pBool = true;
+    };
+
+    return HTOOLS_ERR_NO_ERROR;
 }
 ```
 
@@ -360,33 +360,33 @@ int HTOOLS_stringToBoolean(const char *str, bool *pBool)
 /*---------------------------------------------------------------------------*/
 int HTOOLS_stringToInteger(const char *str, int *pInt, int base)
 {
-	char *strEnd;
-	*pInt = 0;
+    char *strEnd;
+    *pInt = 0;
 
-	/* Check if first character is valid */
+    /* Check if first character is valid */
     if(str[0] == '\0' || isspace(str[0])){
-		return HTOOLS_ERR_STR2INT_INVALID;
-	}
+        return HTOOLS_ERR_STR2INT_INVALID;
+    }
 
-	/* Convert string to long */
-	long longValue = strtol(str, &strEnd, base);
+    /* Convert string to long */
+    long longValue = strtol(str, &strEnd, base);
 
-	/* Check limits values of an integer and errno because (INT_MAX == LONG_MAX) is possible */
+    /* Check limits values of an integer and errno because (INT_MAX == LONG_MAX) is possible */
     if( (longValue > INT_MAX) || (errno == ERANGE && longValue == LONG_MAX) ){
-		return HTOOLS_ERR_STR2INT_OVERFLOW;
-	}
-	if( (longValue < INT_MIN) || (errno == ERANGE && longValue == LONG_MIN) ){
-		return HTOOLS_ERR_STR2INT_UNDERFLOW;
-	}
+        return HTOOLS_ERR_STR2INT_OVERFLOW;
+    }
+    if( (longValue < INT_MIN) || (errno == ERANGE && longValue == LONG_MIN) ){
+        return HTOOLS_ERR_STR2INT_UNDERFLOW;
+    }
 
-	/* Check if value convertion succeed */
-	if(str == strEnd){
-		return HTOOLS_ERR_STR2INT_INVALID;
-	}
+    /* Check if value convertion succeed */
+    if(str == strEnd){
+        return HTOOLS_ERR_STR2INT_INVALID;
+    }
 
-	/* Convertion succeed */
-	*pInt = longValue;
-	return HTOOLS_ERR_NO_ERROR;
+    /* Convertion succeed */
+    *pInt = longValue;
+    return HTOOLS_ERR_NO_ERROR;
 }
 ```
 
@@ -414,30 +414,30 @@ int HTOOLS_stringToInteger(const char *str, int *pInt, int base)
 /*---------------------------------------------------------------------------*/
 int HTOOLS_stringToUnsignedInteger(const char *str, unsigned int *pUnsignedInt, int base)
 {
-	char *strEnd;
-	*pUnsignedInt = 0;
+    char *strEnd;
+    *pUnsignedInt = 0;
 
-	/* Check if first character is valid */
+    /* Check if first character is valid */
     if(str[0] == '-' || str[0] == '\0' || isspace(str[0])){
-		return HTOOLS_ERR_STR2INT_INVALID;
-	}
+        return HTOOLS_ERR_STR2INT_INVALID;
+    }
 
-	/* Convert string to unsigned long */
-	unsigned long uLongValue = strtoul(str, &strEnd, base);
+    /* Convert string to unsigned long */
+    unsigned long uLongValue = strtoul(str, &strEnd, base);
 
-	/* Check limits values of an unisgned integer and errno because (UINT_MAX == ULONG_MAX) is possible */
+    /* Check limits values of an unisgned integer and errno because (UINT_MAX == ULONG_MAX) is possible */
     if( (uLongValue > UINT_MAX) || (errno == ERANGE && uLongValue == ULONG_MAX) ){
-		return HTOOLS_ERR_STR2INT_OVERFLOW;
-	}
+        return HTOOLS_ERR_STR2INT_OVERFLOW;
+    }
 
-	/* Check if value convertion succeed */
-	if(str == strEnd){
-		return HTOOLS_ERR_STR2INT_INVALID;
-	}
+    /* Check if value convertion succeed */
+    if(str == strEnd){
+        return HTOOLS_ERR_STR2INT_INVALID;
+    }
 
-	/* Convertion succeed */
-	*pUnsignedInt = uLongValue;
-	return HTOOLS_ERR_NO_ERROR;
+    /* Convertion succeed */
+    *pUnsignedInt = uLongValue;
+    return HTOOLS_ERR_NO_ERROR;
 }
 ```
 
