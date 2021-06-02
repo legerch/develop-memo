@@ -15,7 +15,7 @@ Dans ce répertoire se trouve toutes les "astuces" relatives au développement a
 - [GStreamer](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/GStreamer "GStreamer")
 - [IDE](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE "IDE")
   - [VsCode](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode "IDE/VsCode")
-- [Linux tips](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux "Linux")
+- [Linux](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux "Linux")
 - [MakeFile](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/MakeFile/ "Makefile")
 - [Markdown](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Markdown/ "Markdown")
 - [SSH](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Ssh "SSH")
