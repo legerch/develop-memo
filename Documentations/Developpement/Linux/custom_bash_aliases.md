@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from PC-CHARLIE - Ubuntu 18.04 - Kernel 5.4.0-73-generic - 14/05/2021 :
+Save from PC-CHARLIE - Ubuntu 20.04 - Kernel 5.4.0-73-generic - 03/06/2021 :
 
 ```shell
 ##
@@ -50,8 +50,7 @@ alias cobra-keygen='ssh-keygen -f "/home/charlie/.ssh/known_hosts" -R "192.168.0
 # Go to Cobra workspace
 alias cobra-libs='cd ~/Documents/CobraWorkspaces/Cobra-applicationLayer/06-app_layer/03-libs'
 alias cobra-apps='cd ~/Documents/CobraWorkspaces/Cobra-applicationLayer/06-app_layer/04-apps'
-alias cobra-build-ciele='cd ~/Documents/CobraWorkspaces/Cobra-buildTarget-boardCiele'
-alias cobra-build-armadeus='cd ~/Documents/CobraWorkspaces/Cobra-buildTarget-boardArmadeus/RAYPLICKER-V2/bsp-rayplicker-v2-1.0/software'
+alias cobra-build='cd ~/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/'
 
 # Load cross-compiler for arm32 and aarch64
 alias cobra-load-gcc-arm32='source ~/Documents/CobraWorkspaces/Cobra-applicationLayer/env_arm32.sh'
