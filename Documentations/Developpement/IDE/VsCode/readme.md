@@ -2,6 +2,10 @@
 - [1. Introduction](#1-introduction)
 - [2. First thing to do](#2-first-thing-to-do)
   - [2.1. Set **Tab** parameter](#21-set-tab-parameter)
+  - [2.2. Disable _Preview Mode_](#22-disable-preview-mode)
+  - [2.3. Set keyboard shortcuts](#23-set-keyboard-shortcuts)
+    - [2.3.1. How to ?](#231-how-to-)
+    - [2.3.2. Which one ?](#232-which-one-)
 - [3. Plugins](#3-plugins)
 - [4. Snippets](#4-snippets)
   - [4.1. How to use ?](#41-how-to-use-)
@@ -48,6 +52,32 @@ In result, `settings.json` will result :
 
 ```
 
+## 2.2. Disable _Preview Mode_
+
+By default, when a tab is opened, if we don't modify it and open a new file, this new file will not open in a new tab but instead it will be put in replacement of first file, this is the _Preview Mode_.
+
+To disable it, go to `setting` :
+1. `File`
+2. `Preferences` -> `Settings`
+3. `Workbench`
+4. Disable _Preview_ :
+   1. `Editor: Enable Preview` : **False**
+
+## 2.3. Set keyboard shortcuts
+
+### 2.3.1. How to ?
+
+Go to :
+1. `File`
+2. `Preferences` -> `Keyboard Shortcuts`
+3. Click on _edit_ icon
+4. Press new shortcut to use, this key can be already use, so be sure this new shortcut will not conflict.
+5. Press `Enter` to save
+
+### 2.3.2. Which one ?
+List of default keyboard shortcut to changed :
+- Switch between Header/Source is `Alt + O`. Better to use `F4`
+
 # 3. Plugins
 
 _Visual Studio Code_ allow usage of plugin, list of useful plugins :
@@ -93,3 +123,4 @@ In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** 
 - Threads :
   - https://stackoverflow.com/questions/50571130/how-can-i-create-templates-for-file-extensions-in-visual-studio-code
   - https://github.com/Microsoft/vscode-cpptools/issues/1476
+  - https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab
