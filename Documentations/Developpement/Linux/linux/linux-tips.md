@@ -196,7 +196,7 @@ function set-title(){
 # To perform host updates
 alias maj='sudo apt update && sudo apt full-upgrade'
 ```
-> Find complete custom `bash_aliases` here : ["Custom bash aliases"](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux/custom_bash_aliases.md)
+> Find complete custom `bash_aliases` here : ["Custom bash aliases"](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux/linux/custom_bash_aliases.md)
 
 4. To reload `~/.bashrc` file :
 - Open new tab

@@ -33,6 +33,9 @@ alias vg-helgrind='valgrind --tool=helgrind'
 # Go to Qt worspace
 alias qt-workspace='cd /home/charlie/Documents/workspaces/workspaceQT'
 
+# Copy VsCode snippets to documentation folder
+alias snippet-copy-c='cp ~/.config/Code/User/snippets/c.json ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
+
 ##
 # Cobra specific aliases
 ##
