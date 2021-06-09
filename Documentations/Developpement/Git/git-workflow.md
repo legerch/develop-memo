@@ -38,6 +38,9 @@ git am open-sourced-feature.patch
 ```shell
 # Example : commit since tag 2020.02 of buildroot
 git format-patch 1a6bd98fa87996f50f42a27857a9e9f029cc83e0
+
+# Example : only 1 commit
+git format-patch -1 <SHA1>
 ```
 
 ### 2.1.3. Update project from upstream release

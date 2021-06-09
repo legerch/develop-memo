@@ -17,6 +17,10 @@
 - Créer une branche remote à partir d'une branche locale : `git push origin -u <name>`
 - Renommer une branche remote : Nécessaire de push la branche renommée et de supprimer l'ancienne
 > Plus de détails ici : https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
+
+- Créer une branche depuis un tag : `git branch <name-branch> <tag : origin/2021.02.x>`
+- Créer une branche depuis un tag et checkout dessus : `git checkout tags/2020.02.3 -b 2020.02.3`
+- Créer une branche depuis une branche locale : `git checkout -b <branch-name>`
 - Créer une branche sur un commit spécifique : `git branch <branchname> <sha1-of-commit>`
 - Hard reset sur la HEAD : `git reset --hard HEAD`
 - Supprimer les fichiers locaux non trackés de la branche courante :
@@ -30,6 +34,13 @@ git clean -fd   # To remove directories
 git clean -fX   # To remove ignored files
 git clean -fx   # To remove ignored and non-ignored files
 ```
+
+- Obtenir historique de la branche courante : `git log`
+- Obtenir historique de la branche courante en limitant nb commits et auteur : `git log -n 5 --author=Salvador`
+- Obtenir historique de la branche courante en limitant nb commits et seule une ligne : `git log -n 5 --oneline`
+
+- Obtenir les changement courants : `git diff` ou `git diff --staged` (si déjà _staged_)
+- Committer avec description et message : utiliser `git commit` (ouvrira vim et permettra de renseigner un titre et une description)
 
 ## 1.2. Patch
 
