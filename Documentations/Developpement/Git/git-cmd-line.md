@@ -11,6 +11,7 @@
 - Lister les branches locales : `git branch`
 - Lister les branches locales + remotes : `git branch -all`
 - Lister les tags : `git tag`
+- Lister les tags et appliquer un filtre : `git tag -l <pattern-with-quotes>`
 - Supprimer une branche locale : `git branch -d <branchname>`
 - Supprimer une branche distante : `git push <remote-name> --delete <branch-name>`
 - Renommer une branche locale : `git branch -m <new_name>`
@@ -38,6 +39,8 @@ git clean -fx   # To remove ignored and non-ignored files
 - Obtenir historique de la branche courante : `git log`
 - Obtenir historique de la branche courante en limitant nb commits et auteur : `git log -n 5 --author=Salvador`
 - Obtenir historique de la branche courante en limitant nb commits et seule une ligne : `git log -n 5 --oneline`
+- Obtenir détails d'un tag en particulier : `git show <tag>` or `git log -1 <tag>`
+- Obtenir détails d'un commit en particulier : `git show <sha1>` or `git log --format=%B -n 1 <sha1>`
 
 - Obtenir les changement courants : `git diff` ou `git diff --staged` (si déjà _staged_)
 - Committer avec description et message : utiliser `git commit` (ouvrira vim et permettra de renseigner un titre et une description)
@@ -49,7 +52,11 @@ https://stackoverflow.com/questions/2249852/how-to-apply-a-patch-generated-with-
 
 Générer un patch pour chaque commit depuis le commit <SHA1> spécifié (non inclus) :
 ```shell
+# Patch will be generated in current directory
 git format-patch <SHA1>
+
+# Path will be generated in directory "tmp-patch"
+git format-patch -o tmp-patch/ <SHA1> 
 ```
 
 Générer un patch pour un commit spécifique :
@@ -70,6 +77,7 @@ Appliquer un patch à un dépôt GIT :
 git am <my-patch.patch>
 git am path/*.patch
 ```
+> Better to use `git am -3` to perform 3-way merge
 
 # 2. Git UI
 
