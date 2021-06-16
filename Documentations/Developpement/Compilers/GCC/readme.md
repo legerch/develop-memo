@@ -2,7 +2,8 @@
 - [1. Introduction](#1-introduction)
 - [2. GCC Options](#2-gcc-options)
   - [2.1. Detailled useful warnings options](#21-detailled-useful-warnings-options)
-  - [2.2. GCC options line to use in Cobra Project](#22-gcc-options-line-to-use-in-cobra-project)
+  - [2.2. Detailled useful optimization options](#22-detailled-useful-optimization-options)
+  - [2.3. GCC options line to use in C Project](#23-gcc-options-line-to-use-in-c-project)
 - [3. GCC Attributes](#3-gcc-attributes)
 - [4. GCC Version](#4-gcc-version)
 - [5. Links](#5-links)
@@ -64,12 +65,34 @@ Standard value can be found at : [GCC Standard](https://gcc.gnu.org/onlinedocs/g
 **All warnings options** had a negative flag used to disable them of form : `-Wno-concerned-warning`.  
 > Examples : `-Wno-format`, `-Wno-missing-braces`, `-Wno-unused-variable`, `-Wno-ignored-qualifiers`, etc...
 
-## 2.2. GCC options line to use in Cobra Project
+## 2.2. Detailled useful optimization options
+
+List of optimizations options to look at, official documentation can be found at [Optimization options](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html) :
+- `-O0`  
+**Default optimization option**, reduce compilation time and make debugging produce the expected results.
+
+- `-O<level>`  
+Optimization for speed from level 1 to 3, please don't use level 3 `-O3` which is known for being "instable" (code must be very well written to be correctly optimize because optimisation applied are aggressive, also can have "inverse effect" due to heavy binaries which gonna use more memory, see documentation for more details).  
+Consider `-O2` like maximum level. 
+    > See also [Linux kernel contributors are against `-O3` flag in the project](https://www.phoronix.com/scan.php?page=news_item&px=Linux-Upstream-Against-O3-Kern).
+
+- `-Os`  
+Optimize for size. `-Os` enables all `-O2` optimizations except those that often increase code size.
+
+**Warning :** Please refer to doc before using non-default optimization flags. For example, with flag `-O2` (and `-Os` by extension), option `-fno-gcse` must be used for programs using GCC extension **Computed goto** ([official doc](https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html) and [tutorial](https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables))
+
+## 2.3. GCC options line to use in C Project
 
 ```shell
 EXTRA_CFLAGS  = -Wall -Wextra -Werror=format -Werror=return-type -Werror=implicit-function-declaration \
 				-Wstrict-prototypes -Wshadow \
 				-Wno-ignored-qualifiers
+
+# For arch x64/x86
+OPTIMIZATION_FLAG = -O2
+
+# For embedded devices
+OPTIMIZATION_FLAG = -Os
 ```
 
 This means we enables all warnings, `-Wreturn-type` and `-Wimplicit-function-declaration` must be considered as errors. Plus, we added 2 more warnings : `-Wstrict-prototypes` and `-Wshadow`.  
@@ -164,8 +187,13 @@ GCC provide somes predefined macros ([GCC common predefined macros](https://gcc.
   - [GCC function attributes](https://gcc.gnu.org/onlinedocs/gcc/Function-Attributes.html)
   - [GCC variables attributes](https://gcc.gnu.org/onlinedocs/gcc/Variable-Attributes.html)
   - [GCC implicit-fallthrough warning and attribute](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-fallthrough)
+  - [GCC optimization options](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)
+  - [GCC computed goto](https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html)
 - Interessant articles :
   - [`Werror` is not your friend](https://embeddedartistry.com/blog/2017/05/22/werror-is-not-your-friend/)
+  - [Upstream Linux Developers Against "-O3" Optimizing The Kernel](https://www.phoronix.com/scan.php?page=news_item&px=Linux-Upstream-Against-O3-Kern)
+- Tutorials
+  - [Computed goto for efficient dispatch tables](https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables)
 - Thread
   - https://stackoverflow.com/questions/45129741/gcc-7-wimplicit-fallthrough-warnings-and-portable-way-to-clear-them
   - https://stackoverflow.com/questions/2855121/what-is-the-purpose-of-using-pedantic-in-gcc-g-compiler/40580407

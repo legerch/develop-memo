@@ -177,6 +177,8 @@ DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
     CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
+else
+    CFLAGS += -Os # -O2
 endif
 
 # Install
@@ -444,6 +446,8 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
 ifeq ($(DEBUG), 1)
     CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
+else
+    CFLAGS += -Os # -O2
 endif
 
 #
@@ -644,6 +648,8 @@ DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
     CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
+else
+    CFLAGS += -Os # -O2
 endif
 
 # Coverage information
@@ -808,6 +814,8 @@ DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
     CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
+else
+    CFLAGS += -Os # -O2
 endif
 
 # Coverage information
@@ -1045,6 +1053,8 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEBUG_LEVEL ?= CI_DEBUG_LEVEL=CI_DEBUG_LEVEL_INFO
 ifeq ($(DEBUG), 1)
     CFLAGS += -g -DDEBUG -D$(DEBUG_LEVEL)
+else
+    CFLAGS += -Os # -O2
 endif
 
 #
