@@ -1,29 +1,34 @@
 **Sommaire :**
 - [1. Introduction](#1-introduction)
-- [2. Coté serveur](#2-coté-serveur)
-  - [2.1. IMX6](#21-imx6)
-    - [2.1.1. Source caméra](#211-source-caméra)
-    - [2.1.2. Source simulée](#212-source-simulée)
-  - [2.2. IMX8MM](#22-imx8mm)
-    - [2.2.1. Source simulée](#221-source-simulée)
-- [3. Coté client](#3-coté-client)
-  - [3.1. Via GStreamer](#31-via-gstreamer)
-  - [3.2. Via fichier `.sdp`](#32-via-fichier-sdp)
-- [4. Informations importantes](#4-informations-importantes)
-  - [4.1. Mode bayer](#41-mode-bayer)
+- [2. Streaming](#2-streaming)
+  - [2.1. Coté serveur](#21-coté-serveur)
+    - [2.1.1. IMX6](#211-imx6)
+      - [2.1.1.1. Source caméra](#2111-source-caméra)
+      - [2.1.1.2. Source simulée](#2112-source-simulée)
+    - [2.1.2. IMX8MM](#212-imx8mm)
+      - [2.1.2.1. Source simulée](#2121-source-simulée)
+  - [2.2. Coté client](#22-coté-client)
+    - [2.2.1. Via GStreamer](#221-via-gstreamer)
+    - [2.2.2. Via fichier `.sdp`](#222-via-fichier-sdp)
+- [3. Informations importantes](#3-informations-importantes)
+  - [3.1. Mode bayer](#31-mode-bayer)
+- [4. Fonctionnalités](#4-fonctionnalités)
+  - [4.1. Obtenir des diagrammes/graphes](#41-obtenir-des-diagrammesgraphes)
 - [5. Ressources](#5-ressources)
 
 # 1. Introduction
 
 _Under construction_
 
-# 2. Coté serveur
+# 2. Streaming
 
-## 2.1. IMX6
+## 2.1. Coté serveur
+
+### 2.1.1. IMX6
 
 L'IMX6 possède un VPU hardware pour l'encodage x264.
 
-### 2.1.1. Source caméra
+#### 2.1.1.1. Source caméra
 
 - Démarrer le streaming vidéo en le diffusant au framebuffer et via UDP :
 ```shell
@@ -40,7 +45,7 @@ gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,width=632,height=632 
 gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,width=632,height=632 ! queue ! videoconvert ! v4l2h264enc output-io-mode=4 ! rtph264pay ! udpsink host=192.168.0.157 port=1234
 ```
 
-### 2.1.2. Source simulée
+#### 2.1.1.2. Source simulée
 
 - Démarrer le streaming vidéo en le diffusant au framebuffer et via UDP :
 ```shell
@@ -59,7 +64,7 @@ gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=632
 gst-launch-1.0 -v v4l2src videotestsrc pattern=ball is-live=true ! video/x-raw,width=632,height=632 ! queue ! videoconvert ! v4l2h264enc output-io-mode=4 ! rtph264pay ! udpsink host=192.168.0.157 port=1234
 ```
 
-## 2.2. IMX8MM
+### 2.1.2. IMX8MM
 
 L'IMX8M Mini ne possède pas d'encodeur H264 hardware, il utilise un encodeur software, il est donné pour un encodage H264 `1080@60fps` d'après la documentation.
 > Documentation NXP : https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES  
@@ -68,7 +73,7 @@ L'IMX8M Mini ne possède pas d'encodeur H264 hardware, il utilise un encodeur so
 
 Ici, nous sommes obligé d'utiliser un encodeur avec les paramètres à la qualité la plus basse, sinon trop de latence ou trop de bruit.
 
-### 2.2.1. Source simulée
+#### 2.1.2.1. Source simulée
 
 - Démarrer le streaming vidéo en le diffusant au framebuffer et via UDP :
 ```shell
@@ -85,9 +90,9 @@ gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=600
 gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=600,height=600 ! queue ! videoconvert ! x264enc quantizer=25 speed-preset=ultrafast tune=zerolatency ! rtph264pay ! udpsink host=192.168.0.157 port=1234
 ```
 
-# 3. Coté client
+## 2.2. Coté client
 
-## 3.1. Via GStreamer
+### 2.2.1. Via GStreamer
 On peut recuperer le flux sur le PC connecte via la commande GStreamer (UNIX) :
 ```shell
 # 1ere version
@@ -102,7 +107,7 @@ LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=0.0.0.0 port=1234 ! appli
 > Le paramètre `LIBVA_DRIVER_NAME=iHD` peut être nécessaire si présence de 2 cartes graphiques sur le PC récepteur.  
 > Ici, on demande à utiliser la carte graphique Intel.
 
-## 3.2. Via fichier `.sdp`
+### 2.2.2. Via fichier `.sdp`
 On peut également spécifier les détails du flux dans un fichier SDP :
 ```shell
 v=0
@@ -122,8 +127,8 @@ Ou via GStreamer :
 LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v filesrc location=myStreamFile.sdp ! sdpdemux ! decodebin ! videoconvert ! autovideosink
 ```
 
-# 4. Informations importantes
-## 4.1. Mode bayer
+# 3. Informations importantes
+## 3.1. Mode bayer
 
 - Exemple de pipeline en mode bayer (diffusion sur framebuffer) :
 ```shell
@@ -133,6 +138,44 @@ gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-bayer,format=
 > Note that bayer2rgb is in gst plugins bad package if not yet installed. It may be slow, so it may be better to boost your jetson with MAXN nvpmodel and max clocks.
 bayer2rgb debayers on CPU.
 
+# 4. Fonctionnalités
+## 4.1. Obtenir des diagrammes/graphes
+
+GStreamer est capable de générer les graphes de chacun des éléments utilisés dans un pipeline, ce qui peut être utile pour savoir quelle a été la configuration exacte utilisée.  
+Cette fonctionnalité est également très intéressante lorsque nous utilisons des éléments comme [`playbin`](https://gstreamer.freedesktop.org/documentation/playback/playbin.html) ou [`decodebin`](https://gstreamer.freedesktop.org/documentation/playback/decodebin.html?gi-language=c) qui vont automatiquement utiliser les éléments nécessaires pour la lectrure d'un flux.  
+Nous axerons ce tutoriel au travers de `playbin` avec la lecture d'un fichier vidéo.
+> Plus de détails concernant la lecture vidéo dans la section **PENSER A AJOUTER LA SECTION**  
+> Ressources utilisées :
+> - https://stackoverflow.com/questions/42297360/which-elements-are-contained-in-decodebin
+> - https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph)
+
+Pour la commande suivante permettant la lecture d'un fichier `.mp4` :
+```shell
+gst-launch-1.0 -v playbin uri=file:///home/user/media/vid/mp4/SampleVideo_128x128_30mb.mp4 video-sink=fbdevsink audio-sink=fakesink
+```
+
+Pour générer les diagrammes **GStreamer** :
+1. Définir la variable `GST_DEBUG_DUMP_DOT_DIR`
+Cette variable permet de définir où devront être enregistrés les fichier `.dot`, qui sont les diagrammes. Si aucune valeur, aucun diagramme ne sera généré. Ainsi, un diagramme sera généré à chaque changements d'état du pipeline :
+```shell
+GST_DEBUG_DUMP_DOT_DIR=/home/user gst-launch-1.0 -v playbin uri=file:///home/ciele/media/vid/mp4/SampleVideo_128x128_30mb.mp4 video-sink=fbdevsink audio-sink=fakesink
+```
+> Ici, nous avons obtenu :
+> - 0.00.00.122276333-gst-launch.NULL_READY
+> - 0.00.00.545431666-gst-launch.READY_PAUSED
+> - 0.00.02.171714000-gst-launch.PAUSED_PLAYING
+> - 0.00.13.888280001-gst-launch.PLAYING_READY
+
+1. Convertir les fichiers `.dot` en fichiers `.png` via le paquet `ghraphviz` :
+```shell
+# Convert only one file
+dot -Tpng 0.00.00.545431666-gst-launch.READY_PAUSED.dot -o0.00.00.545431666-gst-launch.READY_PAUSED.png
+
+# Convert multiple files in one command (for current directory)
+ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
+```
+> Les fichiers obtenues sont disponibles dans [Gstreamer/res/graphs](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/GStreamer/res/graphs)
+
 # 5. Ressources
 
 - Documentation officielle **GStreamer**:
@@ -141,6 +184,7 @@ bayer2rgb debayers on CPU.
     - [tee](https://gstreamer.freedesktop.org/documentation/coreelements/tee.html?gi-language=c)
     - [queue](https://gstreamer.freedesktop.org/documentation/coreelements/queue.html?gi-language=c)
     - [decodebin](https://gstreamer.freedesktop.org/documentation/playback/decodebin.html?gi-language=c)
+    - [`playbin`](https://gstreamer.freedesktop.org/documentation/playback/playbin.html)
   - Source
     - [videotestsrc](https://gstreamer.freedesktop.org/documentation/videotestsrc/index.html?gi-language=c)
     - [v4l2src](https://gstreamer.freedesktop.org/documentation/video4linux2/v4l2src.html?gi-language=c)
@@ -172,6 +216,8 @@ bayer2rgb debayers on CPU.
 - Documentation officielle **NXP** :
   - [Processeurs IMX8](https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES)
 - Documentation officielle fichier `.sdp` : https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer
+- Tutoriels
+  - https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph)
 - Threads
   - Fichiers `.sdp`
     - [Pipeline GStreamer pour lire le flux depuis fichier `.sdp`](http://gstreamer-devel.966125.n4.nabble.com/Unable-to-play-a-rtp-stream-td4675068.html)
@@ -183,6 +229,7 @@ bayer2rgb debayers on CPU.
   - Autres
     - https://stackoverflow.com/questions/65996592/gstreamer-pipeline-gets-warning-from-fbdevsink-buffers-being-dropped-while-doin
     - https://forums.developer.nvidia.com/t/streaming-issues-with-gst-launch-1-0-with-a-custom-camera-device/73505/3
+    - https://stackoverflow.com/questions/42297360/which-elements-are-contained-in-decodebin
 
 <!-- Images -->
 [icon-valid]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
