@@ -12,9 +12,12 @@
     - [2.2.2. Via fichier `.sdp`](#222-via-fichier-sdp)
 - [3. Informations importantes](#3-informations-importantes)
   - [3.1. Mode bayer](#31-mode-bayer)
-- [4. Fonctionnalités](#4-fonctionnalités)
-  - [4.1. Obtenir des diagrammes/graphes](#41-obtenir-des-diagrammesgraphes)
-- [5. Ressources](#5-ressources)
+- [4. Lecture vidéo](#4-lecture-vidéo)
+  - [4.1. Pipeline automatique](#41-pipeline-automatique)
+  - [4.2. Pipeline manuel](#42-pipeline-manuel)
+- [5. Fonctionnalités](#5-fonctionnalités)
+  - [5.1. Obtenir des diagrammes/graphes](#51-obtenir-des-diagrammesgraphes)
+- [6. Ressources](#6-ressources)
 
 # 1. Introduction
 
@@ -138,13 +141,56 @@ gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-bayer,format=
 > Note that bayer2rgb is in gst plugins bad package if not yet installed. It may be slow, so it may be better to boost your jetson with MAXN nvpmodel and max clocks.
 bayer2rgb debayers on CPU.
 
-# 4. Fonctionnalités
-## 4.1. Obtenir des diagrammes/graphes
+# 4. Lecture vidéo
+
+GStreamer permet la lecture de tous les formats vidéos (à condition d'avoir les plugins ncéessaires à chaque format).  
+Afin de vérifier rapidement si votre plateforme possède les éléments nécessaires à la lecture de la vidéo, nous pouvons utiliser le plugin [`playbin`](https://gstreamer.freedesktop.org/documentation/playback/playbin.html) qui va automatiquement générer le pipeline nécessaire, en se basant sur les plugins disponibles.
+
+## 4.1. Pipeline automatique
+Ainsi, pour lire une vidéo :
+```shell
+# Format ".mp4"
+gst-launch-1.0 -v playbin uri=file:///home/user/media/vid/mp4/SampleVideo_128x128_30mb.mp4 video-sink=fbdevsink audio-sink=fakesink
+
+# Format .mov
+gst-launch-1.0 -v playbin uri=file:///home/user/media/vid/mov/file_example_MOV_480_700kB video-sink=fbdevsink audio-sink=fakesink
+```
+> On notera que la seule différence entre ces deux commandes sont les fichiers d'entrée (les plugins utilisés en interne sont bien différents)  
+> Il est possible de ne pas préciser les _sink_ vidéos et audio, les plugins `autovideosink` et `autoaudiosink` seront alors utilisés.
+
+Il est également possible d'utiliser d'autres plugins en plus de `playbin`, pour "scale" la vidéo par exemple avec `videoscale` :
+```shell
+gst-launch-1.0 playbin uri=file:///home/user/media/vid/mp4/SampleVideo_128x128_30mb.mp4 video-sink="videoscale ! video/x-raw,width=128,height=128 ! fbdevsink" audio-sink=fakesink
+```
+> Pour utiliser d'autres plugins, on notera l'utilisation des guillemets `"` dans le _sink_ de sortie.
+
+## 4.2. Pipeline manuel
+
+L'élément `playbin`, permet de construire rapidement son pipeline, mais il peut également être sujet à des soucis de performances. Il devient alors nécessaire de construire manuellement le pipeline.  
+La construction manuelle du pipeline peut être nécessaire aussi par exemple si certains flux ne sont pas nécessaires (audio par exemple) ou si certaines méthodes peuvent être améliorées (choix du décodeur par exemple).  
+Nous réutiliserons ici l'exemple avec le fichier `.mp4` précédent.
+
+En étudiant les diagrammes générés par **GStreamer**, on peut constater que certains plugins peuvent ne pas être nécessaires.  
+Ainsi pour lire un fichier `.mp4` :
+```shell
+gst-launch-1.0 filesrc location=/home/user/media/vid/mp4/SampleVideo_128x128_30mb.mp4 ! qtdemux name=demux  demux.audio_0 ! queue ! decodebin ! audioconvert ! fakesink  demux.video_0 ! queue ! avdec_h264 ! videoconvert ! fbdevsink
+```
+> Le format `.mp4` est un conteneur de flux, on dit qu'ils sont "muxés", il faut alors les "démuxer" (pour un fichier `.mp4`, on va séparer les flux vidéos, audios et sous-titres). C'est le rôle du plugin [`qtdemux`](https://gstreamer.freedesktop.org/documentation/isomp4/qtdemux.html?gi-language=c) (pour QuickTime Demuxer).  
+> Il faut ensuite décoder la vidéo, dans notre cas, la vidéo était encodée avec le codec **x264**. C'est le rôle du plugin [`avdec_h264`](https://gstreamer.freedesktop.org/documentation/libav/avdec_h264.html?gi-language=c) (_libav h264 decoder_).
+
+Dans notre cas, seule la vidéo nous intéresse, il est possible d'ignorer l'audio :
+```shell
+gst-launch-1.0 filesrc location=/home/user/media/vid/mp4/SampleVideo_128x128_30mb.mp4 ! qtdemux name=demux  demux.video_0 ! queue ! avdec_h264 ! videoconvert ! fbdevsink
+```
+> Note : Concernant le décodeur, il peut parfois être nécessaire d'appeler le plugin `h264parse` avant le plugin décodeur (ici `avdec_h264`)  
+> Par ailleurs, ce n'est pas le seul plugin décodeur _h264_ disponible, il y a également `v4l2h264dec`.
+
+# 5. Fonctionnalités
+## 5.1. Obtenir des diagrammes/graphes
 
 GStreamer est capable de générer les graphes de chacun des éléments utilisés dans un pipeline, ce qui peut être utile pour savoir quelle a été la configuration exacte utilisée.  
 Cette fonctionnalité est également très intéressante lorsque nous utilisons des éléments comme [`playbin`](https://gstreamer.freedesktop.org/documentation/playback/playbin.html) ou [`decodebin`](https://gstreamer.freedesktop.org/documentation/playback/decodebin.html?gi-language=c) qui vont automatiquement utiliser les éléments nécessaires pour la lectrure d'un flux.  
 Nous axerons ce tutoriel au travers de `playbin` avec la lecture d'un fichier vidéo.
-> Plus de détails concernant la lecture vidéo dans la section **PENSER A AJOUTER LA SECTION**  
 > Ressources utilisées :
 > - https://stackoverflow.com/questions/42297360/which-elements-are-contained-in-decodebin
 > - https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph)
@@ -155,7 +201,7 @@ gst-launch-1.0 -v playbin uri=file:///home/user/media/vid/mp4/SampleVideo_128x12
 ```
 
 Pour générer les diagrammes **GStreamer** :
-1. Définir la variable `GST_DEBUG_DUMP_DOT_DIR`
+1. Définir la variable `GST_DEBUG_DUMP_DOT_DIR`  
 Cette variable permet de définir où devront être enregistrés les fichier `.dot`, qui sont les diagrammes. Si aucune valeur, aucun diagramme ne sera généré. Ainsi, un diagramme sera généré à chaque changements d'état du pipeline :
 ```shell
 GST_DEBUG_DUMP_DOT_DIR=/home/user gst-launch-1.0 -v playbin uri=file:///home/ciele/media/vid/mp4/SampleVideo_128x128_30mb.mp4 video-sink=fbdevsink audio-sink=fakesink
@@ -166,7 +212,7 @@ GST_DEBUG_DUMP_DOT_DIR=/home/user gst-launch-1.0 -v playbin uri=file:///home/cie
 > - 0.00.02.171714000-gst-launch.PAUSED_PLAYING
 > - 0.00.13.888280001-gst-launch.PLAYING_READY
 
-1. Convertir les fichiers `.dot` en fichiers `.png` via le paquet `ghraphviz` :
+2. Convertir les fichiers `.dot` en fichiers `.png` via le paquet `ghraphviz` :
 ```shell
 # Convert only one file
 dot -Tpng 0.00.00.545431666-gst-launch.READY_PAUSED.dot -o0.00.00.545431666-gst-launch.READY_PAUSED.png
@@ -176,7 +222,7 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
 ```
 > Les fichiers obtenues sont disponibles dans [Gstreamer/res/graphs](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/GStreamer/res/graphs)
 
-# 5. Ressources
+# 6. Ressources
 
 - Documentation officielle **GStreamer**:
   - [Accès à tous les plugins](https://gstreamer.freedesktop.org/documentation/plugins_doc.html?gi-language=c)
@@ -196,11 +242,14 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
   - Convertion
     - [videoconvert](https://gstreamer.freedesktop.org/documentation/videoconvert/index.html?gi-language=c)
     - [bayer2rgb](https://gstreamer.freedesktop.org/documentation/bayer/bayer2rgb.html?gi-language=c)
+  - Demuxers
+    - [`qtdemux`](https://gstreamer.freedesktop.org/documentation/isomp4/qtdemux.html?gi-language=c)
   - Encodeurs
     - v4l2h264enc
     - [x264enc](https://gstreamer.freedesktop.org/documentation/x264/index.html?gi-language=c)
   - Decodeurs
     - [h264parse](https://gstreamer.freedesktop.org/documentation/videoparsersbad/h264parse.html?gi-language=c)
+    - v4l2h264dec
     - [avdec_h264](https://gstreamer.freedesktop.org/documentation/libav/avdec_h264.html?gi-language=c)
   - Réseau
     - [rtph264pay](https://gstreamer.freedesktop.org/documentation/rtp/rtph264pay.html?gi-language=c)
