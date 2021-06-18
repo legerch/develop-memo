@@ -1,7 +1,8 @@
 **Sommaire :**
 - [1. Git command-line](#1-git-command-line)
   - [1.1. Général](#11-général)
-  - [1.2. Patch](#12-patch)
+  - [1.2. Merge](#12-merge)
+  - [1.3. Patch](#13-patch)
 - [2. Git UI](#2-git-ui)
 
 # 1. Git command-line
@@ -45,7 +46,26 @@ git clean -fx   # To remove ignored and non-ignored files
 - Obtenir les changement courants : `git diff` ou `git diff --staged` (si déjà _staged_)
 - Committer avec description et message : utiliser `git commit` (ouvrira vim et permettra de renseigner un titre et une description)
 
-## 1.2. Patch
+## 1.2. Merge
+
+Plusieurs stratégies de merge existent, voir [git merge strategy](https://git-scm.com/docs/git-merge/en#_merge_strategies) pour plus de détails. Les stratégies _resolve_ (merge deux branches) et _octopus_ (merge plusieurs branches) sont les stratégies utilisées par défaut selon les cas.
+
+Nous détaillerons ici une autre stratégie pouvant parfois être utile : [_ours strategy_](https://git-scm.com/docs/git-merge/en#Documentation/git-merge.txt-ours).  
+Prenons l'exemple d'un projet possédant une branche `master` et `dev`, les modifications effectuées dans `dev` sont normalement dédiées à être merge dans `master`. Or, parfois, il y a eu tellement de changements dans la branche `dev` (restructuration du porjet, nouvelle techno, etc...) qu'un merge classique n'est plus pertinent (surtout s'il y a eu d'autres commits en parallèle sur le master...).
+
+Mais comment conserver l'historique de `master` mais en se rebasant sur la branche `dev`. Tout d'abord, l'option de _rebase_ ici est hors de question puisque l'on réécrirait l'historique `master` avec celui de `dev`, on souhaite conserver chacun des historiques.  
+C'est là que la stratégie _ours_ devient utile !
+
+Ainsi, nous pouvons utiliser les commandes suivantes pour appliquer la stratégie _ours_ pour merge `dev` dans la branche `master` :
+```shell
+git checkout develop
+git merge -s ours master
+git checkout master
+git merge develop
+```
+> The resulting master should now contain the contents of your previous develop and ignore all changes in master.
+
+## 1.3. Patch
 
 https://stackoverflow.com/questions/2249852/how-to-apply-a-patch-generated-with-git-format-patch/50329788
 (git apply applies changes as a patch, not as a commit, while git am assumes that the text of the email is the commit message (with some exceptions) and applies changes creating a commit (and it can try to resolve conflicts with 3-way merge with git am --3way)
