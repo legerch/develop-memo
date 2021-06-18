@@ -187,7 +187,7 @@ gst-launch-1.0 filesrc location=/home/user/media/vid/mp4/SampleVideo_128x128_30m
 > It does the following :
 > - Handles stream format conversion.
 > - Handles alignment conversion.
-> - Implements  periodic SPS/PPS insertion via the config-interval property. You can use this to ensure seeking works correctly in some circumstances.
+> - Implements  periodic SPS/PPS insertion via the config-interval property. You can use this to ensure seeking works correctly in some circumstances.  
 > You don't necessarily need to have this plugin in your pipeline, but if you have a variety of source content, or you don't have a say in how the source content is created, then you probably want it in your pipeline. 
 
 # 5. Fonctionnalités
