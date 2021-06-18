@@ -182,8 +182,13 @@ Dans notre cas, seule la vidéo nous intéresse, il est possible d'ignorer l'aud
 ```shell
 gst-launch-1.0 filesrc location=/home/user/media/vid/mp4/SampleVideo_128x128_30mb.mp4 ! qtdemux name=demux  demux.video_0 ! queue ! avdec_h264 ! videoconvert ! fbdevsink
 ```
-> Note : Concernant le décodeur, il peut parfois être nécessaire d'appeler le plugin `h264parse` avant le plugin décodeur (ici `avdec_h264`)  
-> Par ailleurs, ce n'est pas le seul plugin décodeur _h264_ disponible, il y a également `v4l2h264dec`.
+> **Note 1** : `avdec_h264` n'est pas le seul plugin décodeur _h264_ disponible, il y a également `v4l2h264dec` (et plein d'autres !).  
+> **Note 2** : Si possible, toujours utiliser le plugin `h264parse` avant d'encoder/décoder une vidéo en h264.  
+> It does the following :
+> - Handles stream format conversion.
+> - Handles alignment conversion.
+> - Implements  periodic SPS/PPS insertion via the config-interval property. You can use this to ensure seeking works correctly in some circumstances.
+> You don't necessarily need to have this plugin in your pipeline, but if you have a variety of source content, or you don't have a say in how the source content is created, then you probably want it in your pipeline. 
 
 # 5. Fonctionnalités
 ## 5.1. Obtenir des diagrammes/graphes
@@ -244,11 +249,12 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
     - [bayer2rgb](https://gstreamer.freedesktop.org/documentation/bayer/bayer2rgb.html?gi-language=c)
   - Demuxers
     - [`qtdemux`](https://gstreamer.freedesktop.org/documentation/isomp4/qtdemux.html?gi-language=c)
+  - Codec parser
+    - [h264parse](https://gstreamer.freedesktop.org/documentation/videoparsersbad/h264parse.html?gi-language=c)
   - Encodeurs
     - v4l2h264enc
     - [x264enc](https://gstreamer.freedesktop.org/documentation/x264/index.html?gi-language=c)
   - Decodeurs
-    - [h264parse](https://gstreamer.freedesktop.org/documentation/videoparsersbad/h264parse.html?gi-language=c)
     - v4l2h264dec
     - [avdec_h264](https://gstreamer.freedesktop.org/documentation/libav/avdec_h264.html?gi-language=c)
   - Réseau
@@ -263,10 +269,11 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
   - Autres
     - [autovideosink](https://gstreamer.freedesktop.org/documentation/autodetect/autovideosink.html?gi-language=c)
 - Documentation officielle **NXP** :
-  - [Processeurs IMX8](https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES)
-- Documentation officielle fichier `.sdp` : https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer
+  - [Processeurs IMX8](https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES) 
 - Tutoriels
-  - https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph)
+  - [Introduction to network streaming using GStreamer](https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer)
+  - [How to generate a Gstreamer pipeline diagram (graph)](https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph))
+  - [GStreamer cheatsheet](https://gist.github.com/strezh/9114204)
 - Threads
   - Fichiers `.sdp`
     - [Pipeline GStreamer pour lire le flux depuis fichier `.sdp`](http://gstreamer-devel.966125.n4.nabble.com/Unable-to-play-a-rtp-stream-td4675068.html)
@@ -274,11 +281,18 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
   - IMX8 encodeurs :
     - https://community.nxp.com/t5/i-MX-Processors/iMX8M-Software-H-264-Encoding-Speed-Not-as-Advertised/m-p/981332/highlight/true
     - https://community.nxp.com/t5/i-MX-Processors/i-MX8M-SW-Video-Encoder-Linux/td-p/748960
-    - 
+  - Détails concernant le plugin `h264parse` :
+    - [Usage of h264parse](http://gstreamer-devel.966125.n4.nabble.com/Usage-of-h264parse-td4671122.html)
+    - [What's the difference between h264parse and x264enc](http://gstreamer-devel.966125.n4.nabble.com/What-s-the-difference-between-h264parse-and-x264enc-td4665616.html)
+    - [h264parse element needed to play video in VLC after encoding with nvh264enc](http://gstreamer-devel.966125.n4.nabble.com/h264parse-element-needed-to-play-video-in-VLC-after-encoding-with-nvh264enc-td4692147.html)
+    - [Usage of h264parse and rtph264pay](http://gstreamer-devel.966125.n4.nabble.com/Usage-of-h264parse-and-rtph264pay-td4683943.html)
+    - [How to demux a mp4 file to a encoded 264 video file by qtdemux ?](http://gstreamer-devel.966125.n4.nabble.com/How-to-demux-a-mp4-file-to-a-encoded-264-video-file-by-qtdemux-td4670615.html)
   - Autres
-    - https://stackoverflow.com/questions/65996592/gstreamer-pipeline-gets-warning-from-fbdevsink-buffers-being-dropped-while-doin
-    - https://forums.developer.nvidia.com/t/streaming-issues-with-gst-launch-1-0-with-a-custom-camera-device/73505/3
-    - https://stackoverflow.com/questions/42297360/which-elements-are-contained-in-decodebin
+    - [GStreamer pipeline gets warning from FBDevSink: buffers being dropped while doing Tee with h264 encoding](https://stackoverflow.com/questions/65996592/gstreamer-pipeline-gets-warning-from-fbdevsink-buffers-being-dropped-while-doin)
+    - [Streaming issues with gst-launch-1.0 with a custom camera device](https://forums.developer.nvidia.com/t/streaming-issues-with-gst-launch-1-0-with-a-custom-camera-device/73505/3)
+    - [Which elements are contained in decodebin ?](https://stackoverflow.com/questions/42297360/which-elements-are-contained-in-decodebin)
+    - [Decode a mp4 video with gstreamer](https://stackoverflow.com/questions/13500893/decode-a-mp4-video-with-gstreamer)
+    - [v4l2h264dec instead of omxh264dec](https://www.raspberrypi.org/forums/viewtopic.php?t=240274)
 
 <!-- Images -->
 [icon-valid]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
