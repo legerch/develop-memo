@@ -218,7 +218,7 @@
 		  "{",
 		  "    printf(\"Application version : %s\\n\", ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_VERSION);",
 		  "    printf(\"Dependencies : \\n\");",
-		  "    printf(\"Library <name-library> : %s\\n\", \"No version\");",
+		  "    printf(\"- Library <name-library> : %s\\n\", \"No version\");",
 		  "}",
 		  "",
 		  "/******************************************************************************/",
