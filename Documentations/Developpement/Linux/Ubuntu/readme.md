@@ -6,7 +6,8 @@
     - [2.2.1. Terminal](#221-terminal)
     - [2.2.2. Graphical interface](#222-graphical-interface)
   - [2.3. Softwares](#23-softwares)
-- [3. Ressources](#3-ressources)
+- [3. `tracker` process](#3-tracker-process)
+- [4. Ressources](#4-ressources)
 
 # 1. Introduction
 
@@ -63,8 +64,30 @@ List of softwares using PPA repository :
 - [teamviewer](https://community.teamviewer.com/English/kb/articles/30666-how-to-update-teamviewer-on-linux-via-repository)
 - [thunderbird](https://doc.ubuntu-fr.org/thunderbird)
 - [vscode](https://code.visualstudio.com/docs/setup/linux)
-  
-# 3. Ressources
+
+# 3. `tracker` process
+
+`tracker` was introduced in _Ubuntu 19.10_ (it's a **Gnome** dependency). It indexes your files to allow for fast searching for content in files from Files or Gnome Documents, find pictures in Gnome Photos, allow to rename files based on metadata, and so on.
+
+Many users have complain about tracker taking a lot of CPU ressources. If you don't need global research, you can disable tracker (research in a directory will still be available and even faster...)
+
+To disable tracker for current user :
+```shell
+systemctl --user mask tracker-store.service tracker-miner-fs.service tracker-miner-rss.service tracker-extract.service tracker-miner-apps.service tracker-writeback.service
+tracker reset --hard
+sudo reboot
+```
+
+To undo, reenable the services :
+```shell
+systemctl --user unmask tracker-store.service tracker-miner-fs.service tracker-miner-rss.service tracker-extract.service tracker-miner-apps.service tracker-writeback.service
+sudo reboot
+```
+> More details on this procedure in the concerned thread from Ubuntu forum : [Tracker process taking lot of CPU](https://askubuntu.com/questions/1187191/tracker-process-taking-lot-of-cpu).  
+> **Don't forget** to re-enable services before performing major upgrades of Ubuntu OS to prevent from unexpected behaviour.
+
+
+# 4. Ressources
 
 - Official documentation :
   - [FR Ubuntu - PPA](https://doc.ubuntu-fr.org/ppa)
@@ -76,4 +99,6 @@ List of softwares using PPA repository :
     - https://www.addictivetips.com/ubuntu-linux-tips/update-ubuntu-ppa-to-20-04-release/
   - _Gimp_
     - https://ubuntuhandbook.org/index.php/2020/07/ppa-install-gimp-2-10-20-ubuntu-20-04/
+- Threads
+  - [Tracker process taking lot of CPU](https://askubuntu.com/questions/1187191/tracker-process-taking-lot-of-cpu)
   
