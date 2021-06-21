@@ -8,7 +8,7 @@
   - [2.4. String](#24-string)
     - [2.4.1. Allocations](#241-allocations)
     - [2.4.2. Conversions](#242-conversions)
-- [3. Useful links](#3-useful-links)
+- [3. Ressources](#3-ressources)
 
 # 1. Limits
 
@@ -50,6 +50,14 @@ fprintf(stream, "Hexadecimal value : 0x%02x", 42);
 fprintf(stream, "size_t value : zd", 42);
 ```
 > More details here : https://www.gnu.org/software/libc/manual/html_node/Integer-Conversions.html
+
+- Format **GLib** types :
+```C
+gsize sizeBuffer = 54324567;
+printf("My value: %" G_GSIZE_FORMAT "\n", sizeBuffer);
+```
+> Note that the `%` is not part of the macro.  
+> For macro documentation, please check : [GLib-BasicTypes](https://developer.gnome.org/glib/stable/glib-Basic-Types.html)
 
 ## 2.2. Enum errors
 
@@ -103,11 +111,13 @@ static const char *arrayEnumNetErrorToString[] = {
 ```C
 /*----------------------------------------------------------------------------*/
 /**
- * \brief       Use to convert network manager error to string  
+ * \brief Use to convert network manager error to string  
  *
- * \param[in]   NETM_enuErrors enuError : Error to convert
+ * \param[in] enuError
+ * Error to convert
  *
- * \return      const char * : String representation of error
+ * \return
+ * Returns string representation of error
  */
 /*----------------------------------------------------------------------------*/
 const char *NETM_enuErrors_getString(NETM_enuErrors enuError)
@@ -127,21 +137,14 @@ const char *NETM_enuErrors_getString(NETM_enuErrors enuError)
 ```C
 /*---------------------------------------------------------------------------*/
 /**
- * \brief      Print variable value byte by byte in hexadecimal format
- * \details    NA
+ * \brief Print variable value byte by byte in hexadecimal format
  *             
- * \param[in] void *value
- * 	Pointer value, must be not NULL.
- * \param[in] size_t sizeOfValue
- * 	Number of bytes of value.
- * \param[in] FILE *fdOutput
- * 	File descriptor opened of stream output.
- *
- * \param[out] NA
- * \return     NA
- *
- * \warning    NA
- * \note       NA
+ * \param[in] value
+ * Pointer value, must be not NULL.
+ * \param[in] sizeOfValue
+ * Number of bytes of value.
+ * \param[in] fdOutput
+ * File descriptor opened of stream output.
  */
 /*---------------------------------------------------------------------------*/
 void HTOOLS_vPrintByteByByteValue(void *value, size_t sizeOfValue, FILE *fdOutput){
@@ -441,5 +444,10 @@ int HTOOLS_stringToUnsignedInteger(const char *str, unsigned int *pUnsignedInt, 
 }
 ```
 
-# 3. Useful links
-- https://stackoverflow.com/questions/293438/left-pad-printf-with-spaces
+# 3. Ressources
+
+- Official :
+  - [GLib-BasicTypes](https://developer.gnome.org/glib/stable/glib-Basic-Types.html)
+- Threads
+  - [Left pad printf with spaces](https://stackoverflow.com/questions/293438/left-pad-printf-with-spaces)
+  - [How to print a guint64 value when using glib ?](https://stackoverflow.com/questions/15272976/how-to-print-a-guint64-value-when-using-glib)
