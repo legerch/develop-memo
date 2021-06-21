@@ -53,7 +53,7 @@ Plusieurs stratégies de merge existent, voir [git merge strategy](https://git-s
 Nous détaillerons ici une autre stratégie pouvant parfois être utile : [_ours strategy_](https://git-scm.com/docs/git-merge/en#_merge_strategies).  
 > **Attention :** On parle bien ici de la stratégie **ours merge strategy** et non pas de l'option _ours_ de la stratégie **recursive merge strategy** qui sont deux choses distinctes.
  
-Prenons l'exemple d'un projet possédant une branche `master` et `dev`, les modifications effectuées dans `dev` sont normalement dédiées à être merge dans `master`. Or, parfois, il y a eu tellement de changements dans la branche `dev` (restructuration du porjet, nouvelle techno, etc...) qu'un merge classique n'est plus pertinent (surtout s'il y a eu d'autres commits en parallèle sur le master...).
+Prenons l'exemple d'un projet possédant une branche `master` et `dev`, les modifications effectuées dans `dev` sont normalement dédiées à être merge dans `master`. Or, parfois, il y a eu tellement de changements dans la branche `dev` (restructuration du projet, nouvelle techno, etc...) qu'un merge classique n'est plus pertinent (surtout s'il y a eu d'autres commits en parallèle sur le master...).
 
 Mais comment conserver l'historique de `master` mais en se rebasant sur la branche `dev`. Tout d'abord, l'option de _rebase_ ici est hors de question puisque l'on réécrirait l'historique `master` avec celui de `dev`, on souhaite conserver chacun des historiques.  
 C'est là que la stratégie _ours_ devient utile !
