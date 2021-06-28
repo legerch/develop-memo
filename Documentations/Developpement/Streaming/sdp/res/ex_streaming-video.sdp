@@ -1,0 +1,7 @@
+v=0
+s=Rayplicker Cobra
+i=Streaming from Cobra device
+m=video 1234 RTP/AVP 96
+c=IN IP4 0.0.0.0
+a=rtpmap:96 H264/90000
+a=recvonly
