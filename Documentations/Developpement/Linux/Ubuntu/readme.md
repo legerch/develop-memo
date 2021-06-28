@@ -7,6 +7,9 @@
     - [2.2.2. Graphical interface](#222-graphical-interface)
   - [2.3. Softwares](#23-softwares)
 - [3. `tracker` process](#3-tracker-process)
+- [Graphics cards support](#graphics-cards-support)
+  - [Nvidia](#nvidia)
+- [System freeze](#system-freeze)
 - [4. Ressources](#4-ressources)
 
 # 1. Introduction
@@ -86,6 +89,18 @@ sudo reboot
 > More details on this procedure in the concerned thread from Ubuntu forum : [Tracker process taking lot of CPU](https://askubuntu.com/questions/1187191/tracker-process-taking-lot-of-cpu).  
 > **Don't forget** to re-enable services before performing major upgrades of Ubuntu OS to prevent from unexpected behaviour.
 
+# Graphics cards support
+## Nvidia
+
+_Under construction_ 
+> Use this tutorial : https://www.cyberciti.biz/faq/ubuntu-linux-install-nvidia-driver-latest-proprietary-driver/
+
+# System freeze
+
+_under construction_
+> How to properly shutdown Ubuntu even if all is freezed : https://doc.ubuntu-fr.org/tutoriel/lorsque_le_systeme_gele  
+> Note : don't forget to print those pages...  
+> magic keys (impr'ecran) : https://doc.ubuntu-fr.org/touches_magiques
 
 # 4. Ressources
 
