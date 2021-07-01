@@ -121,6 +121,7 @@ In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** 
 - Tutorials
   - https://sqldbawithabeard.com/2017/04/24/setting-the-default-file-type-for-a-new-file-in-vs-code/
 - Threads :
-  - https://stackoverflow.com/questions/50571130/how-can-i-create-templates-for-file-extensions-in-visual-studio-code
-  - https://github.com/Microsoft/vscode-cpptools/issues/1476
-  - https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab
+  - [How can I create templates for file extensions in Visual Studio Code ?](https://stackoverflow.com/questions/50571130/how-can-i-create-templates-for-file-extensions-in-visual-studio-code)
+  - [When creating a VSCode snippet, how can I transform a variable to title-case (like TitleCase) ?](https://stackoverflow.com/questions/52874954/when-creating-a-vscode-snippet-how-can-i-transform-a-variable-to-title-case-li)
+  - [Snippet can not work in C header file (#1476)](https://github.com/Microsoft/vscode-cpptools/issues/1476)
+  - [Open files always in a new tab](https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab)

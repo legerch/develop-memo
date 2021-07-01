@@ -14,7 +14,7 @@
 	// }
 
 	"Generate C source file for Cobra project ": {
-		"prefix": "cobra-source-c",
+		"prefix": "cobra-source-lib-c",
 		"body": [
 		  "/******************************************************************************/",
 		  "/**",
@@ -74,6 +74,13 @@
 		  "/* Private variable definitions                                               */",
 		  "/******************************************************************************/",
 		  "",
+          "/* Library version */",
+          "#if defined(LIB_VERSION)",
+          "static const char *m_lib${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} = LIB_VERSION;",
+          "#else",
+          "#error \"Macro LIB_VERSION for library '${TM_FILENAME_BASE}` not defined, please set !\"",
+          "#endif",
+          "",
 		  "/******************************************************************************/",
 		  "/* Private functions                                                          */",
 		  "/******************************************************************************/",
@@ -90,6 +97,19 @@
 		  "/* Public functions                                                           */",
 		  "/******************************************************************************/",
 		  "",
+          "/*----------------------------------------------------------------------------*/",
+          "/**",
+          " * \\brief Use to get string of library version",
+          " *",
+          " * \\return",
+          " * Returns string version of library \\c ${TM_FILENAME_BASE}",
+          " */",
+          "/*----------------------------------------------------------------------------*/",
+          "const char *NETM_getLibVersion(void)",
+          "{",
+          "    return m_lib${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g};",
+          "}",
+          "",
 		  "/******************************************************************************/",
 		  "/* EOF                                                                        */",
 		  "/******************************************************************************/"
