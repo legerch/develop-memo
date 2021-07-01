@@ -5,9 +5,12 @@
   - [2.1. Printf](#21-printf)
   - [2.2. Enum errors](#22-enum-errors)
   - [2.3. Buffer](#23-buffer)
-  - [2.4. String](#24-string)
-    - [2.4.1. Allocations](#241-allocations)
-    - [2.4.2. Conversions](#242-conversions)
+  - [2.4. Dynamic allocation](#24-dynamic-allocation)
+    - [2.4.1. Malloc](#241-malloc)
+    - [2.4.2. Calloc](#242-calloc)
+  - [2.5. String](#25-string)
+    - [2.5.1. Allocations](#251-allocations)
+    - [2.5.2. Conversions](#252-conversions)
 - [3. Ressources](#3-ressources)
 
 # 1. Limits
@@ -161,9 +164,34 @@ void HTOOLS_vPrintByteByByteValue(void *value, size_t sizeOfValue, FILE *fdOutpu
 }
 ```
 
-## 2.4. String
+## 2.4. Dynamic allocation
 
-### 2.4.1. Allocations
+To allocate memory, `malloc()` and `calloc()` are available.  
+Both method needed `sizeof()` of the type to reserved, it is better to used `sizeof(var)` instead of `sizeof(type)` to do so because if type of variables is changed, all called to `sizeof()` for this variable must be changed. If we directly used `sizeof(var)`, no extra checking is needed.
+
+### 2.4.1. Malloc
+
+```C
+/* Bad : using type */
+MyStruct *pVar = malloc(1 * sizeof(MyStruct));
+
+/* Good */
+MyStruct *pVar = malloc(1 * sizeof(*pVar));
+```
+
+### 2.4.2. Calloc
+
+```C
+/* Bad : using type */
+MyStruct *pVar = calloc(1, sizeof(MyStruct));
+
+/* Good */
+MyStruct *pVar = calloc(1, sizeof(*pVar));
+```
+
+## 2.5. String
+
+### 2.5.1. Allocations
 
 Functions [`asprintf`](https://linux.die.net/man/3/vasprintf) and [`vasprintf`](https://linux.die.net/man/3/asprintf) are GNU extensions, not in C or POSIX.  
 We can use those functions or define own implementations :
@@ -281,7 +309,7 @@ error_return:
 }
 ```
 
-### 2.4.2. Conversions
+### 2.5.2. Conversions
 
 Methods used to convert any string to appropriate types safely :
 
@@ -448,6 +476,9 @@ int HTOOLS_stringToUnsignedInteger(const char *str, unsigned int *pUnsignedInt, 
 
 - Official :
   - [GLib-BasicTypes](https://developer.gnome.org/glib/stable/glib-Basic-Types.html)
+  - [Google Guideline](https://google.github.io/styleguide/cppguide.html)
 - Threads
   - [Left pad printf with spaces](https://stackoverflow.com/questions/293438/left-pad-printf-with-spaces)
   - [How to print a guint64 value when using glib ?](https://stackoverflow.com/questions/15272976/how-to-print-a-guint64-value-when-using-glib)
+  - [“C” sizeof with a type or variable](https://stackoverflow.com/questions/373252/c-sizeof-with-a-type-or-variable)
+  - ["sizeof(value) vs sizeof(type) ?"](https://stackoverflow.com/questions/12811696/sizeofvalue-vs-sizeoftype)
