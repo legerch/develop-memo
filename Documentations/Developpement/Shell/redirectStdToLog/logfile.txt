@@ -1,0 +1,45 @@
+Logfile: mercredi 5 février 2020, 18:19:44 (UTC+0100)
+-------------------------------------
+
+Output of "ls -al" command
+
+total 16
+drwxr-xr-x  2 charlie charlie 4096 févr.  5 18:19 .
+drwxr-xr-x 11 charlie charlie 4096 févr.  5 18:06 ..
+-rwxr-xr-x  1 charlie charlie 1378 févr.  5 18:19 exemple_redirect_std.sh
+-rw-r--r--  1 charlie charlie  122 févr.  5 18:19 logfile.txt
+
+
+Output of "df" command
+
+Sys. de fichiers blocs de 1K  Utilisé Disponible Uti% Monté sur
+udev                 3906084        0    3906084   0% /dev
+tmpfs                 786076     2008     784068   1% /run
+/dev/sda7          102687672 31148500   66279908  32% /
+tmpfs                3930380   174500    3755880   5% /dev/shm
+tmpfs                   5120        4       5116   1% /run/lock
+tmpfs                3930380        0    3930380   0% /sys/fs/cgroup
+/dev/loop1              3840     3840          0 100% /snap/gnome-system-monitor/127
+/dev/loop2             46080    46080          0 100% /snap/gtk-common-themes/1440
+/dev/loop0              1024     1024          0 100% /snap/gnome-logs/73
+/dev/loop3            160512   160512          0 100% /snap/gnome-3-28-1804/110
+/dev/loop4             56064    56064          0 100% /snap/core18/1668
+/dev/loop5             91264    91264          0 100% /snap/core/8039
+/dev/loop7            144128   144128          0 100% /snap/gnome-3-26-1604/92
+/dev/loop9              1024     1024          0 100% /snap/gnome-logs/81
+/dev/loop6             91264    91264          0 100% /snap/core/8268
+/dev/loop10            15104    15104          0 100% /snap/gnome-characters/399
+/dev/loop8              4352     4352          0 100% /snap/gnome-calculator/501
+/dev/loop12           144128   144128          0 100% /snap/gnome-3-26-1604/98
+/dev/loop14             3840     3840          0 100% /snap/gnome-system-monitor/123
+/dev/loop13            56064    56064          0 100% /snap/core18/1650
+/dev/loop11           164096   164096          0 100% /snap/gnome-3-28-1804/116
+/dev/loop15            15104    15104          0 100% /snap/gnome-characters/375
+/dev/loop16            45312    45312          0 100% /snap/gtk-common-themes/1353
+/dev/loop17             4352     4352          0 100% /snap/gnome-calculator/544
+/dev/sda1             661504    67748     593756  11% /boot/efi
+tmpfs                 786076       52     786024   1% /run/user/1000
+
+Output of error : cat lala.txt
+cat: lala.txt: Aucun fichier ou dossier de ce type
+
