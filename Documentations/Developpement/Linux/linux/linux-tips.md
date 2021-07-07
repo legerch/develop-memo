@@ -207,3 +207,4 @@ alias maj='sudo apt update && sudo apt full-upgrade'
 - https://askubuntu.com/questions/318530/generate-md5-checksum-for-all-files-in-a-directory
 - https://stackoverflow.com/questions/1341467/find-filenames-not-ending-in-specific-extensions-on-unix
 - https://askubuntu.com/questions/662339/sort-files-alphabetically-before-processing
+- https://www.digitalocean.com/community/tutorials/an-introduction-to-useful-bash-aliases-and-functions

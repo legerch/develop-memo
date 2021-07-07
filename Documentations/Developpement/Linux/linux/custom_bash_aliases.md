@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from PC-CHARLIE - Ubuntu 20.04 - Kernel 5.4.0-73-generic - 03/06/2021 :
+Save from : PC-CHARLIE - Ubuntu 20.04.2 LTS - Kernel 5.4.0-77-generic - 07/07/2021 :
 
 ```shell
 ##
@@ -14,6 +14,36 @@ function set-title(){
   fi
   TITLE="\[\e]2;$*\a\]"
   PS1="${ORIG}${TITLE}"
+}
+
+# Function used to create a copy of ~/.bash_aliases into a markdown file :
+# ${1} : file to write (ex : file.md)
+function save-custom-bash-aliases(){
+    # Check that a destination file is available
+    if [ -z "${1}" ]; then
+        printf "USAGE : save-bash-aliases <file_destination>\n"
+        return 1
+    fi
+
+    local fileDest="${1}"
+    local fileSrc="${HOME}/.bash_aliases"
+    local infoUnameNodename=$( uname -n )
+    local infoUnameKernel=$( uname -r )
+    local infoOsRelease=$( grep -oP '(?<=^PRETTY_NAME=).+' /etc/os-release | tr -d '"' )
+    local infoDate=$( date +%d/%m/%Y )
+
+    # Delete content
+    > "${fileDest}"
+
+    # Write into file
+    ## Context informations
+    printf "# Custom bash aliases\n\n" >> "${fileDest}"
+    printf "Save from : ${infoUnameNodename} - ${infoOsRelease} - Kernel ${infoUnameKernel} - ${infoDate} :\n\n" >> "${fileDest}"
+
+    ## Bash aliases script
+    printf "\`\`\`shell\n" >> "${fileDest}"
+    printf "%s\n" "$(<${fileSrc})" >> "${fileDest}"
+    printf "\`\`\`\n" >> "${fileDest}"
 }
 
 ##
@@ -35,6 +65,10 @@ alias qt-workspace='cd /home/charlie/Documents/workspaces/workspaceQT'
 
 # Copy VsCode snippets to documentation folder
 alias snippet-copy-c='cp ~/.config/Code/User/snippets/c.json ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
+alias snippet-copy-sh='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json'
+
+# Use to save custom bash aliases do documentation folder
+alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md'
 
 ##
 # Cobra specific aliases
