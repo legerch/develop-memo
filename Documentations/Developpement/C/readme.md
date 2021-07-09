@@ -29,8 +29,8 @@
 |`unsigned long int` | 4 | 8 | 0 | 18 446 744 073 709 551 615 |
 
 > Those informations are **theorical** and **platform dependant** :
-> - Use header `limits.h` for application ([official-c++](https://www.cplusplus.com/reference/climits/), [official2](https://devdocs.io/c/types/limits), [tutorial](https://www.tutorialspoint.com/c_standard_library/limits_h.htm))
-> - Use header `stdint.h` if exact byte size is needed ([official1](https://www.cplusplus.com/reference/cstdint/), [official2](https://devdocs.io/c/types/integer))
+> - Use header `limits.h` for application ([official-c++](https://www.cplusplus.com/reference/climits/), [official-c](https://devdocs.io/c/types/limits), [tutorial-c](https://www.tutorialspoint.com/c_standard_library/limits_h.htm))
+> - Use header `stdint.h` if exact byte size is needed ([official-c++](https://www.cplusplus.com/reference/cstdint/), [official-c](https://devdocs.io/c/types/integer))
 
 # 2. Tips
 
