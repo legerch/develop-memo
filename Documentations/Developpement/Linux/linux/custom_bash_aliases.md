@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.2 LTS - Kernel 5.4.0-77-generic - 07/07/2021 :
+Save from : PC-CHARLIE - Ubuntu 20.04.2 LTS - Kernel 5.4.0-77-generic - 13/07/2021 :
 
 ```shell
 ##
@@ -44,6 +44,19 @@ function save-custom-bash-aliases(){
     printf "\`\`\`shell\n" >> "${fileDest}"
     printf "%s\n" "$(<${fileSrc})" >> "${fileDest}"
     printf "\`\`\`\n" >> "${fileDest}"
+}
+
+# Function used as a memo to build Cobra OS :
+# - Print command to use for Buildroot Cobra project
+# - List all available configs from "/configs" directory
+function cobra-memo-build(){
+    local pathCfgFiles="${HOME}/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/bsp-external-rayplicker-v2/configs/"
+    
+    printf "make PROJECT_DEFCONFIG=imx8_armadeus_run2_debug PROJECT_USE_BR_CUSTOM_PATCHES=1 clean\n"
+    printf "Available configs files:\n"
+    for i in `ls ${pathCfgFiles} | grep "\defconfig"`; do
+        printf "\t${i}\n"
+    done
 }
 
 ##
