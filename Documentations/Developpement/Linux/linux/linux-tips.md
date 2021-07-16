@@ -141,10 +141,10 @@ make sdk
 In _dev_ phase, libraries are not always at their standard destination `/usr/lib` (because it's dev phase !), so to use an application which needed to be link to the library, we need to tell where to find this library. To do so, use :
 ```shell
 # 1 library
-export LD_LIBRARY_PATH=../bin/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../bin/
 
 # Multiple libraries (':' is the key character)
-export LD_LIBRARY_PATH=../../helper_tools/bin:../../custom_error/bin:../bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_error/bin:../bin
 ```
 
 # 8. Modules
