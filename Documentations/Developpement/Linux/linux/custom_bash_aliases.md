@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.2 LTS - Kernel 5.4.0-77-generic - 13/07/2021 :
+Save from : PC-CHARLIE - Ubuntu 20.04.2 LTS - Kernel 5.4.0-77-generic - 16/07/2021 :
 
 ```shell
 ##
@@ -49,7 +49,7 @@ function save-custom-bash-aliases(){
 # Function used as a memo to build Cobra OS :
 # - Print command to use for Buildroot Cobra project
 # - List all available configs from "/configs" directory
-function cobra-memo-build(){
+function memo-cobra-build(){
     local pathCfgFiles="${HOME}/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/bsp-external-rayplicker-v2/configs/"
     
     printf "make PROJECT_DEFCONFIG=imx8_armadeus_run2_debug PROJECT_USE_BR_CUSTOM_PATCHES=1 clean\n"
@@ -79,6 +79,9 @@ alias qt-workspace='cd /home/charlie/Documents/workspaces/workspaceQT'
 # Copy VsCode snippets to documentation folder
 alias snippet-copy-c='cp ~/.config/Code/User/snippets/c.json ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
 alias snippet-copy-sh='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json'
+
+# Use as a memo to load library into env variables
+alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../bin/\n"'
 
 # Use to save custom bash aliases do documentation folder
 alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md'
