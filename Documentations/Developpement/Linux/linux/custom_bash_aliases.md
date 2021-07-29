@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.2 LTS - Kernel 5.4.0-77-generic - 16/07/2021 :
+Save from : PC-CHARLIE - Ubuntu 20.04.2 LTS - Kernel 5.4.0-80-generic - 29/07/2021 :
 
 ```shell
 ##
@@ -65,6 +65,9 @@ function memo-cobra-build(){
 
 # To perform host updates
 alias maj='sudo apt update && sudo apt full-upgrade'
+
+# To uninstall a package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/151941/how-can-you-completely-remove-a-package)
+alias apt-uninstall="sudo apt purge --autoremove"
 
 # Get 'sync' command status
 alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
