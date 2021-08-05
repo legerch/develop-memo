@@ -80,7 +80,7 @@ List of default keyboard shortcut to changed :
 
 # 3. Plugins
 
-_Visual Studio Code_ allow usage of plugin, list of useful plugins :
+_Visual Studio Code_ allow usage of plugin, list of useful plugins and somes associated settings :
 - [Back & Forth](https://marketplace.visualstudio.com/items?itemName=nick-rudenko.back-n-forth)
 - [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 - [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
@@ -88,6 +88,8 @@ _Visual Studio Code_ allow usage of plugin, list of useful plugins :
 - [Doxygen Documentation Generator](https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen)
 - [Keep a Changelog](https://marketplace.visualstudio.com/items?itemName=RLNT.keep-a-changelog)
 - [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+  - `Mardown/extension/print/Absolute Img Path` : By default, this setting is enable, disable it to make your `.html` **moveable** when using an `images` folder
+  - `Mardown/extension/print/Img To Base64` : Can be useful to include images directly into `.html` files to get ride of the `images` folder when generate `.html`
 - [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)
 - [Vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
 
