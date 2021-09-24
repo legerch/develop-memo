@@ -7,6 +7,7 @@
     - [2.1.3. Update project from upstream release](#213-update-project-from-upstream-release)
       - [2.1.3.1. Method 1 : Rebase](#2131-method-1--rebase)
       - [2.1.3.2. Method 2 : Use existing patches](#2132-method-2--use-existing-patches)
+- [Manage private custom repository](#manage-private-custom-repository)
 
 # 1. Introduction
 
@@ -62,6 +63,12 @@ Ici, on utilise les patchs utilsés pour les précédentes versions, ce qui perm
 ```shell
 git checkout master     # or `git checkout -b 2021.02.x origin/2021.02.x`   or `git checkout tags/2020.02.3 -b 2020.02.3`
 git pull upstream
-git am my-folder-of-patches/*.patch # On importe les patchs déjà générés pour les mettre à jour : gestion des conflits plus simples
+git am -3 my-folder-of-patches/*.patch # On importe les patchs déjà générés pour les mettre à jour : gestion des conflits plus simples
 ```
-> Il est nécessaire par la suite de générer à nouveau les patchs avec la commande `git format-patch <sha1>`
+> L'option `-3` va permettre d'activer le **three-way merge** si conflit il y a. De ce fait, il sera ainsi possible d'utiliser un outil de résolution de conflit (comme _meld_) avec la commande `git mergetool`.
+
+Il est nécessaire par la suite de générer à nouveau les patchs avec la commande `git format-patch <sha1>`
+
+# Manage private custom repository
+
+a dev : https://stackoverflow.com/questions/5181845/git-push-existing-repo-to-a-new-and-different-remote-repo-server

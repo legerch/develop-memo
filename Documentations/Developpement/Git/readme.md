@@ -12,6 +12,7 @@ This folder is about Git :
   - https://stackoverflow.com/questions/21903805/how-to-download-a-single-commit-diff-from-github
   - https://stackoverflow.com/questions/17630970/how-to-manage-the-open-source-projects-patches-which-cant-push-to-upstream
   - https://stackoverflow.com/questions/3357280/print-commit-message-of-a-given-commit-in-git
+  - https://stackoverflow.com/questions/16190387/when-applying-a-patch-is-there-any-way-to-resolve-conflicts
 - Tutorials :
   - [How to rename local and remote git branch](https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/)
   - [Git overwriting master with another branch](https://knasmueller.net/git-overwriting-master-with-another-branch)

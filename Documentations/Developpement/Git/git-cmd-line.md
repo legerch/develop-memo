@@ -4,6 +4,8 @@
   - [1.2. Merge](#12-merge)
   - [1.3. Patch](#13-patch)
 - [2. Git UI](#2-git-ui)
+  - [2.1. Real UI](#21-real-ui)
+  - [2.2. Terminal UI](#22-terminal-ui)
 
 # 1. Git command-line
 
@@ -23,6 +25,7 @@
 - Créer une branche depuis un tag : `git branch <name-branch> <tag : origin/2021.02.x>`
 - Créer une branche depuis un tag et checkout dessus : `git checkout tags/2020.02.3 -b 2020.02.3`
 - Créer une branche depuis une branche locale : `git checkout -b <branch-name>`
+- Créer une branche depuis une branche distante : `git checkout -b <branch-name> <remote-branch>` (ex : `git checkout -b 2021.02.x origin/2021.02.x`)
 - Créer une branche sur un commit spécifique : `git branch <branchname> <sha1-of-commit>`
 - Hard reset sur la HEAD : `git reset --hard HEAD`
 - Supprimer les fichiers locaux non trackés de la branche courante :
@@ -45,6 +48,15 @@ git clean -fx   # To remove ignored and non-ignored files
 
 - Obtenir les changement courants : `git diff` ou `git diff --staged` (si déjà _staged_)
 - Committer avec description et message : utiliser `git commit` (ouvrira vim et permettra de renseigner un titre et une description)
+
+- Ajouter une remote : `git remote add <remote name> <remote url>`
+- Supprimer une remote : `git remote remove <remote name>`
+- Obtenir l'url d'une remote : `git remote show <remote name>`
+- Pousser une branche locale sur une remote spécifique : `git push <remote_name> <local_branch_name>:<remote_branch_name>` ou `git push <remote_name> <branch_name>` si la branche de la remote possède le même nom que celle en local.
+
+- Comparer deux branches : `git diff branch1..branch2` 
+- Comparer les commits de deux branches : `git log branch1..branch2`
+- Obtenir le nombre de commits entre deux branches : `git rev-list --count branch1..branch2`
 
 ## 1.2. Merge
 
@@ -103,6 +115,8 @@ git am path/*.patch
 
 # 2. Git UI
 
+## 2.1. Real UI
+
 Plusieurs projets GIT UI sont disponibles :
 - GitKraken (compatible Windows, Mac, Linux) : https://www.gitkraken.com/download
   - UI user-friendly : branches disponibles facilement visibles et différenciables, historique complet, modification non validées affichées, etc... 
@@ -117,3 +131,15 @@ Plusieurs projets GIT UI sont disponibles :
   - Gère les submodules
   - Gère les patchs (et utilise la commande `git am` pour les appliquer en interne)
   - Permet de travailler les dépôts volumineux types _kernel linux_
+
+## 2.2. Terminal UI
+
+Plusieurs projets de GIT UI ont également vu le jour pour fonctionner avec le terminal, ils permettent surtout de réduire les soucis de performance sur de gros projets (_ex : Noyau linux_) :
+- [Lazygit](https://github.com/jesseduffield/lazygit)
+  - Cross platform : Linux, windows, MacOS
+
+- [gitui](https://github.com/extrawurst/gitui)
+  - Cross platform : Linux, windows, MacOS
+  - Meilleures performances face à _Lazygit_
+  - Raccourcis claviers intuitifs
+  - **Attention :** Projet en phase beta actuellement (21/09/2021)
