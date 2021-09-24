@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.2 LTS - Kernel 5.4.0-80-generic - 29/07/2021 :
+Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.4.0-84-generic - 21/09/2021 :
 
 ```shell
 ##
@@ -88,6 +88,9 @@ alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../bin/\n"'
 
 # Use to save custom bash aliases do documentation folder
 alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md'
+
+# Create alias for gitui program, which doesn't yet have a proper system installation, so we use binaries (https://github.com/extrawurst/gitui)
+alias gituibin='~/Téléchargements/Fichiers\ Setup/gitui-linux-musl/gitui'
 
 ##
 # Cobra specific aliases
