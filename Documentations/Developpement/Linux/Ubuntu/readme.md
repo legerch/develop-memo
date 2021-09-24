@@ -6,11 +6,12 @@
     - [2.2.1. Terminal](#221-terminal)
     - [2.2.2. Graphical interface](#222-graphical-interface)
   - [2.3. Softwares](#23-softwares)
-- [3. `tracker` process](#3-tracker-process)
-- [Graphics cards support](#graphics-cards-support)
-  - [Nvidia](#nvidia)
-- [System freeze](#system-freeze)
-- [4. Ressources](#4-ressources)
+- [3. Standalone packages](#3-standalone-packages)
+- [4. `tracker` process](#4-tracker-process)
+- [5. Graphics cards support](#5-graphics-cards-support)
+  - [5.1. Nvidia](#51-nvidia)
+- [6. System freeze](#6-system-freeze)
+- [7. Ressources](#7-ressources)
 
 # 1. Introduction
 
@@ -68,7 +69,12 @@ List of softwares using PPA repository :
 - [thunderbird](https://doc.ubuntu-fr.org/thunderbird)
 - [vscode](https://code.visualstudio.com/docs/setup/linux)
 
-# 3. `tracker` process
+# 3. Standalone packages
+
+Some package can be installed without using package manager (apt, snapd, etc...). This become a problem when we need to uninstall the package.  
+> Section under construction, check this tutorial : [Install/Uninstall packages in Ubuntu from tar.gz](https://ajinkya007.in/linux/install-packages-in-ubuntu-from-tar-gz/)
+
+# 4. `tracker` process
 
 `tracker` was introduced in _Ubuntu 19.10_ (it's a **Gnome** dependency). It indexes your files to allow for fast searching for content in files from Files or Gnome Documents, find pictures in Gnome Photos, allow to rename files based on metadata, and so on.
 
@@ -89,20 +95,20 @@ sudo reboot
 > More details on this procedure in the concerned thread from Ubuntu forum : [Tracker process taking lot of CPU](https://askubuntu.com/questions/1187191/tracker-process-taking-lot-of-cpu).  
 > **Don't forget** to re-enable services before performing major upgrades of Ubuntu OS to prevent from unexpected behaviour.
 
-# Graphics cards support
-## Nvidia
+# 5. Graphics cards support
+## 5.1. Nvidia
 
 _Under construction_ 
 > Use this tutorial : https://www.cyberciti.biz/faq/ubuntu-linux-install-nvidia-driver-latest-proprietary-driver/
 
-# System freeze
+# 6. System freeze
 
 _under construction_
 > How to properly shutdown Ubuntu even if all is freezed : https://doc.ubuntu-fr.org/tutoriel/lorsque_le_systeme_gele  
 > Note : don't forget to print those pages...  
 > magic keys (impr'ecran) : https://doc.ubuntu-fr.org/touches_magiques
 
-# 4. Ressources
+# 7. Ressources
 
 - Official documentation :
   - [FR Ubuntu - PPA](https://doc.ubuntu-fr.org/ppa)
@@ -112,6 +118,9 @@ _under construction_
     - https://fostips.com/y-ppa-manager-graphical-tool-manage-ubuntu-ppas/
     - https://itsfoss.com/y-ppa-manager/
     - https://www.addictivetips.com/ubuntu-linux-tips/update-ubuntu-ppa-to-20-04-release/
+  - Packages
+    - [Install/Uninstall packages in Ubuntu from tar.gz](https://ajinkya007.in/linux/install-packages-in-ubuntu-from-tar-gz/)
+    - [How to use checkinstall](https://doc.ubuntu-fr.org/checkinstall)
   - _Gimp_
     - https://ubuntuhandbook.org/index.php/2020/07/ppa-install-gimp-2-10-20-ubuntu-20-04/
 - Threads
