@@ -8,6 +8,8 @@
       - [3.2.1.1. Preparing your application](#3211-preparing-your-application)
       - [3.2.1.2. Using `linuxdeploy` tool](#3212-using-linuxdeploy-tool)
     - [3.2.2. Generate _AppImage_ application](#322-generate-appimage-application)
+      - [3.2.2.1. linuxdeploy-plugin-appimage](#3221-linuxdeploy-plugin-appimage)
+      - [3.2.2.2. AppImageKit](#3222-appimagekit)
 - [4. Ressources](#4-ressources)
 
 # 1. Introduction
@@ -83,12 +85,29 @@ Official documentation of this tool is available at [_linuxdeploy_ : User guide]
 # Use Qt plugin
 LD_LIBRARY_PATH=/home/<user>/Qt/5.15.2/gcc_64/lib QMAKE=/home/<user>/Qt/5.15.2/gcc_64/bin/qmake ./linuxdeploy-x86_64.AppImage --appdir ~/path/to/my/appdir/ --plugin qt
 ```
-> Documentation for **Qt plugin** can be found at [linuxdeploy-qt-plugin](https://github.com/linuxdeploy/linuxdeploy-plugin-qt).  
-> By default, plugin will use `QMake` installed in `/usr/lib/` (when Qt is installed with distribution packages). If you installed Qt with official installer (recommended !), then Qt files will be located at `/home/<user>/Qt`.
+> Documentation for **Qt plugin** can be found at [linuxdeploy-qt-plugin](https://github.com/linuxdeploy/linuxdeploy-plugin-qt).   
+> By default, plugin will use `QMake` installed in `/usr/lib/` (when Qt is installed with distribution packages). If you installed Qt with official installer (recommended !), then Qt files will be located at `/home/<user>/Qt`.  
+> If plugin `linuxdeploy-plugin-appimage` is installed, you can add `--output appimage` to the command line to generate the **AppImage** after creation of **AppDir**
 
 ### 3.2.2. Generate _AppImage_ application
 
-Once your **AppDir** is created and complete, we can create our **AppImage** file, to do so, we need [AppImageKit application](https://github.com/AppImage/AppImageKit).
+Once your **AppDir** is created and complete, we can create our **AppImage** file, to do so, two solutions :
+- [linuxdeploy-plugin-appimage](https://github.com/linuxdeploy/linuxdeploy-plugin-appimage)
+- [AppImageKit application](https://github.com/AppImage/AppImageKit)
+
+When generate binary files, it is recommended to include the arch build on the generated _AppImage_ :
+- myApp-v1.0.0-i386.AppImage
+- myApp-v1.0.0-x86_64.AppImage
+- myApp-v1.0.0-aarch64.AppImage
+- myApp-v1.0.0-armhf.AppImage
+> Don't forget to add executable right on the file if needed with `chmod +x ./myApp.AppImage`.  
+
+#### 3.2.2.1. linuxdeploy-plugin-appimage
+
+1. Download plugin file from [linuxdeploy-plugin-appimage/releases](https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases) and put it next to `linuxdeploy` main app
+2. When building **AppDir**, add command `--output appimage`
+
+#### 3.2.2.2. AppImageKit
 
 1. Download release file from [AppImageKit/releases](https://github.com/AppImage/AppImageKit/releases) 
 2. Create your `AppImage` file :
@@ -99,7 +118,6 @@ Once your **AppDir** is created and complete, we can create our **AppImage** fil
 ```shell
 ./myApp.AppImage
 ```
-> Don't forget to add executable right on the file if needed with `chmod +x ./myApp.AppImage`
 
 # 4. Ressources
 
