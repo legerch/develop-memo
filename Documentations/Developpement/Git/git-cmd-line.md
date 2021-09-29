@@ -11,6 +11,7 @@
 
 ## 1.1. Général 
 
+1. Gestion des branches :
 - Lister les branches locales : `git branch`
 - Lister les branches locales + remotes : `git branch -all`
 - Lister les tags : `git tag`
@@ -40,20 +41,32 @@ git clean -fX   # To remove ignored files
 git clean -fx   # To remove ignored and non-ignored files
 ```
 
+2. Etude des commits
 - Obtenir historique de la branche courante : `git log`
 - Obtenir historique de la branche courante en limitant nb commits et auteur : `git log -n 5 --author=Salvador`
 - Obtenir historique de la branche courante en limitant nb commits et seule une ligne : `git log -n 5 --oneline`
 - Obtenir détails d'un tag en particulier : `git show <tag>` or `git log -1 <tag>`
 - Obtenir détails d'un commit en particulier : `git show <sha1>` or `git log --format=%B -n 1 <sha1>`
+- Chercher un commit contenant un pattern : `git log --all --grep='<pattern>'` (`--all` for all branches)
 
 - Obtenir les changement courants : `git diff` ou `git diff --staged` (si déjà _staged_)
 - Committer avec description et message : utiliser `git commit` (ouvrira vim et permettra de renseigner un titre et une description)
 
+3. Gestion des remotes
+- Lister les remotes : `git remote`
 - Ajouter une remote : `git remote add <remote name> <remote url>`
 - Supprimer une remote : `git remote remove <remote name>`
 - Obtenir l'url d'une remote : `git remote show <remote name>`
-- Pousser une branche locale sur une remote spécifique : `git push <remote_name> <local_branch_name>:<remote_branch_name>` ou `git push <remote_name> <branch_name>` si la branche de la remote possède le même nom que celle en local.
+- Récupérer (**pull**) une branche distante d'une remote spécifique vers une branche locale : `git pull <remote_name> <remote_branch_name>:<local_branch_name>` ou `git pull <remote_name> <branch_name>` si la branche de la remote possède le même nom que celle en local.
+- Pousser (**push**) une branche locale sur une remote spécifique : `git push <remote_name> <local_branch_name>:<remote_branch_name>` ou `git push <remote_name> <branch_name>` si la branche de la remote possède le même nom que celle en local.
+- Paramétrer une branche locale pour suivre une branche distante : `git branch --set-upstream-to=<remote>/<remote_branch> <local_branch>`
+- Savoir à quel branche distante est associée une branche locale : `git branch -vv`
+- Créer une branche locale depuis une branche distante d'une remote différente : `git fetch <remote> <remote_branch>:<local_branch>`
 
+4. Debugguage
+- Activer le mode verbose : `GIT_TRACE=1` avant la commande git à utiliser (certaines nécessiterons le flag `--verbose` ou `-v` comme pour `git fetch -v`)
+
+5. Comparaisons
 - Comparer deux branches : `git diff branch1..branch2` 
 - Comparer les commits de deux branches : `git log branch1..branch2`
 - Obtenir le nombre de commits entre deux branches : `git rev-list --count branch1..branch2`
@@ -84,7 +97,7 @@ git merge develop
 https://stackoverflow.com/questions/2249852/how-to-apply-a-patch-generated-with-git-format-patch/50329788
 (git apply applies changes as a patch, not as a commit, while git am assumes that the text of the email is the commit message (with some exceptions) and applies changes creating a commit (and it can try to resolve conflicts with 3-way merge with git am --3way)
 
-Générer un patch pour chaque commit depuis le commit <SHA1> spécifié (non inclus) :
+- Générer un patch pour chaque commit depuis le commit <SHA1> spécifié (non inclus) :
 ```shell
 # Patch will be generated in current directory
 git format-patch <SHA1>
@@ -93,25 +106,37 @@ git format-patch <SHA1>
 git format-patch -o tmp-patch/ <SHA1> 
 ```
 
-Générer un patch pour un commit spécifique :
+- Générer un patch pour un commit spécifique :
 ```shell
 git format-patch -1 <SHA1>
 ```
 
-Générer un patch depuis un commit _Github_ :
+- Générer un patch depuis un commit _Github_ :
 Ajouter `.patch` (ou `.diff`) à l'URL du commit permet de le formatter :
 ```shell
 https://github.com/foo/bar/commit/${SHA}.patch
 ```
 > Reference : https://stackoverflow.com/questions/21903805/how-to-download-a-single-commit-diff-from-github
 
-
-Appliquer un patch à un dépôt GIT :
+- Appliquer un patch à un dépôt GIT :
 ```shell
 git am <my-patch.patch>
 git am path/*.patch
 ```
 > Better to use `git am -3` to perform 3-way merge
+
+- Vérifier si un patch n'a pas déjà été appliqué : 
+```shell
+# If we could reverse the patch, then it has already been applied; skip it
+if patch --dry-run --reverse --force < patchfiles/foo.patch >/dev/null 2>&1; then
+  echo "Patch already applied - skipping."
+else # patch not yet applied
+  echo "Patching..."
+  patch -Ns < patchfiles/foo.patch || echo "Patch failed" >&2 && exit 1
+fi
+```
+> L'option `--dry-run` permet d'effectuer la commande sans les appliquer, elle simule l'action.    
+> `patch` documentation : [man patch](https://man7.org/linux/man-pages/man1/patch.1.html)
 
 # 2. Git UI
 
