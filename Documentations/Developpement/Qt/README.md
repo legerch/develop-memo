@@ -18,14 +18,28 @@ In this folder, you will find all Qt relatives informations
 
 # 2. Installation
 
-//TODO : installation under Windows + Linux (via official installer)
+Qt official installer : https://www.qt.io/download-qt-installer
+> Qt can be obtained through tree licences : **GPL**, **LGPL** and **Commercial**. Please review all available modules and conditions of each at https://www.qt.io/product/features 
 
 # 3. Deploy
 
 ## 3.1. Windows OS
 
-// TODO : Release compilation  
-// TODO : Launch MSVC toolchain with Qt environment (described shortcut to `cmd.exe` with Qt bat script)
+Under windows, libraries are needed next to executable, otherwise it cannot be launch.  
+To do so, you must launch `cmd.exe` with the Qt environment to used :
+```shell
+# Cmd line to use (can be used as a shortcut) - This example is for MSVC 2019 - Qt 5.15.2 - 64bits
+C:\Windows\System32\cmd.exe /A /Q /K C:\Qt\5.15.2\msvc2019_64\bin\qtenv2.bat
+```
+
+Then we can use `windeployqt` to deploy our application :
+```shell
+cd path/to/dir/of/app/executable/
+windeployqt --release myApp.exe
+```
+> We can also used option `--no-translations` if the application doesn't provide translations
+
+Now, the directory must contains our application `myApp.exe` and all needed Qt libraries (`Qt5Core.dll`, `Qt5Widgets.dll`, etc...)
 
 ## 3.2. Linux OS
 
