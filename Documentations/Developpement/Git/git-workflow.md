@@ -43,6 +43,7 @@ git format-patch 1a6bd98fa87996f50f42a27857a9e9f029cc83e0
 # Example : only 1 commit
 git format-patch -1 <SHA1>
 ```
+> We can also use option `-o <dir>` or `--output-directory <dir>` to specify a directory destination of generated patches.
 
 ### 2.1.3. Update project from upstream release
 
