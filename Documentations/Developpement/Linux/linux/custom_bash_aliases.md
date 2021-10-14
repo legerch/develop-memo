@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.4.0-88-generic - 01/10/2021 :
+Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.4.0-88-generic - 14/10/2021 :
 
 ```shell
 ##
@@ -85,6 +85,8 @@ alias snippet-copy-sh='cp ~/.config/Code/User/snippets/shellscript.json ~/Docume
 
 # Use as a memo to load library into env variables
 alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../bin/\n"'
+# Memo used to know how to use raw2rgbpnm (https://git.retiisi.org.uk/?p=~sailus/raw2rgbpnm.git)
+alias memo-raw2rgbpnm='printf "raw2rgbpnm -s 1288x968 -f SGRBG10 frame-000000.bin frame-000000.ppm\n"'
 
 # Use to save custom bash aliases do documentation folder
 alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md'
