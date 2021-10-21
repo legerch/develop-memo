@@ -146,10 +146,17 @@ Plusieurs projets GIT UI sont disponibles :
 - GitKraken (compatible Windows, Mac, Linux) : https://www.gitkraken.com/download
   - UI user-friendly : branches disponibles facilement visibles et différenciables, historique complet, modification non validées affichées, etc... 
   - Permet le multi-compte
-  - Gère les submodules
+  - Gère facilement les submodules
   - Ne gère pas les patchs
   - Ne permet pas de travailler avec un gros dépôt type _kernel linux_ par exemple
 
+- Source-tree (compatible Windows et Mac ) : https://www.sourcetreeapp.com/
+  - UI relativement complète (trop !) : branches et historiques visibles mais pas évident à prendre en main
+  - Ne permet pas le multi-compte
+  - Gère les submodules 
+  - Ne gère pas les patchs
+  - Non testé sur dépôt volumineux
+  
 - Git-cola (compatible Windows, Mac, Linux) : https://git-cola.github.io/downloads.html
   - UI simple : branches difficilement visibles, historique complet difficilement visible, modification non validées affichées
   - Ne permet pas le multi-compte
