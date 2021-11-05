@@ -9,6 +9,7 @@ Table of contents :
 - [6. Compilation](#6-compilation)
 - [7. Libraries](#7-libraries)
 - [8. Modules](#8-modules)
+- [Symlinks](#symlinks)
 - [9. Custom terminal commands](#9-custom-terminal-commands)
 - [10. Ressources](#10-ressources)
 
@@ -151,6 +152,19 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_erro
 - List all availables modules
 ```shell
 find /lib/modules/$(uname -r) -type f -name '*.ko*'
+```
+
+# Symlinks
+
+Sometimes, you copy some libraries directories and symlinks are _broken_...so how to spot and repair easily without looping through `ls -l` and `ln -sf <target> <link>`.  
+
+Easy ! Use [symlinks utility](https://linux.die.net/man/8/symlinks).  
+**Example :**
+```shell
+$ rm a
+$ ln -s a b
+$ symlinks .
+dangling: /tmp/b -> a
 ```
 
 # 9. Custom terminal commands
