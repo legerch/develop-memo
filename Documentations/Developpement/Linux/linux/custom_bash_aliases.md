@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.4.0-88-generic - 14/10/2021 :
+Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.4.0-89-generic - 04/11/2021 :
 
 ```shell
 ##
@@ -116,10 +116,6 @@ alias cobra-keygen='ssh-keygen -f "/home/charlie/.ssh/known_hosts" -R "192.168.0
 alias cobra-libs='cd ~/Documents/CobraWorkspaces/Cobra-applicationLayer/06-app_layer/03-libs'
 alias cobra-apps='cd ~/Documents/CobraWorkspaces/Cobra-applicationLayer/06-app_layer/04-apps'
 alias cobra-build='cd ~/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/'
-
-# Load cross-compiler for arm32 and aarch64
-alias cobra-load-gcc-arm32='source ~/Documents/CobraWorkspaces/Cobra-applicationLayer/env_arm32.sh'
-alias cobra-load-gcc-aarch64='source ~/Documents/CobraWorkspaces/Cobra-applicationLayer/env_aarch64.sh'
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
 alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=0.0.0.0 port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
