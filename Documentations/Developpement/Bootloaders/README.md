@@ -32,16 +32,19 @@ Host device will gonna need a **TFTP server** (**The Trivial File Transfer Proto
 
 1. Plug micro-usb to the board and connect to the host
 2. Start the board on _U-Boot_
-   
-3. Set host network interface related to u-boot target
-```shell
-HOST> ifconfig enp4s0u2u4c2 192.168.2.1       # Interface can also be "usbXYZ"
-```
 
-4. Configure _U-Boot_ to access network through USB
+3. Configure _U-Boot_ to access network through USB
 ```shell
 U-Boot> setenv ipaddr 192.168.2.2       # Target static IP address
 U-Boot> setenv serverip 192.168.2.1     # TFTP server IP address
+
+U-Boot> setenv cdc_connect_timeout 120  # Set a timeout
+U-Boot> setenv ethact usb_ether         # Allow host to see target
+```
+
+4. Set host network interface related to u-boot target
+```shell
+HOST> ifconfig enp4s0u2u4c2 192.168.2.1       # Interface can also be "usbXYZ"
 ```
 
 5. Check network configuration
