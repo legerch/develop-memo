@@ -6,7 +6,8 @@
       - [2.1.1.1. Source caméra](#2111-source-caméra)
       - [2.1.1.2. Source simulée](#2112-source-simulée)
     - [2.1.2. IMX8MM](#212-imx8mm)
-      - [2.1.2.1. Source simulée](#2121-source-simulée)
+      - [2.1.2.1. Source caméra](#2121-source-caméra)
+      - [2.1.2.2. Source simulée](#2122-source-simulée)
   - [2.2. Coté client](#22-coté-client)
     - [2.2.1. Via GStreamer](#221-via-gstreamer)
     - [2.2.2. Via fichier `.sdp`](#222-via-fichier-sdp)
@@ -76,7 +77,24 @@ L'IMX8M Mini ne possède pas d'encodeur H264 hardware, il utilise un encodeur so
 
 Ici, nous sommes obligé d'utiliser un encodeur avec les paramètres à la qualité la plus basse, sinon trop de latence ou trop de bruit.
 
-#### 2.1.2.1. Source simulée
+#### 2.1.2.1. Source caméra
+
+- Démarrer le streaming vidéo en le diffusant au framebuffer et via UDP :
+```shell
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=632,height=632,framerate=20/1 ! tee name=t ! queue ! videoconvert ! videoscale method=0 ! queue ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0 t. ! queue ! videoconvert ! x264enc quantizer=25 speed-preset=ultrafast tune=zerolatency ! rtph264pay ! udpsink host=192.168.0.20 port=1234
+```
+
+- Démarrer le streaming vidéo en le diffusant seulement sur le framebuffer :
+```shell
+gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=632,height=632,framerate=20/1 ! queue ! videoconvert ! videoscale method=0 ! queue ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0
+```
+
+- Démarrer le streaming vidéo en le diffusant seulement via UDP :
+```shell
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=632,height=632,framerate=20/1 ! queue ! videoconvert ! x264enc quantizer=25 speed-preset=ultrafast tune=zerolatency ! rtph264pay ! udpsink host=192.168.0.20 port=1234
+```
+
+#### 2.1.2.2. Source simulée
 
 - Démarrer le streaming vidéo en le diffusant au framebuffer et via UDP :
 ```shell
