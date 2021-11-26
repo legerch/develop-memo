@@ -155,9 +155,9 @@ LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v filesrc location=myStreamFile.sdp ! sdpd
 ```shell
 gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-bayer,format=grbg,width=432,height=432,framerate=30/1 ! bayer2rgb ! queue ! videoconvert ! videoscale method=0 ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0
 ```
-> Note that gstreamer may only be able to handle 8 bits bayer frames, so you may try first to get it working in this mode. Note however that you would have to debayer frames with a gstreamer plugin bayer2rgb that runs on CPU.  
-> Note that bayer2rgb is in gst plugins bad package if not yet installed. It may be slow, so it may be better to boost your jetson with MAXN nvpmodel and max clocks.
-bayer2rgb debayers on CPU.
+> - Note that gstreamer may only be able to handle 8 bits bayer frames, so you may try first to get it working in this mode. Note however that you would have to debayer frames with a gstreamer plugin `bayer2rgb` that runs on CPU.  
+> - Note that `bayer2rgb` is in gst plugins bad package if not yet installed. It may be slow, so it may be better to boost your jetson with MAXN nvpmodel and max clocks.  
+> - Note that for some ARM and ARM64 platforms (like **IMX** family for example), **NEON** acceleration can be available, so you may test with the plugin `bayer2rgb-neon` instead of `bayer2rgb`
 
 # 4. Lecture vidéo
 
@@ -287,7 +287,11 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
   - Autres
     - [autovideosink](https://gstreamer.freedesktop.org/documentation/autodetect/autovideosink.html?gi-language=c)
 - Documentation officielle **NXP** :
-  - [Processeurs IMX8](https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES) 
+  - [Processeurs IMX8](https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES)
+  - [i.IMX8 GStreamer User Guide](https://community.nxp.com/t5/i-MX-Processors-Knowledge-Base/i-MX-8-GStreamer-User-Guide/ta-p/1098942?attachment-id=101553) (If link unavailable, this PDF can be found in **Datasheets** of this repository)
+- Documentation pour **Instructions NEON** :
+  - [ARM Developer - Instruction sets - NEON](https://developer.arm.com/architectures/instruction-sets/simd-isas/neon)
+  - [ARM Developer - NEON Architecture overview](https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/NEON-architecture-overview/NEON-instructions)
 - Tutoriels
   - [Introduction to network streaming using GStreamer](https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer)
   - [How to generate a Gstreamer pipeline diagram (graph)](https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph))
