@@ -1,10 +1,78 @@
-# Instructions de débuggage
+Sommaire :
+- [1. Introduction](#1-introduction)
+- [2. Instructions de débuggage - Débugguer sur une cible _remote_](#2-instructions-de-débuggage---débugguer-sur-une-cible-remote)
+  - [2.1. Configuration Buildroot](#21-configuration-buildroot)
+  - [2.2. Utilisation](#22-utilisation)
+    - [2.2.1. Machine cible](#221-machine-cible)
+    - [2.2.2. Machine hôte](#222-machine-hôte)
+- [3. Instructions de débuggage - Fichier _core dump_](#3-instructions-de-débuggage---fichier-core-dump)
+  - [3.1. Configuration de la cible](#31-configuration-de-la-cible)
+  - [3.2. Configuration de l'hôte](#32-configuration-de-lhôte)
+    - [3.2.1. Configuration de GDB](#321-configuration-de-gdb)
+      - [3.2.1.1. Fichier .gdbinit](#3211-fichier-gdbinit)
+    - [3.2.2. Configuration des ressources à debugger](#322-configuration-des-ressources-à-debugger)
+- [4. Utilisation de GDB](#4-utilisation-de-gdb)
+- [5. Ressources](#5-ressources)
+
+# 1. Introduction
 
 Dans ce dossier se trouve des élements de documentation liés au DEBUG sous un environnement linux.
 
-## Configuration de la cible
+# 2. Instructions de débuggage - Débugguer sur une cible _remote_
 
-Lorsque qu'une erreur se produit dans une application amenant à un "crash" de cette dernière (**SEGFAULT** par exemple), la cible est capable de créer fichier _core_ permettant un débuggage.  
+Remote debugging is the process of debugging a program running on a different system (called target) from a different system (called host).  
+To start remote debugging, a debugger running on host machine connects to a program which is running on the target via network.  
+The debugger in the host can then control the execution of the program on the remote system and retrieve information about its state.  
+
+Remote debugging is often useful in case of embedded applications where the resources are limited.  
+
+In this tutorial, we will see how we can debug programs running on a different system using GDB Server.  
+We need the following two utilities to perform a remote debugging :
+- `gdbserver` : Run this on your target system
+- `GDB` : Execute this on your host system to connect to your target system
+> `GDB` and `gdbserver` communicate via either a serial line or a network, using the standard gdb remote serial protocol.
+
+## 2.1. Configuration Buildroot
+
+Pour pouvoir utiliser `gdbserver` depuis la machine cible, il est nécessaire d'activer sa configuration dans **Buildroot** :
+- `BR2_PACKAGE_HOST_GDB=y`
+- `BR2_PACKAGE_GDB=y`
+> Il n'y a pas besoin de compiler avec les symboles de débugguage ou de désactiver le "strip" pour les fichiers binaires pour la machine cible, `GDB` utilisera les ressources de l'host pour procéder au debuggage.
+
+## 2.2. Utilisation
+### 2.2.1. Machine cible
+
+Pour lancer une session `gdbserver` depuis la machine cible :
+```shell
+gdbserver localhost:2000 myApplication
+```
+> Ici, l'execution de l'application `myApplication` sera suspendue jusqu'à ce qu'un debuggeur se connecte sur le port **2000**
+
+### 2.2.2. Machine hôte
+
+Pour se connecter au `gdbserver` distant :
+
+1. Lancer `GDB` :
+```shell
+# Target used same toolchain as host
+gdb myApplication
+# Target used different toolchain from the host
+arm-buildroot-linux-gnueabihf_sdk-buildroot//bin//arm-buildroot-linux-gnueabihf-gdb myApplication
+```
+
+2. Se connecter :
+```shell
+target remote 192.168.1.10:2000
+```
+
+Désormais, nous pouvons utiliser les commandes classiques de `GDB`.
+
+# 3. Instructions de débuggage - Fichier _core dump_
+
+Lorsque qu'une erreur se produit dans une application amenant à un "crash" de cette dernière (**SEGFAULT** par exemple), la cible est capable de créer fichier _core_ permettant un débuggage.
+
+## 3.1. Configuration de la cible
+  
 Par défaut, cette fonctionnalité est désactivée, due à la taille qu'un _dump_ induit.  
 Pour activer cette fonctionnalité, il est nécessaire d'augmenter la taille limite :
 ```shell
@@ -30,14 +98,14 @@ setrlimit(RLIMIT_CORE, &core_limits);   /* RLIMIT_CORE is the macro associated t
 > Docs :  
 > https://linux.die.net/man/2/setrlimit
 
-## Configuration de l'hôte
+## 3.2. Configuration de l'hôte
 
 Le débuggeur utilisé est **GDB**.
 > Note : Si l'application a été compilée avec une toolchain, il est nécessaire d'utiliser le debuggeur de cette même toolchain
 
-### Configuration de GDB
+### 3.2.1. Configuration de GDB
 
-#### Fichier .gdbinit
+#### 3.2.1.1. Fichier .gdbinit
 
 Pour utiliser GDB avec une application qui nécessite des librairies partagées, il est préférable de créer un `.gdbinit` de façon à configurer l'environnement GDB pour ce projet.
 
@@ -60,7 +128,7 @@ gdb --init-command=./.gdbinit pathToBin pathToCoreFile  # Read default GDB confi
 arm-linux-gnueabihf-gdb --init-command=./.gdbinit  ./bin/rp2_core core_overlayGStreamer
 ```
 
-### Configuration des ressources à debugger
+### 3.2.2. Configuration des ressources à debugger
 
 Pour pouvoir debbuguer un fichier _core_, il est nécessaire d'avoir : 
 - un binaire de l'application en question, qui a été compilée avec les symboles de debuggage (le binaire générant le fichier _core_ n'a pas besoin d'avoir ces symboles de debuggage)
@@ -76,7 +144,7 @@ Cas particuliers rencontrés :
 > http://lists.busybox.net/pipermail/buildroot/2012-May/053310.html
 
 
-### Utilisation de GDB
+# 4. Utilisation de GDB
 
 Les **principales** commandes :
 - Backtrace : `backtrace` ou `bt` (`bt full` pour une backtrace détaillée)
@@ -99,7 +167,12 @@ Les **breakpoints**, via le mot-clé `break` ou `b` :
 - `break <filename:linenum>` : Placer un breakpoint à un numéro de ligne d'un fichier (utile lors du débuggage d'une application utilisant une librairie par exemple) 
 > Pour plus de commandes liées au breakpoint, voir : https://ftp.gnu.org/old-gnu/Manuals/gdb/html_node/gdb_28.html#SEC29
 
-> Docs :  
-> - https://visualgdb.com/gdbreference/commands/
-> - https://stackoverflow.com/questions/5115613/core-dump-file-analysis
-> - http://jlbicquelet.free.fr/aix/procedures/core_aix.php
+# 5. Ressources
+
+- Officiels :
+  - [VisualGDB - GDB Command Reference](https://visualgdb.com/gdbreference/commands/)
+- Tutoriels :
+  - [How to Debug Programs on Remote Server using GDBServer](https://www.thegeekstuff.com/2014/04/gdbserver-example/)
+  - [Analyser un fichier **core dump**](http://jlbicquelet.free.fr/aix/procedures/core_aix.php)
+- Threads :
+  - https://stackoverflow.com/questions/5115613/core-dump-file-analysis
