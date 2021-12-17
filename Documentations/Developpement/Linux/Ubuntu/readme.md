@@ -104,7 +104,9 @@ _Under construction_
 # 6. System freeze
 
 _under construction_
-> How to properly shutdown Ubuntu even if all is freezed : https://doc.ubuntu-fr.org/tutoriel/lorsque_le_systeme_gele  
+> How to properly shutdown Ubuntu even if all is freezed : https://doc.ubuntu-fr.org/tutoriel/lorsque_le_systeme_gele
+> https://askubuntu.com/questions/4408/what-should-i-do-when-ubuntu-freezes (intresting memory helper !)
+> https://linuxconfig.org/how-to-enable-all-sysrq-functions-on-linux (by default only SUB part of REISUB cmd is enable, so you need to configure it before this command is needed...)
 > Note : don't forget to print those pages...  
 > magic keys (impr'ecran) : https://doc.ubuntu-fr.org/touches_magiques
 
