@@ -11,6 +11,7 @@ Table of contents :
 - [8. Modules](#8-modules)
 - [Symlinks](#symlinks)
 - [9. Custom terminal commands](#9-custom-terminal-commands)
+- [Linux versionning](#linux-versionning)
 - [10. Ressources](#10-ressources)
 
 # 1. Hardware properties 
@@ -215,6 +216,13 @@ alias maj='sudo apt update && sudo apt full-upgrade'
 4. To reload `~/.bashrc` file :
 - Open new tab
 - Or : `source ~/.bashrc`
+
+# Linux versionning
+
+Linux distros used a file which contains operating system identification data, this file is `etc/os-release` which is a symlink to `/usr/lib/os-release`
+
+doc of the file : https://www.freedesktop.org/software/systemd/man/os-release.html
+check version from your shell : https://unix.stackexchange.com/questions/88644/how-to-check-os-and-version-using-a-linux-command
 
 # 10. Ressources
 
