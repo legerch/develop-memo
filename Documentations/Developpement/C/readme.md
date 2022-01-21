@@ -11,7 +11,8 @@
   - [2.5. String](#25-string)
     - [2.5.1. Allocations](#251-allocations)
     - [2.5.2. Conversions](#252-conversions)
-- [3. Ressources](#3-ressources)
+- [3. Regex](#3-regex)
+- [4. Ressources](#4-ressources)
 
 # 1. Limits
 
@@ -29,8 +30,8 @@
 |`unsigned long int` | 4 | 8 | 0 | 18 446 744 073 709 551 615 |
 
 > Those informations are **theorical** and **platform dependant** :
-> - Use header `limits.h` for application ([official-c++](https://www.cplusplus.com/reference/climits/), [official-c](https://devdocs.io/c/types/limits), [tutorial-c](https://www.tutorialspoint.com/c_standard_library/limits_h.htm))
-> - Use header `stdint.h` if exact byte size is needed ([official-c++](https://www.cplusplus.com/reference/cstdint/), [official-c](https://devdocs.io/c/types/integer))
+> - Use header `limits.h` for application ([official-c++][cpp-limits], [official-c][c-limits], [tutorial-c][c-limits-tutorial])
+> - Use header `stdint.h` if exact byte size is needed ([official-c++][cpp-stdint], [official-c][c-stdint])
 
 # 2. Tips
 
@@ -52,7 +53,7 @@ fprintf(stream, "Hexadecimal value : 0x%02x", 42);
 // Format for type size_t
 fprintf(stream, "size_t value : zd", 42);
 ```
-> More details here : https://www.gnu.org/software/libc/manual/html_node/Integer-Conversions.html
+> More details here : [integer conversion][printf-integer]
 
 - Format **GLib** types :
 ```C
@@ -60,7 +61,7 @@ gsize sizeBuffer = 54324567;
 printf("My value: %" G_GSIZE_FORMAT "\n", sizeBuffer);
 ```
 > Note that the `%` is not part of the macro.  
-> For macro documentation, please check : [GLib-BasicTypes](https://developer.gnome.org/glib/stable/glib-Basic-Types.html)
+> For macro documentation, please check : [GLib-BasicTypes][glib-basictypes]
 
 ## 2.2. Enum errors
 
@@ -193,7 +194,7 @@ MyStruct *pVar = calloc(1, sizeof(*pVar));
 
 ### 2.5.1. Allocations
 
-Functions [`asprintf`](https://linux.die.net/man/3/vasprintf) and [`vasprintf`](https://linux.die.net/man/3/asprintf) are GNU extensions, not in C or POSIX.  
+Functions [`asprintf`][linux-asprintf] and [`vasprintf`][linux-vasprintf] are GNU extensions, not in C or POSIX.  
 We can use those functions or define own implementations :
 
 - **asprintf()** :
@@ -472,13 +473,157 @@ int HTOOLS_stringToUnsignedInteger(const char *str, unsigned int *pUnsignedInt, 
 }
 ```
 
-# 3. Ressources
+# 3. Regex
+
+Regex in C are supported, see officials documentation for more details :
+- [Regex compilation][regex-compilation]
+- [Regex cleanup][regex-cleanup]
+- [Regex syntax][regex-syntax]
+
+See below written methods used to manage regex in C :
+- **stringMatchesPatternRegex** :
+```c
+/*---------------------------------------------------------------------------*/
+/**
+ * \brief Use to check if a string matches a regex pattern.
+ * \details
+ * Use this method to check if a string matches a regex pattern, if you have multiple strings to check,
+ * it's better to use this method (that allow to compile regex only once). \n
+ * If you only have one string to test, consider using HTOOLS_stringMatchesPatternStr() which is easier
+ * to use.
+ * 
+ * \param[in] str
+ * String source to test, must be <b>NOT NULL</b>.
+ * \param[in] compiledRegex
+ * Regex pattern to use, regex must have been already compiled (with regcomp(), don't forget to free it after with regfree()). \n
+ * You can find POSIX regex documentation at : https://www.gnu.org/software/libc/manual/html_node/Regular-Expressions.html. \n
+ * For syntax of POSIX regex, please see : https://en.wikibooks.org/wiki/Regular_Expressions/POSIX-Extended_Regular_Expressions
+ * 
+ * \param[out] isMatching
+ * This value is set to \c true if string matches the pattern, otherwise value is set to false. \n
+ * In case of error during regex execution, \c isMatching is set to \c false and method will return \c HTOOLS_ERR_REGEX. 
+ *
+ * \return 
+ * Returns HTOOLS_ERR_NO_ERROR if succeed, otherwise see HTOOLS_enuErrors for more
+ * details.
+ * 
+ * \sa HTOOLS_stringMatchesPatternStr()
+ */
+/*---------------------------------------------------------------------------*/
+HTOOLS_enuErrors HTOOLS_stringMatchesPatternRegex(const char *str, const regex_t *compiledRegex, bool *isMatching)
+{
+    int sResult;
+    HTOOLS_enuErrors toolsErr = HTOOLS_ERR_NO_ERROR;
+
+    sResult = regexec(compiledRegex, str, 0, NULL, 0);
+    if(sResult == 0){
+        *isMatching = true;
+    }else if(sResult == REG_NOMATCH){
+        *isMatching = false;
+    }else{
+        // Set return values
+        *isMatching = false;
+        toolsErr = HTOOLS_ERR_REGEX;
+
+        // Log regex error (just in case)
+        char bufferStr[LENGTH_STR_REGEX_ERROR];
+        regerror(sResult, compiledRegex, bufferStr, LENGTH_STR_REGEX_ERROR);
+        m_callbackError("[htools] Failed to compare string to a regex pattern : %s\n", bufferStr);
+    }
+
+    return toolsErr;
+}
+```
+
+- **stringMatchesPatternStr** :
+```c
+/*---------------------------------------------------------------------------*/
+/**
+ * \brief Use to check if a string matches a regex pattern.
+ * \details
+ * Use this method to check if a string matches a regex pattern, if you have multiple strings to check
+ * with the same pattern, please use HTOOLS_stringMatchesPatternRegex() instead.
+ * 
+ * \param[in] str
+ * String source to test, must be <b>NOT NULL</b>.
+ * \param[in] pattern
+ * String pattern to use. \n
+ * For syntax of POSIX regex, please see : https://en.wikibooks.org/wiki/Regular_Expressions/POSIX-Extended_Regular_Expressions
+ * 
+ * \param[out] isMatching
+ * This value is set to \c true if string matches the pattern, otherwise value is set to false. \n
+ * In case of error during regex execution, \c isMatching is set to \c false and method will return \c HTOOLS_ERR_REGEX. 
+ *
+ * \return 
+ * Returns HTOOLS_ERR_NO_ERROR if succeed, otherwise see HTOOLS_enuErrors for more
+ * details.
+ * 
+ * \sa HTOOLS_stringMatchesPatternStr()
+ */
+/*---------------------------------------------------------------------------*/
+HTOOLS_enuErrors HTOOLS_stringMatchesPatternStr(const char *str, const char *pattern, bool *isMatching)
+{
+    regex_t regex;
+    int sResult;
+
+    HTOOLS_enuErrors toolsErr = HTOOLS_ERR_NO_ERROR;
+
+    /* Compile regex */
+    sResult = regcomp(&regex, pattern, 0);
+    if(sResult != 0){
+        char bufferStr[LENGTH_STR_REGEX_ERROR];
+        regerror(sResult, &regex, bufferStr, LENGTH_STR_REGEX_ERROR);
+        m_callbackError("[htools] Unable to compile regex pattern '%s' [error: %s (%d)]\n", pattern, bufferStr, sResult);
+
+        *isMatching = false;
+        return HTOOLS_ERR_REGEX;
+    }
+
+    /* Execute regex (by using wrapper around "regexec") */
+    toolsErr = HTOOLS_stringMatchesPatternRegex(str, &regex, isMatching);
+
+    /* Free memory allocated for regex */
+    regfree(&regex);
+
+    return toolsErr;
+}
+```
+
+# 4. Ressources
 
 - Official :
-  - [GLib-BasicTypes](https://developer.gnome.org/glib/stable/glib-Basic-Types.html)
-  - [Google Guideline](https://google.github.io/styleguide/cppguide.html)
+  - [cpp-limits]
+  - [c-limits]
+  - [c-limits-tutorial]
+  - [cpp-stdint]
+  - [c-stdint]
+  - [linux-asprintf]
+  - [linux-vasprintf]
+  - [glib-basictypes]
+  - [printf-integer]
+  - [regex-compilation]
+  - [regex-cleanup]
+  - [regex-syntax]
 - Threads
   - [Left pad printf with spaces](https://stackoverflow.com/questions/293438/left-pad-printf-with-spaces)
   - [How to print a guint64 value when using glib ?](https://stackoverflow.com/questions/15272976/how-to-print-a-guint64-value-when-using-glib)
   - [“C” sizeof with a type or variable](https://stackoverflow.com/questions/373252/c-sizeof-with-a-type-or-variable)
   - ["sizeof(value) vs sizeof(type) ?"](https://stackoverflow.com/questions/12811696/sizeofvalue-vs-sizeoftype)
+
+<!-- Links of useful ressources -->
+[cpp-limits]: https://www.cplusplus.com/reference/climits/
+[c-limits]: https://devdocs.io/c/types/limits
+[c-limits-tutorial]: https://www.tutorialspoint.com/c_standard_library/limits_h.htm
+[cpp-stdint]: https://www.cplusplus.com/reference/cstdint/
+[c-stdint]: https://devdocs.io/c/types/integer
+
+[linux-asprintf]: https://linux.die.net/man/3/vasprintf
+[linux-vasprintf]: https://linux.die.net/man/3/asprintf  
+
+[glib-basictypes]: https://developer.gnome.org/glib/stable/glib-Basic-Types.html
+
+[printf-integer]: https://www.gnu.org/software/libc/manual/html_node/Integer-Conversions.html
+
+[regex-compilation]: https://www.gnu.org/software/libc/manual/html_node/POSIX-Regexp-Compilation.html
+[regex-cleanup]: https://www.gnu.org/software/libc/manual/html_node/Regexp-Cleanup.html
+[regex-syntax]: https://en.wikibooks.org/wiki/Regular_Expressions/POSIX-Extended_Regular_Expressions
