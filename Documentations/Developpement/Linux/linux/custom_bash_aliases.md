@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.4.0-96-generic - 21/01/2022 :
+Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.13.0-28-generic - 02/02/2022 :
 
 ```shell
 ##
@@ -77,7 +77,10 @@ alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=
 alias vg-helgrind='valgrind --tool=helgrind'
 
 # Go to Qt worspace
-alias qt-workspace='cd /home/charlie/Documents/workspaces/workspaceQT'
+alias workspace-qt='cd /home/charlie/Documents/workspaces/workspaceQT'
+
+# Go to AppImage folder
+alias workspace-appimage='cd /home/charlie/Téléchargements/app-image'
 
 # Copy VsCode snippets to documentation folder
 alias snippet-copy-c='cp ~/.config/Code/User/snippets/c.json ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
@@ -95,8 +98,8 @@ alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/Borea/Docume
 alias gituibin='~/Téléchargements/Fichiers\ Setup/gitui-linux-musl/gitui'
 
 # Create alias for application used to create an AppImage, which are released under binaries
-alias linuxdeploy.AppImage='~/Téléchargements/Fichiers\ Setup/linuxdeploy/linuxdeploy-x86_64.AppImage'
-alias appimagetool.AppImage='~/Téléchargements/Fichiers\ Setup/AppImageKit/appimagetool-x86_64.AppImage'
+alias linuxdeploy.AppImage='~/Téléchargements/apps/linuxdeploy/linuxdeploy-x86_64.AppImage'
+alias appimagetool.AppImage='~/Téléchargements/apps/appimagekit/appimagetool-x86_64.AppImage'
 
 ##
 # Cobra specific aliases
@@ -118,7 +121,7 @@ alias cobra-apps='cd ~/Documents/CobraWorkspaces/Cobra-applicationLayer/06-app_l
 alias cobra-build='cd ~/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/'
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
-alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=0.0.0.0 port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
+alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! queue ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
 
 # Allow to create symlink to the script used to check if folder of patches were applied on the current project (use when manage kernel, buildroot, etc...)
 alias cobra-symlink-patches-check='ln -sf ~/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/bsp-external-rayplicker-v2/patch/check-applied-patches.sh check-applied-patches.sh'
