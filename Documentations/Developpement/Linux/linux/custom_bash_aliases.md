@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.13.0-28-generic - 02/02/2022 :
+Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.13.0-28-generic - 08/02/2022 :
 
 ```shell
 ##
@@ -66,6 +66,10 @@ function memo-cobra-build(){
 # To perform host updates
 alias maj='sudo apt update && sudo apt full-upgrade'
 
+# In order to "disallow" some commands (It is use for my embedded target and I don't want to perform them on my host machine)
+alias poweroff='printf "I m not gonna do that !\n"'
+alias reboot='printf "I m not gonna do that !\n"'
+
 # To uninstall a package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/151941/how-can-you-completely-remove-a-package)
 alias apt-uninstall="sudo apt purge --autoremove"
 
@@ -92,7 +96,11 @@ alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_
 alias memo-raw2rgbpnm='printf "raw2rgbpnm -s 1288x968 -f SGRBG10 frame-000000.bin frame-000000.ppm\n"'
 
 # Use to save custom bash aliases do documentation folder
-alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md'
+alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md && printf "Done !"'
+
+# Use to manage "bash_aliases" file
+alias bash-aliases-edit='vi ~/.bash_aliases'
+alias bash-aliases-reload='source ~/.bash_aliases && printf "Done !"'
 
 # Create alias for gitui program, which doesn't yet have a proper system installation, so we use binaries (https://github.com/extrawurst/gitui)
 alias gituibin='~/Téléchargements/Fichiers\ Setup/gitui-linux-musl/gitui'
