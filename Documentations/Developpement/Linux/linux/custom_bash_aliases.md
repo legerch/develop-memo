@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : PC-CHARLIE - Ubuntu 20.04.3 LTS - Kernel 5.13.0-28-generic - 08/02/2022 :
+Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-28-generic - 15/02/2022 :
 
 ```shell
 ##
@@ -50,7 +50,7 @@ function save-custom-bash-aliases(){
 # - Print command to use for Buildroot Cobra project
 # - List all available configs from "/configs" directory
 function memo-cobra-build(){
-    local pathCfgFiles="${HOME}/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/bsp-external-rayplicker-v2/configs/"
+    local pathCfgFiles="${HOME}/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-Buildroot/RAYPLICKER-V2/bsp-external-rayplicker-v2/configs/"
     
     printf "make PROJECT_DEFCONFIG=imx8_armadeus_run2_debug PROJECT_USE_BR_CUSTOM_PATCHES=1 clean\n"
     printf "Available configs files:\n"
@@ -80,15 +80,16 @@ alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
 alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes'
 alias vg-helgrind='valgrind --tool=helgrind'
 
-# Go to Qt worspace
-alias workspace-qt='cd /home/charlie/Documents/workspaces/workspaceQT'
+# Go to worspaces
+alias workspace-qt='cd /home/charlie/Documents/workspaces/workspace-qt'
+alias workspace-vscode='cd /home/charlie/Documents/workspaces/workspace-vscode'
 
 # Go to AppImage folder
 alias workspace-appimage='cd /home/charlie/Téléchargements/app-image'
 
 # Copy VsCode snippets to documentation folder
-alias snippet-copy-c='cp ~/.config/Code/User/snippets/c.json ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
-alias snippet-copy-sh='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json'
+alias snippet-copy-c='cp ~/.config/Code/User/snippets/c.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
+alias snippet-copy-sh='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json'
 
 # Use as a memo to load library into env variables
 alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_error/bin:../bin\n"'
@@ -96,11 +97,11 @@ alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_
 alias memo-raw2rgbpnm='printf "raw2rgbpnm -s 1288x968 -f SGRBG10 frame-000000.bin frame-000000.ppm\n"'
 
 # Use to save custom bash aliases do documentation folder
-alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/Borea/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md && printf "Done !"'
+alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md && printf "Done !\n"'
 
 # Use to manage "bash_aliases" file
 alias bash-aliases-edit='vi ~/.bash_aliases'
-alias bash-aliases-reload='source ~/.bash_aliases && printf "Done !"'
+alias bash-aliases-reload='source ~/.bash_aliases && printf "Done !\n"'
 
 # Create alias for gitui program, which doesn't yet have a proper system installation, so we use binaries (https://github.com/extrawurst/gitui)
 alias gituibin='~/Téléchargements/Fichiers\ Setup/gitui-linux-musl/gitui'
@@ -124,13 +125,10 @@ alias cobra-ssh-root='ssh root@192.168.0.5'
 alias cobra-keygen='ssh-keygen -f "/home/charlie/.ssh/known_hosts" -R "192.168.0.5"'
 
 # Go to Cobra workspace
-alias cobra-libs='cd ~/Documents/CobraWorkspaces/Cobra-applicationLayer/06-app_layer/03-libs'
-alias cobra-apps='cd ~/Documents/CobraWorkspaces/Cobra-applicationLayer/06-app_layer/04-apps'
-alias cobra-build='cd ~/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/'
+alias cobra-libs='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/03-libs'
+alias cobra-apps='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/04-apps'
+alias cobra-build='cd ~/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-Buildroot/RAYPLICKER-V2/'
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
 alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! queue ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
-
-# Allow to create symlink to the script used to check if folder of patches were applied on the current project (use when manage kernel, buildroot, etc...)
-alias cobra-symlink-patches-check='ln -sf ~/Documents/CobraWorkspaces/Cobra-buildTarget-buildroot/RAYPLICKER-V2/bsp-external-rayplicker-v2/patch/check-applied-patches.sh check-applied-patches.sh'
 ```
