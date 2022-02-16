@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-28-generic - 15/02/2022 :
+Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-28-generic - 16/02/2022 :
 
 ```shell
 ##
@@ -115,7 +115,7 @@ alias appimagetool.AppImage='~/Téléchargements/apps/appimagekit/appimagetool-x
 ##
 
 # Launch minicom session of Cobra (via UART)
-alias cobra-uart='sudo minicom -D /dev/ttyUSB0 -b 115200'
+alias cobra-uart='sudo minicom -D /dev/ttyUSB0 -b 115200 -c on'
 
 # Launch SSH session of Cobra
 alias cobra-ssh-ciele='ssh ciele@192.168.0.5'
@@ -128,6 +128,7 @@ alias cobra-keygen='ssh-keygen -f "/home/charlie/.ssh/known_hosts" -R "192.168.0
 alias cobra-libs='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/03-libs'
 alias cobra-apps='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/04-apps'
 alias cobra-build='cd ~/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-Buildroot/RAYPLICKER-V2/'
+alias cobra-kernels='cd ~/Documents/workspaces/workspace-cobra/kernels/'
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
 alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! queue ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
