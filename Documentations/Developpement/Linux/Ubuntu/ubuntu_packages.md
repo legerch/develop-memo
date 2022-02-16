@@ -4,18 +4,19 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
 - [1. Mandatory commands](#1-mandatory-commands)
 - [2. Developer tools](#2-developer-tools)
   - [2.1. Standard](#21-standard)
-  - [2.2. Serial communication](#22-serial-communication)
-    - [2.2.1. Installation](#221-installation)
-    - [2.2.2. Usage](#222-usage)
-    - [2.2.3. Configuration](#223-configuration)
-      - [2.2.3.1. Fail to write](#2231-fail-to-write)
-      - [2.2.3.2. Enable colors output](#2232-enable-colors-output)
-  - [2.3. Logs](#23-logs)
-  - [2.4. File comparaison viewer](#24-file-comparaison-viewer)
-  - [2.5. Documentation](#25-documentation)
-  - [2.6. CTRL-C memory](#26-ctrl-c-memory)
-  - [2.7. Charts tools](#27-charts-tools)
-  - [2.8. Color picker](#28-color-picker)
+  - [2.2. Terminal](#22-terminal)
+  - [2.3. Serial communication](#23-serial-communication)
+    - [2.3.1. Installation](#231-installation)
+    - [2.3.2. Usage](#232-usage)
+    - [2.3.3. Configuration](#233-configuration)
+      - [2.3.3.1. Fail to write](#2331-fail-to-write)
+      - [2.3.3.2. Enable colors output](#2332-enable-colors-output)
+  - [2.4. Logs](#24-logs)
+  - [2.5. File comparaison viewer](#25-file-comparaison-viewer)
+  - [2.6. Documentation](#26-documentation)
+  - [2.7. CTRL-C memory](#27-ctrl-c-memory)
+  - [2.8. Charts tools](#28-charts-tools)
+  - [2.9. Color picker](#29-color-picker)
 - [3. Buildroot/kernels requirements](#3-buildrootkernels-requirements)
   - [3.1. Mandatory packages](#31-mandatory-packages)
   - [3.2. Optional packages](#32-optional-packages)
@@ -56,20 +57,34 @@ sudo apt purge --autoremove <package_name>
 sudo apt install build-essential git tree
 ```
 
-## 2.2. Serial communication
-### 2.2.1. Installation
+## 2.2. Terminal
+
+Terminal is shipped by default but some customizations can help for development :
+- General
+  - **Theme** : `Dark`
+- Keyboard shortcut :
+  - **New tab** : `CTRL + T`
+  - **Previous tab** : `CTRL + LEFT`
+  - **Next tab** : `CTRL + RIGHT`
+- Profils
+  - Colors
+    - **Use system theme** : `true`
+    - **Palette** : `Tango`
+
+## 2.3. Serial communication
+### 2.3.1. Installation
 ```shell
 sudo apt install minicom
 ```
 
-### 2.2.2. Usage
+### 2.3.2. Usage
 ```shell
 sudo minicom -D /dev/ttyUSB0 -b 115200 -c on
 ```
 
-### 2.2.3. Configuration
+### 2.3.3. Configuration
 
-#### 2.2.3.1. Fail to write
+#### 2.3.3.1. Fail to write
 
 Minicom **read** properly but **writing** failed (no entry is written when pressing keyboard) :
 1. Start _minicom_ configuration : `sudo minicom -o -s`
@@ -83,41 +98,41 @@ Minicom **read** properly but **writing** failed (no entry is written when press
 > - [AskUbuntu - Minicom doesn't work][minicom-write-failure-thread-askubuntu]
 > - [Tutorial : Configure minicom for a USB-to-Serial Converter][minicom-write-failure-tutorial]
 
-#### 2.2.3.2. Enable colors output
+#### 2.3.3.2. Enable colors output
 
 To enable color output with _minicom_, you need to use option : `minicom -c on`
 > Ressources used :
 > - [debian.org : color for minicom ?][minicom-color-option-thread-debianorg]
 
-## 2.3. Logs
+## 2.4. Logs
 
 ```shell
 sudo apt install glogg
 ```
 
-## 2.4. File comparaison viewer
+## 2.5. File comparaison viewer
 
 ```shell
 sudo apt install meld
 ```
 
-## 2.5. Documentation
+## 2.6. Documentation
 
 ```shell
 sudo apt install doxygen doxygen-gui doxygen-doc
 ```
 
-## 2.6. CTRL-C memory
+## 2.7. CTRL-C memory
 
 See [CopyQ][copyq-official] official doumentation for more details.
 
-## 2.7. Charts tools
+## 2.8. Charts tools
 
 ```shell
 sudo snap install drawio
 ```
 
-## 2.8. Color picker
+## 2.9. Color picker
 
 ```shell
 sudo snap install color-picker
@@ -245,6 +260,7 @@ gsettings set <path_element> <property>
 
 Useful properties :
 - Show hidden files : `gsettings set org.gnome.nautilus.preferences show-hidden-files true`
+- Remove trash icon from the dock : `gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false`
 
 # 12. Microsoft tools
 
