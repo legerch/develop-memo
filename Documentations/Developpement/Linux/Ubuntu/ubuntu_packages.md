@@ -14,6 +14,8 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [2.4. File comparaison viewer](#24-file-comparaison-viewer)
   - [2.5. Documentation](#25-documentation)
   - [2.6. CTRL-C memory](#26-ctrl-c-memory)
+  - [2.7. Charts tools](#27-charts-tools)
+  - [2.8. Color picker](#28-color-picker)
 - [3. Buildroot/kernels requirements](#3-buildrootkernels-requirements)
   - [3.1. Mandatory packages](#31-mandatory-packages)
   - [3.2. Optional packages](#32-optional-packages)
@@ -26,10 +28,12 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
 - [6. System management](#6-system-management)
 - [7. Networking tools](#7-networking-tools)
 - [8. Emails](#8-emails)
-- [9. Multimedia tools](#9-multimedia-tools)
-- [10. GNOME Customization](#10-gnome-customization)
-  - [10.1. GNOME Plugins](#101-gnome-plugins)
-  - [10.2. GNOME Editor](#102-gnome-editor)
+- [9. Graphics libraries](#9-graphics-libraries)
+- [10. Multimedia tools](#10-multimedia-tools)
+- [11. GNOME Customization](#11-gnome-customization)
+  - [11.1. GNOME Plugins](#111-gnome-plugins)
+  - [11.2. GNOME Editor](#112-gnome-editor)
+- [12. Microsoft tools](#12-microsoft-tools)
 
 # 1. Mandatory commands
 
@@ -106,6 +110,18 @@ sudo apt install doxygen doxygen-gui doxygen-doc
 ## 2.6. CTRL-C memory
 
 See [CopyQ][copyq-official] official doumentation for more details.
+
+## 2.7. Charts tools
+
+```shell
+sudo snap install drawio
+```
+
+## 2.8. Color picker
+
+```shell
+sudo snap install color-picker
+```
 
 # 3. Buildroot/kernels requirements
 
@@ -186,23 +202,37 @@ sudo apt install thunderbird thunderbird-locale-fr
 sudo apt install evolution
 ```
 
-# 9. Multimedia tools
+# 9. Graphics libraries
+
+[OpenGL][opengl] :
+```shell
+sudo apt install freeglut3 libopengl0
+```
+
+Mesa :
+```shell
+sudo apt install mesa-utils
+```
+
+# 10. Multimedia tools
 
 ```shell
 sudo apt install vlc gimp mediainfo-gui
 sudo apt install ffmpeg
 sudo apt install gthumb
 sudo apt install libreoffice # a PPA also exist for libreoffice
+
+sudo snap install discord
 ``` 
 
-# 10. GNOME Customization
-## 10.1. GNOME Plugins
+# 11. GNOME Customization
+## 11.1. GNOME Plugins
 ```shell
 sudo apt install gnome-tweaks chrome-gnome-shell
 sudo apt install gnome-shell-extension-freon # See https://github.com/UshakovVasilii/gnome-shell-extension-freon
 ```
 
-## 10.2. GNOME Editor
+## 11.2. GNOME Editor
 
 GNOME allow preferences customization of properties with `gsettings` tool :
 ```shell
@@ -215,6 +245,10 @@ gsettings set <path_element> <property>
 
 Useful properties :
 - Show hidden files : `gsettings set org.gnome.nautilus.preferences show-hidden-files true`
+
+# 12. Microsoft tools
+
+- Microsoft teams : `sudo snap install teams`
 
 <!-- Anchor of this page -->
 [anchor-dev-tools-std]: #21-standard
@@ -240,3 +274,5 @@ Useful properties :
 [minicom-color-option-thread-debianorg]: https://lists.debian.org/debian-user/1996/10/msg00239.html
 
 [dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
+[opengl]: https://doc.ubuntu-fr.org/opengl
+
