@@ -28,6 +28,8 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
 - [8. Emails](#8-emails)
 - [9. Multimedia tools](#9-multimedia-tools)
 - [10. GNOME Customization](#10-gnome-customization)
+  - [10.1. GNOME Plugins](#101-gnome-plugins)
+  - [10.2. GNOME Editor](#102-gnome-editor)
 
 # 1. Mandatory commands
 
@@ -194,11 +196,25 @@ sudo apt install libreoffice # a PPA also exist for libreoffice
 ``` 
 
 # 10. GNOME Customization
-
+## 10.1. GNOME Plugins
 ```shell
 sudo apt install gnome-tweaks chrome-gnome-shell
 sudo apt install gnome-shell-extension-freon # See https://github.com/UshakovVasilii/gnome-shell-extension-freon
 ```
+
+## 10.2. GNOME Editor
+
+GNOME allow preferences customization of properties with `gsettings` tool :
+```shell
+# To get value
+gsettings get <path_element> <property>
+# To set value
+gsettings set <path_element> <property>
+```
+> If GUI solution is preferred, you can use [dconf-editor] tool.
+
+Useful properties :
+- Show hidden files : `gsettings set org.gnome.nautilus.preferences show-hidden-files true`
 
 <!-- Anchor of this page -->
 [anchor-dev-tools-std]: #21-standard
@@ -222,3 +238,5 @@ sudo apt install gnome-shell-extension-freon # See https://github.com/UshakovVas
 [minicom-write-failure-thread-askubuntu]: https://askubuntu.com/questions/638378/minicom-doesnt-work
 [minicom-write-failure-tutorial]: https://www.centennialsoftwaresolutions.com/post/configure-minicom-for-a-usb-to-serial-converter
 [minicom-color-option-thread-debianorg]: https://lists.debian.org/debian-user/1996/10/msg00239.html
+
+[dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
