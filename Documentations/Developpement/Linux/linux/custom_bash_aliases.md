@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-28-generic - 16/02/2022 :
+Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-28-generic - 17/02/2022 :
 
 ```shell
 ##
@@ -115,7 +115,7 @@ alias appimagetool.AppImage='~/Téléchargements/apps/appimagekit/appimagetool-x
 ##
 
 # Launch minicom session of Cobra (via UART)
-alias cobra-uart='sudo minicom -D /dev/ttyUSB0 -b 115200 -c on'
+alias cobra-uart='sudo minicom -D /dev/ttyUSB0 -b 115200'
 
 # Launch SSH session of Cobra
 alias cobra-ssh-ciele='ssh ciele@192.168.0.5'
