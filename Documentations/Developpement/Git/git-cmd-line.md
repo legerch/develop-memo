@@ -63,10 +63,31 @@ git clean -fx   # To remove ignored and non-ignored files
 - Savoir à quel branche distante est associée une branche locale : `git branch -vv`
 - Créer une branche locale depuis une branche distante d'une remote différente : `git fetch <remote> <remote_branch>:<local_branch>`
 
-4. Debugguage
+4. Add multiple push URLs to a single git remote 
+
+Sometimes you need to keep two upstreams in sync with eachother. For example, you might need to both push to your testing environment and your GitHub repo at the same time. In order to do this simultaneously in one git command, here's a little trick to add multiple push URLs to a single remote.
+
+Once you have a remote set up for one of your upstreams, run these commands with :
+```shell
+git remote set-url --add --push [remote] [original repo URL]
+git remote set-url --add --push [remote] [second repo URL]
+```
+
+Once set up, `git remote -v` should show two (push) URLs and one (fetch) URL. Something like this :
+```shell
+$ git remote -v
+origin git@github.com:username/original-repo.git (fetch)
+origin git@github.com:username/original-repo.git (push)
+origin git@github.com:username/second-repo.git (push)
+```
+
+Now, pushing to this remote will push to both upstreams simultaneiously. Fetch and pull from this remote will still pull from the original repo only.
+> To delete an URL of remote : `git remote set-url --delete --push origin git@github.com:username/project.git`
+
+5. Debugguage
 - Activer le mode verbose : `GIT_TRACE=1` avant la commande git à utiliser (certaines nécessiterons le flag `--verbose` ou `-v` comme pour `git fetch -v`)
 
-5. Comparaisons
+6. Comparaisons
 - Comparer deux branches : `git diff branch1..branch2` 
 - Comparer les commits de deux branches : `git log branch1..branch2`
 - Obtenir le nombre de commits entre deux branches : `git rev-list --count branch1..branch2`
