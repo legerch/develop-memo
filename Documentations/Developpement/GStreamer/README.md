@@ -70,45 +70,45 @@ gst-launch-1.0 -v v4l2src videotestsrc pattern=ball is-live=true ! video/x-raw,w
 
 ### 2.1.2. IMX8MM
 
-L'IMX8M Mini ne possède pas d'encodeur H264 hardware, il utilise un encodeur software, il est donné pour un encodage H264 `1080@60fps` d'après la documentation.
-> Documentation NXP : [i.MX8 processors][doc-nxp-imx8]  
-> Ici, nous utilisons le plugin `x264enc` qui est le plugin générique GStreamer pour un encodage x264. Il y a l'air d'exister un plugin x264 spécifique à l'IMX8, à savoir : `vpuenc_h264` -> **Creuser la piste !**  
-> D'autres threads intéressants concernant la problématique "encodeurs H264 IMX8" sont disponibles dans la section [Ressources][anchor-ressources]
+L'i.MX8MMini ne possède pas d'encodeur H264 hardware, il utilise un VPU software, il est donné pour un encodage H264 `1080@60fps` d'après la documentation.
+> Documentation NXP : [i.MX8 processors][doc-nxp-imx8]
 
-Ici, nous sommes obligé d'utiliser un encodeur avec les paramètres à la qualité la plus basse, sinon trop de latence ou trop de bruit.
+Par ailleurs, l'i.MX8MM bénéficie de l'API **G2D** devéloppé par **NXP** (nécessite le kernel NXP) permettant d'effectuer la transformation de média (GPU) pour conversion de format, scaling, etc...
 
 #### 2.1.2.1. Source caméra
 
 - Démarrer le streaming vidéo en le diffusant au framebuffer et via UDP :
 ```shell
-gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=632,height=632,framerate=20/1 ! tee name=t ! queue ! videoconvert ! videoscale method=0 ! queue ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0 t. ! queue ! videoconvert ! x264enc quantizer=25 speed-preset=ultrafast tune=zerolatency ! rtph264pay ! udpsink host=192.168.0.20 port=1234
+gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=640,height=640,framerate=20/1 ! tee name=t ! queue ! imxg2dvideotransform ! imxvpuenc_h264 bitrate=0 quantization=25 ! rtph264pay ! udpsink host=192.168.0.20 port=1234 t. ! queue ! imxg2dvideotransform ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0
 ```
+> L'élément `imxg2dvideotransform` remplace les éléments génériques `videoconvert` (conversion de format) et `videoscale`.  
+> Cet élement dans la `queue` liée au streaming n'est pas obligatoire mais permet un meilleur rendu des couleurs
 
 - Démarrer le streaming vidéo en le diffusant seulement sur le framebuffer :
 ```shell
-gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=632,height=632,framerate=20/1 ! queue ! videoconvert ! videoscale method=0 ! queue ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0
+gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=640,height=640,framerate=20/1 ! queue ! imxg2dvideotransform ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0
 ```
 
 - Démarrer le streaming vidéo en le diffusant seulement via UDP :
 ```shell
-gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=632,height=632,framerate=20/1 ! queue ! videoconvert ! x264enc quantizer=25 speed-preset=ultrafast tune=zerolatency ! rtph264pay ! udpsink host=192.168.0.20 port=1234
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=640,height=640,framerate=20/1 ! queue ! imxg2dvideotransform ! imxvpuenc_h264 bitrate=0 quantization=25 ! rtph264pay ! udpsink host=192.168.0.20 port=1234
 ```
 
 #### 2.1.2.2. Source simulée
 
 - Démarrer le streaming vidéo en le diffusant au framebuffer et via UDP :
 ```shell
-gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=600,height=600 ! tee name=t ! queue ! videoconvert ! videoscale method=0 ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0 t. ! queue ! videoconvert ! x264enc quantizer=25 speed-preset=ultrafast tune=zerolatency ! rtph264pay ! udpsink host=192.168.0.157 port=1234
+gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=640,height=640,framerate=20/1 ! tee name=t ! queue ! imxg2dvideotransform ! imxvpuenc_h264 bitrate=0 quantization=25 ! rtph264pay ! udpsink host=192.168.0.20 port=1234 t. ! queue ! imxg2dvideotransform ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0
 ```
 
 - Démarrer le streaming vidéo en le diffusant seulement sur le framebuffer :
 ```shell
-gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=600,height=600 ! queue ! videoconvert ! videoscale method=0 ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0
+gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=640,height=640,framerate=20/1 ! queue ! imxg2dvideotransform ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0
 ```
 
 - Démarrer le streaming vidéo en le diffusant seulement via UDP :
 ```shell
-gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=600,height=600 ! queue ! videoconvert ! x264enc quantizer=25 speed-preset=ultrafast tune=zerolatency ! rtph264pay ! udpsink host=192.168.0.157 port=1234
+gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=640,height=640,framerate=20/1 ! queue ! imxg2dvideotransform ! imxvpuenc_h264 bitrate=0 quantization=25 ! rtph264pay ! udpsink host=192.168.0.20 port=1234
 ```
 
 ## 2.2. Coté client
@@ -116,14 +116,7 @@ gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=600
 ### 2.2.1. Via GStreamer
 On peut recuperer le flux sur le PC connecte via la commande GStreamer (UNIX) :
 ```shell
-# 1ere version
-LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=192.168.0.157 port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink
-
-# 2nde version : la commande peut être lente due au fait que le "caps" est "parsé" par GStreamer, en utilisant les éléments drectement, on gagne en performance
-LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=192.168.0.157 port=1234 ! application/x-rtp,media=video,clock-rate=90000,encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
-
-# 3eme version basée sur la 2nde en n'étant plus dépendant de l'adresse IP cliente
-LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc address=0.0.0.0 port=1234 ! application/x-rtp,media=video,clock-rate=90000,encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
+LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! queue ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink
 ```
 > Le paramètre `LIBVA_DRIVER_NAME=iHD` peut être nécessaire si présence de 2 cartes graphiques sur le PC récepteur.  
 > Ici, on demande à utiliser la carte graphique Intel.
@@ -265,11 +258,14 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
   - Convertion
     - [videoconvert][doc-gst-videoconvert]
     - [bayer2rgb][doc-gst-bayer2rgb]
+  - Transformation & convertion
+    - imxg2dvideotransform
   - Demuxers
     - [`qtdemux`][doc-gst-qtdemux]
   - Codec parser
     - [h264parse][doc-gst-h264parse]
   - Encodeurs
+    - imxvpuenc_h264
     - v4l2h264enc
     - [x264enc][doc-gst-x264enc]
   - Decodeurs
