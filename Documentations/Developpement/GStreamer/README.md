@@ -56,7 +56,7 @@ gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,width=632,height=632 
 gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-raw,width=632,height=632 ! tee name=t ! queue ! videoconvert ! videoscale method=0 ! video/x-raw,width=128,height=128 ! fbdevsink device=/dev/fb0 t. ! queue ! videoconvert ! v4l2h264enc output-io-mode=4 ! rtph264pay ! udpsink host=192.168.0.157 port=1234
 ```
 > L'élément `videotestsrc` dispose de plusieurs mode : _smpte_ (bande de couleurs + neige), _ball_ (balle en mouvement), etc...  
-> Pour la liste complète, se référer à la documentation : [GStreamer videotestsrc](https://gstreamer.freedesktop.org/documentation/videotestsrc/index.html)
+> Pour la liste complète, se référer à la documentation : [GStreamer videotestsrc][doc-gst-videotestsrc]
 
 - Démarrer le streaming vidéo en le diffusant seulement sur le framebuffer :
 ```shell
@@ -71,9 +71,9 @@ gst-launch-1.0 -v v4l2src videotestsrc pattern=ball is-live=true ! video/x-raw,w
 ### 2.1.2. IMX8MM
 
 L'IMX8M Mini ne possède pas d'encodeur H264 hardware, il utilise un encodeur software, il est donné pour un encodage H264 `1080@60fps` d'après la documentation.
-> Documentation NXP : https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES  
+> Documentation NXP : [i.MX8 processors][doc-nxp-imx8]  
 > Ici, nous utilisons le plugin `x264enc` qui est le plugin générique GStreamer pour un encodage x264. Il y a l'air d'exister un plugin x264 spécifique à l'IMX8, à savoir : `vpuenc_h264` -> **Creuser la piste !**  
-> D'autres threads intéressants concernant la problématique "encodeurs H264 IMX8" sont disponibles dans la section [Ressources](#ressources)
+> D'autres threads intéressants concernant la problématique "encodeurs H264 IMX8" sont disponibles dans la section [Ressources][anchor-ressources]
 
 Ici, nous sommes obligé d'utiliser un encodeur avec les paramètres à la qualité la plus basse, sinon trop de latence ou trop de bruit.
 
@@ -162,7 +162,7 @@ gst-launch-1.0 -v videotestsrc pattern=ball is-live=true ! video/x-bayer,format=
 # 4. Lecture vidéo
 
 GStreamer permet la lecture de tous les formats vidéos (à condition d'avoir les plugins ncéessaires à chaque format).  
-Afin de vérifier rapidement si votre plateforme possède les éléments nécessaires à la lecture de la vidéo, nous pouvons utiliser le plugin [`playbin`](https://gstreamer.freedesktop.org/documentation/playback/playbin.html) qui va automatiquement générer le pipeline nécessaire, en se basant sur les plugins disponibles.
+Afin de vérifier rapidement si votre plateforme possède les éléments nécessaires à la lecture de la vidéo, nous pouvons utiliser le plugin [`playbin`][doc-gst-playbin] qui va automatiquement générer le pipeline nécessaire, en se basant sur les plugins disponibles.
 
 ## 4.1. Pipeline automatique
 Ainsi, pour lire une vidéo :
@@ -193,8 +193,8 @@ Ainsi pour lire un fichier `.mp4` :
 ```shell
 gst-launch-1.0 filesrc location=/home/user/media/vid/mp4/SampleVideo_128x128_30mb.mp4 ! qtdemux name=demux  demux.audio_0 ! queue ! decodebin ! audioconvert ! fakesink  demux.video_0 ! queue ! avdec_h264 ! videoconvert ! fbdevsink
 ```
-> Le format `.mp4` est un conteneur de flux, on dit qu'ils sont "muxés", il faut alors les "démuxer" (pour un fichier `.mp4`, on va séparer les flux vidéos, audios et sous-titres). C'est le rôle du plugin [`qtdemux`](https://gstreamer.freedesktop.org/documentation/isomp4/qtdemux.html?gi-language=c) (pour QuickTime Demuxer).  
-> Il faut ensuite décoder la vidéo, dans notre cas, la vidéo était encodée avec le codec **x264**. C'est le rôle du plugin [`avdec_h264`](https://gstreamer.freedesktop.org/documentation/libav/avdec_h264.html?gi-language=c) (_libav h264 decoder_).
+> Le format `.mp4` est un conteneur de flux, on dit qu'ils sont "muxés", il faut alors les "démuxer" (pour un fichier `.mp4`, on va séparer les flux vidéos, audios et sous-titres). C'est le rôle du plugin [`qtdemux`][doc-gst-qtdemux] (pour QuickTime Demuxer).  
+> Il faut ensuite décoder la vidéo, dans notre cas, la vidéo était encodée avec le codec **x264**. C'est le rôle du plugin [`avdec_h264`][doc-gst-avdec_h264] (_libav h264 decoder_).
 
 Dans notre cas, seule la vidéo nous intéresse, il est possible d'ignorer l'audio :
 ```shell
@@ -212,11 +212,11 @@ gst-launch-1.0 filesrc location=/home/user/media/vid/mp4/SampleVideo_128x128_30m
 ## 5.1. Obtenir des diagrammes/graphes
 
 GStreamer est capable de générer les graphes de chacun des éléments utilisés dans un pipeline, ce qui peut être utile pour savoir quelle a été la configuration exacte utilisée.  
-Cette fonctionnalité est également très intéressante lorsque nous utilisons des éléments comme [`playbin`](https://gstreamer.freedesktop.org/documentation/playback/playbin.html) ou [`decodebin`](https://gstreamer.freedesktop.org/documentation/playback/decodebin.html?gi-language=c) qui vont automatiquement utiliser les éléments nécessaires pour la lectrure d'un flux.  
+Cette fonctionnalité est également très intéressante lorsque nous utilisons des éléments comme [`playbin`][doc-gst-playbin] ou [`decodebin`][doc-gst-decodebin] qui vont automatiquement utiliser les éléments nécessaires pour la lectrure d'un flux.  
 Nous axerons ce tutoriel au travers de `playbin` avec la lecture d'un fichier vidéo.
 > Ressources utilisées :
-> - https://stackoverflow.com/questions/42297360/which-elements-are-contained-in-decodebin
-> - https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph)
+> - [Which elements are contained in decodebin ?][thread-others-which-elt-contained-decodebin]
+> - [How to generate a GStreamer pipeline diagram (graph)][tutorial-gst-pipeline-diagram]
 
 Pour la commande suivante permettant la lecture d'un fichier `.mp4` :
 ```shell
@@ -243,63 +243,62 @@ dot -Tpng 0.00.00.545431666-gst-launch.READY_PAUSED.dot -o0.00.00.545431666-gst-
 # Convert multiple files in one command (for current directory)
 ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
 ```
-> Les fichiers obtenues sont disponibles dans [Gstreamer/res/graphs](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/GStreamer/res/graphs)
+> Les fichiers obtenues sont disponibles dans [Gstreamer/res/graphs][repo-gst-graphs]
 
 # 6. Ressources
 
 - Documentation officielle **GStreamer**:
-  - [Accès à tous les plugins](https://gstreamer.freedesktop.org/documentation/plugins_doc.html?gi-language=c)
+  - [Accès à tous les plugins][doc-gst-all-plugins]
   - Gestion pipeline
-    - [tee](https://gstreamer.freedesktop.org/documentation/coreelements/tee.html?gi-language=c)
-    - [queue](https://gstreamer.freedesktop.org/documentation/coreelements/queue.html?gi-language=c)
-    - [decodebin](https://gstreamer.freedesktop.org/documentation/playback/decodebin.html?gi-language=c)
-    - [`playbin`](https://gstreamer.freedesktop.org/documentation/playback/playbin.html)
+    - [tee][doc-gst-tee]
+    - [queue][doc-gst-queue]
+    - [decodebin][doc-gst-decodebin]
+    - [`playbin`][doc-gst-playbin]
   - Source
-    - [videotestsrc](https://gstreamer.freedesktop.org/documentation/videotestsrc/index.html?gi-language=c)
-    - [v4l2src](https://gstreamer.freedesktop.org/documentation/video4linux2/v4l2src.html?gi-language=c)
-    - [uvch264src](https://gstreamer.freedesktop.org/documentation/uvch264/uvch264src.html?gi-language=c)
-    - [filesrc](https://gstreamer.freedesktop.org/documentation/coreelements/filesrc.html?gi-language=c)
+    - [videotestsrc][doc-gst-videotestsrc]
+    - [v4l2src][doc-gst-v4l2src]
+    - [uvch264src][doc-gst-uvch264src]
+    - [filesrc][doc-gst-filesrc]
   - Transformation
-    - [videocrop](https://gstreamer.freedesktop.org/documentation/videocrop/videocrop.html?gi-language=c)
-    - [videoscale](https://gstreamer.freedesktop.org/documentation/videoscale/index.html?gi-language=c)
+    - [videocrop][doc-gst-videocrop]
+    - [videoscale][doc-gst-videoscale]
   - Convertion
-    - [videoconvert](https://gstreamer.freedesktop.org/documentation/videoconvert/index.html?gi-language=c)
-    - [bayer2rgb](https://gstreamer.freedesktop.org/documentation/bayer/bayer2rgb.html?gi-language=c)
+    - [videoconvert][doc-gst-videoconvert]
+    - [bayer2rgb][doc-gst-bayer2rgb]
   - Demuxers
-    - [`qtdemux`](https://gstreamer.freedesktop.org/documentation/isomp4/qtdemux.html?gi-language=c)
+    - [`qtdemux`][doc-gst-qtdemux]
   - Codec parser
-    - [h264parse](https://gstreamer.freedesktop.org/documentation/videoparsersbad/h264parse.html?gi-language=c)
+    - [h264parse][doc-gst-h264parse]
   - Encodeurs
     - v4l2h264enc
-    - [x264enc](https://gstreamer.freedesktop.org/documentation/x264/index.html?gi-language=c)
+    - [x264enc][doc-gst-x264enc]
   - Decodeurs
     - v4l2h264dec
-    - [avdec_h264](https://gstreamer.freedesktop.org/documentation/libav/avdec_h264.html?gi-language=c)
+    - [avdec_h264][doc-gst-avdec_h264]
   - Réseau
-    - [rtph264pay](https://gstreamer.freedesktop.org/documentation/rtp/rtph264pay.html?gi-language=c)
-    - [rtph264depay](https://gstreamer.freedesktop.org/documentation/rtp/rtph264depay.html?gi-language=c)
-    - [udpsink](https://gstreamer.freedesktop.org/documentation/udp/udpsink.html?gi-language=c)
-    - [udpsrc](https://gstreamer.freedesktop.org/documentation/udp/udpsrc.html?gi-language=c)
+    - [rtph264pay][doc-gst-rtph264pay]
+    - [rtph264depay][doc-gst-rtph264depay]
+    - [udpsink][doc-gst-udpsink]
+    - [udpsrc][doc-gst-udpsrc]
   - Ecran
-    - [fbdevsink](https://gstreamer.freedesktop.org/documentation/fbdevsink/index.html?gi-language=c)
+    - [fbdevsink][doc-gst-fbdevsink]
   - SDP
-    - [sdpdemux](https://gstreamer.freedesktop.org/documentation/sdpelem/sdpdemux.html?gi-language=c)
+    - [sdpdemux][doc-gst-sdpdemux]
   - Autres
-    - [autovideosink](https://gstreamer.freedesktop.org/documentation/autodetect/autovideosink.html?gi-language=c)
+    - [autovideosink][doc-gst-autovideosink]
 - Documentation officielle **NXP** :
-  - [Processeurs IMX8](https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES)
-  - [i.IMX8 GStreamer User Guide](https://community.nxp.com/t5/i-MX-Processors-Knowledge-Base/i-MX-8-GStreamer-User-Guide/ta-p/1098942?attachment-id=101553) (If link unavailable, this PDF can be found in **Datasheets** of this repository)
+  - [Processeurs IMX8][doc-nxp-imx8]
+  - [i.IMX8 GStreamer User Guide][doc-nxp-imx8-gst] (If link unavailable, this PDF can be found in **Datasheets** directory of Borea)
 - Documentation pour **Instructions NEON** :
-  - [ARM Developer - Instruction sets - NEON](https://developer.arm.com/architectures/instruction-sets/simd-isas/neon)
-  - [ARM Developer - NEON Architecture overview](https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/NEON-architecture-overview/NEON-instructions)
+  - [ARM Developer - Instruction sets - NEON][doc-armdev-neon-instructions-sets]
+  - [ARM Developer - NEON Architecture overview][doc-armdev-neon-arch]
 - Tutoriels
-  - [Introduction to network streaming using GStreamer](https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer)
-  - [How to generate a Gstreamer pipeline diagram (graph)](https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph))
-  - [GStreamer cheatsheet](https://gist.github.com/strezh/9114204)
+  - [Introduction to network streaming using GStreamer][tutorial-gst-stream-network]
+  - [How to generate a Gstreamer pipeline diagram (graph)][tutorial-gst-pipeline-diagram]
+  - [GStreamer cheatsheet][tutorial-gst-cheatsheet]
 - Threads
   - Fichiers `.sdp`
     - [Pipeline GStreamer pour lire le flux depuis fichier `.sdp`](http://gstreamer-devel.966125.n4.nabble.com/Unable-to-play-a-rtp-stream-td4675068.html)
-    - [Générer un fichier .sdp depuis GStreamer](https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer)
   - IMX8 encodeurs :
     - https://community.nxp.com/t5/i-MX-Processors/iMX8M-Software-H-264-Encoding-Speed-Not-as-Advertised/m-p/981332/highlight/true
     - https://community.nxp.com/t5/i-MX-Processors/i-MX8M-SW-Video-Encoder-Linux/td-p/748960
@@ -321,3 +320,47 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
 [icon-invalid]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 [icon-slow]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 [icon-lag]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+
+<!-- Anchor of this file -->
+[anchor-ressources]: #6-ressources
+
+<!-- Link to this repository -->
+[repo-gst-graphs]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/GStreamer/res/graphs
+
+<!-- External links -->
+[doc-gst-all-plugins]: https://gstreamer.freedesktop.org/documentation/plugins_doc.html?gi-language=c
+[doc-gst-autovideosink]: https://gstreamer.freedesktop.org/documentation/autodetect/autovideosink.html?gi-language=c
+[doc-gst-avdec_h264]: https://gstreamer.freedesktop.org/documentation/libav/avdec_h264.html?gi-language=c
+[doc-gst-bayer2rgb]: https://gstreamer.freedesktop.org/documentation/bayer/bayer2rgb.html?gi-language=c
+[doc-gst-decodebin]: https://gstreamer.freedesktop.org/documentation/playback/decodebin.html?gi-language=c
+[doc-gst-fbdevsink]: https://gstreamer.freedesktop.org/documentation/fbdevsink/index.html?gi-language=c
+[doc-gst-filesrc]: https://gstreamer.freedesktop.org/documentation/coreelements/filesrc.html?gi-language=c
+[doc-gst-h264parse]: https://gstreamer.freedesktop.org/documentation/videoparsersbad/h264parse.html?gi-language=c
+[doc-gst-playbin]: https://gstreamer.freedesktop.org/documentation/playback/playbin.html
+[doc-gst-qtdemux]: https://gstreamer.freedesktop.org/documentation/isomp4/qtdemux.html?gi-language=c
+[doc-gst-queue]: https://gstreamer.freedesktop.org/documentation/coreelements/queue.html?gi-language=c
+[doc-gst-rtph264pay]: https://gstreamer.freedesktop.org/documentation/rtp/rtph264pay.html?gi-language=c
+[doc-gst-rtph264depay]: https://gstreamer.freedesktop.org/documentation/rtp/rtph264depay.html?gi-language=c
+[doc-gst-sdpdemux]: https://gstreamer.freedesktop.org/documentation/sdpelem/sdpdemux.html?gi-language=c
+[doc-gst-tee]: https://gstreamer.freedesktop.org/documentation/coreelements/tee.html?gi-language=c
+[doc-gst-udpsink]: https://gstreamer.freedesktop.org/documentation/udp/udpsink.html?gi-language=c
+[doc-gst-udpsrc]: https://gstreamer.freedesktop.org/documentation/udp/udpsrc.html?gi-language=c
+[doc-gst-uvch264src]: https://gstreamer.freedesktop.org/documentation/uvch264/uvch264src.html?gi-language=c
+[doc-gst-v4l2src]: https://gstreamer.freedesktop.org/documentation/video4linux2/v4l2src.html?gi-language=c
+[doc-gst-videoconvert]: https://gstreamer.freedesktop.org/documentation/videoconvert/index.html?gi-language=c
+[doc-gst-videocrop]: https://gstreamer.freedesktop.org/documentation/videocrop/videocrop.html?gi-language=c
+[doc-gst-videoscale]: https://gstreamer.freedesktop.org/documentation/videoscale/index.html?gi-language=c
+[doc-gst-videotestsrc]: https://gstreamer.freedesktop.org/documentation/videotestsrc/index.html
+[doc-gst-x264enc]: https://gstreamer.freedesktop.org/documentation/x264/index.html?gi-language=c
+
+[doc-nxp-imx8]: https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES
+[doc-nxp-imx8-gst]: https://community.nxp.com/t5/i-MX-Processors-Knowledge-Base/i-MX-8-GStreamer-User-Guide/ta-p/1098942?attachment-id=101553
+
+[doc-armdev-neon-instructions-sets]: https://developer.arm.com/architectures/instruction-sets/simd-isas/neon
+[doc-armdev-neon-arch]: https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/NEON-architecture-overview/NEON-instructions
+
+[tutorial-gst-cheatsheet]: https://gist.github.com/strezh/9114204
+[tutorial-gst-pipeline-diagram]: https://developer.ridgerun.com/wiki/index.php/How_to_generate_a_Gstreamer_pipeline_diagram_(graph)
+[tutorial-gst-stream-network]: https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer
+
+[thread-others-which-elt-contained-decodebin]: https://stackoverflow.com/questions/42297360/which-elements-are-contained-in-decodebin
