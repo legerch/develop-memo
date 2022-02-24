@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-28-generic - 17/02/2022 :
+Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-30-generic - 23/02/2022 :
 
 ```shell
 ##
@@ -95,6 +95,8 @@ alias snippet-copy-sh='cp ~/.config/Code/User/snippets/shellscript.json ~/Docume
 alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_error/bin:../bin\n"'
 # Memo used to know how to use raw2rgbpnm (https://git.retiisi.org.uk/?p=~sailus/raw2rgbpnm.git)
 alias memo-raw2rgbpnm='printf "raw2rgbpnm -s 1288x968 -f SGRBG10 frame-000000.bin frame-000000.ppm\n"'
+# Memo on how to use yavta (https://git.ideasonboard.org/?p=yavta.git;a=summary)
+alias memo-yavta='printf "yavta -f SGRBG16 -s 648x648 -c8 -F/tmp/frame-#.bin /dev/video0\n"'
 
 # Use to save custom bash aliases do documentation folder
 alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md && printf "Done !\n"'
