@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-30-generic - 23/02/2022 :
+Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-30-generic - 03/03/2022 :
 
 ```shell
 ##
@@ -130,6 +130,7 @@ alias cobra-keygen='ssh-keygen -f "/home/charlie/.ssh/known_hosts" -R "192.168.0
 alias cobra-libs='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/03-libs'
 alias cobra-apps='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/04-apps'
 alias cobra-build='cd ~/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-Buildroot/RAYPLICKER-V2/'
+alias cobra-bsp='cd ~/Documents/workspaces/workspace-cobra/bsp/'
 alias cobra-kernels='cd ~/Documents/workspaces/workspace-cobra/kernels/'
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
