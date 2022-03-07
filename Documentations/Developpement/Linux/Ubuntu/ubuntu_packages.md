@@ -78,9 +78,20 @@ sudo apt install minicom
 ```
 
 ### 2.3.2. Usage
+
+- Start a session :
 ```shell
 sudo minicom -D /dev/ttyUSB0 -b 115200 -c on
 ```
+
+- Display help : `CTRL+A Z`
+> **Warning** : be careful, in some distributions, keyboard shortcut terminal has `CTRL+A` set for _select all_.  
+> `minicom` command will not be available if this shortcut is set.
+
+- Exit session : `CTRL+A X`
+- Send file by using protocol _zmodem_, _ymodem_, _xmodem_ or _kermit_ : `CTRL+A S`
+> Ressources used :
+> - [StackExchange - File transfer using YMODEM sz][minicom-send-file]
 
 ### 2.3.3. Configuration
 
@@ -150,7 +161,7 @@ List of packages are based on manuals available at :
 [Standard developer tools][anchor-dev-tools-std] are needed, then install :
 ```shell
 sudo apt install patch gzip bzip2 perl cpio unzip rsync python3 python-is-python3 # Buildroot
-sudo apt install jfsutils flex bison util-linux reiserfsprogs xfsprogs btrfs-progs quota libssl-dev fakeroot #kernel
+sudo apt install jfsutils flex bison util-linux reiserfsprogs xfsprogs btrfs-progs quota libssl-dev fakeroot u-boot-tools #kernel
 ```
 
 ## 3.2. Optional packages
@@ -288,6 +299,7 @@ Useful properties :
 [minicom-write-failure-thread-askubuntu]: https://askubuntu.com/questions/638378/minicom-doesnt-work
 [minicom-write-failure-tutorial]: https://www.centennialsoftwaresolutions.com/post/configure-minicom-for-a-usb-to-serial-converter
 [minicom-color-option-thread-debianorg]: https://lists.debian.org/debian-user/1996/10/msg00239.html
+[minicom-send-file]: https://unix.stackexchange.com/questions/273178/file-transfer-using-ymodem-sz
 
 [dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
 [opengl]: https://doc.ubuntu-fr.org/opengl
