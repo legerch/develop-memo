@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-30-generic - 03/03/2022 :
+Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-35-generic - 17/03/2022 :
 
 ```shell
 ##
@@ -8,7 +8,8 @@ Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-30-generic - 03/03/2022
 ##
 
 # Function to set terminal title
-function set-title(){
+function set-title()
+{
   if [[ -z "$ORIG" ]]; then
     ORIG="$PS1"
   fi
@@ -18,7 +19,8 @@ function set-title(){
 
 # Function used to create a copy of ~/.bash_aliases into a markdown file :
 # ${1} : file to write (ex : file.md)
-function save-custom-bash-aliases(){
+function save-custom-bash-aliases()
+{
     # Check that a destination file is available
     if [ -z "${1}" ]; then
         printf "USAGE : save-bash-aliases <file_destination>\n"
@@ -49,7 +51,8 @@ function save-custom-bash-aliases(){
 # Function used as a memo to build Cobra OS :
 # - Print command to use for Buildroot Cobra project
 # - List all available configs from "/configs" directory
-function memo-cobra-build(){
+function memo-cobra-build()
+{
     local pathCfgFiles="${HOME}/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-Buildroot/RAYPLICKER-V2/bsp-external-rayplicker-v2/configs/"
     
     printf "make PROJECT_DEFCONFIG=imx8_armadeus_run2_debug PROJECT_USE_BR_CUSTOM_PATCHES=1 clean\n"
@@ -57,6 +60,32 @@ function memo-cobra-build(){
     for i in `ls ${pathCfgFiles} | grep "\defconfig"`; do
         printf "\t${i}\n"
     done
+}
+
+# Function used to generate doxygen documentation :
+# ${1} : path to root project
+# ${2} : Doxyfile name to use
+function generate-project-documentation()
+{
+    local docPath="${1}"
+    local docFile="${2}"
+
+    local docDoxygen="${docPath}/${docFile}"
+
+    # Check that project doc file is valid
+    if [ ! -f "${docDoxygen}" ]; then
+        printf "USAGE : generate-project-documentation <project_path> <doxygen_file>\n"
+        return 1
+    fi
+
+    # Go to project directory
+    cd ${docPath}
+
+    # Generate documentation
+    doxygen ${docFile}
+
+    # Return to previous directory
+    cd ${OLDPWD}
 }
 
 ##
@@ -111,6 +140,12 @@ alias gituibin='~/Téléchargements/Fichiers\ Setup/gitui-linux-musl/gitui'
 # Create alias for application used to create an AppImage, which are released under binaries
 alias linuxdeploy.AppImage='~/Téléchargements/apps/linuxdeploy/linuxdeploy-x86_64.AppImage'
 alias appimagetool.AppImage='~/Téléchargements/apps/appimagekit/appimagetool-x86_64.AppImage'
+
+# Create aliases used to generate documentation of multiple projects
+alias doc-cobra-libs='generate-project-documentation /home/charlie/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/03-libs Doxyfile'
+alias doc-cobra-apps='generate-project-documentation /home/charlie/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/04-apps Doxyfile'
+alias doc-rpcompute='generate-project-documentation /home/charlie/Documents/workspaces/workspace-qt/Cobra-AppCommunication/RP_Lib/deps/RP_Compute Doxyfile'
+alias doc-rplib='generate-project-documentation /home/charlie/Documents/workspaces/workspace-qt/Cobra-AppCommunication/RP_Lib Doxyfile'
 
 ##
 # Cobra specific aliases
