@@ -95,6 +95,8 @@ cat /proc/bus/input/devices
 - List all partitions
 ```shell
 lsblk
+lsblk -o name,mountpoint,label,size,uuid
+lsblk -no label /dev/sdh1
 ```
 
 - Get size of directory
