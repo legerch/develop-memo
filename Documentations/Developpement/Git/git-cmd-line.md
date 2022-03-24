@@ -3,6 +3,8 @@
   - [1.1. Général](#11-général)
   - [1.2. Merge](#12-merge)
   - [1.3. Patch](#13-patch)
+  - [1.4. Réecriture de l'historique](#14-réecriture-de-lhistorique)
+    - [1.4.1. Modifier le contenu d'un commit](#141-modifier-le-contenu-dun-commit)
 - [2. Git UI](#2-git-ui)
   - [2.1. Real UI](#21-real-ui)
   - [2.2. Terminal UI](#22-terminal-ui)
@@ -21,7 +23,7 @@
 - Renommer une branche locale : `git branch -m <new_name>`
 - Créer une branche remote à partir d'une branche locale : `git push origin -u <name>`
 - Renommer une branche remote : Nécessaire de push la branche renommée et de supprimer l'ancienne
-> Plus de détails ici : https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
+> Plus de détails ici : [Linuxsize - How to rename local and remote git branch][tutorial-linuxize-rename-branch]
 
 - Créer une branche depuis un tag : `git branch <name-branch> <tag : origin/2021.02.x>`
 - Créer une branche depuis un tag et checkout dessus : `git checkout tags/2020.02.3 -b 2020.02.3`
@@ -94,9 +96,9 @@ Now, pushing to this remote will push to both upstreams simultaneiously. Fetch a
 
 ## 1.2. Merge
 
-Plusieurs stratégies de merge existent, voir [git merge strategy](https://git-scm.com/docs/git-merge/en#_merge_strategies) pour plus de détails. Les stratégies _resolve_ (merge deux branches) et _octopus_ (merge plusieurs branches) sont les stratégies utilisées par défaut selon les cas.
+Plusieurs stratégies de merge existent, voir [git merge strategy][git-merge-strategies] pour plus de détails. Les stratégies _resolve_ (merge deux branches) et _octopus_ (merge plusieurs branches) sont les stratégies utilisées par défaut selon les cas.
 
-Nous détaillerons ici une autre stratégie pouvant parfois être utile : [_ours strategy_](https://git-scm.com/docs/git-merge/en#_merge_strategies).  
+Nous détaillerons ici une autre stratégie pouvant parfois être utile : [_ours strategy_][git-merge-strategy-ours].  
 > **Attention :** On parle bien ici de la stratégie **ours merge strategy** et non pas de l'option _ours_ de la stratégie **recursive merge strategy** qui sont deux choses distinctes.
  
 Prenons l'exemple d'un projet possédant une branche `master` et `dev`, les modifications effectuées dans `dev` sont normalement dédiées à être merge dans `master`. Or, parfois, il y a eu tellement de changements dans la branche `dev` (restructuration du projet, nouvelle techno, etc...) qu'un merge classique n'est plus pertinent (surtout s'il y a eu d'autres commits en parallèle sur le master...).
@@ -137,7 +139,7 @@ Ajouter `.patch` (ou `.diff`) à l'URL du commit permet de le formatter :
 ```shell
 https://github.com/foo/bar/commit/${SHA}.patch
 ```
-> Reference : https://stackoverflow.com/questions/21903805/how-to-download-a-single-commit-diff-from-github
+> Reference : [StackOverflow - How to download a single commit from Github][thread-so-dl-patch-github]
 
 - Appliquer un patch à un dépôt GIT :
 ```shell
@@ -157,28 +159,76 @@ else # patch not yet applied
 fi
 ```
 > L'option `--dry-run` permet d'effectuer la commande sans les appliquer, elle simule l'action.    
-> `patch` documentation : [man patch](https://man7.org/linux/man-pages/man1/patch.1.html)
+> `patch` documentation : [man patch][man-patch]
+
+
+## 1.4. Réecriture de l'historique
+### 1.4.1. Modifier le contenu d'un commit
+
+Il peut parfois être utile de modifier un commit alors que d'autres commits ont été créé depuis (gestion de patchs par exemple, pour éviter les patchs qui corrigent les patchs...).  
+> Le principal est résumé ci-dessous, pour un tutoriel plus complet, voir [Medium - Git Commit Fixup, ou comment garder un historique propre][tutorial-medium-edit-commit]  
+> Les commandes pour mémo :
+> 1. `git commit -a --fixup=<sha1_commit>`
+> 2. `git rebase -i --autosquash <sha1_commit>~`
+> 3. `git push --force`
+
+Admettons l'historique _git_ suivant :
+```shell
+charlie@charlie-B660M:~/Documents/workspaces/workspace-cobra/kernels/linux-imx$ git log -n 5 --oneline
+ff07367f27fd (HEAD -> borea/imx8/5.4.70_2.3.2) media: i2c: mt9m114: Add debug timer on method used to set stream status
+a45f953ccffc media: videobuf2-core: Add debug timer to track dequeue operation
+d9cfc3d3d563 (upstream/borea/imx8/5.4.70_2.3.2) arm64: dts: Add missing DTS file in Freescale makefile
+a9105b0b6636 arm64: dts: imx8mm-rayplicker: enable VPU and GPU
+9371217537e3 arm64: dts: imx8mm-rayplicker: set DISP clocks
+```
+
+Je souhaite modifier le commit `a45f953ccffc media: videobuf2-core: Add debug timer to track dequeue operation`, comment procéder ? :
+1. Faire les modifications nécessaires du code
+2. Commiter ces modifications en utilisant l'option `--fixup=` permettant de préciser que l'on souhaite corriger un commit :
+```shell
+charlie@charlie-B660M:~/Documents/workspaces/workspace-cobra/kernels/linux-imx$ git commit -a --fixup=a45f953ccffc
+[borea/imx8/5.4.70_2.3.2 d96725f13885] fixup! media: videobuf2-core: Add debug timer to track dequeue operation
+ 1 file changed, 8 insertions(+), 20 deletions(-)
+```
+3. Mettre à jour les commits dépendants en réécrivant l'historique via la commande _git_ `rebase` en précisant le commit qui a été fixé (sur lequel "rebaser") :
+```shell
+charlie@charlie-B660M:~/Documents/workspaces/workspace-cobra/kernels/linux-imx$ git rebase -i --autosquash a45f953ccffc~
+Rebasage et mise à jour de refs/heads/borea/imx8/5.4.70_2.3.2 avec succès.
+```
+4. Le commit a correctement été modifié :
+```shell
+charlie@charlie-B660M:~/Documents/workspaces/workspace-cobra/kernels/linux-imx$ git log -n 10 --oneline
+974cd5daed7b (HEAD -> borea/imx8/5.4.70_2.3.2) media: i2c: mt9m114: Add debug timer on method used to set stream status
+48de28a6d6ed media: videobuf2-core: Add debug timer to track dequeue operation
+d9cfc3d3d563 (upstream/borea/imx8/5.4.70_2.3.2) arm64: dts: Add missing DTS file in Freescale makefile
+a9105b0b6636 arm64: dts: imx8mm-rayplicker: enable VPU and GPU
+9371217537e3 arm64: dts: imx8mm-rayplicker: set DISP clocks
+```
+> Nous pouvons faire un `git show 48de28a6d6ed` pour véfifier le contenu du commit modifié.  
+> On notera que les hash ont été modifiés.
+
+5. Si ces modifications doivent être pousser sur un dépôt distant, l'option `--force` de `git push` sera nécessaire pour pouvoir réécrire l'historique du dépôt.
 
 # 2. Git UI
 
 ## 2.1. Real UI
 
 Plusieurs projets GIT UI sont disponibles :
-- GitKraken (compatible Windows, Mac, Linux) : https://www.gitkraken.com/download
+- [GitKraken][git-ui-gitkraken] (compatible Windows, Mac, Linux)
   - UI user-friendly : branches disponibles facilement visibles et différenciables, historique complet, modification non validées affichées, etc... 
   - Permet le multi-compte
   - Gère facilement les submodules
   - Ne gère pas les patchs
   - Ne permet pas de travailler avec un gros dépôt type _kernel linux_ par exemple
 
-- Source-tree (compatible Windows et Mac ) : https://www.sourcetreeapp.com/
+- [Source-tree][git-ui-sourcetree] (compatible Windows et Mac )
   - UI relativement complète (trop !) : branches et historiques visibles mais pas évident à prendre en main
   - Ne permet pas le multi-compte
   - Gère les submodules 
   - Ne gère pas les patchs
   - Non testé sur dépôt volumineux
   
-- Git-cola (compatible Windows, Mac, Linux) : https://git-cola.github.io/downloads.html
+- [Git-cola][git-ui-gitcola] (compatible Windows, Mac, Linux)
   - UI simple : branches difficilement visibles, historique complet difficilement visible, modification non validées affichées
   - Ne permet pas le multi-compte
   - Gère les submodules
@@ -188,11 +238,29 @@ Plusieurs projets GIT UI sont disponibles :
 ## 2.2. Terminal UI
 
 Plusieurs projets de GIT UI ont également vu le jour pour fonctionner avec le terminal, ils permettent surtout de réduire les soucis de performance sur de gros projets (_ex : Noyau linux_) :
-- [Lazygit](https://github.com/jesseduffield/lazygit)
+- [Lazygit][git-tui-lazygit]
   - Cross platform : Linux, windows, MacOS
 
-- [gitui](https://github.com/extrawurst/gitui)
+- [gitui][git-tui-gitui]
   - Cross platform : Linux, windows, MacOS
   - Meilleures performances face à _Lazygit_
   - Raccourcis claviers intuitifs
   - **Attention :** Projet en phase beta actuellement (21/09/2021)
+
+<!-- Links -->
+
+[git-merge-strategies]: https://git-scm.com/docs/git-merge/en#_merge_strategies
+[git-merge-strategy-ours]: https://git-scm.com/docs/git-merge/en#_merge_strategies
+
+[git-ui-gitkraken]: https://www.gitkraken.com/download
+[git-ui-sourcetree]: https://www.sourcetreeapp.com/
+[git-ui-gitcola]: https://git-cola.github.io/downloads.html
+[git-tui-lazygit]: https://github.com/jesseduffield/lazygit
+[git-tui-gitui]: https://github.com/extrawurst/gitui
+
+[man-patch]: https://man7.org/linux/man-pages/man1/patch.1.html
+
+[thread-so-dl-patch-github]: https://stackoverflow.com/questions/21903805/how-to-download-a-single-commit-diff-from-github
+
+[tutorial-linuxize-rename-branch]: https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
+[tutorial-medium-edit-commit]: https://medium.com/just-tech-it-now/git-commit-fixup-corriger-editer-un-commit-simplement-dd6c7d9026cd
