@@ -15,7 +15,7 @@
 
 # 1. Introduction
 
-Official website : https://code.visualstudio.com/
+Official website : [VsCode][vscode-official]
 
 # 2. First thing to do
 
@@ -81,27 +81,26 @@ List of default keyboard shortcut to changed :
 # 3. Plugins
 
 _Visual Studio Code_ allow usage of plugin, list of useful plugins and somes associated settings :
-- [Back & Forth](https://marketplace.visualstudio.com/items?itemName=nick-rudenko.back-n-forth)
-- [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-- [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
-- [DeviceTree](https://marketplace.visualstudio.com/items?itemName=plorefice.devicetree)
-- [Doxygen Documentation Generator](https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen)
-- [Keep a Changelog](https://marketplace.visualstudio.com/items?itemName=RLNT.keep-a-changelog)
-- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+- [Back & Forth][plugin-back-forth]
+- [C/C++][plugin-c-cpp]
+- [Doxygen Documentation Generator][plugin-doxygen]
+- [Keep a Changelog][plugin-changelog]
+- [Markdown All in One][plugin-markdown]
   - `Mardown/extension/print/Absolute Img Path` : By default, this setting is enable, disable it to make your `.html` **moveable** when using an `images` folder
   - `Mardown/extension/print/Img To Base64` : Can be useful to include images directly into `.html` files to get ride of the `images` folder when generate `.html`
-- [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)
-- [Vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
+- [Todo Tree][plugin-todo-tree]
+- [Vscode-icons][plugin-vscode-icons]
+- [Embedded Linux Kernel Dev][plugin-kernel-dev]: Useful to support _device-tree_ files and to find associated documentation (bindings and drivers). Be careful, this extension have dependencies packages, check `README` of it to install them !
 
 # 4. Snippets
 
 ## 4.1. How to use ?
 
-_VsCode_ allow us to create custom snippets for each supported languages : https://code.visualstudio.com/docs/editor/userdefinedsnippets.  
+_VsCode_ allow us to create custom snippets for each supported languages : [VsCode - User snippets][vscode-snippets].  
 Furthermore, some useful variables are available : `TM_FILENAME`, `CURRENT_DATE`, etc...
 
-Generate our snippets at _VsCode_ format can become difficult, use [Snippet generator](https://snippet-generator.app/) to do so.
-> An exemple for C language snippets can be found at : [dev/ide/vscode/res/c.json](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode/ressources/c.json)
+Generate our snippets at _VsCode_ format can become difficult, use [Snippet generator][snippet-generator] to do so.
+> An exemple for C language snippets can be found at : [dev/ide/vscode/res/c.json][doc-snippets-c]
 
 ## 4.2. Particular case
 ### 4.2.1. C language
@@ -113,17 +112,37 @@ In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** 
 4. Go to `Associations` fields
    1. Add in `Item` value : _*.h_
    2. Add in `Value` value : _c_
-> Link of the associated issue : https://github.com/Microsoft/vscode-cpptools/issues/1476
+> Link of the associated [issue][issue-c-headers-not-triggered]
 
 # 5. Ressources
 
 - Official documentation : 
-  - Website : https://code.visualstudio.com/
-  - Snippets : https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  - [Website][vscode-official]
+  - [Snippets][vscode-snippets]
 - Tutorials
   - https://sqldbawithabeard.com/2017/04/24/setting-the-default-file-type-for-a-new-file-in-vs-code/
 - Threads :
   - [How can I create templates for file extensions in Visual Studio Code ?](https://stackoverflow.com/questions/50571130/how-can-i-create-templates-for-file-extensions-in-visual-studio-code)
   - [When creating a VSCode snippet, how can I transform a variable to title-case (like TitleCase) ?](https://stackoverflow.com/questions/52874954/when-creating-a-vscode-snippet-how-can-i-transform-a-variable-to-title-case-li)
-  - [Snippet can not work in C header file (#1476)](https://github.com/Microsoft/vscode-cpptools/issues/1476)
+  - [Snippet can not work in C header file (#1476)][issue-c-headers-not-triggered]
   - [Open files always in a new tab](https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab)
+
+<!-- Links to this repository -->
+[doc-snippets-c]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode/ressources/c.json
+
+<!-- External links -->
+[vscode-official]: https://code.visualstudio.com/
+[vscode-snippets]: https://code.visualstudio.com/docs/editor/userdefinedsnippets
+
+[plugin-back-forth]: https://marketplace.visualstudio.com/items?itemName=nick-rudenko.back-n-forth
+[plugin-c-cpp]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
+[plugin-changelog]: https://marketplace.visualstudio.com/items?itemName=RLNT.keep-a-changelog
+[plugin-doxygen]: https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen
+[plugin-kernel-dev]: https://marketplace.visualstudio.com/items?itemName=microhobby.linuxkerneldev
+[plugin-markdown]: https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
+[plugin-todo-tree]: https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
+[plugin-vscode-icons]: https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons
+
+[snippet-generator]: https://snippet-generator.app/
+
+[issue-c-headers-not-triggered]: https://github.com/Microsoft/vscode-cpptools/issues/1476
