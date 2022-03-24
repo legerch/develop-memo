@@ -211,7 +211,7 @@ sudo apt install y-ppa-manager # a PPA exist for this package
 # 7. Networking tools
 
 ```shell
-sudo apt install net-tools libpcap-dev libnet1-dev rpcbind openssh-server nmap
+sudo apt install net-tools libpcap-dev libnet1-dev rpcbind openssh-client openssh-server nmap
 sudo apt install wireshark
 sudo apt install filezilla
 ```
