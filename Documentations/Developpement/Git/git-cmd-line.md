@@ -31,6 +31,7 @@
 - Créer une branche depuis une branche distante : `git checkout -b <branch-name> <remote-branch>` (ex : `git checkout -b 2021.02.x origin/2021.02.x`)
 - Créer une branche sur un commit spécifique : `git branch <branchname> <sha1-of-commit>`
 - Hard reset sur la HEAD : `git reset --hard HEAD`
+- Hard reset sur un commit spécifique : `git reset --hard <commid_id> && git clean -f`
 - Supprimer les fichiers locaux non trackés de la branche courante :
 ```shell
 # If you want to see which files will be deleted you can use the -n option
