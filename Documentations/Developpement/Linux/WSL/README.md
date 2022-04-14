@@ -12,6 +12,14 @@ This file will resumed how to use **WSL** filesystem
 Install an Ubuntu WSL by following [this tutorial][wsl-install-doc]. 
 To run WSL, simply open a Windows terminal and run WSL. It should get you into the Ubuntu shell.
 
+Setup your Git (GitHub/GitLab) SSH keys and install all the needed Ubuntu dependencies.
+
+Mixing Windows and WSL tools (most notably Git) causes incompatibilities. 
+To work with projects inside WSL, WSL tools (Git, GitKraken, VSCode, ...) are needed. 
+If you have VSCode already installed in Windows, you can use it to [develop for WSL][wsl-vscode]
+
+Other GUI tools can be used from WSL: see [here][wsl-gui]
+
 ## 1.2. Sharing data between Windows and WSL
 
 To share data between Windows and WSL, always acces Windows data from WSL, not the other way around. 
@@ -21,17 +29,6 @@ It is possible to create a symbolic link pointing to a Windows folder using :
 ```
 ln -s /mnt/<win-disk>/<path-to-win-folder> ~/<path-to-home-subfolder>
 ```
-
-## 1.3. Prepare tour WSL system
-
-Setup your Git (GitHub/GitLab) SSH keys and install all the needed Ubuntu dependencies.
-
-For convenience, you can create the folder `C:\Projects\Cobra` to store the projects and link to it from your WSL home directory using :
-```
-ln -s /mnt/c/Projects ~/Projects
-```
-
-You cant then go to `~/Projects/cobra` and clone your projects from there.
 
 # 2. Known issues
 ## 2.1. Unable to access to _Windows_ files under _WSL_
@@ -65,3 +62,5 @@ _TODO: check if problems persists when using Windows Git tools on a projects clo
 <!-- Links -->
 [thread-so-wsl-remove-win-path]: https://stackoverflow.com/questions/51336147/how-to-remove-the-win10s-path-from-wsl
 [wsl-install-doc]: https://docs.microsoft.com/fr-fr/windows/wsl/install
+[wsl-vscode]: https://code.visualstudio.com/docs/remote/wsl
+[wsl-gui]: https://docs.microsoft.com/fr-fr/windows/wsl/tutorials/gui-apps
