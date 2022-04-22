@@ -1,23 +1,27 @@
 This document will resume multiple kernel repositories
 
-- [Kernel.org](#kernelorg)
-- [Codeaurora](#codeaurora)
+- [1. Kernel.org](#1-kernelorg)
+- [2. Codeaurora](#2-codeaurora)
+  - [2.1. Management of i.MX release tags](#21-management-of-imx-release-tags)
+  - [2.2. Repository management](#22-repository-management)
 
-# Kernel.org
+# 1. Kernel.org
 
 Kernel repositories :
-- Mainline kernel : https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/
-- Stable kernel : https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
+- [Mainline kernel][repo-kernel-mainline]
+- [Stable kernel][repo-kernel-stable]
 
-> Useful informations : https://stackoverflow.com/questions/18557690/why-kernel-repositories-tags-are-different
+> Useful informations : [Why kernel repositories' tags are different ?][thread-so-why-repo-tags-are-different]
 
-Kernels move from **prepatch** to **mainline** to **stable** (as described in https://www.kernel.org/releases.html and https://www.kernel.org/doc/Documentation/development-process/2.Process) :
+Kernels move from **prepatch** to **mainline** to **stable** (as described in [doc-kernel-releases] and [doc-kernel-dev-process]) :
 - The **prepatch** (3.X-rc) and **mainline** (3.X) tags are in the `torvalds` repository maintained by _Linus Torvalds_ himself. 
 - The **stable** (3.X.Y) and **longterm** (3.X.Y) tags are in the `stable` repository, maintained by designated maintainers.
 
 > The Torvalds **mainline** repository represents the latest patches and fixes. Kernel versions that pass some degree of testing are moved to the **stable** repository and tagged. Afterwards, bug fixes are sometimes backported from mainline versions to tagged **stable** versions.
 
-# Codeaurora
+# 2. Codeaurora
+
+## 2.1. Management of i.MX release tags
 
 Ces informations proviennent de _M.Pinchart_ (mail 26/01/2022) lorsque j'ai demandé plus d'informations sur la façon dont était géré le dépôt _Freescale_ (`linux-imx`).
 
@@ -138,3 +142,29 @@ Il n'y a pas de solution miracle lorsque les branches divergent, en particulier 
 Pour revenir à votre première question, nous pouvons procéder de deux manières :
 - Par rebase : en réécrivant l'historique, pour obtenir une branche linéaire basée sur le noyau NXP. Cette méthode facilitera le passage à une nouvelle version majeure du noyau NXP, mais rend le développement plus complexe si vous devez coordonner plusieurs développeurs avec un nombre important de commits.
 - Par merge : cette méthode est plus facile lorsque plusieurs développeurs travaillent de manière concurrente, mais rend l'historique plus opaque et le passage à une nouvelle version majeure du noyau plus difficile.
+
+## 2.2. Repository management
+
+**CodeAurora** repository have multiple tags :
+- `lf-*`
+- `rel_imx_*`
+
+Prefix commit messages used :
+- `MLK` : MCU Linux Kernel
+- `MA` : MCU Android
+- `LFU` : Linux Factory U-boot
+- `LF` : Linux Factory
+- `MMFMWK` : MultiMedia Framework (guessing on the meaning of FMWK)
+- `MGS` : MCU GPU
+
+> Those informations were retrieved from this thread : [Linux v5.10 for i.MX8 development][thread-yocto-codeaurora-repo-details]
+
+<!-- Links -->
+[doc-kernel-releases]: https://www.kernel.org/releases.html
+[doc-kernel-dev-process]: https://www.kernel.org/doc/Documentation/development-process/2.Process
+
+[repo-kernel-mainline]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/
+[repo-kernel-stable]: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
+
+[thread-so-why-repo-tags-are-different]: https://stackoverflow.com/questions/18557690/why-kernel-repositories-tags-are-different
+[thread-yocto-codeaurora-repo-details]: https://lists.yoctoproject.org/g/meta-freescale/topic/linux_v5_10_for_i_mx8/85752797
