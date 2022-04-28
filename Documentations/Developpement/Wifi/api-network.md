@@ -68,16 +68,28 @@ Une adresse statique est affectée pour un réseau (comme sous linux), cela n'af
 
 ## API système
 
-- Windows : [WlanAPI](https://docs.microsoft.com/fr-fr/windows/win32/nativewifi/native-wifi-functions?redirectedfrom=MSDN)
-- Mac OSX : [CoreWlan](https://developer.apple.com/documentation/corewlan?language=objc)
-- Linux : DBus
+- Windows : 
+  - [WlanAPI][wlanapi] : Permet le contrôle des réseaux wifi (scan, connexion, déconnexion, création profil, etc...) 
+  - [IpHelperAPI][iphelperapi] : Permet d'obtenir le contrôle des cartes réseaux (ou interfaces) installées (adresse MAC, compatible IpV4/IpV6, etc...) 
+- Mac OSX : 
+  - [CoreWlan][corewlan] : Permet d'obtenir le contôle des cartes réseaux installées et de gérer les réseaux wifi
+- Linux : 
+  - DBus
   
 ## Solution existante
 
-Une API a été créée dans le but de gérer les actions relatives au WIFI (scanner les réseaux, se connecter à un réseau connu/inconnu, etc...). Cette API a pour but d'utiliser les API systèmes sans se soucier du système sur lequel l'on tourne, l'API est compatible :
+Une API a été créée dans le but de gérer les actions relatives au WIFI (obtenir les propriétés des interfaces réseaux, scanner les réseaux, se connecter à un réseau connu/inconnu, etc...). Cette API a pour but d'utiliser les API systèmes sans se soucier du système sur lequel l'on tourne, l'API est compatible :
 - Windows
 - Mac OSX (prévu, non développée pour le moment)
 - Linux (prévu, non dévéloppée pour le moment)
 
-L'API est disponible à l'adresse suivante : https://github.com/BOREA-DENTAL/API-Wifi  
+L'API est disponible sous le nom [wlan-manager][repo-wlan-manager].   
 Elle possède des dépendances au framework Qt (notammement pour son système de signal/slot).
+
+<!-- Borea links -->
+[repo-wlan-manager]: https://github.com/BOREA-DENTAL/WlanManager-library
+
+<!-- External links -->
+[wlanapi]: https://docs.microsoft.com/fr-fr/windows/win32/nativewifi/native-wifi-functions?redirectedfrom=MSDN
+[iphelperapi]: https://docs.microsoft.com/fr-fr/windows-hardware/drivers/network/ip-helper
+[corewlan]: https://developer.apple.com/documentation/corewlan?language=objc
