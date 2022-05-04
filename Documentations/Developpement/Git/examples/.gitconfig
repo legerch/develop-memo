@@ -1,0 +1,15 @@
+[user]
+	email = c.leger@borea-dental.com
+	name = Leger Charlie
+	signingKey = ""
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.office365.com
+	smtpuser = c.leger@borea-dental.com
+	smtpserverport = 587
