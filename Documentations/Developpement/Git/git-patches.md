@@ -1,9 +1,16 @@
-Dans ce documentation seront décris toutes les procédures liées à la gestion de patch.
+Dans ce document seront décrit toutes les procédures liées à la gestion de patch.
 
 **Sommaire :**
+- [1. Management](#1-management)
+  - [1.1. Générer un patch](#11-générer-un-patch)
+  - [1.2. Appliquer un patch](#12-appliquer-un-patch)
+- [2. Contribuer à un projet open-source](#2-contribuer-à-un-projet-open-source)
+  - [2.1. Configuration Git](#21-configuration-git)
+  - [2.2. Projets](#22-projets)
+- [3. Ressources](#3-ressources)
 
-# Management
-## Générer un patch
+# 1. Management
+## 1.1. Générer un patch
 
 - Générer un patch pour chaque commit depuis le commit <SHA1> spécifié (non inclus) :
 ```shell
@@ -31,7 +38,7 @@ https://github.com/foo/bar/commit/${SHA}.patch
 ```
 > Reference : [StackOverflow - How to download a single commit from Github][thread-so-dl-patch-github]
 
-## Appliquer un patch
+## 1.2. Appliquer un patch
 
 - Appliquer un patch à un dépôt _Git_ :
 ```shell
@@ -53,11 +60,11 @@ fi
 > L'option `--dry-run` permet d'effectuer la commande sans les appliquer, elle simule l'action.    
 > `patch` documentation : [man patch][man-patch]
 
-# Contribuer à un projet open-source
+# 2. Contribuer à un projet open-source
 
 Les projets open-source utilisent ce que l'on appelle une _mailing list_ qui permet de mettre les développeurs du projet en relation, leur permettant de procéder à une _review_ du ou des patchs proposés.
 
-## Configuration Git
+## 2.1. Configuration Git
 
 Pour pouvoir _contribuer_ à un projet, il est nécessaire que _Git_ soit correctement configuré pour pouvoir envoyer les patchs par email.
 > **Note :** Pour voir la configuration actuelle de Git, on peux afficher son fichier de configuration :
@@ -67,7 +74,7 @@ Pour pouvoir _contribuer_ à un projet, il est nécessaire que _Git_ soit correc
     ```shell
     git send-email --help
     ```
-    
+
 2. Installer l'extension si la commande n'est pas reconnue
     - **Ubuntu** :
     ```shell
@@ -102,12 +109,12 @@ Pour pouvoir _contribuer_ à un projet, il est nécessaire que _Git_ soit correc
     git send-email --to destination@address.com outgoing/*  # Will sent all patches of directory "outgoing"
     ```
 
-## Projets
+## 2.2. Projets
 
 - [Buildroot][br-contribute]
 - [Linux][linux-contribute]
 
-# Ressources
+# 3. Ressources
 
 - Git :
   - [format-patch][doc-git-format-patch]
