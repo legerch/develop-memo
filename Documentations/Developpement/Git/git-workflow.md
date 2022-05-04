@@ -73,3 +73,7 @@ Il est nécessaire par la suite de générer à nouveau les patchs avec la comma
 # Manage private custom repository
 
 a dev : https://stackoverflow.com/questions/5181845/git-push-existing-repo-to-a-new-and-different-remote-repo-server
+
+<!-- External links -->
+[thread-so-how-to-manage-open-source-projects-patches-which-cant-push-to-upstream]: https://stackoverflow.com/questions/17630970/how-to-manage-the-open-source-projects-patches-which-cant-push-to-upstream
+[thread-so-when-applying-a-patch-is-there-any-way-to-resolve-conflicts]: https://stackoverflow.com/questions/16190387/when-applying-a-patch-is-there-any-way-to-resolve-conflicts

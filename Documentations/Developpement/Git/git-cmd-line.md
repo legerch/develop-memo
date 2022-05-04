@@ -213,3 +213,6 @@ Plusieurs projets de GIT UI ont également vu le jour pour fonctionner avec le t
 
 [tutorial-linuxize-rename-branch]: https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
 [tutorial-medium-edit-commit]: https://medium.com/just-tech-it-now/git-commit-fixup-corriger-editer-un-commit-simplement-dd6c7d9026cd
+[tutorial-git-overwriting-master-with-another-branch]: https://knasmueller.net/git-overwriting-master-with-another-branch
+
+[thread-so-print-commit-message-of-a-given-commit]: https://stackoverflow.com/questions/3357280/print-commit-message-of-a-given-commit-in-git
