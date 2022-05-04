@@ -54,7 +54,7 @@ sudo apt purge --autoremove <package_name>
 ## 2.1. Standard
 
 ```shell
-sudo apt install build-essential git tree
+sudo apt install build-essential git git-email tree
 ```
 
 ## 2.2. Terminal
