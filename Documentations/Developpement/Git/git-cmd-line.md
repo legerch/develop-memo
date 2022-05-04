@@ -2,9 +2,8 @@
 - [1. Git command-line](#1-git-command-line)
   - [1.1. Général](#11-général)
   - [1.2. Merge](#12-merge)
-  - [1.3. Patch](#13-patch)
-  - [1.4. Réecriture de l'historique](#14-réecriture-de-lhistorique)
-    - [1.4.1. Modifier le contenu d'un commit](#141-modifier-le-contenu-dun-commit)
+  - [1.3. Réecriture de l'historique](#13-réecriture-de-lhistorique)
+    - [1.3.1. Modifier le contenu d'un commit](#131-modifier-le-contenu-dun-commit)
 - [2. Git UI](#2-git-ui)
   - [2.1. Real UI](#21-real-ui)
   - [2.2. Terminal UI](#22-terminal-ui)
@@ -116,55 +115,8 @@ git merge develop
 ```
 > The resulting master should now contain the contents of your previous develop and ignore all changes in master.
 
-## 1.3. Patch
-
-https://stackoverflow.com/questions/2249852/how-to-apply-a-patch-generated-with-git-format-patch/50329788
-(git apply applies changes as a patch, not as a commit, while git am assumes that the text of the email is the commit message (with some exceptions) and applies changes creating a commit (and it can try to resolve conflicts with 3-way merge with git am --3way)
-
-- Générer un patch pour chaque commit depuis le commit <SHA1> spécifié (non inclus) :
-```shell
-# Patch will be generated in current directory
-git format-patch <SHA1>
-
-# Path will be generated in directory "tmp-patch"
-git format-patch -o tmp-patch/ <SHA1> 
-```
-
-- Générer un patch pour un commit spécifique :
-```shell
-git format-patch -1 <SHA1>
-```
-
-- Générer un patch depuis un commit _Github_ :
-Ajouter `.patch` (ou `.diff`) à l'URL du commit permet de le formatter :
-```shell
-https://github.com/foo/bar/commit/${SHA}.patch
-```
-> Reference : [StackOverflow - How to download a single commit from Github][thread-so-dl-patch-github]
-
-- Appliquer un patch à un dépôt GIT :
-```shell
-git am <my-patch.patch>
-git am path/*.patch
-```
-> Better to use `git am -3` to perform 3-way merge
-
-- Vérifier si un patch n'a pas déjà été appliqué : 
-```shell
-# If we could reverse the patch, then it has already been applied; skip it
-if patch --dry-run --reverse --force < patchfiles/foo.patch >/dev/null 2>&1; then
-  echo "Patch already applied - skipping."
-else # patch not yet applied
-  echo "Patching..."
-  patch -Ns < patchfiles/foo.patch || echo "Patch failed" >&2 && exit 1
-fi
-```
-> L'option `--dry-run` permet d'effectuer la commande sans les appliquer, elle simule l'action.    
-> `patch` documentation : [man patch][man-patch]
-
-
-## 1.4. Réecriture de l'historique
-### 1.4.1. Modifier le contenu d'un commit
+## 1.3. Réecriture de l'historique
+### 1.3.1. Modifier le contenu d'un commit
 
 Il peut parfois être utile de modifier un commit alors que d'autres commits ont été créé depuis (gestion de patchs par exemple, pour éviter les patchs qui corrigent les patchs...).  
 > Le principal est résumé ci-dessous, pour un tutoriel plus complet, voir [Medium - Git Commit Fixup, ou comment garder un historique propre][tutorial-medium-edit-commit]  
@@ -258,10 +210,6 @@ Plusieurs projets de GIT UI ont également vu le jour pour fonctionner avec le t
 [git-ui-gitcola]: https://git-cola.github.io/downloads.html
 [git-tui-lazygit]: https://github.com/jesseduffield/lazygit
 [git-tui-gitui]: https://github.com/extrawurst/gitui
-
-[man-patch]: https://man7.org/linux/man-pages/man1/patch.1.html
-
-[thread-so-dl-patch-github]: https://stackoverflow.com/questions/21903805/how-to-download-a-single-commit-diff-from-github
 
 [tutorial-linuxize-rename-branch]: https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
 [tutorial-medium-edit-commit]: https://medium.com/just-tech-it-now/git-commit-fixup-corriger-editer-un-commit-simplement-dd6c7d9026cd
