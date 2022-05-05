@@ -2,6 +2,9 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
 
 **Table of contents :**
 - [1. Mandatory commands](#1-mandatory-commands)
+  - [1.1. Apt manager](#11-apt-manager)
+  - [1.2. Snap](#12-snap)
+  - [1.3. Flatpak](#13-flatpak)
 - [2. Developer tools](#2-developer-tools)
   - [2.1. Standard](#21-standard)
   - [2.2. Terminal](#22-terminal)
@@ -38,6 +41,7 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
 
 # 1. Mandatory commands
 
+## 1.1. Apt manager
 - Update your system :
 ```shell
 sudo apt update
@@ -50,12 +54,59 @@ sudo apt install <package_name>
 sudo apt purge --autoremove <package_name>
 ```
 
+## 1.2. Snap
+
+List of available package can be found at [snapcraft repositories][snapcraft-repositories].  
+Official documentation can be found at [snapcraft documentation][snapcraft-documentation].  
+
+- Update all packages :
+```shell
+sudo snap refresh
+```
+
+- Revert to a previous snap version package :
+```shell
+sudo snap revert <package_name>
+```
+
+- Install/uninstall package :
+```shell
+sudo snap install <package_name>
+sudo snap remove <package_name>
+```
+
+- List installed packages :
+```shell
+snap list
+```
+
+## 1.3. Flatpak
+
+Official documentation can be found at [flatpak documentation][flatpak-documentation].  
+One main flatpak repository is [flathub][flatpak-repositories]
+
+- Update all packages :
+```shell
+flatpak update
+```
+
+- Install/uninstall package :
+```shell
+flatpak install <package_name>
+```
+
+- List installed packages :
+```shell
+flatpak list --app
+```
+
 # 2. Developer tools
 ## 2.1. Standard
 
 ```shell
 sudo apt install build-essential git git-email tree
 ```
+> If you intend to contribute to mainline project, use a git editor which allow to follow 50/72 rule (see [git commit message][doc-git-commit-message] for more details) : [GNOME Commit][git-app-commit] is a usefool tool to do it !
 
 ## 2.2. Terminal
 
@@ -281,6 +332,7 @@ Useful properties :
 [anchor-dev-tools-std]: #21-standard
 
 <!-- Links of this repository -->
+[doc-git-commit-message]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Git/git-cmd-line.md
 [doc-qt]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Qt
 [doc-vscode]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode
 
@@ -288,19 +340,25 @@ Useful properties :
 [br-getting-started]: https://buildroot.org/downloads/manual/manual.html#_getting_started
 [br-requirements]: https://buildroot.org/downloads/manual/manual.html#requirement
 
+[copyq-official]: https://hluk.github.io/CopyQ/
+[dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
+[git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
+[gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
+
+[flatpak-documentation]: https://docs.flatpak.org/en/latest/using-flatpak.html
+[flatpak-repositories]: https://flathub.org/home
+
 [kernel-index]: https://www.kernel.org/doc/html/v5.15/index.html
 [kernel-requirements]: https://www.kernel.org/doc/html/v5.15/process/changes.html#minimal-requirements-to-compile-the-kernel
-
-[theme-gedit-dracula]: https://draculatheme.com/gedit
-
-[copyq-official]: https://hluk.github.io/CopyQ/
-[gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
 
 [minicom-write-failure-thread-askubuntu]: https://askubuntu.com/questions/638378/minicom-doesnt-work
 [minicom-write-failure-tutorial]: https://www.centennialsoftwaresolutions.com/post/configure-minicom-for-a-usb-to-serial-converter
 [minicom-color-option-thread-debianorg]: https://lists.debian.org/debian-user/1996/10/msg00239.html
 [minicom-send-file]: https://unix.stackexchange.com/questions/273178/file-transfer-using-ymodem-sz
 
-[dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
 [opengl]: https://doc.ubuntu-fr.org/opengl
+
+[snapcraft-repositories]: https://snapcraft.io/
+[snapcraft-documentation]: https://snapcraft.io/docs
+[theme-gedit-dracula]: https://draculatheme.com/gedit
 
