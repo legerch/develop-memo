@@ -13,3 +13,5 @@
 	smtpserver = smtp.office365.com
 	smtpuser = c.leger@borea-dental.com
 	smtpserverport = 587
+[core]
+	editor = flatpak run --file-forwarding re.sonny.Commit @@
