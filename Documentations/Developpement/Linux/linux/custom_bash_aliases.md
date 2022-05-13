@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-35-generic - 17/03/2022 :
+Save from : charlie-B660M - Ubuntu 21.10 - Kernel 5.13.0-41-generic - 13/05/2022 :
 
 ```shell
 ##
@@ -93,7 +93,9 @@ function generate-project-documentation()
 ##
 
 # To perform host updates
-alias maj='sudo apt update && sudo apt full-upgrade'
+alias maj-apt='sudo apt update && sudo apt full-upgrade'
+alias maj-snap='sudo snap refresh'
+alias maj-flatpak='flatpak update'
 
 # In order to "disallow" some commands (It is use for my embedded target and I don't want to perform them on my host machine)
 alias poweroff='printf "I m not gonna do that !\n"'
@@ -155,7 +157,6 @@ alias doc-rplib='generate-project-documentation /home/charlie/Documents/workspac
 alias cobra-uart='sudo minicom -D /dev/ttyUSB0 -b 115200'
 
 # Launch SSH session of Cobra
-alias cobra-ssh-ciele='ssh ciele@192.168.0.5'
 alias cobra-ssh-root='ssh root@192.168.0.5'
 
 # Generate new ssh key with Cobra device
