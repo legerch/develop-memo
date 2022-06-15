@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04 LTS - Kernel 5.15.0-35-generic - 07/06/2022 :
+Save from : charlie-B660M - Ubuntu 22.04 LTS - Kernel 5.15.0-37-generic - 15/06/2022 :
 
 ```shell
 ##
@@ -88,6 +88,38 @@ function generate-project-documentation()
     cd ${OLDPWD}
 }
 
+# Function used to update host firmwares
+function update-host-fw()
+{
+    local doUpdateFw=0
+
+    # Refresh list of host devices
+    fwupdmgr refresh
+
+    # Check available firmware updates
+    fwupdmgr get-updates
+
+    # Ask user before proceed to FW update
+    read -p "Do you want to update host firmware ? (yes/no) " userInput
+
+    case "${userInput}" in 
+        yes)
+            doUpdateFw=1
+            ;;
+
+        *)
+            doUpdateFw=0
+            ;;
+    esac
+
+    if [ ${doUpdateFw} -eq 1 ]; then
+        printf "Host firmware will be updated...\n"
+        fwupdmgr update
+    else
+        printf "No firmware update have been performed\n"
+    fi
+}
+
 ##
 # Host specific aliases
 ##
@@ -96,6 +128,7 @@ function generate-project-documentation()
 alias maj-apt='sudo apt update && sudo apt full-upgrade'
 alias maj-snap='sudo snap refresh'
 alias maj-flatpak='flatpak update'
+alias maj-firmware='update-host-fw'
 
 # In order to "disallow" some commands (It is use for my embedded target and I don't want to perform them on my host machine)
 alias poweroff='printf "I m not gonna do that !\n"'
