@@ -5,6 +5,7 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [1.1. Apt manager](#11-apt-manager)
   - [1.2. Snap](#12-snap)
   - [1.3. Flatpak](#13-flatpak)
+  - [1.4. Firmware update](#14-firmware-update)
 - [2. Developer tools](#2-developer-tools)
   - [2.1. Standard](#21-standard)
   - [2.2. Terminal](#22-terminal)
@@ -99,6 +100,35 @@ flatpak install <package_name>
 ```shell
 flatpak list --app
 ```
+
+## 1.4. Firmware update
+
+Host firmware can be updated too (bios, device firmware, etc...).  
+This is possible thanks to [Linux Vendor Firmware Service][lvfs-official] which is a secure portal which allows hardware vendors to upload firmware.
+
+In order to update host firmware, _firmware update daemon_ must be installed :
+```shell
+sudo apt install fwupd
+```
+> _fwupd_ versions are also available through **Snap** and **Flatpack**
+
+- Display supported devices :
+```shell
+fwupdmgr get-devices
+```
+
+- Update firmwares of supported devices :
+```shell
+fwupdmgr refresh        # This option will download the latest metadata from LVFS
+fwupdmgr get-updates    # This option will display the available updates for any devices on the system
+
+fwupdmgr update         # This option download and apply all updates for your system
+```
+> Tutorials used to write this section :
+> - [lvfs-official]
+> - [lvfs-repository]
+> - [lvfs-ubuntu]
+> - [lvfs-tutorial-linoxide]
 
 # 2. Developer tools
 ## 2.1. Standard
@@ -347,6 +377,11 @@ Useful properties :
 
 [flatpak-documentation]: https://docs.flatpak.org/en/latest/using-flatpak.html
 [flatpak-repositories]: https://flathub.org/home
+
+[lvfs-official]: https://fwupd.org/
+[lvfs-repository]: https://github.com/fwupd/fwupd
+[lvfs-ubuntu]: https://doc.ubuntu-fr.org/lvfs
+[lvfs-tutorial-linoxide]: https://linoxide.com/how-to-update-firmware-on-ubuntu-using-fwupd/
 
 [kernel-index]: https://www.kernel.org/doc/html/v5.15/index.html
 [kernel-requirements]: https://www.kernel.org/doc/html/v5.15/process/changes.html#minimal-requirements-to-compile-the-kernel
