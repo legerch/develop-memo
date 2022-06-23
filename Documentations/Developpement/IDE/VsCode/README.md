@@ -90,6 +90,7 @@ _Visual Studio Code_ allow usage of plugin, list of useful plugins and somes ass
   - `Mardown/extension/print/Img To Base64` : Can be useful to include images directly into `.html` files to get ride of the `images` folder when generate `.html`
 - [Todo Tree][plugin-todo-tree]
 - [Vscode-icons][plugin-vscode-icons]
+- [Color Highlight][plugin-color-highlight]
 - [Embedded Linux Kernel Dev][plugin-kernel-dev]: Useful to support _device-tree_ files and to find associated documentation (bindings and drivers). Be careful, this extension have dependencies packages, check `README` of it to install them !
 
 # 4. Snippets
@@ -137,6 +138,7 @@ In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** 
 [plugin-back-forth]: https://marketplace.visualstudio.com/items?itemName=nick-rudenko.back-n-forth
 [plugin-c-cpp]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
 [plugin-changelog]: https://marketplace.visualstudio.com/items?itemName=RLNT.keep-a-changelog
+[plugin-color-highlight]: https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight
 [plugin-doxygen]: https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen
 [plugin-kernel-dev]: https://marketplace.visualstudio.com/items?itemName=microhobby.linuxkerneldev
 [plugin-markdown]: https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
