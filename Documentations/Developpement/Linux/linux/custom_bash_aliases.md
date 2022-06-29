@@ -155,8 +155,10 @@ alias workspace-appimage='cd /home/charlie/Téléchargements/app-image'
 alias snippet-copy-c='cp ~/.config/Code/User/snippets/c.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
 alias snippet-copy-sh='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json'
 
-# Use as a memo to load library into env variables
+# Used as a memo to load library into env variables
 alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_error/bin:../bin\n"'
+# Memo used to remain how to remove last line of a file
+alias memo-remove-last-line='printf "sed -i \"$ d\" file.txt\n"'
 # Memo used to know how to use raw2rgbpnm (https://git.retiisi.org.uk/?p=~sailus/raw2rgbpnm.git)
 alias memo-raw2rgbpnm='printf "raw2rgbpnm -s 1288x968 -f SGRBG10 frame-000000.bin frame-000000.ppm\n"'
 # Memo on how to use yavta (https://git.ideasonboard.org/?p=yavta.git;a=summary)
