@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04 LTS - Kernel 5.15.0-37-generic - 15/06/2022 :
+Save from : charlie-B660M - Ubuntu 22.04 LTS - Kernel 5.15.0-40-generic - 29/06/2022 :
 
 ```shell
 ##
@@ -152,8 +152,10 @@ alias workspace-vscode='cd /home/charlie/Documents/workspaces/workspace-vscode'
 alias workspace-appimage='cd /home/charlie/Téléchargements/app-image'
 
 # Copy VsCode snippets to documentation folder
-alias snippet-copy-c='cp ~/.config/Code/User/snippets/c.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
-alias snippet-copy-sh='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json'
+alias snippet-c-export='cp ~/.config/Code/User/snippets/c.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json'
+alias snippet-c-import='cp ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json ~/.config/Code/User/snippets/c.json'
+alias snippet-sh-export='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json'
+alias snippet-sh-import='cp ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json ~/.config/Code/User/snippets/shellscript.json'
 
 # Used as a memo to load library into env variables
 alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_error/bin:../bin\n"'
