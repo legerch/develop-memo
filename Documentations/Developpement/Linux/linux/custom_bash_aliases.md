@@ -143,6 +143,7 @@ alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
 # Valgrind commands
 alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes'
 alias vg-helgrind='valgrind --tool=helgrind'
+alias memo-vg-memcheck='printf "valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes\n"'
 
 # Go to worspaces
 alias workspace-qt='cd /home/charlie/Documents/workspaces/workspace-qt'
