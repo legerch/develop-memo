@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04 LTS - Kernel 5.15.0-40-generic - 29/06/2022 :
+Save from : charlie-B660M - Ubuntu 22.04 LTS - Kernel 5.15.0-40-generic - 12/07/2022 :
 
 ```shell
 ##
@@ -171,7 +171,8 @@ alias memo-yavta='printf "yavta -f SGRBG16 -s 648x648 -c8 -F/tmp/frame-#.bin /de
 alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md && printf "Done !\n"'
 
 # Use to manage "bash_aliases" file
-alias bash-aliases-edit='vi ~/.bash_aliases'
+alias bash-aliases-edit-vi='vi ~/.bash_aliases'
+alias bash-aliases-edit-vscode='code ~/.bash_aliases'
 alias bash-aliases-reload='source ~/.bash_aliases && printf "Done !\n"'
 
 # Create alias for gitui program, which doesn't yet have a proper system installation, so we use binaries (https://github.com/extrawurst/gitui)
