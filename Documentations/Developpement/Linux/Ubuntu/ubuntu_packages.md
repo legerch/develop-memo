@@ -21,6 +21,7 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [2.7. CTRL-C memory](#27-ctrl-c-memory)
   - [2.8. Charts tools](#28-charts-tools)
   - [2.9. Color picker](#29-color-picker)
+  - [2.10. Arduino development](#210-arduino-development)
 - [3. Buildroot/kernels requirements](#3-buildrootkernels-requirements)
   - [3.1. Mandatory packages](#31-mandatory-packages)
   - [3.2. Optional packages](#32-optional-packages)
@@ -230,6 +231,10 @@ sudo snap install drawio
 sudo snap install color-picker
 ```
 
+## 2.10. Arduino development
+
+See [Doc - Arduino development][doc-arduino] for more details.
+
 # 3. Buildroot/kernels requirements
 
 In order to use [Buildroot][br-getting-started] framework to build _custom Linux OS_ and to compile [Linux kernel][kernel-index], some packages are needed.  
@@ -362,6 +367,7 @@ Useful properties :
 [anchor-dev-tools-std]: #21-standard
 
 <!-- Links of this repository -->
+[doc-arduino]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Arduino
 [doc-git-commit-message]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Git/git-cmd-line.md
 [doc-qt]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Qt
 [doc-vscode]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode
