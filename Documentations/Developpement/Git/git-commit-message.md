@@ -48,7 +48,7 @@ git commit -a
 
 ## 2.2. External apps
 
-Please refer to [list of apps][doc-ubuntu-packages] to get list of usefool tool for this behaviour.
+Please refer to [list of apps][doc-ubuntu-packages-git-ui] to get list of usefool tool for this behaviour.
 
 # 3. Ressources
 
@@ -64,6 +64,7 @@ Please refer to [list of apps][doc-ubuntu-packages] to get list of usefool tool 
 
 <!-- Links of this repository -->
 [doc-ubuntu-packages]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Linux/Ubuntu/ubuntu_packages.md
+[doc-ubuntu-packages-git-ui]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Linux/Ubuntu/ubuntu_packages.md#5-git-ui
 
 <!-- External links -->
 [git-rule-blog1]: https://cbea.ms/git-commit/

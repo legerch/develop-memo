@@ -31,6 +31,8 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [4.3. Gedit](#43-gedit)
   - [4.4. Vi](#44-vi)
 - [5. Git UI](#5-git-ui)
+  - [5.1. Generic](#51-generic)
+  - [5.2. Compatibe 50/72 rule](#52-compatibe-5072-rule)
 - [6. System management](#6-system-management)
 - [7. Networking tools](#7-networking-tools)
 - [8. Emails](#8-emails)
@@ -137,7 +139,7 @@ fwupdmgr update         # This option download and apply all updates for your sy
 ```shell
 sudo apt install build-essential git git-email tree
 ```
-> If you intend to contribute to mainline project, use a git editor which allow to follow 50/72 rule (see [git commit message][doc-git-commit-message] for more details) : [GNOME Commit][git-app-commit] is a usefool tool to do it !
+> If you intend to contribute to mainline project, use a git editor which allow to follow 50/72 rule (see [git editor compatible with 50/72 rule][anchor-git-ui-50-72]
 
 ## 2.2. Terminal
 
@@ -284,8 +286,14 @@ sudo apt install vim
 > **Note :** Command to use will still be `vi mydoc-to-edit.txt`.
 
 # 5. Git UI
+## 5.1. Generic
 
 - [GitKraken][gitkraken-doc-install]
+
+## 5.2. Compatibe 50/72 rule
+
+To get more infomations about **50/72 rule**, see [git commit message][doc-git-commit-message].
+- [GNOME Commit][git-app-commit]
 
 # 6. System management
 
@@ -365,10 +373,12 @@ Useful properties :
 
 <!-- Anchor of this page -->
 [anchor-dev-tools-std]: #21-standard
+[anchor-git-ui]: #5-git-ui
+[anchor-git-ui-50-72]: #52-compatibe-5072-rule
 
 <!-- Links of this repository -->
 [doc-arduino]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Arduino
-[doc-git-commit-message]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Git/git-cmd-line.md
+[doc-git-commit-message]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Git/git-commit-message.md
 [doc-qt]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Qt
 [doc-vscode]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode
 
