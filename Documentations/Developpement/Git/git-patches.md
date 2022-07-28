@@ -17,6 +17,9 @@ Dans ce document seront décrit toutes les procédures liées à la gestion de p
 # Patch will be generated in current directory
 git format-patch <SHA1>
 
+# Patch will be numbered by starting at 500 instead of 1
+git format-patch --start-number 500 <SHA1>
+
 # Patch will be generated in directory "outgoing"
 git format-patch -o outgoing/ <SHA1>
 
