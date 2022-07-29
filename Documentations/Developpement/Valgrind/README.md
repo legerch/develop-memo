@@ -6,6 +6,8 @@
     - [2.1.2. Alias command](#212-alias-command)
     - [2.1.3. Particular case : false-positive](#213-particular-case--false-positive)
       - [2.1.3.1. How to get "suppression file" ?](#2131-how-to-get-suppression-file-)
+        - [2.1.3.1.1. List of existant _suppression file_](#21311-list-of-existant-suppression-file)
+        - [2.1.3.1.2. Generate own _suppression file_](#21312-generate-own-suppression-file)
       - [2.1.3.2. How to apply "suppression file" ?](#2132-how-to-apply-suppression-file-)
   - [2.2. Helgrind](#22-helgrind)
     - [2.2.1. Overview](#221-overview)
@@ -62,12 +64,14 @@ vg-memcheck='valgrind --tool=memcheck --suppressions=supfile1.supp --suppression
 In this section, we gonna used an example, where all files can be found here : [Example - Suppression file](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Valgrind/example-suppression_file)
 
 #### 2.1.3.1. How to get "suppression file" ?
-
-1- Existant _suppresion file_ :
+##### 2.1.3.1.1. List of existant _suppression file_
 Some libraries already have a suppression file :
-- GLib : `/usr/share/glib-2.0/valgrind/glib.supp`  (which is a library used by _GStreamer_ for example)
+- GLib : [glib.supp][vg-sup-file-glib] (also installed in `/usr/share/glib-2.0/valgrind/glib.supp`)
+- GStreamer : [gst.supp][vg-sup-file-gstreamer]
 
-2- Generate own _suppression file_ : be sure that those memory leaks are **REALLY** false-positive !  
+##### 2.1.3.1.2. Generate own _suppression file_
+
+Be sure that those memory leaks are **REALLY** false-positive !  
 Run valgrind as usual, but with the extra option `--gen-suppressions=all`. This tells valgrind to print a suppression after every error it finds.  
 Example output :
 ```shell
@@ -138,6 +142,7 @@ This way, we know fore sure that all thrown errors are neither from `library GLi
 > - https://stackoverflow.com/questions/56218885/how-to-get-rid-of-the-memory-leaks-in-third-party-frameworkgstreamer
 > - https://wiki.wxwidgets.org/Valgrind_Suppression_File_Howto
 > - https://wiki.wxwidgets.org/Parse_valgrind_suppressions.sh
+> - https://developer.ridgerun.com/wiki/index.php?title=How_to_Analyze_GStreamer_with_Valgrind
 
 ## 2.2. Helgrind
 ### 2.2.1. Overview
@@ -175,6 +180,11 @@ This tools can used many options, please refer to [DRD documentation](https://va
   - Valgrind : https://www.cprogramming.com/debugging/valgrind.html
   - Valgrind suppressions files : https://wiki.wxwidgets.org/Valgrind_Suppression_File_Howto
   - Script to manage suppressions files : https://wiki.wxwidgets.org/Parse_valgrind_suppressions.sh
+  - Use Valgrind with GStreamer : https://developer.ridgerun.com/wiki/index.php?title=How_to_Analyze_GStreamer_with_Valgrind
 - Threads forums used to resolves issues :
   - https://stackoverflow.com/questions/2375726/how-do-you-tell-valgrind-to-completely-suppress-a-particular-so-file/4226706#4226706
   - https://stackoverflow.com/questions/56218885/how-to-get-rid-of-the-memory-leaks-in-third-party-frameworkgstreamer
+
+<!-- Links -->
+[vg-sup-file-glib]: https://github.com/GNOME/glib/blob/main/tools/glib.supp
+[vg-sup-file-gstreamer]: https://gitlab.freedesktop.org/gstreamer/common/-/blob/master/gst.supp
