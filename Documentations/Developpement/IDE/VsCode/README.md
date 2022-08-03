@@ -88,10 +88,11 @@ _Visual Studio Code_ allow usage of plugin, list of useful plugins and somes ass
 - [Markdown All in One][plugin-markdown]
   - `Mardown/extension/print/Absolute Img Path` : By default, this setting is enable, disable it to make your `.html` **moveable** when using an `images` folder
   - `Mardown/extension/print/Img To Base64` : Can be useful to include images directly into `.html` files to get ride of the `images` folder when generate `.html`
+- [Markdown emoji][plugin-markdown-emoji] : Use to add support for emoji in markdwon files (see [Github emoji cheat-sheet][github-list-emoji] for available emoji)
 - [Todo Tree][plugin-todo-tree]
 - [Vscode-icons][plugin-vscode-icons]
 - [Color Highlight][plugin-color-highlight]
-- [Embedded Linux Kernel Dev][plugin-kernel-dev]: Useful to support _device-tree_ files and to find associated documentation (bindings and drivers). Be careful, this extension have dependencies packages, check `README` of it to install them !
+- [Embedded Linux Kernel Dev][plugin-kernel-dev] : Useful to support _device-tree_ files and to find associated documentation (bindings and drivers). Be careful, this extension have dependencies packages, check `README` of it to install them !
 
 # 4. Snippets
 
@@ -142,8 +143,11 @@ In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** 
 [plugin-doxygen]: https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen
 [plugin-kernel-dev]: https://marketplace.visualstudio.com/items?itemName=microhobby.linuxkerneldev
 [plugin-markdown]: https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
+[plugin-markdown-emoji]: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji
 [plugin-todo-tree]: https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
 [plugin-vscode-icons]: https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons
+
+[github-list-emoji]: https://github.com/ikatyang/emoji-cheat-sheet
 
 [snippet-generator]: https://snippet-generator.app/
 
