@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04 LTS - Kernel 5.15.0-41-generic - 28/07/2022 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-43-generic - 03/08/2022 :
 
 ```shell
 ##
@@ -210,6 +210,9 @@ alias cobra-build='cd ~/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-B
 alias cobra-bsp='cd ~/Documents/workspaces/workspace-cobra/bsp/'
 alias cobra-kernels='cd ~/Documents/workspaces/workspace-cobra/kernels/'
 alias cobra-releases='cd ~/Téléchargements/ReleasesCobra/'
+
+# Cobra SDK properties
+alias cobra-sdk-gdb-armadeus='/home/charlie/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/05-bsp/02-armadeus-imx8-bsp/01-sdk/aarch64-buildroot_borea-linux-gnu_sdk-buildroot/bin/aarch64-buildroot_borea-linux-gnu-gdb'
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
 alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! queue ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
