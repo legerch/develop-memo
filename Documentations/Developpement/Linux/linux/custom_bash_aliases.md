@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-43-generic - 03/08/2022 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-46-generic - 24/08/2022 :
 
 ```shell
 ##
@@ -130,12 +130,16 @@ alias maj-snap='sudo snap refresh'
 alias maj-flatpak='flatpak update'
 alias maj-firmware='update-host-fw'
 
+# To uninstall a package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/151941/how-can-you-completely-remove-a-package)
+alias apt-uninstall="sudo apt purge --autoremove"
+
+# PPA related commands for easier install/uninstall
+alias ppa-add-repo="sudo add-apt-repository"
+alias ppa-remove-repo="sudo ppa-purge" # Use "ppa-purge" command instead of "add-apt-repository --remove" in order to perform a real clean
+
 # In order to "disallow" some commands (It is use for my embedded target and I don't want to perform them on my host machine)
 alias poweroff='printf "I m not gonna do that !\n"'
 alias reboot='printf "I m not gonna do that !\n"'
-
-# To uninstall a package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/151941/how-can-you-completely-remove-a-package)
-alias apt-uninstall="sudo apt purge --autoremove"
 
 # Get 'sync' command status
 alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
