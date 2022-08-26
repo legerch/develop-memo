@@ -16,6 +16,9 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
       - [2.3.3.1. Fail to write](#2331-fail-to-write)
       - [2.3.3.2. Enable colors output](#2332-enable-colors-output)
   - [2.4. Logs](#24-logs)
+    - [2.4.1. Installation](#241-installation)
+    - [2.4.2. Custom configuration](#242-custom-configuration)
+      - [2.4.2.1. glogg](#2421-glogg)
   - [2.5. File comparaison viewer](#25-file-comparaison-viewer)
   - [2.6. Documentation](#26-documentation)
   - [2.7. CTRL-C memory](#27-ctrl-c-memory)
@@ -200,10 +203,20 @@ To enable color output with _minicom_, you need to use option : `minicom -c on`
 > - [debian.org : color for minicom ?][minicom-color-option-thread-debianorg]
 
 ## 2.4. Logs
-
+### 2.4.1. Installation
 ```shell
 sudo apt install glogg
 ```
+> [glogg][glogg-repository] hasn't been updated since _august 2018_, [klogg][klogg-repository] seems to be a really good fork but doesn't provide any `apt` packaging yet...
+
+### 2.4.2. Custom configuration
+#### 2.4.2.1. glogg
+
+| Description | Filters | Ignore case | Fore Color | Back Color |
+|:-:|:-:|:-:|:-:|:-:|
+| Warnings messages | `.warn` | false | white | orange |
+| Error messages | `.err` | false | white | red |
+| Board is started | `syslog.info syslogd started` | false | black | lime |
 
 ## 2.5. File comparaison viewer
 
@@ -390,6 +403,9 @@ Useful properties :
 [dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
 [git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
 [gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
+
+[glogg-repository]: https://github.com/nickbnf/glogg
+[klogg-repository]: https://github.com/variar/klogg
 
 [flatpak-documentation]: https://docs.flatpak.org/en/latest/using-flatpak.html
 [flatpak-repositories]: https://flathub.org/home
