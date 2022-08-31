@@ -28,16 +28,34 @@
 /* Functions implementation  */
 /*****************************/
 
+/**
+ * \brief Use to initialize an Ascii objec
+ * \details
+ * Constructor only initialize byte to \c 0.
+ */
 Ascii::Ascii()
 {
-    
+    m_byte = 0;
 }
 
+/**
+ * \brief Use to set byte
+ */
 void Ascii::set(int byte)
 {
     m_byte = byte;
 }
 
+/**
+ * \brief Use to write to serial Ascii object at multiple formats
+ * \details
+ * This method will write on serial byte value at multiple formats:
+ * - Raw
+ * - Decimal
+ * - Hexadecimal
+ * - Octal
+ * - Binary
+ */
 void Ascii::toSerial()
 {
     Serial.write(m_byte);
@@ -54,3 +72,7 @@ void Ascii::toSerial()
     Serial.print(", bin: ");
     Serial.println(m_byte, BIN);
 }
+
+/*******************************/
+/* End function implementation */
+/*******************************/

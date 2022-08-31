@@ -1,0 +1,1 @@
+Example Arduino project used to display ASCII characters
