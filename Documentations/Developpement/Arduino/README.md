@@ -7,10 +7,12 @@
   - [2.2. Configure sample project](#22-configure-sample-project)
   - [2.3. Compilation](#23-compilation)
   - [2.4. Upload and run](#24-upload-and-run)
-  - [2.5. Known issues](#25-known-issues)
-    - [2.5.1. Linux - Snap installation](#251-linux---snap-installation)
-      - [2.5.1.1. Cannot find Arduino IDE](#2511-cannot-find-arduino-ide)
-      - [2.5.1.2. Unable to list board](#2512-unable-to-list-board)
+  - [2.5. Manage libraries](#25-manage-libraries)
+  - [2.6. Use multiples sources files and classes](#26-use-multiples-sources-files-and-classes)
+  - [2.7. Known issues](#27-known-issues)
+    - [2.7.1. Linux - Snap installation](#271-linux---snap-installation)
+      - [2.7.1.1. Cannot find Arduino IDE](#2711-cannot-find-arduino-ide)
+      - [2.7.1.2. Unable to list board](#2712-unable-to-list-board)
 
 # 1. Arduino boards
 
@@ -102,11 +104,20 @@ To upload (and run) your sketch, use command `upload`.
 
 Under a _Linux OS_, it may be necessary to proceed to few more steps to be able to upload your sketch to the board, see [Troubleshooting - Fix port access on Linux][arduino-troubleshooting-linux-port-access].
 
-## 2.5. Known issues
-### 2.5.1. Linux - Snap installation
-#### 2.5.1.1. Cannot find Arduino IDE
+## 2.5. Manage libraries
 
-This problem is specific to **snap installation** and **VsCode environment**, it may appears this can of message error: _"Cannot find Arduino IDE. Please specify the 'arduino.path"_ even after [extension configuration][#212-vscode]. To fix this issue, set those parameters in extension parameter:
+_To complete_
+
+## 2.6. Use multiples sources files and classes
+
+In order to use multiple sources files, you need a `src` folder in your project, a project example is available at [Arduino example - Find Ascii][repo-arduino-example-find-ascii].  
+Note than to use _classes_, you need to include `#include <Arduino.h>`.
+
+## 2.7. Known issues
+### 2.7.1. Linux - Snap installation
+#### 2.7.1.1. Cannot find Arduino IDE
+
+This problem is specific to **snap installation** and **VsCode environment**, it may appears this can of message error: _"Cannot find Arduino IDE. Please specify the 'arduino.path"_ even after [extension configuration][anchor-install-vscode]. To fix this issue, set those parameters in extension parameter:
 - **Use Arduino Cli**: `true`
 - **Path**: `/snap/bin/`
 - **Command path**: `arduino-cli`
@@ -121,7 +132,7 @@ Global file `settings.json` must have those entries:
 > **Related issue :** [issue 1346][arduino-vscode-extension-issues-1346]  
 > **Comment used to solve issue:** [issue 1346 - Comment][arduino-vscode-extension-issues-1346-resolve]
 
-#### 2.5.1.2. Unable to list board
+#### 2.7.1.2. Unable to list board
 
 This problem is specific to **snap installation**, it may be issues when listing boards (and sketch upload).  
 Please refer to official documentation of [arduino-cli snap][arduino-cli-snap] which **clearly** explain what to do in this case.
@@ -130,9 +141,10 @@ Once, board list is working in command-line, you may not be able to use it under
 
 <!-- Anchor of this file-->
 [anchor-install-vscode]: #212-vscode
-[anchor-issues-linux-snap]: #251-linux---snap-installation
+[anchor-issues-linux-snap]: #271-linux---snap-installation
 
 <!-- Repository links -->
+[repo-arduino-example-find-ascii]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Arduino/arduino-example-find-ascii
 [repo-ide-vscode]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode
 [repo-linux-bash-aliases-custom]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Linux/linux/custom_bash_aliases.md
 
