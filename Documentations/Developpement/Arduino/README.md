@@ -16,7 +16,7 @@
 
 | Board | Guide | Datasheet | Native Port Serial USB | Programming Port Serial |
 |:-:|:-:|:-:|:-:|:-:|
-| [Arduino Due][arduino-due-store] | [Guide][arduino-due-guide] | [Datasheet][arduino-due-datasheet] | Yes | Yes |
+| [Arduino Due][arduino-due-store] | [Guide (new)][arduino-due-guide-new]<br>[Guide (old)][arduino-due-guide-old] | [Datasheet][arduino-due-datasheet] | Yes | Yes |
 
 # 2. Development
 ## 2.1. Installation
@@ -144,7 +144,8 @@ Once, board list is working in command-line, you may not be able to use it under
 [arduino-cli-snap]: https://snapcraft.io/arduino-cli
 
 [arduino-due-store]: https://store.arduino.cc/arduino-due
-[arduino-due-guide]: https://www.arduino.cc/en/Guide/ArduinoDue
+[arduino-due-guide-new]: https://www.arduino.cc/en/Guide/ArduinoDue
+[arduino-due-guide-old]: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiDl-3QgvH5AhXXwYUKHWd8DlIQFnoECBYQAQ&url=https%3A%2F%2Fwww.arduino.cc%2Fen%2FGuide%2FArduinoDue%2F&usg=AOvVaw2keWTNubni4sdksLhBBk8G]
 [arduino-due-datasheet]: http://www.atmel.com/Images/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf
 
 [arduino-ide]: https://www.arduino.cc/en/software
