@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-46-generic - 24/08/2022 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-46-generic - 31/08/2022 :
 
 ```shell
 ##
@@ -120,6 +120,98 @@ function update-host-fw()
     fi
 }
 
+# Function used to retrieve all arduino-cli informations to proceed to update
+function update-arduino-cli-binary-get-infos-latest()
+{
+    # Find current architecture
+    local hostArch=$(uname -m)
+    case ${hostArch} in
+    armv5*) hostArch="armv5" ;;
+    armv6*) hostArch="ARMv6" ;;
+    armv7*) hostArch="ARMv7" ;;
+    aarch64) hostArch="ARM64" ;;
+    arm64) hostArch="ARM64" ;;
+    x86) hostArch="32bit" ;;
+    x86_64) hostArch="64bit" ;;
+    i686) hostArch="32bit" ;;
+    i386) hostArch="32bit" ;;
+    esac
+
+    # Use the GitHub releases webpage to find the latest version for this project
+    local projectOwner="arduino"
+    local projectName="arduino-cli"
+
+    local versionRegex="[0-9][A-Za-z0-9\.-]*"
+    local latestVersionUrl="https://github.com/${projectOwner}/${projectName}/releases/latest"
+
+    m_arduinoCliLatestVersionTag=$(curl -SsL ${latestVersionUrl} | grep -o "<title>Release ${versionRegex} · ${projectOwner}/${projectName}" | grep -o "${versionRegex}")
+    m_arduinoCliLatestVersionArchive="${projectName}_${m_arduinoCliLatestVersionTag}_Linux_${hostArch}.tar.gz"
+    m_arduinoCliLatestVersionUrl="https://downloads.arduino.cc/${projectName}/${m_arduinoCliLatestVersionArchive}"
+}
+
+# Function used to download latest binary of arduino-cli
+function update-arduino-cli-binary-get-binary()
+{
+    local locationDirTmp="/tmp/"
+    local locationOutTmp="${locationDirTmp}/${m_arduinoCliLatestVersionArchive}"
+
+    local binFile="arduino-cli"
+    local locationDirFinal="/usr/local/bin"
+    local locationOutFinal="${locationDirFinal}/${binFile}"
+
+    printf "Download ${m_arduinoCliLatestVersionUrl}...\n"
+    curl -sL ${m_arduinoCliLatestVersionUrl} -o "${locationOutTmp}"
+    tar -xf ${locationOutTmp} -C ${locationDirTmp}
+
+    printf "Install ${binFile} at \"${locationDirFinal}\"\n"
+    sudo cp "${locationDirTmp}/${binFile}" "${locationOutFinal}"
+    sudo chmod +x "${locationOutFinal}"
+
+    printf "${binFile} ${m_arduinoCliLatestVersionTag} have been installed to ${locationOutFinal}\n"
+}
+
+# Function used to update arduino-cli binary
+function update-arduino-cli-binary()
+{
+    local doUpdateArduinoCli=0
+
+    # Check current version
+    arduino-cli version
+
+    # Check than mandatory tools are available to proceed to update
+    which curl &> /dev/null
+    local curlStatus=$?
+    if [ ${curlStatus} -eq 0 ]; then
+        
+        # Ask user before proceed to FW update
+        read -p "Do you want to update arduino-cli binary ? (yes/no) " userInput
+
+        case "${userInput}" in 
+            yes)
+                doUpdateArduinoCli=1
+                ;;
+
+            *)
+                doUpdateArduinoCli=0
+                ;;
+        esac
+
+        # Display update status perform
+        if [ ${doUpdateArduinoCli} -eq 1 ]; then
+            printf "arduino-cli will be updated...\n"
+            
+            update-arduino-cli-binary-get-infos-latest
+            update-arduino-cli-binary-get-binary
+
+        else
+            printf "No arduino-cli binary update have been performed\n"
+        fi
+        
+    else
+        printf "You need curl as download tool. Please install it first before continuing\n"
+    fi
+}
+
 ##
 # Host specific aliases
 ##
@@ -129,6 +221,7 @@ alias maj-apt='sudo apt update && sudo apt full-upgrade'
 alias maj-snap='sudo snap refresh'
 alias maj-flatpak='flatpak update'
 alias maj-firmware='update-host-fw'
+alias maj-arduino-cli-bin='update-arduino-cli-binary'
 
 # To uninstall a package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/151941/how-can-you-completely-remove-a-package)
 alias apt-uninstall="sudo apt purge --autoremove"
@@ -193,6 +286,7 @@ alias doc-cobra-libs='generate-project-documentation /home/charlie/Documents/wor
 alias doc-cobra-apps='generate-project-documentation /home/charlie/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/04-apps Doxyfile'
 alias doc-rpcompute='generate-project-documentation /home/charlie/Documents/workspaces/workspace-qt/Cobra-AppCommunication/RP_Lib/deps/RP_Compute Doxyfile'
 alias doc-rplib='generate-project-documentation /home/charlie/Documents/workspaces/workspace-qt/Cobra-AppCommunication/RP_Lib Doxyfile'
+alias doc-benchmanager-lib='generate-project-documentation /home/charlie/Documents/workspaces/workspace-qt/BancCalibration-application/BancCalibration-library Doxyfile'
 
 ##
 # Cobra specific aliases
