@@ -81,6 +81,7 @@ List of default keyboard shortcut to changed :
 # 3. Plugins
 
 _Visual Studio Code_ allow usage of plugin, list of useful plugins and somes associated settings :
+- [Arduino][plugin-arduino] (a [tutorial][doc-arduino] is available in this repository)
 - [Back & Forth][plugin-back-forth]
 - [C/C++][plugin-c-cpp]
 - [Doxygen Documentation Generator][plugin-doxygen]
@@ -130,12 +131,14 @@ In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** 
   - [Open files always in a new tab](https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab)
 
 <!-- Links to this repository -->
+[doc-arduino]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Arduino
 [doc-snippets-c]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode/ressources/c.json
 
 <!-- External links -->
 [vscode-official]: https://code.visualstudio.com/
 [vscode-snippets]: https://code.visualstudio.com/docs/editor/userdefinedsnippets
 
+[plugin-arduino]: https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.vscode-arduino
 [plugin-back-forth]: https://marketplace.visualstudio.com/items?itemName=nick-rudenko.back-n-forth
 [plugin-c-cpp]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
 [plugin-changelog]: https://marketplace.visualstudio.com/items?itemName=RLNT.keep-a-changelog
