@@ -4,16 +4,19 @@
   - [2.1. Installation](#21-installation)
     - [2.1.1. Arduino IDE](#211-arduino-ide)
     - [2.1.2. VsCode](#212-vscode)
-  - [2.2. Configure sample project](#22-configure-sample-project)
-  - [2.3. Compilation](#23-compilation)
-  - [2.4. Upload and run](#24-upload-and-run)
-  - [2.5. Manage libraries](#25-manage-libraries)
-  - [2.6. Use multiples sources files and classes](#26-use-multiples-sources-files-and-classes)
-  - [2.7. Documentation](#27-documentation)
-  - [2.8. Known issues](#28-known-issues)
-    - [2.8.1. Linux - Snap installation](#281-linux---snap-installation)
-      - [2.8.1.1. Cannot find Arduino IDE](#2811-cannot-find-arduino-ide)
-      - [2.8.1.2. Unable to list board](#2812-unable-to-list-board)
+  - [2.2. Maintenance](#22-maintenance)
+  - [2.3. Configure sample project](#23-configure-sample-project)
+  - [2.4. Compilation](#24-compilation)
+  - [2.5. Upload and run](#25-upload-and-run)
+  - [2.6. Manage libraries](#26-manage-libraries)
+    - [2.6.1. Arduino-cli](#261-arduino-cli)
+    - [2.6.2. VsCode](#262-vscode)
+  - [2.7. Use multiples sources files and classes](#27-use-multiples-sources-files-and-classes)
+  - [2.8. Documentation](#28-documentation)
+  - [2.9. Known issues](#29-known-issues)
+    - [2.9.1. Linux - Snap installation](#291-linux---snap-installation)
+      - [2.9.1.1. Cannot find Arduino IDE](#2911-cannot-find-arduino-ide)
+      - [2.9.1.2. Unable to list board](#2912-unable-to-list-board)
 
 # 1. Arduino boards
 
@@ -61,7 +64,15 @@ It is also possible to develop for Arduino under [VsCode][repo-ide-vscode]. In o
 4. Restart _VsCode IDE_
 5. Install board toolchain via command panel **Arduino: Board manager**
 
-## 2.2. Configure sample project
+## 2.2. Maintenance
+
+To update all installed _cores_ and _libraries_, you can use:
+```shell
+arduino-cli update  # Refresh indexes of cores and libraries
+arduino-cli upgrade # Proceed to upgrade of all cores and libraries
+```
+
+## 2.3. Configure sample project
 
 Just to verify than we can used Arduino setup, let's start a simple project with [provided built-in examples][arduino-builtin-examples].  
 We choose [blink][arduino-builtin-example-blink] here:
@@ -93,11 +104,11 @@ Under **VsCode**, those settings will be put in `.vscode/arduino.json` file of t
 
 3. Paste _blink_ code into `blink.ino` file.
 
-## 2.3. Compilation
+## 2.4. Compilation
 
 To compile a sketch, use command `verify`
 
-## 2.4. Upload and run
+## 2.5. Upload and run
 
 To upload (and run) your sketch, use command `upload`.
 > **Note:** Some Arduino boards use two USB ports (**Native Port Serial USB** and **Programming Port Serial**).  
@@ -105,16 +116,38 @@ To upload (and run) your sketch, use command `upload`.
 
 Under a _Linux OS_, it may be necessary to proceed to few more steps to be able to upload your sketch to the board, see [Troubleshooting - Fix port access on Linux][arduino-troubleshooting-linux-port-access].
 
-## 2.5. Manage libraries
+## 2.6. Manage libraries
 
-_To complete_
+To manage **Arduino libraries**, please refer to [official libraries documentation][arduino-lib-install-official].  
+All registered libraries are referenced at [Arduino - Libraries references][arduino-lib-references]. 
 
-## 2.6. Use multiples sources files and classes
+### 2.6.1. Arduino-cli
+
+- List installed libraries:
+```shell
+arduino-cli lib list
+```
+
+- Install a library
+```shell
+arduino-cli lib install name_of_library
+```
+
+- Uninstall a library
+```shell
+arduino-cli lib uninstall name_of_library
+```
+
+### 2.6.2. VsCode
+
+To manage libraries under **VsCode**, use command panel **Arduino: Library manager**
+
+## 2.7. Use multiples sources files and classes
 
 In order to use multiple sources files, you need a `src` folder in your project, a project example is available at [Arduino example - Find Ascii][repo-arduino-example-find-ascii].  
 Note than to use _classes_, you need to include `#include <Arduino.h>`.
 
-## 2.7. Documentation
+## 2.8. Documentation
 
 In order to document your **Arduino** project with [Doxygen][doxygen-official] utility, it is needed to configure some others options in order to support `.ino` files :
 - Project :
@@ -127,9 +160,9 @@ Then, `.ino` file must contains tag `\file` at top of the file, otherwise file w
 /** @file sketch_1.ino */
 ```
 
-## 2.8. Known issues
-### 2.8.1. Linux - Snap installation
-#### 2.8.1.1. Cannot find Arduino IDE
+## 2.9. Known issues
+### 2.9.1. Linux - Snap installation
+#### 2.9.1.1. Cannot find Arduino IDE
 
 This problem is specific to **snap installation** and **VsCode environment**, it may appears this can of message error: _"Cannot find Arduino IDE. Please specify the 'arduino.path"_ even after [extension configuration][anchor-install-vscode]. To fix this issue, set those parameters in extension parameter:
 - **Use Arduino Cli**: `true`
@@ -146,7 +179,7 @@ Global file `settings.json` must have those entries:
 > **Related issue :** [issue 1346][arduino-vscode-extension-issues-1346]  
 > **Comment used to solve issue:** [issue 1346 - Comment][arduino-vscode-extension-issues-1346-resolve]
 
-#### 2.8.1.2. Unable to list board
+#### 2.9.1.2. Unable to list board
 
 This problem is specific to **snap installation**, it may be issues when listing boards (and sketch upload).  
 Please refer to official documentation of [arduino-cli snap][arduino-cli-snap] which **clearly** explain what to do in this case.
@@ -155,7 +188,7 @@ Once, board list is working in command-line, you may not be able to use it under
 
 <!-- Anchor of this file-->
 [anchor-install-vscode]: #212-vscode
-[anchor-issues-linux-snap]: #281-linux---snap-installation
+[anchor-issues-linux-snap]: #291-linux---snap-installation
 
 <!-- Repository links -->
 [repo-arduino-example-find-ascii]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Arduino/arduino-example-find-ascii
@@ -175,6 +208,9 @@ Once, board list is working in command-line, you may not be able to use it under
 [arduino-due-datasheet]: http://www.atmel.com/Images/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf
 
 [arduino-ide]: https://www.arduino.cc/en/software
+
+[arduino-lib-install-official]: https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries
+[arduino-lib-references]: https://www.arduino.cc/reference/en/libraries/
 
 [arduino-troubleshooting-linux-port-access]: https://support.arduino.cc/hc/en-us/articles/360016495679-Fix-port-access-on-Linux
 
