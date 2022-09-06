@@ -270,6 +270,7 @@ sudo apt install jfsutils flex bison util-linux reiserfsprogs xfsprogs btrfs-pro
 - Buildroot GUI with _ncurses5_ : `sudo apt install libncurses-dev`
 - Buildroot GUI with _qt_ : `sudo apt install qtbase5-dev`
 - Buildroot GUI with _gtk_ : `sudo apt install libglade2-dev libglib2.0-dev libgtk2.0-dev`
+> Note than `buildroot GUI` is `KConfig` which is also used in others projects: kernel, busybox, u-boot, etc...
 
 # 4. Edition tools
 ## 4.1. Qt
@@ -321,6 +322,7 @@ sudo apt install y-ppa-manager # a PPA exist for this package
 sudo apt install net-tools libpcap-dev libnet1-dev rpcbind openssh-client openssh-server nmap
 sudo apt install wireshark
 sudo apt install filezilla
+sudo apt install iperf3
 ```
 
 # 8. Emails
