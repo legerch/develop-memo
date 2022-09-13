@@ -242,6 +242,12 @@ sudo snap install drawio
 
 ## 2.9. Color picker
 
+- [eyedropper][eyedropper-repository] :
+```shell
+flatpak install flathub com.github.finefindus.eyedropper
+```
+
+- [ColorPicker][colorpicker-repository] :
 ```shell
 sudo snap install color-picker
 ```
@@ -402,7 +408,9 @@ Useful properties :
 [br-requirements]: https://buildroot.org/downloads/manual/manual.html#requirement
 
 [copyq-official]: https://hluk.github.io/CopyQ/
+[colorpicker-repository]: https://github.com/keshavbhatt/ColorPicker
 [dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
+[eyedropper-repository]: https://github.com/FineFindus/eyedropper
 [git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
 [gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
 
