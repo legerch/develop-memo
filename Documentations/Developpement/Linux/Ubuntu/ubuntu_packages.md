@@ -79,7 +79,7 @@ sudo snap revert <package_name>
 - Install/uninstall package :
 ```shell
 sudo snap install <package_name>
-sudo snap remove <package_name>
+sudo snap remove --purge <package_name>
 ```
 
 - List installed packages :
