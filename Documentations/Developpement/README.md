@@ -25,6 +25,7 @@ Dans ce répertoire se trouve toutes les "astuces" relatives au développement a
 - [Streaming](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Streaming "Streaming")
 - [Valgrind](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Valgrind "Valgrind")
 - [Wifi](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Wifi "Wifi")
+- [Windows](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Windows "Windows")
 
 ## Problèmes rencontrés
 
