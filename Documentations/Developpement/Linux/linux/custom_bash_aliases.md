@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-47-generic - 02/09/2022 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-48-generic - 27/09/2022 :
 
 ```shell
 ##
@@ -234,6 +234,13 @@ alias ppa-remove-repo="sudo ppa-purge" # Use "ppa-purge" command instead of "add
 alias poweroff='printf "I m not gonna do that !\n"'
 alias reboot='printf "I m not gonna do that !\n"'
 
+# Aliases used for LAMP (Linux, Apache, MySQL,PHP) management
+alias lamp-autostart-enable='sudo systemctl enable apache2 && sudo systemctl enable mysql && printf "LAMP auto-start enabled !\n"'
+alias lamp-autostart-disable='sudo systemctl disable apache2 && sudo systemctl disable mysql && printf "LAMP auto-start disabled !\n"'
+alias lamp-start='sudo systemctl start apache2 && sudo systemctl start mysql && printf "LAMP started !\n"'
+alias lamp-stop='sudo systemctl stop apache2 && sudo systemctl stop mysql && printf "LAMP stopped !\n"'
+alias lamp-restart='sudo systemctl restart apache2 && sudo systemctl restart mysql && printf "LAMP restarted !\n"'
+
 # Get 'sync' command status
 alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
 
@@ -243,6 +250,7 @@ alias vg-helgrind='valgrind --tool=helgrind'
 alias memo-vg-memcheck='printf "valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes\n"'
 
 # Go to worspaces
+alias workspace-apache='cd /var/www/'
 alias workspace-qt='cd /home/charlie/Documents/workspaces/workspace-qt'
 alias workspace-vscode='cd /home/charlie/Documents/workspaces/workspace-vscode'
 
