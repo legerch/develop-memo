@@ -217,6 +217,7 @@ sudo apt install glogg
 | Warnings messages | `.warn` | false | white | orange |
 | Error messages | `.err` | false | white | red |
 | Board is started | `syslog.info syslogd started` | false | black | lime |
+| Application is restarted | `Scheduling for restart` | false | black | fuchsia |
 
 ## 2.5. File comparaison viewer
 
