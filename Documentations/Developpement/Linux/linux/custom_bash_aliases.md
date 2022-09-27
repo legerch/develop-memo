@@ -302,10 +302,10 @@ alias arduino-uart='sudo minicom -D /dev/ttyACM0 -b 115200'
 alias cobra-uart='sudo minicom -D /dev/ttyUSB0 -b 115200'
 
 # Launch SSH session of Cobra
-alias cobra-ssh-root='ssh root@192.168.0.5'
+alias cobra-ssh-root='ssh root@172.27.77.5'
 
 # Generate new ssh key with Cobra device
-alias cobra-keygen='ssh-keygen -f "/home/charlie/.ssh/known_hosts" -R "192.168.0.5"'
+alias cobra-keygen='ssh-keygen -f "/home/charlie/.ssh/known_hosts" -R "172.27.77.5"'
 
 # Go to Cobra workspace
 alias cobra-libs='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/03-libs'
