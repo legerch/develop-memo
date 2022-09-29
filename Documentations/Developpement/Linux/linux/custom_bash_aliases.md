@@ -231,6 +231,15 @@ function print-passwd-wifi-specific()
     fi
 }
 
+# Function used to set LAMP properties
+function set-lamp-properties()
+{
+    local cmd="${1}"
+    local message="${2}"
+
+    sudo systemctl "${cmd}" apache2 && sudo systemctl "${cmd}" mysql && printf "${message}\n"
+}
+
 ##
 # Host specific aliases
 ##
@@ -254,11 +263,11 @@ alias poweroff='printf "I m not gonna do that !\n"'
 alias reboot='printf "I m not gonna do that !\n"'
 
 # Aliases used for LAMP (Linux, Apache, MySQL,PHP) management
-alias lamp-autostart-enable='sudo systemctl enable apache2 && sudo systemctl enable mysql && printf "LAMP auto-start enabled !\n"'
-alias lamp-autostart-disable='sudo systemctl disable apache2 && sudo systemctl disable mysql && printf "LAMP auto-start disabled !\n"'
-alias lamp-start='sudo systemctl start apache2 && sudo systemctl start mysql && printf "LAMP started !\n"'
-alias lamp-stop='sudo systemctl stop apache2 && sudo systemctl stop mysql && printf "LAMP stopped !\n"'
-alias lamp-restart='sudo systemctl restart apache2 && sudo systemctl restart mysql && printf "LAMP restarted !\n"'
+alias lamp-autostart-enable='set-lamp-properties "enable" "LAMP auto-start enabled !"'
+alias lamp-autostart-disable='set-lamp-properties "disable" "LAMP auto-start disabled !"'
+alias lamp-start='set-lamp-properties "start" "LAMP started !"'
+alias lamp-stop='set-lamp-properties "stop" "LAMP stopped !"'
+alias lamp-restart='set-lamp-properties "restart" "LAMP restarted !"'
 
 # Aliases used for password network properties
 alias show-passwd-wifi-current='nmcli device wifi show-password'
