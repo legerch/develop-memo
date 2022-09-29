@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-48-generic - 27/09/2022 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-48-generic - 29/09/2022 :
 
 ```shell
 ##
@@ -212,6 +212,25 @@ function update-arduino-cli-binary()
     fi
 }
 
+# Function used to get wifi password of specific network
+# ${1} : SSID to retrieve
+function print-passwd-wifi-specific()
+{
+    local ssid="${1}"
+
+    if [ -z "${ssid}" ]; then
+        printf "Cannot retrieve passwd, no arguments was supplied\n"
+    else
+        local ssidInfos="/etc/NetworkManager/system-connections/${ssid}.nmconnection"
+        if [ -f "${ssidInfos}" ]; then
+            local passwd="$(sudo cat ${ssidInfos} | grep "psk=" | cut -d "=" -f 2)"
+            printf "Wifi password for [${ssid}] is [${passwd}]\n"
+        else
+            printf "Cannot retrieve passwd, ssid [${ssid}] is unknown\n"
+        fi
+    fi
+}
+
 ##
 # Host specific aliases
 ##
@@ -240,6 +259,10 @@ alias lamp-autostart-disable='sudo systemctl disable apache2 && sudo systemctl d
 alias lamp-start='sudo systemctl start apache2 && sudo systemctl start mysql && printf "LAMP started !\n"'
 alias lamp-stop='sudo systemctl stop apache2 && sudo systemctl stop mysql && printf "LAMP stopped !\n"'
 alias lamp-restart='sudo systemctl restart apache2 && sudo systemctl restart mysql && printf "LAMP restarted !\n"'
+
+# Aliases used for password network properties
+alias show-passwd-wifi-current='nmcli device wifi show-password'
+alias show-passwd-wifi-specific='print-passwd-wifi-specific'
 
 # Get 'sync' command status
 alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
