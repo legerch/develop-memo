@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-48-generic - 29/09/2022 :
+Save from : inspiron-55510 - Ubuntu 22.04.1 LTS - Kernel 5.15.0-47-generic - 01/10/2022 :
 
 ```shell
 ##
@@ -212,8 +212,45 @@ function update-arduino-cli-binary()
     fi
 }
 
-# Function used to get wifi password of specific network
+# Function used to generate wifi QrCode
+# Note 1 : "qrencode" package must be available (used to generate QrCode).
+# Note 2 : Bash 4 minimum is needed (used to easily manage lower/upper case)
+#
+# Wifi QrCode format : 
+# - https://feeding.cloud.geek.nz/posts/encoding-wifi-access-point-passwords-qr-code/
+# - https://pocketables.com/2022/01/how-to-format-that-wifi-qr-code-in-plain-text.html
+#
+function generate-wifi-qrcode()
+{
+    local argSsid="${1}"
+    local argSecurity="${2^^}"
+    local argPasswd="${3}"
+    
+    local security=""
+
+    # Found out security type
+    if [[ "${argSecurity}" == *"WPA"* ]]; then
+        security="WPA"
+    else
+        security="WEP"
+    fi
+
+    # Generate plain text to encode
+    local wifiTxt="WIFI:S:${argSsid};T:${security};P:${argPasswd};;"
+
+    # Print QrCode
+    printf "\n"
+    qrencode -m 2 -t utf8 <<< "${wifiTxt}"
+    printf "\n"
+
+}
+
+# Function used to get wifi password of specific network.
+# A QrCode will be generated if "qrencode" package available, otherwise
+# wifi infos are only displayed.
+#
 # ${1} : SSID to retrieve
+#
 function print-passwd-wifi-specific()
 {
     local ssid="${1}"
@@ -222,9 +259,18 @@ function print-passwd-wifi-specific()
         printf "Cannot retrieve passwd, no arguments was supplied\n"
     else
         local ssidInfos="/etc/NetworkManager/system-connections/${ssid}.nmconnection"
-        if [ -f "${ssidInfos}" ]; then
+        if [ -f "${ssidInfos}" ]; then            
+            local security="$(sudo cat ${ssidInfos} | grep "key-mgmt=" | cut -d "=" -f 2)"
             local passwd="$(sudo cat ${ssidInfos} | grep "psk=" | cut -d "=" -f 2)"
-            printf "Wifi password for [${ssid}] is [${passwd}]\n"
+            
+            printf "\nSSID: ${ssid}\nSecurity: ${security}\nPassword: ${passwd}\n"
+
+            which qrencode &> /dev/null
+            local qrStatus=$?
+            if [ ${qrStatus} -eq 0 ]; then
+                generate-wifi-qrcode "${ssid}" "${security}" "${passwd}"
+            fi
+
         else
             printf "Cannot retrieve passwd, ssid [${ssid}] is unknown\n"
         fi
