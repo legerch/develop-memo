@@ -24,7 +24,8 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [2.7. CTRL-C memory](#27-ctrl-c-memory)
   - [2.8. Charts tools](#28-charts-tools)
   - [2.9. Color picker](#29-color-picker)
-  - [2.10. Arduino development](#210-arduino-development)
+  - [2.10. QrCode](#210-qrcode)
+  - [2.11. Arduino development](#211-arduino-development)
 - [3. Buildroot/kernels requirements](#3-buildrootkernels-requirements)
   - [3.1. Mandatory packages](#31-mandatory-packages)
   - [3.2. Optional packages](#32-optional-packages)
@@ -253,7 +254,14 @@ flatpak install flathub com.github.finefindus.eyedropper
 sudo snap install color-picker
 ```
 
-## 2.10. Arduino development
+## 2.10. QrCode
+
+- [qrencode][qrencode-man] :
+```shell
+sudo apt install qrencode
+```
+
+## 2.11. Arduino development
 
 See [Doc - Arduino development][doc-arduino] for more details.
 
@@ -414,6 +422,7 @@ Useful properties :
 [eyedropper-repository]: https://github.com/FineFindus/eyedropper
 [git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
 [gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
+[qrencode-man]: https://linux.die.net/man/1/qrencode
 
 [glogg-repository]: https://github.com/nickbnf/glogg
 [klogg-repository]: https://github.com/variar/klogg
