@@ -89,11 +89,16 @@ Available triplet values are:
 # 3. Update
 ## 3.1. Update VCPKG itself
 
-_in construction_
+To [update VCPKG itself][vcpgk-update-itself]:
+1. Use `git pull` to get the latest sources
+2. Run `bootstrap-vcpkg.bat` (Windows) or `./bootstrap-vcpkg.sh` (Unix) to update vcpkg
 
 ## 3.2. Update libraries
 
-_in construction_
+To [update VCPKG libraries][vcpkg-update-lib], use subcommand:
+```shell
+.\vcpkg\vcpkg update
+```
 
 <!-- External links -->
 [git-official]: https://git-scm.com/downloads
