@@ -2,17 +2,22 @@
 
 Table of contents :
 - [1. Hardware properties](#1-hardware-properties)
-- [2. Process](#2-process)
-- [3. Checksum](#3-checksum)
-- [4. Devices](#4-devices)
-- [5. Directories](#5-directories)
-- [6. Compilation](#6-compilation)
-- [7. Libraries](#7-libraries)
-- [8. Modules](#8-modules)
-- [Symlinks](#symlinks)
-- [9. Custom terminal commands](#9-custom-terminal-commands)
-- [Linux versionning](#linux-versionning)
-- [10. Ressources](#10-ressources)
+- [2. Screen](#2-screen)
+  - [2.1. Framebuffer](#21-framebuffer)
+- [3. Process](#3-process)
+  - [3.1. Watch real-time](#31-watch-real-time)
+  - [3.2. "Inittab" file](#32-inittab-file)
+- [4. Ressources](#4-ressources)
+- [5. Checksum](#5-checksum)
+- [6. Devices](#6-devices)
+- [7. Directories](#7-directories)
+- [8. Compilation](#8-compilation)
+- [9. Libraries](#9-libraries)
+- [10. Modules](#10-modules)
+- [11. Symlinks](#11-symlinks)
+- [12. Custom terminal commands](#12-custom-terminal-commands)
+- [13. Linux versionning](#13-linux-versionning)
+- [14. Ressources](#14-ressources)
 
 # 1. Hardware properties 
 - List hardwares properties and driver informations
@@ -26,7 +31,28 @@ lshw -C network
 - https://www.binarytides.com/linux-lshw-command/
 - https://www.geeksforgeeks.org/lshw-command-in-linux-with-examples/
 
-# 2. Process
+# 2. Screen
+## 2.1. Framebuffer
+
+- Display **RAW** image:
+```shell
+dd if=/path/my_image.fb of=/dev/fb0 bs=32768 count=1 > /dev/null 2>&1
+```
+
+- Display `.png` image :
+```shell
+fbv -0 /path/my_image.png
+```
+
+- Convert `.png` image to **RAW** file:
+```shell
+fbv -0 /path/exemple.png  > /dev/null 2>&1
+dd if=/dev/fb0 of=example.fb
+```
+
+# 3. Process
+## 3.1. Watch real-time
+
 - Watch processus :
 ```shell
 watch -n 0.1 cat /pro/interrupts
@@ -37,16 +63,7 @@ watch -n 0.1 cat /pro/interrupts
 watch -d "ps -a | grep 'app\|memcheck'"
 ```
 
-- Watch ressources used :
-```shell
-top
-htop
-```
-
-- Get status of `sync` command :
-```shell
-watch -d grep -e Dirty: -e Writeback: /proc/meminfo
-```
+## 3.2. "Inittab" file
 
 - Reload `inittab` file :
 1. Via `init`
@@ -65,7 +82,26 @@ kill -1 1
 kill -SIGHUP 1
 ```
 
-# 3. Checksum
+# 4. Ressources
+
+- Watch ressources used :
+```shell
+top
+htop
+```
+
+- Get memory informations :
+```shell
+cat /proc/meminfo   # All memory informations
+watch -n 1 "cat /proc/meminfo | grep 'MemAvailable:'"
+```
+
+- Get status of `sync` command :
+```shell
+watch -d grep -e Dirty: -e Writeback: /proc/meminfo
+```
+
+# 5. Checksum
 
 - Get MD5 of a file :
 ```shell
@@ -85,13 +121,13 @@ find -type f -not -name "*.data*" -not -name "*.bin*" -not -name "*.ppm*" -exec 
 find -type f -not -name "*.data*" -not -name "*.bin*" -not -name "*.ppm*" -not -name "*.ods*" -not -name "*trace*" -not -name "*chk*" -print0 | sort -z | xargs -r0 md5sum > checklist.chk
 ```
 
-# 4. Devices
+# 6. Devices
 - List all devices :
 ```shell
 cat /proc/bus/input/devices
 ```
 
-# 5. Directories
+# 7. Directories
 - List all partitions
 ```shell
 lsblk
@@ -124,7 +160,7 @@ hexdump -C <fileName>
 mount -o loop <name> /mnt/
 ```
 
-# 6. Compilation
+# 8. Compilation
 - Get compilation/installation informations :
 ```shell 
 uname -a
@@ -140,7 +176,7 @@ strings <filename>
 make sdk
 ```
 
-# 7. Libraries
+# 9. Libraries
 
 In _dev_ phase, libraries are not always at their standard destination `/usr/lib` (because it's dev phase !), so to use an application which needed to be link to the library, we need to tell where to find this library. To do so, use :
 ```shell
@@ -151,13 +187,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../bin/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_error/bin:../bin
 ```
 
-# 8. Modules
+# 10. Modules
 - List all availables modules
 ```shell
 find /lib/modules/$(uname -r) -type f -name '*.ko*'
 ```
 
-# Symlinks
+# 11. Symlinks
 
 Sometimes, you copy some libraries directories and symlinks are _broken_...so how to spot and repair easily without looping through `ls -l` and `ln -sf <target> <link>`.  
 
@@ -170,7 +206,7 @@ $ symlinks .
 dangling: /tmp/b -> a
 ```
 
-# 9. Custom terminal commands
+# 12. Custom terminal commands
 
 Linux operating system allows users to create commands. To create custom commands :
 1. Check that `~/.bashrc` have routine to load custom commands :
@@ -219,14 +255,14 @@ alias maj='sudo apt update && sudo apt full-upgrade'
 - Open new tab
 - Or : `source ~/.bashrc`
 
-# Linux versionning
+# 13. Linux versionning
 
 Linux distros used a file which contains operating system identification data, this file is `etc/os-release` which is a symlink to `/usr/lib/os-release`
 
 doc of the file : https://www.freedesktop.org/software/systemd/man/os-release.html
 check version from your shell : https://unix.stackexchange.com/questions/88644/how-to-check-os-and-version-using-a-linux-command
 
-# 10. Ressources
+# 14. Ressources
 
 - https://askubuntu.com/questions/318530/generate-md5-checksum-for-all-files-in-a-directory
 - https://stackoverflow.com/questions/1341467/find-filenames-not-ending-in-specific-extensions-on-unix
