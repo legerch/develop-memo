@@ -141,6 +141,9 @@ Ou via GStreamer :
 LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v filesrc location=myStreamFile.sdp ! sdpdemux ! decodebin ! videoconvert ! autovideosink
 ```
 
+Ou via FFMPEG:  
+Voir [documentation - FFMPEG][repo-ffmpeg] pour plus de détails
+
 # 3. Informations importantes
 ## 3.1. Mode bayer
 
@@ -322,6 +325,7 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
 
 <!-- Link to this repository -->
 [repo-gst-graphs]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/GStreamer/res/graphs
+[repo-ffmpeg]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/FFMPEG
 
 <!-- External links -->
 [doc-gst-all-plugins]: https://gstreamer.freedesktop.org/documentation/plugins_doc.html?gi-language=c
