@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : inspiron-55510 - Ubuntu 22.04.1 LTS - Kernel 5.15.0-47-generic - 01/10/2022 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-52-generic - 08/11/2022 :
 
 ```shell
 ##
@@ -60,6 +60,26 @@ function memo-cobra-build()
     for i in `ls ${pathCfgFiles} | grep "\defconfig"`; do
         printf "\t${i}\n"
     done
+}
+
+# Function used to copy Cobra firmware to localhost :
+# ${1} : Path to localhost directory
+# ${2} : Firmare version with hyphen separator
+function copy-cobra-fw-release-to-localhost()
+{
+    local dstFw="${1}"
+
+    local fwNameHyphen="${2}"
+    local fwNameUnderscore=${fwNameHyphen//[-]/_}
+
+    local pathFw="${HOME}/Téléchargements/ReleasesCobra/${fwNameHyphen}/${fwNameUnderscore}-imx8_armadeus_run2_release/image/rayplicker-v2-${fwNameUnderscore}"
+
+    if [ -f "${pathFw}" ]; then
+        cp "${pathFw}" "${dstFw}"
+        printf "Firmware \"${pathFw}\" has been copied to \"${dstFw}\"\n"
+    else
+        printf "Firmware \"${pathFw}\" can't be found\n"
+    fi
 }
 
 # Function used to generate doxygen documentation :
@@ -406,4 +426,9 @@ alias cobra-sdk-gdb-armadeus='/home/charlie/Documents/workspaces/workspace-cobra
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
 alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! queue ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'
+
+# Cobra firmware management
+## Localhost
+alias cobra-fw-localhost-index-update='cp /home/charlie/Documents/workspaces/workspace-qt/Cobra-AppCommunication/RP_CobraApplication/configurations/examples/server-localhost-cobra-fw-list.json /var/www/html/cobra-firmware/'
+alias cobra-fw-localhost-add='copy-cobra-fw-release-to-localhost /var/www/html/cobra-firmware/cobra-fw-list/'
 ```
