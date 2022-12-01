@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-52-generic - 08/11/2022 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-53-generic - 01/12/2022 :
 
 ```shell
 ##
@@ -72,7 +72,7 @@ function copy-cobra-fw-release-to-localhost()
     local fwNameHyphen="${2}"
     local fwNameUnderscore=${fwNameHyphen//[-]/_}
 
-    local pathFw="${HOME}/Téléchargements/ReleasesCobra/${fwNameHyphen}/${fwNameUnderscore}-imx8_armadeus_run2_release/image/rayplicker-v2-${fwNameUnderscore}"
+    local pathFw="${HOME}/Documents/workspaces/workspace-cobra/cobra-releases/${fwNameHyphen}/${fwNameUnderscore}-imx8_armadeus_run2_release/image/rayplicker-v2-${fwNameUnderscore}"
 
     if [ -f "${pathFw}" ]; then
         cp "${pathFw}" "${dstFw}"
@@ -419,7 +419,7 @@ alias cobra-apps='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLay
 alias cobra-build='cd ~/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-Buildroot/RAYPLICKER-V2/'
 alias cobra-bsp='cd ~/Documents/workspaces/workspace-cobra/bsp/'
 alias cobra-kernels='cd ~/Documents/workspaces/workspace-cobra/kernels/'
-alias cobra-releases='cd ~/Téléchargements/ReleasesCobra/'
+alias cobra-releases='cd ~/Documents/workspaces/workspace-cobra/cobra-releases/'
 
 # Cobra SDK properties
 alias cobra-sdk-gdb-armadeus='/home/charlie/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/05-bsp/02-armadeus-imx8-bsp/01-sdk/aarch64-buildroot_borea-linux-gnu_sdk-buildroot/bin/aarch64-buildroot_borea-linux-gnu-gdb'
