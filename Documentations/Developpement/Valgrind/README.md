@@ -42,14 +42,15 @@ Options detailled below : [Particular case - false-positive](#particular-case--f
 An alias commands for _Valgrind memcheck_ can be added in order to not taping all options at each time (see more details here : [Linux - Custom terminal commands](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux#8-custom-terminal-commands)) :
 ```shell
 # Valgrind memcheck alias
-alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes'
+alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes'
 ```
 
 In this way, we can use :
 ```shell
-# equivalent to : valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./bin/myapp
+# equivalent to : valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes ./bin/myapp
 vg-memcheck ./bin/myapp
 ```
+> **Note:** option `--track-fds=yes` is used to follow file descriptors
 
 ### 2.1.3. Particular case : false-positive 
 

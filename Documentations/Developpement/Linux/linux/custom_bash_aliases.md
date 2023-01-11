@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-53-generic - 01/12/2022 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-57-generic - 11/01/2023 :
 
 ```shell
 ##
@@ -343,9 +343,9 @@ alias show-passwd-wifi-specific='print-passwd-wifi-specific'
 alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
 
 # Valgrind commands
-alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes'
+alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes'
 alias vg-helgrind='valgrind --tool=helgrind'
-alias memo-vg-memcheck='printf "valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes\n"'
+alias memo-vg-memcheck='printf "valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes\n"'
 
 # Go to worspaces
 alias workspace-apache='cd /var/www/'
