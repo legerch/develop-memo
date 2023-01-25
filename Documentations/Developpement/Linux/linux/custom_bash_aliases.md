@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-58-generic - 18/01/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-58-generic - 25/01/2023 :
 
 ```shell
 ##
@@ -322,6 +322,8 @@ alias apt-uninstall="sudo apt purge --autoremove"
 alias apt-list-installed="apt list --installed"
 # To uninstall a snap package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/1130791/how-to-uninstall-a-package-installed-from-snapcraft)
 alias snap-uninstall="sudo snap remove --purge"
+alias snap-list-revs="snap list --all"
+alias snap-revert="sudo snap revert"
 
 # PPA related commands for easier install/uninstall
 alias ppa-add-repo="sudo add-apt-repository"
