@@ -401,6 +401,11 @@ alias doc-benchmanager-lib='generate-project-documentation /home/charlie/Documen
 alias doc-benchmanager-arduino='generate-project-documentation /home/charlie/Documents/workspaces/workspace-vscode/BancCalibration-arduino Doxyfile'
 
 ##
+# Pi specific aliases
+##
+alias pi-ssh='ssh pi@raspberrypi'
+
+##
 # Arduino specific aliases
 ##
 alias arduino-uart='sudo minicom -D /dev/ttyACM0 -b 115200'
