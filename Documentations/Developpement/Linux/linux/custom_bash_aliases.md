@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-58-generic - 25/01/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-58-generic - 06/02/2023 :
 
 ```shell
 ##
@@ -123,7 +123,7 @@ function update-host-fw()
     read -p "Do you want to update host firmware ? (yes/no) " userInput
 
     case "${userInput}" in 
-        yes)
+        Y|y|YES|Yes|yes)
             doUpdateFw=1
             ;;
 
@@ -207,7 +207,7 @@ function update-arduino-cli-binary()
         read -p "Do you want to update arduino-cli binary ? (yes/no) " userInput
 
         case "${userInput}" in 
-            yes)
+            Y|y|YES|Yes|yes)
                 doUpdateArduinoCli=1
                 ;;
 
@@ -227,6 +227,47 @@ function update-arduino-cli-binary()
             printf "No arduino-cli binary update have been performed\n"
         fi
         
+    else
+        printf "You need curl as download tool. Please install it first before continuing\n"
+    fi
+}
+
+# Function used to download tarball from github repositories
+function github-dl-tarball()
+{
+    local owner="${1}"
+    local repo="${2}"
+    local version="${3}"
+
+    local doDlTarball=0
+
+    # Check than mandatory tools are available to download tarball
+    which curl &> /dev/null
+    local curlStatus=$?
+    if [ ${curlStatus} -eq 0 ]; then
+        local url="https://github.com/${owner}/${repo}/archive/${version}.tar.gz"
+
+        # Ask user before proceed to download
+        printf "Tarball URL is: ${url}\n"
+        read -p "Proceed ? (yes/no)" userInput
+
+        case "${userInput}" in 
+            Y|y|YES|Yes|yes)
+                doDlTarball=1
+                ;;
+
+            *)
+                doDlTarball=0
+                ;;
+        esac
+
+        # Perfor download in current directory
+        if [ ${doDlTarball} -eq 1 ]; then
+            curl -L ${url} -o "${repo}-${version}.tar.gz"
+
+        else
+            printf "No file has been downloaded\n"
+        fi
     else
         printf "You need curl as download tool. Please install it first before continuing\n"
     fi
