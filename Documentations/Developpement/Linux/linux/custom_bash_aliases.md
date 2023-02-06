@@ -326,8 +326,10 @@ alias snap-list-revs="snap list --all"
 alias snap-revert="sudo snap revert"
 
 # PPA related commands for easier install/uninstall
+# Blog helper: https://blog.desdelinux.net/fr/ppa-purge-como-remover-un-repositorio-ppa-en-forma-segura/
 alias ppa-add-repo="sudo add-apt-repository"
 alias ppa-remove-repo="sudo ppa-purge" # Use "ppa-purge" command instead of "add-apt-repository --remove" in order to perform a real clean
+alias ppa-list="grep -i ppa.launchpad.net /etc/apt/sources.list.d/*.list"
 
 # In order to "disallow" some commands (It is use for my embedded target and I don't want to perform them on my host machine)
 alias poweroff='printf "I m not gonna do that !\n"'
