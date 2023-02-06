@@ -216,7 +216,10 @@ sudo apt install glogg
 | Description | Filters | Ignore case | Fore Color | Back Color |
 |:-:|:-:|:-:|:-:|:-:|
 | Warnings messages | `.warn` | false | white | orange |
+| Any warnings messages | `warning` | true | white | orange |
 | Error messages | `.err` | false | white | red |
+| Any error messages | `error` | true | white | red |
+| Any failure messages | `fail` | true | red | white |
 | Board is started | `syslog.info syslogd started` | false | black | lime |
 | Application is restarted | `Scheduling for restart` | false | black | fuchsia |
 
