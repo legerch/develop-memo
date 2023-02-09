@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-58-generic - 06/02/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-58-generic - 09/02/2023 :
 
 ```shell
 ##
@@ -413,6 +413,8 @@ alias snippet-sh-edit='code ~/.config/Code/User/snippets/shellscript.json'
 
 # Used as a memo to load library into env variables
 alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_error/bin:../bin\n"'
+# Memo used to remember how to convert PNG image to RAW framebuffer format
+alias memo-png-to-fb='printf "fbv -0 ./my-picture.png  > /dev/null 2>&1\ndd if=/dev/fb0 of=my-picture.fb\n"'
 # Memo used to remain how to remove last line of a file
 alias memo-remove-last-line='printf "sed -i \"$ d\" file.txt\n"'
 # Memo used to know how to use raw2rgbpnm (https://git.retiisi.org.uk/?p=~sailus/raw2rgbpnm.git)
