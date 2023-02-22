@@ -167,6 +167,23 @@ Les **breakpoints**, via le mot-clé `break` ou `b` :
 - `break <filename:linenum>` : Placer un breakpoint à un numéro de ligne d'un fichier (utile lors du débuggage d'une application utilisant une librairie par exemple) 
 > Pour plus de commandes liées au breakpoint, voir : https://ftp.gnu.org/old-gnu/Manuals/gdb/html_node/gdb_28.html#SEC29
 
+Enfin, il est également possible de gérer les signaux liés à l'application. En effet GDB a son propre _signal handler_, ce qui fait que l'application ne les recevra pas, plusieurs solutions sont possibles :
+- Désactiver la gestion d'un signal `<id-signal>` de GDB
+```shell
+handle <id-signal> noprint nostop pass
+```
+- Lancer un signal de GDB vers l'application :
+```shell
+signal <id-signal>
+```
+
+- On peut tout simplement envoyer un signal via `kill` dans un second terminal :
+```
+kill -<id-signal> <id-process-app>
+```
+> **Notes :** Les ressources suivantes ont été utilisées :
+> - https://stackoverflow.com/questions/36993909/debugging-a-program-that-uses-sigint-with-gdb
+
 # 5. Ressources
 
 - Officiels :
@@ -176,3 +193,4 @@ Les **breakpoints**, via le mot-clé `break` ou `b` :
   - [Analyser un fichier **core dump**](http://jlbicquelet.free.fr/aix/procedures/core_aix.php)
 - Threads :
   - https://stackoverflow.com/questions/5115613/core-dump-file-analysis
+  - https://stackoverflow.com/questions/36993909/debugging-a-program-that-uses-sigint-with-gdb
