@@ -20,12 +20,14 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
     - [2.4.2. Custom configuration](#242-custom-configuration)
       - [2.4.2.1. glogg](#2421-glogg)
   - [2.5. File comparaison viewer](#25-file-comparaison-viewer)
-  - [2.6. Documentation](#26-documentation)
-  - [2.7. CTRL-C memory](#27-ctrl-c-memory)
-  - [2.8. Charts tools](#28-charts-tools)
-  - [2.9. Color picker](#29-color-picker)
-  - [2.10. QrCode](#210-qrcode)
-  - [2.11. Arduino development](#211-arduino-development)
+  - [2.6. Hexadecimal viewer](#26-hexadecimal-viewer)
+  - [2.7. Documentation](#27-documentation)
+  - [2.8. CTRL-C memory](#28-ctrl-c-memory)
+  - [2.9. Charts tools](#29-charts-tools)
+  - [2.10. Box of tools for developers](#210-box-of-tools-for-developers)
+  - [2.11. Color picker](#211-color-picker)
+  - [2.12. QrCode](#212-qrcode)
+  - [2.13. Arduino development](#213-arduino-development)
 - [3. Buildroot/kernels requirements](#3-buildrootkernels-requirements)
   - [3.1. Mandatory packages](#31-mandatory-packages)
   - [3.2. Optional packages](#32-optional-packages)
@@ -229,23 +231,37 @@ sudo apt install glogg
 sudo apt install meld
 ```
 
-## 2.6. Documentation
+## 2.6. Hexadecimal viewer
+
+- [Gnome hex editor][gnome-hex-editor]
+```shell
+sudo apt install ghex
+```
+
+## 2.7. Documentation
 
 ```shell
 sudo apt install doxygen doxygen-gui doxygen-doc
 ```
 
-## 2.7. CTRL-C memory
+## 2.8. CTRL-C memory
 
 See [CopyQ][copyq-official] official doumentation for more details.
 
-## 2.8. Charts tools
+## 2.9. Charts tools
 
 ```shell
 sudo snap install drawio
 ```
 
-## 2.9. Color picker
+## 2.10. Box of tools for developers
+
+- [Dev toolbox][developer-toolbox]
+```shell
+flatpak install flathub me.iepure.devtoolbox
+```
+
+## 2.11. Color picker
 
 - [eyedropper][eyedropper-repository] :
 ```shell
@@ -257,14 +273,14 @@ flatpak install flathub com.github.finefindus.eyedropper
 sudo snap install color-picker
 ```
 
-## 2.10. QrCode
+## 2.12. QrCode
 
 - [qrencode][qrencode-man] :
 ```shell
 sudo apt install qrencode
 ```
 
-## 2.11. Arduino development
+## 2.13. Arduino development
 
 See [Doc - Arduino development][doc-arduino] for more details.
 
@@ -422,9 +438,11 @@ Useful properties :
 [copyq-official]: https://hluk.github.io/CopyQ/
 [colorpicker-repository]: https://github.com/keshavbhatt/ColorPicker
 [dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
+[developer-toolbox]: https://beta.flathub.org/apps/me.iepure.devtoolbox
 [eyedropper-repository]: https://github.com/FineFindus/eyedropper
 [git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
 [gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
+[gnome-hex-editor]: https://wiki.gnome.org/Apps/Ghex
 [qrencode-man]: https://linux.die.net/man/1/qrencode
 
 [glogg-repository]: https://github.com/nickbnf/glogg
