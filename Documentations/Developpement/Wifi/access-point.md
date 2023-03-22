@@ -1,17 +1,19 @@
 This file will resume how to create an access point.
 
 **Table of contents :**
-- [1. Driver support](#1-driver-support)
-- [2. Setup interface](#2-setup-interface)
-- [3. Setup hostapd](#3-setup-hostapd)
-- [4. Ressources used](#4-ressources-used)
+- [1. Configuration](#1-configuration)
+  - [1.1. Driver support](#11-driver-support)
+  - [1.2. Setup interface](#12-setup-interface)
+  - [1.3. Setup hostapd](#13-setup-hostapd)
+  - [1.4. Ressources used](#14-ressources-used)
 
-# 1. Driver support
+# 1. Configuration
+## 1.1. Driver support
 
 First, we need to verify that driver of our network interface support access point.  
 Documentation have been written for some chipset, please check folder [documentation/drivers/wifi][doc-drivers-wifi].
 
-# 2. Setup interface
+## 1.2. Setup interface
 
 1. Interface configuration via `/etc/network/interfaces` :
 ```shell
@@ -35,16 +37,16 @@ $ /sbin/ifup -a # Use /etc/network/interfaces file
 > Some chipsets required more instructions before calling `ifdown/ifup` :
 > - _Example :_ `iw dev mlan0 interface add uap0 type __ap # We should have : lo, mlan0 and uap0 with $ifconfig`.
 
-# 3. Setup hostapd
+## 1.3. Setup hostapd
 
-1. Configure `/etc/hostapd.conf` (an example can be found at [[doc-hostapd-conf-example]])
+1. Configure `/etc/hostapd.conf` (an example can be found at [hostapd example][doc-hostapd-conf-example])
 2. Start **hostapd**
 ```shell
 hostapd -B /etc/hostapd.conf
 ```
 > `-B` here is for : _run daemon in the background_
 
-# 4. Ressources used
+## 1.4. Ressources used
 
 - Ubuntu
   - [Hostapd][doc-ubuntu-hostapd]
@@ -60,7 +62,10 @@ hostapd -B /etc/hostapd.conf
 - Threads
   - [StackExchange - How to set up wifi hotspot with 802.11n mode ?][thread-se-how-to-setup-wifi-hostspot-with-80211n-mode]
 - Useful apps
-  - [Sparrow-wifi][app-sparrow-wifi] : Sparrow-wifi has been built from the ground up to be the next generation 2.4 GHz and 5 GHz Wifi spectral awareness tool
+  - **Linux:**
+    - [Sparrow-wifi][app-sparrow-wifi] : Sparrow-wifi has been built from the ground up to be the next generation 2.4 GHz and 5 GHz Wifi spectral awareness tool
+  - **Windows:**
+    - [Wifi Analyzer][app-wifi-analyzer]
 
 <!-- Documentation links -->
 [doc-hostapd-conf-example]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Wifi/examples/hostapd.conf
@@ -68,6 +73,7 @@ hostapd -B /etc/hostapd.conf
 
 <!-- External links -->
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
+[app-wifi-analyzer]: https://apps.microsoft.com/store/detail/wifi-analyzer/9NBLGGH33N0N?hl=fr-fr&gl=fr
 
 [doc-ubuntu-hostapd]: https://doc.ubuntu-fr.org/hostapd
 
