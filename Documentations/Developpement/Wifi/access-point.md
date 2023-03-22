@@ -1,19 +1,41 @@
 This file will resume how to create an access point.
 
 **Table of contents :**
-- [1. Configuration](#1-configuration)
-  - [1.1. Driver support](#11-driver-support)
-  - [1.2. Setup interface](#12-setup-interface)
-  - [1.3. Setup hostapd](#13-setup-hostapd)
-  - [1.4. Ressources used](#14-ressources-used)
+- [1. IEEE802.11 specifications](#1-ieee80211-specifications)
+  - [1.1. Major protocols](#11-major-protocols)
+  - [1.2. Useful amendment](#12-useful-amendment)
+- [2. Configuration](#2-configuration)
+  - [2.1. Driver support](#21-driver-support)
+  - [2.2. Setup interface](#22-setup-interface)
+  - [2.3. Setup hostapd](#23-setup-hostapd)
+  - [2.4. Ressources used](#24-ressources-used)
 
-# 1. Configuration
-## 1.1. Driver support
+# 1. IEEE802.11 specifications
+
+[IEEE 802.11][doc-wiki-ieee80211] have gone through many specifications. We gonna describe some of them.
+
+## 1.1. Major protocols
+
+| Protocol | Alternative name | Creation date | Frequency (GHz) | Bandwith (MHz) | MIMO support |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| 802.11b | Wifi 1 | 1999 | 2.4 | 20 | :x: |
+| 802.11a | Wifi 2 | 1999 | 5 | 5 / 10 / 20 | :x: |
+| 802.11g | Wifi 3 | 2003 | 2.4 | 5 / 10 / 20 | :x: |
+| 802.11n | Wifi 4 | 2009 | 2.4 / 5 | 20 / 40 | :heavy_check_mark: |
+| 802.11ac | Wifi 5 | 2013 | 5 | 20 / 40 / 80 / 160 | :heavy_check_mark: |
+| 802.11ax | Wifi 6 | 2021 | 2.4 / 5 | 20 / 40 / 80 | :heavy_check_mark: |
+| 802.11ax | Wifi 6E | 2021 | 2.4 / 5 / 6 | 20 / 40 / 80 | :heavy_check_mark: |
+
+## 1.2. Useful amendment
+
+
+# 2. Configuration
+## 2.1. Driver support
 
 First, we need to verify that driver of our network interface support access point.  
 Documentation have been written for some chipset, please check folder [documentation/drivers/wifi][doc-drivers-wifi].
 
-## 1.2. Setup interface
+## 2.2. Setup interface
 
 1. Interface configuration via `/etc/network/interfaces` :
 ```shell
@@ -37,7 +59,7 @@ $ /sbin/ifup -a # Use /etc/network/interfaces file
 > Some chipsets required more instructions before calling `ifdown/ifup` :
 > - _Example :_ `iw dev mlan0 interface add uap0 type __ap # We should have : lo, mlan0 and uap0 with $ifconfig`.
 
-## 1.3. Setup hostapd
+## 2.3. Setup hostapd
 
 1. Configure `/etc/hostapd.conf` (an example can be found at [hostapd example][doc-hostapd-conf-example])
 2. Start **hostapd**
@@ -46,7 +68,7 @@ hostapd -B /etc/hostapd.conf
 ```
 > `-B` here is for : _run daemon in the background_
 
-## 1.4. Ressources used
+## 2.4. Ressources used
 
 - Ubuntu
   - [Hostapd][doc-ubuntu-hostapd]
