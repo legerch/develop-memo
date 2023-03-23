@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.1 LTS - Kernel 5.15.0-58-generic - 09/02/2023 :
+Save from : inspiron-55510 - Ubuntu 22.04.2 LTS - Kernel 5.19.0-35-generic - 23/03/2023 :
 
 ```shell
 ##
@@ -386,6 +386,11 @@ alias lamp-restart='set-lamp-properties "restart" "LAMP restarted !"'
 # Aliases used for password network properties
 alias show-passwd-wifi-current='nmcli device wifi show-password'
 alias show-passwd-wifi-specific='print-passwd-wifi-specific'
+
+# Aliases used to scan available networks
+alias scan-wifi-basic='nmcli dev wifi'
+alias scan-wifi-details='nmcli -m multiline -f ALL dev wifi'
+alias scan-wifi-iw-memo='printf "sudo iw dev <interface> scan\n"'
 
 # Get 'sync' command status
 alias sync-status='watch -d grep -e Dirty: -e Writeback: /proc/meminfo'
