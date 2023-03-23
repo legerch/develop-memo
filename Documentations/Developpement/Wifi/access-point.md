@@ -114,6 +114,8 @@ hostapd -B /etc/hostapd.conf
 
 - Ubuntu
   - [Hostapd][doc-ubuntu-hostapd]
+- Gentoo
+  - [Hostapd][doc-gentoo-hostapd]
 - Wikipedia :
   - [IEEE 802.11][doc-wiki-ieee80211]
   - [IEEE 802.11n][doc-wiki-ieee80211n]
@@ -150,6 +152,7 @@ hostapd -B /etc/hostapd.conf
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
 [app-wifi-analyzer]: https://apps.microsoft.com/store/detail/wifi-analyzer/9NBLGGH33N0N?hl=fr-fr&gl=fr
 
+[doc-gentoo-hostapd]: https://wiki.gentoo.org/wiki/Hostapd
 [doc-ubuntu-hostapd]: https://doc.ubuntu-fr.org/hostapd
 
 [doc-wiki-ieee80211]: https://fr.wikipedia.org/wiki/IEEE_802.11
