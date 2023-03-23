@@ -140,7 +140,7 @@ hostapd -B /etc/hostapd.conf
 
 <!-- Asset ressources -->
 [asset-img-list-channel-24]: images/list-channels-2.4GHz.png
-[asset-img-list-channel-5]: images/list-channels-5GHz.png
+[asset-img-list-channel-5]: images/list-channels-5GHz-background.png
 
 <!-- Documentation links -->
 [doc-hostapd-conf-example]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Wifi/examples/hostapd.conf
