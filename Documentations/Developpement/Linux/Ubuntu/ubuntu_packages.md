@@ -217,8 +217,10 @@ sudo apt install glogg
 
 | Description | Filters | Ignore case | Fore Color | Back Color |
 |:-:|:-:|:-:|:-:|:-:|
+| Debug messages | `.debug` | false | blue | white |
 | Warnings messages | `.warn` | false | white | orange |
 | Any warnings messages | `warning` | true | white | orange |
+| Critical messages | `.crit` | false | white | red |
 | Error messages | `.err` | false | white | red |
 | Any error messages | `error` | true | white | red |
 | Any failure messages | `fail` | true | red | white |
