@@ -4,6 +4,8 @@
   - [1.2. Merge](#12-merge)
   - [1.3. Réecriture de l'historique](#13-réecriture-de-lhistorique)
     - [1.3.1. Modifier le contenu d'un commit](#131-modifier-le-contenu-dun-commit)
+      - [1.3.1.1. Remplacer un commit : **fixup**](#1311-remplacer-un-commit--fixup)
+      - [1.3.1.2. Editer un commit : **rebase interactive**](#1312-editer-un-commit--rebase-interactive)
 - [2. Git UI](#2-git-ui)
   - [2.1. Real UI](#21-real-ui)
   - [2.2. Terminal UI](#22-terminal-ui)
@@ -118,8 +120,11 @@ git merge develop
 ## 1.3. Réecriture de l'historique
 ### 1.3.1. Modifier le contenu d'un commit
 
-Il peut parfois être utile de modifier un commit alors que d'autres commits ont été créé depuis (gestion de patchs par exemple, pour éviter les patchs qui corrigent les patchs...).  
-> Le principal est résumé ci-dessous, pour un tutoriel plus complet, voir [Medium - Git Commit Fixup, ou comment garder un historique propre][tutorial-medium-edit-commit]  
+Il peut parfois être utile de modifier un commit alors que d'autres commits ont été créé depuis (gestion de patchs par exemple, pour éviter les patchs qui corrigent les patchs...). 
+
+#### 1.3.1.1. Remplacer un commit : **fixup**
+
+> Le principal est résumé ci-dessous, pour un tutoriel plus complet, voir [Medium - Git Commit Fixup, ou comment garder un historique propre][tutorial-edit-commit-fixup]   
 > Les commandes pour mémo :
 > 1. `git commit -a --fixup=<sha1_commit>`
 > 2. `git rebase -i --autosquash <sha1_commit>~`
@@ -160,7 +165,49 @@ a9105b0b6636 arm64: dts: imx8mm-rayplicker: enable VPU and GPU
 > Nous pouvons faire un `git show 48de28a6d6ed` pour véfifier le contenu du commit modifié.  
 > On notera que les hash ont été modifiés.
 
-5. Si ces modifications doivent être pousser sur un dépôt distant, l'option `--force` de `git push` sera nécessaire pour pouvoir réécrire l'historique du dépôt.
+5. Si ces modifications doivent être pousser sur un dépôt distant, l'option `--force` de `git push` sera nécessaire pour pouvoir réécrire l'historique du dépôt. Utiliser cette option avec **précaution !**
+
+#### 1.3.1.2. Editer un commit : **rebase interactive**
+
+Le cas précédent montrait comment remplacer un commit, que faire si on veut _éditer_ un commit ?
+
+> Le tutoriel suivant est fortement inspiré de la réponse acceptée du post suivant [Stackoverflow - How do I modify a specific commit ?][tutorial-edit-commit-rebase-interactive]
+
+Admettons l'historique _git_ suivant :
+```shell
+charlie@charlie-B660M:~/Documents/workspaces/workspace-cobra/kernels/linux-imx$ git log -n 5 --oneline
+ff07367f27fd (HEAD -> borea/imx8/5.4.70_2.3.2) media: i2c: mt9m114: Add debug timer on method used to set stream status
+a45f953ccffc media: videobuf2-core: Add debug timer to track dequeue operation
+d9cfc3d3d563 (upstream/borea/imx8/5.4.70_2.3.2) arm64: dts: Add missing DTS file in Freescale makefile
+a9105b0b6636 arm64: dts: imx8mm-rayplicker: enable VPU and GPU
+9371217537e3 arm64: dts: imx8mm-rayplicker: set DISP clocks
+```
+
+Je souhaite modifier le commit `a45f953ccffc media: videobuf2-core: Add debug timer to track dequeue operation`, comment procéder ? :
+
+1. Use [`git rebase`][tutorial-git-rebase] on `<sha1>` commit :
+```shell
+$ git rebase --interactive 'a45f953ccffc^'
+```
+> Please note the caret `^` at the end of the command, because you need actually to rebase back [to the commit before the one you wish to modify][thread-so-caret-git-usage].
+
+2. This will open the default editor with the list of commit to rebase. All have the keywork `pick` (for `cherrypick`), modify `pick` to `edit` in the line mentioning `a45f953ccffc`.  
+Save the file and exit. Git will interpret and automatically execute the commands in the file. You will find yourself in the previous situation in which you just had created commit `a45f953ccffc`.  
+At this point, `a45f953ccffc` is your last commit. 
+
+3. Make your changes and save.
+4. Then, we can [easily amend commit][tutorial-git-amend] with the command:
+```shell
+$ git commit --all --amend --no-edit
+```
+
+5. After that, return back to the previous `HEAD` commit using:
+```shell
+$ git rebase --continue
+```
+> Note that this will change the SHA-1 of that commit as well as all children -- in other words, this rewrites the history from that point forward.
+
+6. Since history has been rewritten, if push must be done to a remote repository, you need to use option `--force` from `git push` command. Use this command **carefully !**
 
 # 2. Git UI
 
@@ -212,7 +259,11 @@ Plusieurs projets de GIT UI ont également vu le jour pour fonctionner avec le t
 [git-tui-gitui]: https://github.com/extrawurst/gitui
 
 [tutorial-linuxize-rename-branch]: https://linuxize.com/post/how-to-rename-local-and-remote-git-branch/
-[tutorial-medium-edit-commit]: https://medium.com/just-tech-it-now/git-commit-fixup-corriger-editer-un-commit-simplement-dd6c7d9026cd
+[tutorial-edit-commit-fixup]: https://medium.com/just-tech-it-now/git-commit-fixup-corriger-editer-un-commit-simplement-dd6c7d9026cd
+[tutorial-edit-commit-rebase-interactive]: https://stackoverflow.com/questions/1186535/how-do-i-modify-a-specific-commit
+[tutorial-git-amend]: https://www.atlassian.com/git/tutorials/rewriting-history#git-commit--amend
+[tutorial-git-rebase]: https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase
 [tutorial-git-overwriting-master-with-another-branch]: https://knasmueller.net/git-overwriting-master-with-another-branch
 
 [thread-so-print-commit-message-of-a-given-commit]: https://stackoverflow.com/questions/3357280/print-commit-message-of-a-given-commit-in-git
+[thread-so-caret-git-usage]: https://stackoverflow.com/questions/1955985/what-does-the-caret-character-mean-in-git
