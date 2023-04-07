@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : inspiron-55510 - Ubuntu 22.04.2 LTS - Kernel 5.19.0-35-generic - 23/03/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-38-generic - 07/04/2023 :
 
 ```shell
 ##
@@ -248,7 +248,9 @@ function github-dl-tarball()
         local url="https://github.com/${owner}/${repo}/archive/${version}.tar.gz"
 
         # Ask user before proceed to download
-        printf "Tarball URL is: ${url}\n"
+        printf "Tarball URL is: ${url}\n\n"
+
+        printf "Expected format is: github-dl-tarball <owner> <repo> <version_or_sha1>\n"
         read -p "Proceed ? (yes/no)" userInput
 
         case "${userInput}" in 
