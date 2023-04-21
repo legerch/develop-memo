@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-38-generic - 07/04/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-40-generic - 21/04/2023 :
 
 ```shell
 ##
@@ -424,11 +424,6 @@ alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_
 alias memo-png-to-fb='printf "fbv -0 ./my-picture.png  > /dev/null 2>&1\ndd if=/dev/fb0 of=my-picture.fb\n"'
 # Memo used to remain how to remove last line of a file
 alias memo-remove-last-line='printf "sed -i \"$ d\" file.txt\n"'
-# Memo used to know how to use raw2rgbpnm (https://git.retiisi.org.uk/?p=~sailus/raw2rgbpnm.git)
-alias memo-raw2rgbpnm='printf "raw2rgbpnm -s 1288x968 -f SGRBG10 frame-000000.bin frame-000000.ppm\n"'
-# Memo on how to use yavta (https://git.ideasonboard.org/?p=yavta.git;a=summary)
-alias memo-yavta='printf "yavta -f SGRBG16 -s 648x648 -c8 -F/tmp/frame-#.bin /dev/video0\n"'
-
 # Use to save custom bash aliases do documentation folder
 alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md && printf "Done !\n"'
 
@@ -451,6 +446,18 @@ alias doc-rpcompute='generate-project-documentation /home/charlie/Documents/work
 alias doc-rplib='generate-project-documentation /home/charlie/Documents/workspaces/workspace-qt/Cobra-AppCommunication/RP_Lib Doxyfile'
 alias doc-benchmanager-lib='generate-project-documentation /home/charlie/Documents/workspaces/workspace-qt/BancCalibration-application/BancCalibration-library Doxyfile'
 alias doc-benchmanager-arduino='generate-project-documentation /home/charlie/Documents/workspaces/workspace-vscode/BancCalibration-arduino Doxyfile'
+
+##
+# Applications build ourself
+#
+# Yavta : https://git.ideasonboard.org/yavta.git
+# Raw2RgbPnm : https://git.retiisi.org.uk/?p=~sailus/raw2rgbpnm.git
+##
+alias custom-yavta='/home/charlie/Documents/workspaces/workspace-vscode/yavta/yavta'
+alias custom-raw2rgbpnm='/home/charlie/Documents/workspaces/workspace-vscode/raw2rgbpnm/raw2rgbpnm'
+
+alias memo-yavta='printf "raw10: yavta -f SGRBG16 -s 648x648 -c8 -F/tmp/frame-#.bin /dev/video0\nraw8: yavta -f SGRBG8 -s 640x640 -c8 -F/tmp/frame-#.bin /dev/video0\nyuyv: yavta -f YUYV -s 640x640 -c8 -F/tmp/frame-#.bin /dev/video0\n"'
+alias memo-raw2rgbpnm='printf "raw10: raw2rgbpnm -s 648x648 -f SGRBG10 frame-000000.bin frame-000000.ppm\nraw8: raw2rgbpnm -s 640x640 -f SGRBG8 frame-000000.bin frame-000000.ppm\nyuyv: raw2rgbpnm -s 640x640 -f YUYV frame-000000.bin frame-000000.ppm\n"'
 
 ##
 # Pi specific aliases
