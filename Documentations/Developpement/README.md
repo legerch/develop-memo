@@ -24,7 +24,6 @@ Dans ce répertoire se trouve toutes les "astuces" relatives au développement a
 - [SSH](Ssh/ "SSH")
 - [Streaming](Streaming/ "Streaming")
 - [Valgrind](Valgrind/ "Valgrind")
-- [Wifi](Wifi/ "Wifi")
 - [Windows](Windows/ "Windows")
 
 ## Problèmes rencontrés

@@ -10,11 +10,12 @@ This file will resume how to create an access point.
   - [1.3. Band Channels](#13-band-channels)
     - [1.3.1. 2.4GHz](#131-24ghz)
     - [1.3.2. 5GHz](#132-5ghz)
-- [2. Configuration](#2-configuration)
+- [2. Create an access point](#2-create-an-access-point)
   - [2.1. Driver support](#21-driver-support)
   - [2.2. Setup interface](#22-setup-interface)
   - [2.3. Setup hostapd](#23-setup-hostapd)
-  - [2.4. Ressources used](#24-ressources-used)
+  - [2.4. Setup DHCP server](#24-setup-dhcp-server)
+  - [2.5. Ressources used](#25-ressources-used)
 
 # 1. IEEE802.11 specifications
 
@@ -71,7 +72,7 @@ If **DFS** is not enabled, your device will only have access to **UNII-1** chann
 > **Source:** [FR - Comprendre et configurer le DFS][doc-wifi-5-dfs-fr]  
 > **Alternative:** [EN - Introduction to 5 GHz WiFi Channels][doc-wifi-5-dfs-en]
 
-# 2. Configuration
+# 2. Create an access point
 ## 2.1. Driver support
 
 First, we need to verify that driver of our network interface support access point.  
@@ -110,7 +111,11 @@ hostapd -B /etc/hostapd.conf
 ```
 > `-B` here is for : _run daemon in the background_
 
-## 2.4. Ressources used
+## 2.4. Setup DHCP server
+
+**DHCP server** will allow to give _IP addresses_ to devices connected to the generated access point, please refer to [DHCP documentation][doc-dhcp] for more details.
+
+## 2.5. Ressources used
 
 - Ubuntu
   - [Hostapd][doc-ubuntu-hostapd]
@@ -138,7 +143,7 @@ hostapd -B /etc/hostapd.conf
     - [Wifi Analyzer][app-wifi-analyzer]
 
 <!-- Anchor of this file -->
-[anchor-band-5ghz-channels]: #5ghz
+[anchor-band-5ghz-channels]: #132-5ghz
 
 <!-- Asset ressources -->
 [asset-img-list-channel-24]: images/list-channels-2.4GHz.png
@@ -146,6 +151,7 @@ hostapd -B /etc/hostapd.conf
 
 <!-- Documentation links -->
 [doc-hostapd-conf-example]: examples/hostapd.conf
+[doc-dhcp]: ../DHCP/
 [doc-drivers-wifi]: ../../Drivers/wifi/
 
 <!-- External links -->
