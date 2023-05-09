@@ -7,7 +7,7 @@
 # 1. Introduction
 
 THis file contains all details about a **Session Description Protocol (SDP)**.  
-Some examples are available in ressources folder : [`sdp/res`](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Streaming/sdp/res)
+Some examples are available in ressources folder : [`sdp/res`](res/)
 
 # 2. Required fields
 

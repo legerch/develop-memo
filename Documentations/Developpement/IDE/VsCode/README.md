@@ -131,8 +131,8 @@ In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** 
   - [Open files always in a new tab](https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab)
 
 <!-- Links to this repository -->
-[doc-arduino]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Arduino
-[doc-snippets-c]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode/ressources/c.json
+[doc-arduino]: ../../Arduino/
+[doc-snippets-c]: ../../IDE/VsCode/ressources/c.json
 
 <!-- External links -->
 [vscode-official]: https://code.visualstudio.com/

@@ -191,9 +191,9 @@ Once, board list is working in command-line, you may not be able to use it under
 [anchor-issues-linux-snap]: #291-linux---snap-installation
 
 <!-- Repository links -->
-[repo-arduino-example-find-ascii]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Arduino/arduino-example-find-ascii
-[repo-ide-vscode]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode
-[repo-linux-bash-aliases-custom]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Linux/linux/custom_bash_aliases.md
+[repo-arduino-example-find-ascii]: arduino-example-find-ascii/
+[repo-ide-vscode]: ../IDE/VsCode/
+[repo-linux-bash-aliases-custom]: ../Linux/linux/custom_bash_aliases.md
 
 <!-- External links ressources -->
 [arduino-builtin-examples]: https://docs.arduino.cc/built-in-examples/

@@ -39,7 +39,7 @@ Options detailled below : [Particular case - false-positive](#particular-case--f
 - `--gen-suppression`
 
 ### 2.1.2. Alias command
-An alias commands for _Valgrind memcheck_ can be added in order to not taping all options at each time (see more details here : [Linux - Custom terminal commands](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux#8-custom-terminal-commands)) :
+An alias commands for _Valgrind memcheck_ can be added in order to not taping all options at each time (see more details here : [Linux - Custom terminal commands](../Linux#8-custom-terminal-commands)) :
 ```shell
 # Valgrind memcheck alias
 alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes'
@@ -62,7 +62,7 @@ When valgrind runs _Memcheck_ tool, it automatically tries to read a file called
 vg-memcheck='valgrind --tool=memcheck --suppressions=supfile1.supp --suppressions=supfile2.supp
 ```
 
-In this section, we gonna used an example, where all files can be found here : [Example - Suppression file](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Valgrind/example-suppression_file)
+In this section, we gonna used an example, where all files can be found here : [Example - Suppression file](example-suppression_file/)
 
 #### 2.1.3.1. How to get "suppression file" ?
 ##### 2.1.3.1.1. List of existant _suppression file_
@@ -119,16 +119,16 @@ By using custom commands valgrind described on top :
 ```shell
 valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --gen-suppressions=all --log-file=minimalraw.log ./bin/myapp
 ```
-> This last command will generate file that can be found here : [vg-rp2_core.log](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Valgrind/example-suppression_file/vg-rp2_core.log)
+> This last command will generate file that can be found here : [vg-rp2_core.log](example-suppression_file/vg-rp2_core.log)
 
-You now have a file containing the raw output, with the suppressions mingled with the errors and other stuff. Also, as errors are usually multiple, there'll usually be multiple instances of each suppression. So the next is to generate a valid _suppression file_ from the raw log file, to do so, use script [vg-parse-suppressions.sh](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Valgrind/scripts/vg-parse-suppressions.sh) :
+You now have a file containing the raw output, with the suppressions mingled with the errors and other stuff. Also, as errors are usually multiple, there'll usually be multiple instances of each suppression. So the next is to generate a valid _suppression file_ from the raw log file, to do so, use script [vg-parse-suppressions.sh](scripts/vg-parse-suppressions.sh) :
 ```shell
 cat vg-rp2_core.log | ./vg-parse-suppressions.sh > vg-rp2_core-full.suppr
 ```
-> Generated file can be found here : [vg-rp2_core-full.suppr](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Valgrind/example-suppression_file/vg-rp2_core-full.suppr)
+> Generated file can be found here : [vg-rp2_core-full.suppr](example-suppression_file/vg-rp2_core-full.suppr)
 
 So, in this generated file, we have all memory-leaks (or errors) throws by _Valgrind Memcheck tool_, but we don't want to actually turn-off all reported errors, only those from external libraries, in this case, main goal was to turn-off all errors from library `/lib/ld-2.25.so` (which is the linker library). So we deleted all _suppress instructions_ and keep only those from library `/lib/ld-2.25.so`.
-> Final suppresion file can be found here : [vg-rp2_core.suppr](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Valgrind/example-suppression_file/vg-rp2_core.suppr)
+> Final suppresion file can be found here : [vg-rp2_core.suppr](example-suppression_file/vg-rp2_core.suppr)
 
 #### 2.1.3.2. How to apply "suppression file" ?
 
@@ -152,7 +152,7 @@ This way, we know fore sure that all thrown errors are neither from `library GLi
 This tools can used many options, please refer to [Hellgrind documentation](https://valgrind.org/docs/manual/hg-manual.html) for more details.
 
 ### 2.2.2. Alias command
-An alias commands for _Valgrind helgrind_ can be added in order to not taping all options at each time (see more details here : [Linux - Custom terminal commands](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux#8-custom-terminal-commands)) :
+An alias commands for _Valgrind helgrind_ can be added in order to not taping all options at each time (see more details here : [Linux - Custom terminal commands](../Linux#8-custom-terminal-commands)) :
 ```shell
 # Valgrind helgrind alias
 alias vg-helgrind='valgrind --tool=helgrind

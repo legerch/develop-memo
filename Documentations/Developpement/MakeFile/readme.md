@@ -483,7 +483,7 @@ version:
 
 
 <!-- Links for other files -->
-[anchor-doc-gcc]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Compilers/GCC
+[anchor-doc-gcc]: ../Compilers/GCC/
 
 <!-- Links for external ressources -->
 [make-file-fct]: https://www.gnu.org/software/make/manual/html_node/File-Function.html

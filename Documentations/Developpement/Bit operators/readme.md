@@ -119,13 +119,13 @@ buf[2] = val1; /* (0011 0001) */
 ## Bit-field
 
 See this courses for more details about **bit-fields** :
-- http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/2-C-adv-data/bit-field.html (or [here](https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Bit%20operators/course_mathcs_bit-field.html) if unavailable)
+- http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/2-C-adv-data/bit-field.html (or [here](course_mathcs_bit-field.html) if unavailable)
 - https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm
 
 ## Bit-array
 
 The **C-programming** language doesn't provide support for array of bits, but all the necessary operations are provided.
-See this course for more details : http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/1-C-intro/bit-array.html (or [here](https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Bit%20operators/course_mathcs_bit-array.html) if unavailable)
+See this course for more details : http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/1-C-intro/bit-array.html (or [here](course_mathcs_bit-array.html) if unavailable)
 
 Below, modified macro to be compatible with any type for bit-array container. In the course, we use an array of int32, with this, we could use an array of int8 if we want.
 

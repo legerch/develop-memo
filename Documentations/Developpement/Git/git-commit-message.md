@@ -63,8 +63,8 @@ Please refer to [list of apps][doc-ubuntu-packages-git-ui] to get list of usefoo
   - [doc-git-template-official]
 
 <!-- Links of this repository -->
-[doc-ubuntu-packages]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Linux/Ubuntu/ubuntu_packages.md
-[doc-ubuntu-packages-git-ui]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Linux/Ubuntu/ubuntu_packages.md#5-git-ui
+[doc-ubuntu-packages]: ../Linux/Ubuntu/ubuntu_packages.md
+[doc-ubuntu-packages-git-ui]: ../Linux/Ubuntu/ubuntu_packages.md#5-git-ui
 
 <!-- External links -->
 [git-rule-blog1]: https://cbea.ms/git-commit/

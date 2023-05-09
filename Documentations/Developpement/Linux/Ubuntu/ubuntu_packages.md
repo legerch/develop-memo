@@ -428,10 +428,10 @@ Useful properties :
 [anchor-git-ui-50-72]: #52-compatibe-5072-rule
 
 <!-- Links of this repository -->
-[doc-arduino]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Arduino
-[doc-git-commit-message]: https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/Developpement/Git/git-commit-message.md
-[doc-qt]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Qt
-[doc-vscode]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/IDE/VsCode
+[doc-arduino]: ../../Arduino/
+[doc-git-commit-message]: ../../Git/git-commit-message.md
+[doc-qt]: ../../Qt/
+[doc-vscode]: ../../IDE/VsCode/
 
 <!-- External links -->
 [br-getting-started]: https://buildroot.org/downloads/manual/manual.html#_getting_started

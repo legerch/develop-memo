@@ -75,7 +75,7 @@ Comme expliqué dans la description :
 Ainsi, veuillez vérifier dans le _.config_ que la valeur associée est bien **M** (Autres valeurs : _N/Y_)  
 
 # Liens utiles
-- [Documentation du Cobra : compilation et installation](https://github.com/BOREA-DENTAL/DocumentationsCobra/blob/master/Documentations/InstallAndUpdate/Compilation%20%5Bapp%2C%20modules%5D.md)  
+- [Documentation du Cobra : compilation et installation](../../../InstallAndUpdate/Compilation%20%5Bapp%2C%20modules%5D.md)  
 - [Documentations kernel linux](https://www.kernel.org/doc/html/latest/index.html)  
 - [Tutoriel linux : chapitre des patches](https://www.linuxtopia.org/online_books/linux_kernel/kernel_configuration/ch07s02.html)
   

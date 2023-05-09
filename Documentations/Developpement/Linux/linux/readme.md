@@ -1,4 +1,4 @@
-- [Linux password management](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux/linux/linux-pwd-management.md)
-- [Linux init management](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux/linux/linux-init-management.md)
-- [Linux logs](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux/linux/linux-logs.md)
-- [Linux tips](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Linux/linux/linux-tips.md)
+- [Linux password management](linux-pwd-management.md)
+- [Linux init management](linux-init-management.md)
+- [Linux logs](linux-logs.md)
+- [Linux tips](linux-tips.md)

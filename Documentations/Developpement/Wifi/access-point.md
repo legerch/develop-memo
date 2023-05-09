@@ -145,8 +145,8 @@ hostapd -B /etc/hostapd.conf
 [asset-img-list-channel-5]: images/list-channels-5GHz-background.png
 
 <!-- Documentation links -->
-[doc-hostapd-conf-example]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Wifi/examples/hostapd.conf
-[doc-drivers-wifi]: https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Drivers/wifi
+[doc-hostapd-conf-example]: examples/hostapd.conf
+[doc-drivers-wifi]: ../../Drivers/wifi/
 
 <!-- External links -->
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi

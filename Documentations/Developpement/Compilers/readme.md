@@ -1,2 +1,2 @@
 This folder contains all useful ressources, options descriptions, etc... of compilers :
-- [GCC](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/Compilers/GCC)
+- [GCC](GCC/)

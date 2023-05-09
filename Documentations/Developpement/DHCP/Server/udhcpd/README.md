@@ -43,12 +43,12 @@ Take a look at variables :
 - `interface` : Interface to use with the DHCP daemon
 Others values can be left to default, documentation of each field can be found at : https://manpages.ubuntu.com/manpages/bionic/man5/udhcpd.conf.5.html.
 > **Be carefull**, host IP address must be exclude !  
-> An example is available under [udhcpd/udhcpd.conf](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/DHCP/Server/udhcpd/udhcpd.conf)
+> An example is available under [udhcpd/udhcpd.conf](udhcpd.conf)
 
 ## 3.3. Init script 
 
 To start DHCP Daemon at startup, a init script must be created in `/etc/init.d`.
-> An example is available under [udhcpd/S46dhcp](https://github.com/BOREA-DENTAL/DocumentationsCobra/tree/master/Documentations/Developpement/DHCP/Server/udhcpd/S46dhcp).  
+> An example is available under [udhcpd/S46dhcp](S46dhcp).  
 > Note that interfaces must be **up** before starting DHCP daemon.
 
 # 4. Ressources

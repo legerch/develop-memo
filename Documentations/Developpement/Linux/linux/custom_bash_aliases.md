@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-40-generic - 21/04/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-41-generic - 05/05/2023 :
 
 ```shell
 ##
@@ -279,7 +279,8 @@ function github-dl-tarball()
 # Note 1 : "qrencode" package must be available (used to generate QrCode).
 # Note 2 : Bash 4 minimum is needed (used to easily manage lower/upper case)
 #
-# Wifi QrCode format : 
+# Wifi QrCode format :
+# - https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11
 # - https://feeding.cloud.geek.nz/posts/encoding-wifi-access-point-passwords-qr-code/
 # - https://pocketables.com/2022/01/how-to-format-that-wifi-qr-code-in-plain-text.html
 #
