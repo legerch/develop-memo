@@ -8,7 +8,6 @@ Dans ce répertoire se trouve toutes les "astuces" relatives au développement a
 - [C](C/ "C")
 - [Compilers](Compilers/ "Compilers")
 - [Debug](Debug/ "Debug")
-- [DHCP](DHCP/ "DHCP")
 - [FFMPEG](FFMPEG/ "FFMPEG")
 - [FTP](Ftp/ "FTP")
 - [GIT](Git/ "GIT")

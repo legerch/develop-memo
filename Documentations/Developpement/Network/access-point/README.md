@@ -151,8 +151,8 @@ hostapd -B /etc/hostapd.conf
 
 <!-- Documentation links -->
 [doc-hostapd-conf-example]: examples/hostapd.conf
-[doc-dhcp]: ../DHCP/
-[doc-drivers-wifi]: ../../Drivers/wifi/
+[doc-dhcp]: ../dhcp/
+[doc-drivers-wifi]: ../../../Drivers/wifi/
 
 <!-- External links -->
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
