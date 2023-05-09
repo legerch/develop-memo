@@ -10,7 +10,7 @@
 
 # 1. Introduction
 
-In this tutorial, [UDHCPD](https://git.busybox.net/busybox/tree/networking/udhcp) from **Busybox** will be used.
+In this tutorial, [UDHCPD][udhcpd-git] from **Busybox** will be used.
 
 # 2. Prepare network informations needed
 
@@ -18,8 +18,8 @@ In this tutorial, [UDHCPD](https://git.busybox.net/busybox/tree/networking/udhcp
 
 ## 2.1. Find IP range
 
-> More details here : https://www.baeldung.com/cs/get-ip-range-from-subnet-mask  
-> If you get lazy : https://www.omnicalculator.com/other/ip-subnet
+> More details here : [Get IP range from subnet mask][ip-range-doc]  
+> If you get lazy : [IP subnet calculator][ip-range-calculator]
 
 # 3. Setup UDHCPD
 
@@ -36,33 +36,49 @@ In this tutorial, [UDHCPD](https://git.busybox.net/busybox/tree/networking/udhcp
 ## 3.2. Create UDHCPD configuration file
 
 Configuration file for **UDHCPD** must be created and placed at `etc/udhcpd.conf`.  
-A default configuration file can be found at : [busybox/udhcpd](https://udhcp.busybox.net/udhcpd.conf).  
+A default configuration file can be found at : [busybox/udhcpd.conf][udhcpd-conf-default].  
 Take a look at variables :
 - `start` : First IP address to use
 - `end` : Last IP address to use
 - `interface` : Interface to use with the DHCP daemon
-Others values can be left to default, documentation of each field can be found at : https://manpages.ubuntu.com/manpages/bionic/man5/udhcpd.conf.5.html.
+Others values can be left to default, documentation of each field can be found at [Manpage udhcpd][udhcpd-doc-ubuntu].
 > **Be carefull**, host IP address must be exclude !  
-> An example is available under [udhcpd/udhcpd.conf](udhcpd.conf)
+> An example is available under [udhcpd/udhcpd.conf][repo-udhcpd-conf-example]
 
 ## 3.3. Init script 
 
 To start DHCP Daemon at startup, a init script must be created in `/etc/init.d`.
-> An example is available under [udhcpd/S46dhcp](S46dhcp).  
+> An example is available under [udhcpd/S46dhcp][repo-udhcpd-script-init].  
 > Note that interfaces must be **up** before starting DHCP daemon.
 
 # 4. Ressources
 
 - Officials
-  - https://www.unix.com/man-page/suse/8/udhcpd/
-  - https://manpages.ubuntu.com/manpages/bionic/man5/udhcpd.conf.5.html
+  - [udhcpd-doc-man]
+  - [udhcpd-doc-ubuntu]
 - Examples
-  - [busybox/udhcpd.conf](https://udhcp.busybox.net/udhcpd.conf)
-  - [yocto/init-busybox-udhcpd](https://git.yoctoproject.org/cgit.cgi/poky/plain/meta/recipes-core/busybox/files/busybox-udhcpd)
+  - [busybox/udhcpd.conf][udhcpd-conf-default]
+  - [yocto/init-busybox-udhcpd][udhcpd-script-init-yocto]
 - Tutorials
   - UDHCPD
-    - https://iotbytes.wordpress.com/configure-dhcp-server-on-microcore-tiny-linux/
-    - https://blog-du-grouik.tinad.fr/post/2013/03/08/serveur-dhcp-vite-fait-sous-d%C3%A9bian
+    - [udhcpd-tutorial-iotbytes]
+    - [udhcpd-tutorial-blog-grouik]
   - Network
-    - https://www.baeldung.com/cs/get-ip-range-from-subnet-mask
-    - https://www.omnicalculator.com/other/ip-subnet
+    - [ip-range-doc]
+    - [ip-range-calculator]
+
+<!-- Ressources links -->
+[repo-udhcpd-conf-example]: udhcpd.conf
+[repo-udhcpd-script-init]: S46dhcp
+
+[udhcpd-conf-default]: https://udhcp.busybox.net/udhcpd.conf
+[udhcpd-doc-man]: https://www.unix.com/man-page/suse/8/udhcpd/
+[udhcpd-doc-ubuntu]: https://manpages.ubuntu.com/manpages/bionic/man5/udhcpd.conf.5.html
+[udhcpd-git]: https://git.busybox.net/busybox/tree/networking/udhcp
+[udhcpd-script-init-yocto]: https://git.yoctoproject.org/cgit.cgi/poky/plain/meta/recipes-core/busybox/files/busybox-udhcpd
+
+[udhcpd-tutorial-iotbytes]: https://iotbytes.wordpress.com/configure-dhcp-server-on-microcore-tiny-linux/
+[udhcpd-tutorial-blog-grouik]: https://blog-du-grouik.tinad.fr/post/2013/03/08/serveur-dhcp-vite-fait-sous-d%C3%A9bian
+
+[ip-range-doc]: https://www.baeldung.com/cs/get-ip-range-from-subnet-mask
+[ip-range-calculator]: https://www.omnicalculator.com/other/ip-subnet
