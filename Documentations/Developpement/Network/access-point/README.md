@@ -92,7 +92,9 @@ netmask 255.255.255.0
 gateway 192.168.0.1
 dns-nameservers 8.8.8.8 8.8.4.4 192.168.0.1
 ```
-> Interface name `wlan0` may vary between chipsets, some required specific name to enable access point capabilities
+> Interface name `wlan0` may vary between chipsets, some required specific name to enable access point capabilities  
+> For more details about `/etc/network/interfaces`, please see:
+> - [Manpage _Interfaces_][doc-file-interfaces-manpage]
 
 2. Enable interface
 ```shell
@@ -157,6 +159,8 @@ hostapd -B /etc/hostapd.conf
 <!-- External links -->
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
 [app-wifi-analyzer]: https://apps.microsoft.com/store/detail/wifi-analyzer/9NBLGGH33N0N?hl=fr-fr&gl=fr
+
+[doc-file-interfaces-manpage]: https://man.cx/interfaces(5)
 
 [doc-gentoo-hostapd]: https://wiki.gentoo.org/wiki/Hostapd
 [doc-ubuntu-hostapd]: https://doc.ubuntu-fr.org/hostapd
