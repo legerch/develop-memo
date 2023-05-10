@@ -94,6 +94,16 @@ gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=640
 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=640,height=640,framerate=20/1 ! queue ! imxg2dvideotransform ! imxvpuenc_h264 bitrate=0 quantization=25 ! rtph264pay ! udpsink host=192.168.0.20 port=1234
 ```
 
+- Démarrer le streaming vidéo en le diffusant sur le framebuffer avec une analyze de **QrCode**:
+```shell
+gst-launch-1.0 -v -m v4l2src device=/dev/video0 io-mode=4 ! video/x-raw,format=UYVY,width=640,height=640,framerate=20/1 ! queue ! imxg2dvideotransform ! video/x-raw,width=128,height=128 ! videoconvert ! zbar ! imxg2dvideotransform ! fbdevsink device=/dev/fb0
+```
+> **Notes :**
+> - On utilise l'option `-m` permettant d'afficher les messages du bus sur _stdout_
+> - L'élement `zbar` ne supporte que les formats [Y800, I420, YV12, NV12, NV21, Y41B, Y42B, YUV9, YVU9] sur son pad **sink** (données d'entrées), tandis que l'élément `imxg2dvideotransform` ne permet que de convertir sur son pad **src** (données de sorties) les formats [RGBx, RGBA, BGRx, BGRA, xRGB, ARGB, xBGR, ABGR, RGB16, BGR16]. C'est pourquoi il est nécessaire d'utiliser l'élément `videoconvert` (conversion _software_) à la place de `imxg2dvideotransform` (conversion _hardware_)
+> - On réduit d'abord la taille du flux vidéo à la taille du framebuffer, cela permet de réduire le délai introduit par l'utilisation de `videoconvert` dans le pipeline, ainsi la vidéo reste fluide.
+> - Penser à activer les algorithmes **d'auto wite-balance** et **d'auto exposure** du capteur pour pouvoir lire le QrCode
+
 #### 2.1.2.2. Source simulée
 
 - Démarrer le streaming vidéo en le diffusant au framebuffer et via UDP :
@@ -285,6 +295,7 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
     - [sdpdemux][doc-gst-sdpdemux]
   - Autres
     - [autovideosink][doc-gst-autovideosink]
+    - [zbar][doc-gst-zbar]
 - Documentation officielle **NXP** :
   - [Processeurs IMX8][doc-nxp-imx8]
   - [i.IMX8 GStreamer User Guide][doc-nxp-imx8-gst] (If link unavailable, this PDF can be found in **Datasheets** directory of Borea)
@@ -352,6 +363,7 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
 [doc-gst-videoscale]: https://gstreamer.freedesktop.org/documentation/videoscale/index.html?gi-language=c
 [doc-gst-videotestsrc]: https://gstreamer.freedesktop.org/documentation/videotestsrc/index.html
 [doc-gst-x264enc]: https://gstreamer.freedesktop.org/documentation/x264/index.html?gi-language=c
+[doc-gst-zbar]: https://gstreamer.freedesktop.org/documentation/zbar/index.html?gi-language=c
 
 [doc-nxp-imx8]: https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors:IMX8-SERIES
 [doc-nxp-imx8-gst]: https://community.nxp.com/t5/i-MX-Processors-Knowledge-Base/i-MX-8-GStreamer-User-Guide/ta-p/1098942?attachment-id=101553
