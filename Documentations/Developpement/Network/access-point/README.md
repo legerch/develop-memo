@@ -12,7 +12,10 @@ This file will resume how to create an access point.
     - [1.3.2. 5GHz](#132-5ghz)
 - [2. Generate an access point (AP mode)](#2-generate-an-access-point-ap-mode)
 - [3. Connect to an access point (STATION mode)](#3-connect-to-an-access-point-station-mode)
-- [4. Ressources used](#4-ressources-used)
+- [4. Manage multiple modes](#4-manage-multiple-modes)
+  - [4.1. Switch from/to AP/STATION mode](#41-switch-fromto-apstation-mode)
+  - [4.2. Manage AP/STATION simultaneously](#42-manage-apstation-simultaneously)
+- [5. Ressources used](#5-ressources-used)
 
 # 1. IEEE802.11 specifications
 
@@ -77,7 +80,16 @@ Please refer to [create an access point tutorial][doc-ap-creation] for more deta
 
 Please refer to [connect to an access point tutorial][doc-ap-connection] for more details.
 
-# 4. Ressources used
+# 4. Manage multiple modes
+## 4.1. Switch from/to AP/STATION mode
+
+Please refer to [switch network mode tutorial][doc-mode-switch] for more details.
+
+## 4.2. Manage AP/STATION simultaneously
+
+Please refer to [use STATION and AP modes simultaneously tutorial][doc-mode-ap-sta] for more details.
+
+# 5. Ressources used
 
 - Wikipedia :
   - [IEEE 802.11][doc-wiki-ieee80211]
@@ -107,6 +119,8 @@ Please refer to [connect to an access point tutorial][doc-ap-connection] for mor
 <!-- Documentation links -->
 [doc-ap-creation]: mode-ap.md
 [doc-ap-connection]: mode-sta.md
+[doc-mode-switch]: mode-switch.md
+[doc-mode-ap-sta]: mode-ap-sta.md
 
 <!-- External links -->
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
