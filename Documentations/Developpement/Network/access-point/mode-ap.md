@@ -5,12 +5,13 @@ This file will resume how to create an access point, also called **AP Mode**.
 - [2. Setup interface](#2-setup-interface)
 - [3. Setup hostapd](#3-setup-hostapd)
 - [4. Setup DHCP server](#4-setup-dhcp-server)
-- [5. Ressources used](#5-ressources-used)
+- [5. Hostapd client](#5-hostapd-client)
+- [6. Ressources used](#6-ressources-used)
 
 # 1. Driver support
 
 First, we need to verify that driver of our network interface support access point.  
-Documentation have been written for some chipset, please check folder [documentation/drivers/wifi][doc-drivers-wifi].  
+Documentation have been written for some chipset, please check folder [documentation/drivers/wifi][repo-drivers-wifi].  
 Then, don't forget to load needed drivers via `modprobe` utility (`modprobe -r` to unload)
 
 # 2. Setup interface
@@ -41,7 +42,7 @@ $ /sbin/ifup -a # Use /etc/network/interfaces file
 
 # 3. Setup hostapd
 
-1. Configure `/etc/hostapd.conf` (an example can be found at [hostapd example][doc-hostapd-conf-example])
+1. Configure `/etc/hostapd.conf` (an example can be found at [hostapd example][repo-hostapd-conf-example])
 2. Start **hostapd**
 ```shell
 hostapd -B /etc/hostapd.conf
@@ -50,9 +51,16 @@ hostapd -B /etc/hostapd.conf
 
 # 4. Setup DHCP server
 
-**DHCP server** will allow to give _IP addresses_ to devices connected to the generated access point, please refer to [DHCP documentation][doc-dhcp] for more details.
+**DHCP server** will allow to give _IP addresses_ to devices connected to the generated access point, please refer to [DHCP server documentation][repo-dhcp-server] for more details.
 
-# 5. Ressources used
+# 5. Hostapd client
+
+**Hostapd** provide similar behaviour than WPA Supplicant to be managed by external applications (like [hostapd_cli][doc-hostapd-cli]), please refer to [WPA Supplicant client section][repo-wpa-client] to understand principles.  
+Library [libwpa_client][doc-wpa-supplicant-hostapd-lib] will also be used.
+> Note:
+> - Field `ctrl_interface` of `hostapd.conf` file must be set to use this feature
+
+# 6. Ressources used
 
 - Ubuntu
   - [Hostapd][doc-ubuntu-hostapd]
@@ -69,10 +77,11 @@ hostapd -B /etc/hostapd.conf
 - Threads
   - [StackExchange - How to set up wifi hotspot with 802.11n mode ?][thread-se-how-to-setup-wifi-hostspot-with-80211n-mode]
 
-<!-- Documentation links -->
-[doc-hostapd-conf-example]: examples/hostapd.conf
-[doc-dhcp]: ../dhcp/
-[doc-drivers-wifi]: ../../../Drivers/wifi/
+<!-- Repository links -->
+[repo-hostapd-conf-example]: examples/hostapd.conf
+[repo-wpa-client]: mode-sta.md
+[repo-dhcp-server]: ../dhcp/server/
+[repo-drivers-wifi]: ../../../Drivers/wifi/
 
 <!-- External links -->
 [doc-wiki-ieee80211]: https://fr.wikipedia.org/wiki/IEEE_802.11
@@ -87,5 +96,8 @@ hostapd -B /etc/hostapd.conf
 [doc-ubuntu-hostapd]: https://doc.ubuntu-fr.org/hostapd
 
 [doc-hostapd-conf-details]: https://w1.fi/cgit/hostap/plain/hostapd/hostapd.conf
+[doc-wpa-supplicant-hostapd-lib]: https://w1.fi/wpa_supplicant/devel/hostapd_ctrl_iface_page.html
+
+[doc-hostapd-cli]: https://manpages.debian.org/stretch/hostapd/hostapd_cli.1.en.html
 
 [thread-se-how-to-setup-wifi-hostspot-with-80211n-mode]: https://unix.stackexchange.com/questions/184175/how-to-set-up-wifi-hotspot-with-802-11n-mode

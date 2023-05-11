@@ -105,8 +105,8 @@ Please refer to [connect to an access point tutorial][doc-ap-connection] for mor
 [asset-img-list-channel-5]: images/list-channels-5GHz-background.png
 
 <!-- Documentation links -->
-[doc-ap-creation]: access-point-creation.md
-[doc-ap-connection]: access-point-connection.md
+[doc-ap-creation]: mode-ap.md
+[doc-ap-connection]: mode-sta.md
 
 <!-- External links -->
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
