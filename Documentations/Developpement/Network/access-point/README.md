@@ -10,12 +10,9 @@ This file will resume how to create an access point.
   - [1.3. Band Channels](#13-band-channels)
     - [1.3.1. 2.4GHz](#131-24ghz)
     - [1.3.2. 5GHz](#132-5ghz)
-- [2. Create an access point](#2-create-an-access-point)
-  - [2.1. Driver support](#21-driver-support)
-  - [2.2. Setup interface](#22-setup-interface)
-  - [2.3. Setup hostapd](#23-setup-hostapd)
-  - [2.4. Setup DHCP server](#24-setup-dhcp-server)
-  - [2.5. Ressources used](#25-ressources-used)
+- [2. Generate an access point (AP mode)](#2-generate-an-access-point-ap-mode)
+- [3. Connect to an access point (STATION mode)](#3-connect-to-an-access-point-station-mode)
+- [4. Ressources used](#4-ressources-used)
 
 # 1. IEEE802.11 specifications
 
@@ -72,57 +69,16 @@ If **DFS** is not enabled, your device will only have access to **UNII-1** chann
 > **Source:** [FR - Comprendre et configurer le DFS][doc-wifi-5-dfs-fr]  
 > **Alternative:** [EN - Introduction to 5 GHz WiFi Channels][doc-wifi-5-dfs-en]
 
-# 2. Create an access point
-## 2.1. Driver support
+# 2. Generate an access point (AP mode)
 
-First, we need to verify that driver of our network interface support access point.  
-Documentation have been written for some chipset, please check folder [documentation/drivers/wifi][doc-drivers-wifi].
+Please refer to [create an access point tutorial][doc-ap-creation] for more details.
 
-## 2.2. Setup interface
+# 3. Connect to an access point (STATION mode)
 
-1. Interface configuration via `/etc/network/interfaces` :
-```shell
-auto lo
-iface lo inet loopback
+Please refer to [connect to an access point tutorial][doc-ap-connection] for more details.
 
-auto wlan0
-iface wlan0 inet static
-address 192.168.0.5
-netmask 255.255.255.0
-gateway 192.168.0.1
-dns-nameservers 8.8.8.8 8.8.4.4 192.168.0.1
-```
-> Interface name `wlan0` may vary between chipsets, some required specific name to enable access point capabilities  
-> For more details about `/etc/network/interfaces`, please see:
-> - [Manpage _Interfaces_][doc-file-interfaces-manpage]
+# 4. Ressources used
 
-2. Enable interface
-```shell
-$ /sbin/ifdown -a
-$ /sbin/ifup -a # Use /etc/network/interfaces file
-```
-> Some chipsets required more instructions before calling `ifdown/ifup` :
-> - _Example :_ `iw dev mlan0 interface add uap0 type __ap # We should have : lo, mlan0 and uap0 with $ifconfig`.
-
-## 2.3. Setup hostapd
-
-1. Configure `/etc/hostapd.conf` (an example can be found at [hostapd example][doc-hostapd-conf-example])
-2. Start **hostapd**
-```shell
-hostapd -B /etc/hostapd.conf
-```
-> `-B` here is for : _run daemon in the background_
-
-## 2.4. Setup DHCP server
-
-**DHCP server** will allow to give _IP addresses_ to devices connected to the generated access point, please refer to [DHCP documentation][doc-dhcp] for more details.
-
-## 2.5. Ressources used
-
-- Ubuntu
-  - [Hostapd][doc-ubuntu-hostapd]
-- Gentoo
-  - [Hostapd][doc-gentoo-hostapd]
 - Wikipedia :
   - [IEEE 802.11][doc-wiki-ieee80211]
   - [IEEE 802.11n][doc-wiki-ieee80211n]
@@ -130,14 +86,11 @@ hostapd -B /etc/hostapd.conf
   - [IEEE 802.11e][doc-wiki-ieee80211e] (used for **QoS** service)
   - [IEEE 802.11h][doc-wiki-ieee80211h] (used for **UNII2** and **UNII2-extended** support on 5GHz band)
 - Others
-  - [Hostapd - Configuration file details][doc-hostapd-conf-details]
   - [Wifi country code and channel division][doc-wifi-country-channel-division]
   - [802.11 b/g/n][doc-wifi-bgn-normes]
   - Understand 5GHz band
     - [FR - Comprendre et configurer le DFS][doc-wifi-5-dfs-fr]  
     - [EN - Introduction to 5 GHz WiFi Channels][doc-wifi-5-dfs-en]
-- Threads
-  - [StackExchange - How to set up wifi hotspot with 802.11n mode ?][thread-se-how-to-setup-wifi-hostspot-with-80211n-mode]
 - Useful apps
   - **Linux:**
     - [Sparrow-wifi][app-sparrow-wifi] : Sparrow-wifi has been built from the ground up to be the next generation 2.4 GHz and 5 GHz Wifi spectral awareness tool
@@ -152,18 +105,12 @@ hostapd -B /etc/hostapd.conf
 [asset-img-list-channel-5]: images/list-channels-5GHz-background.png
 
 <!-- Documentation links -->
-[doc-hostapd-conf-example]: examples/hostapd.conf
-[doc-dhcp]: ../dhcp/
-[doc-drivers-wifi]: ../../../Drivers/wifi/
+[doc-ap-creation]: access-point-creation.md
+[doc-ap-connection]: access-point-connection.md
 
 <!-- External links -->
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
 [app-wifi-analyzer]: https://apps.microsoft.com/store/detail/wifi-analyzer/9NBLGGH33N0N?hl=fr-fr&gl=fr
-
-[doc-file-interfaces-manpage]: https://man.cx/interfaces(5)
-
-[doc-gentoo-hostapd]: https://wiki.gentoo.org/wiki/Hostapd
-[doc-ubuntu-hostapd]: https://doc.ubuntu-fr.org/hostapd
 
 [doc-wiki-ieee80211]: https://fr.wikipedia.org/wiki/IEEE_802.11
 [doc-wiki-ieee80211d]: https://fr.wikipedia.org/wiki/IEEE_802.11d
@@ -172,11 +119,8 @@ hostapd -B /etc/hostapd.conf
 [doc-wiki-ieee80211h]: https://en.wikipedia.org/wiki/IEEE_802.11h-2003
 [doc-wiki-list-wlan-channels]: https://en.wikipedia.org/wiki/List_of_WLAN_channels
 
-[doc-hostapd-conf-details]: https://w1.fi/cgit/hostap/plain/hostapd/hostapd.conf
 [doc-wifi-country-channel-division]: https://chowdera.com/2021/01/20210128110913670Y.html
 [doc-wifi-bgn-normes]: https://fr.ihowto.tips/did-you-know/ce-reprezinta-standardele-wi-fi-ieee-802-11a-802-11b-g-n-si-802-11ac-ale-unui-router-wireless.html
 
 [doc-wifi-5-dfs-fr]: https://toubox.fr/wi-fi-comprendre-et-configurer-le-dfs/
 [doc-wifi-5-dfs-en]: https://www.accessagility.com/blog/introduction-to-5-ghz-wifi-channels
-
-[thread-se-how-to-setup-wifi-hostspot-with-80211n-mode]: https://unix.stackexchange.com/questions/184175/how-to-set-up-wifi-hotspot-with-802-11n-mode
