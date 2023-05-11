@@ -1,5 +1,12 @@
 This file will resume how to connect to an access point, also called **STATION Mode**.
 
+> Quick memo (only for my own config), files involved for this mode:
+> - `etc/network/interfaces`
+> - `etc/wpa_supplicant.conf`
+> - `etc/init.d/S40netwkork` (load drivers)
+> - Command used to start _wpa_supplicant_
+> - Command used to refresh DHCP client
+
 **Table of contents:**
 - [1. Setup interface](#1-setup-interface)
 - [2. Setup _wpa\_supplicant_](#2-setup-wpa_supplicant)

@@ -1,5 +1,12 @@
 This file will resume how to create an access point, also called **AP Mode**.
 
+> Quick memo (only for my own config), files involved for this mode:
+> - `etc/network/interfaces`
+> - `etc/init.d/S40netwkork` (load drivers)
+> - `etc/init.d/S41dhcp` (start DHCP server)
+> - `etc/init.d/S42ap` (start hostapd access point from `hostapd.conf`) 
+> - `etc/init.d/S98apcheck` (verify AP is enabled, backup if none)
+
 **Table of contents:**
 - [1. Driver support](#1-driver-support)
 - [2. Setup interface](#2-setup-interface)
