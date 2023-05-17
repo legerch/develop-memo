@@ -11,7 +11,10 @@
   - [4.1. How to use ?](#41-how-to-use-)
   - [4.2. Particular case](#42-particular-case)
     - [4.2.1. C language](#421-c-language)
-- [5. Ressources](#5-ressources)
+- [5. File association](#5-file-association)
+  - [5.1. How to set](#51-how-to-set)
+  - [5.2. Which to set](#52-which-to-set)
+- [6. Ressources](#6-ressources)
 
 # 1. Introduction
 
@@ -108,16 +111,29 @@ Generate our snippets at _VsCode_ format can become difficult, use [Snippet gene
 ## 4.2. Particular case
 ### 4.2.1. C language
 
-In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** header will not be trigger if they are in `c.json`. To do so, change default configuration to considered `.h` as **C** files (for **C++** header, use `hpp` extension) :  
+In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** header will not be trigger if they are in `c.json`. To do so, change default configuration to considered `.h` as **C** files (for **C++** header, use `hpp` extension).  
+See section [File association][anchor-file-assocation] for more details.
+> Link of the associated [issue][issue-c-headers-not-triggered]
+
+# 5. File association
+## 5.1. How to set
+
+To set language associated to a file extension:
 1. `File` -> `Preferences`
 2. `Settings`
 3. `Text Editor` -> `Files`
 4. Go to `Associations` fields
-   1. Add in `Item` value : _*.h_
-   2. Add in `Value` value : _c_
-> Link of the associated [issue][issue-c-headers-not-triggered]
+   1. Add in `Item` value : <my_extension>
+   2. Add in `Value` value : <associated_language>
 
-# 5. Ressources
+## 5.2. Which to set
+
+| Item (extension) | Value (language) |
+|:-:|:-:|
+| `*.h` | `c` |
+| `*.make` | `makefile` |
+
+# 6. Ressources
 
 - Official documentation : 
   - [Website][vscode-official]
@@ -129,6 +145,10 @@ In _VsCode_, `.h` are considered like **C++** files. Snippets defined for **C** 
   - [When creating a VSCode snippet, how can I transform a variable to title-case (like TitleCase) ?](https://stackoverflow.com/questions/52874954/when-creating-a-vscode-snippet-how-can-i-transform-a-variable-to-title-case-li)
   - [Snippet can not work in C header file (#1476)][issue-c-headers-not-triggered]
   - [Open files always in a new tab](https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab)
+
+
+<!-- Anchor to this file -->
+[anchor-file-assocation]: #5-file-association
 
 <!-- Links to this repository -->
 [doc-arduino]: ../../Arduino/
