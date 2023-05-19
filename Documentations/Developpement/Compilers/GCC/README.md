@@ -10,12 +10,12 @@
 
 # 1. Introduction
 
-Official GCC documentation can be found here : [GCC documentation](https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html)
+Official GCC documentation can be found here : [GCC documentation][gcc-doc-home]
 
 # 2. GCC Options
 ## 2.1. Detailled useful warnings options
 
-List of warnings options to look at, official documentation can be found at [Warning options](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html) :
+List of warnings options to look at, official documentation can be found at [Warning options][gcc-doc-warnings]:
 - `-Wall`  
 This enables all the warnings about constructions that some users consider questionable, and that are easy to avoid (or modify to prevent the warning), even in conjunction with macros. See official documentation for detailled list of enabled warnings.
 
@@ -49,15 +49,15 @@ Warn whenever a local variable or type declaration shadows another variable, par
 - `-pedantic`  
 Issue all the warnings demanded by strict ISO C and ISO C++; reject all programs that use forbidden extensions, and some other programs that do not follow ISO C and ISO C++. For ISO C, follows the version of the ISO C standard specified by any -std option used.  
 In absence of -pedantic, even when a specific standard is requested, GCC will still allow some extensions that are not acceptable in the C standard.
-    > See this thread for more info : https://stackoverflow.com/questions/2855121/what-is-the-purpose-of-using-pedantic-in-gcc-g-compiler/40580407
+    > See this thread for more info : [thread-so-purpose-of-using-pedantic]
 
 - `-ansi`  
 This option refers to _1989 ANSI C Standard_ (or equivalently the _1990 ISO C standard_). This option is **obsolete** and if _1989 ANSI C Standard_ is required in a program, use `-std=c89` instead (they both do same thing, but using option `-std=` is prefered instead of `-ansi`).
     > **Note :** In C++, `-ansi` is equivalent to `-std=c++98`
 
 - `-std=`  
-Refer to official documentation for more information about this option : [GCC dialect option](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html).  
-Standard value can be found at : [GCC Standard](https://gcc.gnu.org/onlinedocs/gcc/Standards.html#Standards)
+Refer to official documentation for more information about this option : [GCC dialect option][gcc-doc-dialects].  
+Standard value can be found at : [GCC Standard][gcc-doc-standards]
     > Currently (05/2021), `-std=` default value is :
     > - **C** : `-std=gnu17`
     > - **C++** : `-std=gnu++17`
@@ -67,19 +67,19 @@ Standard value can be found at : [GCC Standard](https://gcc.gnu.org/onlinedocs/g
 
 ## 2.2. Detailled useful optimization options
 
-List of optimizations options to look at, official documentation can be found at [Optimization options](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html) :
+List of optimizations options to look at, official documentation can be found at [Optimization options][gcc-doc-optimizations]:
 - `-O0`  
 **Default optimization option**, reduce compilation time and make debugging produce the expected results.
 
 - `-O<level>`  
 Optimization for speed from level 1 to 3, please don't use level 3 `-O3` which is known for being "instable" (code must be very well written to be correctly optimize because optimisation applied are aggressive, also can have "inverse effect" due to heavy binaries which gonna use more memory, see documentation for more details).  
 Consider `-O2` like maximum level. 
-    > See also [Linux kernel contributors are against `-O3` flag in the project](https://www.phoronix.com/scan.php?page=news_item&px=Linux-Upstream-Against-O3-Kern).
+    > See also [Linux kernel contributors are against `-O3` flag in the project][news-phoronix-linux-kernel-against-o3-flag].
 
 - `-Os`  
 Optimize for size. `-Os` enables all `-O2` optimizations except those that often increase code size.
 
-**Warning :** Please refer to doc before using non-default optimization flags. For example, with flag `-O2` (and `-Os` by extension), option `-fno-gcse` must be used for programs using GCC extension **Computed goto** ([official doc](https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html) and [tutorial](https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables))
+**Warning :** Please refer to doc before using non-default optimization flags. For example, with flag `-O2` (and `-Os` by extension), option `-fno-gcse` must be used for programs using GCC extension **Computed goto** ([official doc][gcc-doc-computed-goto] and [tutorial][tutorial-greenplace-computed-goto])
 
 ## 2.3. GCC options line to use in C Project
 
@@ -97,12 +97,13 @@ OPTIMIZATION_FLAG = -Os
 
 This means we enables all warnings, `-Wreturn-type` and `-Wimplicit-function-declaration` must be considered as errors. Plus, we added 2 more warnings : `-Wstrict-prototypes` and `-Wshadow`.  
 Warning `-Wignored-qualifiers` is disable (was added by `-Wextra`) because this warning is only useful in C++ (it is available in C for library wrote in C compatible in C++ for example).
-> `-pedantic` is not enable, but it could be useful !
+> `-pedantic` is not enabled, but it could be useful if you want to stick to standard C (without _POSIX_ or _GNU_ extensions)
 
 # 3. GCC Attributes
 
 GCC also provides somes attributes used for example to disable a warning in this specific case, that tells to the compiler "this is the expected behaviour, don't warn about it", sometimes it can also make optimisation (it's the case for unused variables for example).  
-Useful attributes (they are defined as macro here to be easily portable with another compiler) :
+Useful attributes (they are defined as macro here to be easily portable with another compiler):
+
 - **Unused function**
 ```C
 #define COMPILER_FCT_UNUSED __attribute__((unused))
@@ -153,13 +154,13 @@ switch(cond)
 ```
 
 > All describes attributes can be found at :
-> - [GCC function attributes](https://gcc.gnu.org/onlinedocs/gcc/Function-Attributes.html)
-> - [GCC variables attributes](https://gcc.gnu.org/onlinedocs/gcc/Variable-Attributes.html)
-> - [GCC implicit-fallthrough warning and attribute](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-fallthrough)
+> - [GCC function attributes][gcc-doc-functions-attributes]
+> - [GCC variables attributes][gcc-doc-variables-attributes]
+> - [GCC implicit-fallthrough warning and attribute][gcc-doc-warnings-implicit-fallthrough]
   
 # 4. GCC Version
 
-GCC provide somes predefined macros ([GCC common predefined macros](https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html)). Here we gonna take a look at _version macro_.
+GCC provide somes predefined macros ([GCC common predefined macros][gcc-doc-common-predefined-macros]). Here we gonna take a look at _version macro_.
 
 ```C
 /* Compute GCC version at compilation time */
@@ -180,20 +181,42 @@ GCC provide somes predefined macros ([GCC common predefined macros](https://gcc.
 # 5. Links
 
 - Official documentation
-  - [GCC options documentation](https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html)
-  - [GCC dialect option](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html)
-  - [GCC Standard](https://gcc.gnu.org/onlinedocs/gcc/Standards.html#Standards)
-  - [GCC common predefined macros](https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html)
-  - [GCC function attributes](https://gcc.gnu.org/onlinedocs/gcc/Function-Attributes.html)
-  - [GCC variables attributes](https://gcc.gnu.org/onlinedocs/gcc/Variable-Attributes.html)
-  - [GCC implicit-fallthrough warning and attribute](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-fallthrough)
-  - [GCC optimization options](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)
-  - [GCC computed goto](https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html)
-- Interessant articles :
-  - [`Werror` is not your friend](https://embeddedartistry.com/blog/2017/05/22/werror-is-not-your-friend/)
-  - [Upstream Linux Developers Against "-O3" Optimizing The Kernel](https://www.phoronix.com/scan.php?page=news_item&px=Linux-Upstream-Against-O3-Kern)
+  - [GCC options documentation][gcc-doc-home]
+  - [GCC dialect option][gcc-doc-dialects]
+  - [GCC Standard][gcc-doc-standards]
+  - [GCC Warnings][gcc-doc-warnings]
+  - [GCC common predefined macros][gcc-doc-common-predefined-macros]
+  - [GCC function attributes][gcc-doc-functions-attributes]
+  - [GCC variables attributes][gcc-doc-variables-attributes]
+  - [GCC implicit-fallthrough warning and attribute][gcc-doc-warnings-implicit-fallthrough]
+  - [GCC optimization options][gcc-doc-optimizations]
+  - [GCC computed goto][gcc-doc-computed-goto]
+- Interesting articles :
+  - [`Werror` is not your friend][article-embeddedartitry-werror-is-not-your-friend]
+  - [Upstream Linux Developers Against "-O3" Optimizing The Kernel][news-phoronix-linux-kernel-against-o3-flag]
 - Tutorials
-  - [Computed goto for efficient dispatch tables](https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables)
+  - [Computed goto for efficient dispatch tables][tutorial-greenplace-computed-goto]
 - Thread
-  - https://stackoverflow.com/questions/45129741/gcc-7-wimplicit-fallthrough-warnings-and-portable-way-to-clear-them
-  - https://stackoverflow.com/questions/2855121/what-is-the-purpose-of-using-pedantic-in-gcc-g-compiler/40580407
+  - [thread-so--wimplicit-fallthrough-warnings-and-portable-way-to-clear-them]
+  - [thread-so-purpose-of-using-pedantic]
+
+<!-- Links to external ressources -->
+[gcc-doc-home]: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
+
+[gcc-doc-common-predefined-macros]: https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html
+[gcc-doc-computed-goto]: https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html
+[gcc-doc-dialects]: https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html
+[gcc-doc-functions-attributes]: https://gcc.gnu.org/onlinedocs/gcc/Function-Attributes.html
+[gcc-doc-optimizations]: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+[gcc-doc-standards]: https://gcc.gnu.org/onlinedocs/gcc/Standards.html#Standards
+[gcc-doc-variables-attributes]: https://gcc.gnu.org/onlinedocs/gcc/Variable-Attributes.html
+[gcc-doc-warnings]: https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
+[gcc-doc-warnings-implicit-fallthrough]: https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-fallthrough
+
+[article-embeddedartitry-werror-is-not-your-friend]: https://embeddedartistry.com/blog/2017/05/22/werror-is-not-your-friend/
+[news-phoronix-linux-kernel-against-o3-flag]: https://www.phoronix.com/scan.php?page=news_item&px=Linux-Upstream-Against-O3-Kern
+
+[thread-so-purpose-of-using-pedantic]: https://stackoverflow.com/questions/2855121/what-is-the-purpose-of-using-pedantic-in-gcc-g-compiler/40580407
+[thread-so--wimplicit-fallthrough-warnings-and-portable-way-to-clear-them]: https://stackoverflow.com/questions/45129741/gcc-7-wimplicit-fallthrough-warnings-and-portable-way-to-clear-them
+
+[tutorial-greenplace-computed-goto]: https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables
