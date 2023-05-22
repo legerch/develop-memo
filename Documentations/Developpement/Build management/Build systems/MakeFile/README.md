@@ -20,10 +20,10 @@ Makefile
 
 # 2. Makefile syntax
 
-Be careful when using **Makefile** syntax, _tab_ characters and _spaces_ have different meaning !
-> See this [stackoverflow thread][thread-so-makefile-space-or-tab] for more details
+See [makefile cheatsheet][repo-makefile-cheatsheet] for syntax details
 
-See [makefile cheatsheet][repo-makefile-cheatsheet] for more details
+> Be careful when using **Makefile** syntax, _tab_ characters and _spaces_ have different meaning !  
+> See this [stackoverflow thread][thread-so-makefile-space-or-tab] for more details
 
 # 3. Template for a simple case
 ## 3.1. Build an application
