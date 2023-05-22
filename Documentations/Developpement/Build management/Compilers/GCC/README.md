@@ -10,7 +10,8 @@
 
 # 1. Introduction
 
-Official GCC documentation can be found here : [GCC documentation][gcc-doc-home]
+Official GCC documentation can be found here : [GCC documentation][gcc-doc-home].  
+> Note than a custom header for compiler attributes is available at [Compilers/custom_compiler.h][repo-compilers-custom-header]
 
 # 2. GCC Options
 ## 2.1. Detailled useful warnings options
@@ -108,7 +109,7 @@ Useful attributes (they are defined as macro here to be easily portable with ano
 ```C
 #define COMPILER_FCT_UNUSED __attribute__((unused))
 
-// This can be used like (in .cpp file):
+// This can be used like (in  .c file):
 static int COMPILER_FCT_UNUSED myUnusedFunction(void){}
 ```
 
@@ -116,7 +117,7 @@ static int COMPILER_FCT_UNUSED myUnusedFunction(void){}
 ```C
 #define COMPILER_FCT_DEPRECATED __attribute__((deprecated))
 
-// This can be used like (in .cpp file):
+// This can be used like (in  .c file):
 static int COMPILER_FCT_DEPRECATED myDeprecatedFunction(void){}
 ```
 
@@ -124,7 +125,7 @@ static int COMPILER_FCT_DEPRECATED myDeprecatedFunction(void){}
 ```C
 #define COMPILER_VAR_UNUSED __attribute__((unused))
 
-// This can be used like (in .cpp file):
+// This can be used like (in  .c file):
 static void myFunction(int COMPILER_VAR_UNUSED intArgNotUsed){}
 ```
 
@@ -199,6 +200,9 @@ GCC provide somes predefined macros ([GCC common predefined macros][gcc-doc-comm
 - Thread
   - [thread-so--wimplicit-fallthrough-warnings-and-portable-way-to-clear-them]
   - [thread-so-purpose-of-using-pedantic]
+
+<!-- Links of this repository -->
+[repo-compilers-custom-header]: ../custom_compiler.h
 
 <!-- Links to external ressources -->
 [gcc-doc-home]: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
