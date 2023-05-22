@@ -6,7 +6,12 @@
   - [2.3. GCC options line to use in C Project](#23-gcc-options-line-to-use-in-c-project)
 - [3. GCC Attributes](#3-gcc-attributes)
 - [4. GCC Version](#4-gcc-version)
-- [5. Links](#5-links)
+- [5. GCC extensions](#5-gcc-extensions)
+  - [5.1. POSIX extensions](#51-posix-extensions)
+    - [5.1.1. Details](#511-details)
+    - [5.1.2. GCC support](#512-gcc-support)
+  - [5.2. GNU extensions](#52-gnu-extensions)
+- [6. Ressources](#6-ressources)
 
 # 1. Introduction
 
@@ -179,7 +184,42 @@ GCC provide somes predefined macros ([GCC common predefined macros][gcc-doc-comm
 #endif
 ```
 
-# 5. Links
+# 5. GCC extensions
+
+For reference, you can find detailled documentation of all extensions quote below at [manpage - feature_test_macros][manpage-feature-test-macros]
+
+## 5.1. POSIX extensions
+### 5.1.1. Details
+
+_POSIX extensions_ allows you to use functions that are not part of the standard C library but are part of the [POSIX standard][wiki-posix-standard].  
+If your application/library need POSIX extension, define macro `_POSIX_C_SOURCE` (`_POSIX_SOURCE` is obsolete) at the needed version.  
+Example:
+```c
+#define _POSIX_C_SOURCE 200809L
+```
+> Note than this is better to define this macro in your build system (_Makefile_, _CMake_). If part of your project need those extensions, then your entire project need it...
+
+### 5.1.2. GCC support
+
+By default, **GCC** use `-std=gnu<std_version>` which enable **POSIX extensions** (_gnu_ part set it), you can easily verify this by printing `_POSIX_C_SOURCE` value:
+```c
+printf("POSIX standard used: %ld\n", _POSIX_C_SOURCE)
+```
+> So, if using `-sdt=gnu<std_version>`, you don't even need to define this macro yourself!
+
+In order to disable this extension, you need to use options:
+- `-std=<std_version>`: Set to a C standard (note the missing _gnu_)
+- `-pedantic`: Issue all the warnings demanded by strict ISO C and ISO C++
+
+## 5.2. GNU extensions
+
+_GNU extensions_ can be useful for **GNU and/or Linux** specific stuff support.  
+
+In order to enable this extension, you must:
+1. Set build option `-std=gnu<std_version>` (with _gnu_ part): this will enable part of GNU extension
+2. Define macro `_GNU_SOURCE` in your build system (makefile, cmake, etc...): This will enable all GNU extension features
+
+# 6. Ressources
 
 - Official documentation
   - [GCC options documentation][gcc-doc-home]
@@ -192,6 +232,11 @@ GCC provide somes predefined macros ([GCC common predefined macros][gcc-doc-comm
   - [GCC implicit-fallthrough warning and attribute][gcc-doc-warnings-implicit-fallthrough]
   - [GCC optimization options][gcc-doc-optimizations]
   - [GCC computed goto][gcc-doc-computed-goto]
+- Extensions
+  - [Manpage - Features test macros][manpage-feature-test-macros]
+  - [POSIX standards][wiki-posix-standard]
+  - [POXIX macro][thread-so-posix-extension-macro]
+  - [Disable GCC GNU (and POSIX) extensions][thread-so-disable-extensions]
 - Interesting articles :
   - [`Werror` is not your friend][article-embeddedartitry-werror-is-not-your-friend]
   - [Upstream Linux Developers Against "-O3" Optimizing The Kernel][news-phoronix-linux-kernel-against-o3-flag]
@@ -222,5 +267,11 @@ GCC provide somes predefined macros ([GCC common predefined macros][gcc-doc-comm
 
 [thread-so-purpose-of-using-pedantic]: https://stackoverflow.com/questions/2855121/what-is-the-purpose-of-using-pedantic-in-gcc-g-compiler/40580407
 [thread-so--wimplicit-fallthrough-warnings-and-portable-way-to-clear-them]: https://stackoverflow.com/questions/45129741/gcc-7-wimplicit-fallthrough-warnings-and-portable-way-to-clear-them
+[thread-so-posix-extension-macro]: https://stackoverflow.com/questions/48332332/what-does-define-posix-source-mean
+[thread-so-disable-extensions]: https://stackoverflow.com/questions/38939991/how-to-disable-gnu-c-extensions
 
 [tutorial-greenplace-computed-goto]: https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables
+
+[manpage-feature-test-macros]: https://man7.org/linux/man-pages/man7/feature_test_macros.7.html
+
+[wiki-posix-standard]: https://en.wikipedia.org/wiki/POSIX
