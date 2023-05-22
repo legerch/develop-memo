@@ -1,0 +1,69 @@
+# ------------------------------------------------
+# This makefile use a common makefile used
+# to build applications
+# Date : 12/05/2023
+# ------------------------------------------------
+# Description of available arguments of this Makefile :
+#
+# Please refer to included makefile for arguments details
+# ------------------------------------------------
+
+# Set application informations
+TARGET_NAME := app_gstreamer_manager
+TARGET_VERSION_SEMANTIC := 1.1.0
+
+# Set application needed headers
+HEADERS_SPECIFIC_LIST	:=	../include \
+							../../ci_times/include \
+							../../custom_error/include \
+							../../helper_tools/include \
+							../../network_manager/include
+
+HEADERS_LAYER_LIST		:=
+
+HEADERS_SDK_LIST		:=	/usr/include/glib-2.0 \
+							/usr/lib/glib-2.0/include \
+							/usr/include/gstreamer-1.0
+
+# Set application custom flags
+CFLAGS_TARGET 			:=
+
+# Set application flags specific to board
+BOARD_RASPBERRY_CFLAGS	:=
+BOARD_ARDUINO_CFLAGS	:=
+BOARD_OTHERS_CFLAGS 	:=
+
+# Set application linking libraries paths
+PATHS_LIBS_LIST_SPECIFIC		:=	../bin/ \
+									../../ci_times/bin \
+									../../custom_error/bin \
+									../../helper_tools/bin \
+									../../network_manager/bin
+
+OPT_LDFLAGS_USE_LAYER_DIR_LIB	:=	0
+
+# Set application needed libraries
+LDLIBS_SPECIFIC					:=	-lci_times \
+									-lcustomerror \
+									-lgstreamermanager \
+									-lhelpertools \
+									-lnetworkmanager \
+									\
+									-lgstreamer-1.0
+
+# Set application linking libraries paths specific to board
+BOARD_RASPBERRY_LIB_PATHS_LIST	:=
+
+BOARD_ARDUINO_LIB_PATHS_LIST	:=
+
+BOARD_OTHERS_LIB_PATHS_LIST		:=
+
+# Set application needed libraries specific to board
+BOARD_RASPBERRY_LDLIBS			:=
+
+BOARD_ARDUINO_LDLIBS			:=
+
+BOARD_OTHERS_LDLIBS				:=
+
+# Call generic application makefile
+include ../../../01-makefile/app.make

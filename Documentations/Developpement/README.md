@@ -5,8 +5,8 @@ Dans ce répertoire se trouve toutes les "astuces" relatives au développement a
 ## Tutoriels
 
 - [Bit-operators](Bit%20operators/ "Bit-operators")
+- [Build management](Build%20management/ "Build management")
 - [C](C/ "C")
-- [Compilers](Compilers/ "Compilers")
 - [Debug](Debug/ "Debug")
 - [FFMPEG](FFMPEG/ "FFMPEG")
 - [FTP](Ftp/ "FTP")
@@ -15,7 +15,6 @@ Dans ce répertoire se trouve toutes les "astuces" relatives au développement a
 - [GStreamer](GStreamer/ "GStreamer")
 - [IDE](IDE/ "IDE")
 - [Linux](Linux/ "Linux")
-- [MakeFile](MakeFile/ "Makefile")
 - [Markdown](Markdown/ "Markdown")
 - [Network](Network/ "Network")
 - [Qt](Qt/ "Qt")

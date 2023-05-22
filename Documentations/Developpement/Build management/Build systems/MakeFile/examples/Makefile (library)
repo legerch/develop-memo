@@ -1,0 +1,33 @@
+# ------------------------------------------------
+# This makefile use a common makefile used
+# to build libraries
+# Date : 12/05/2023
+# ------------------------------------------------
+# Description of available arguments of this Makefile :
+#
+# Please refer to included makefile for arguments details
+# ------------------------------------------------
+
+# Set library informations
+TARGET_NAME := libgstreamermanager
+TARGET_VERSION_SEMANTIC := 1.1.2
+
+# Set library needed headers
+HEADERS_SPECIFIC_LIST	:=	../helper_tools/include \
+							../network_manager/include \
+							../screen/include
+
+HEADERS_SDK_LIST		:=	/usr/include/glib-2.0 \
+							/usr/lib/glib-2.0/include \
+							/usr/include/gstreamer-1.0
+
+# Set library custom flags
+CFLAGS_TARGET :=
+
+# Set library flags specific to board
+BOARD_RASPBERRY_CFLAGS	:=
+BOARD_ARDUINO_CFLAGS	:=
+BOARD_OTHERS_CFLAGS 	:=
+
+# Call generic library makefile
+include ../../01-makefile/lib.make

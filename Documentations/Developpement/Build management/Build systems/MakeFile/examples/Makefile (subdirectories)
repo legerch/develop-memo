@@ -1,0 +1,31 @@
+# ------------------------------------------------
+# This makefile use a common makefile used
+# to multiples subdirectories
+# Date : 19/05/2023
+# ------------------------------------------------
+# Description of available arguments of this Makefile :
+#
+# Please refer to included makefile for arguments details
+# ------------------------------------------------
+
+# Set list of subdirectories dedicated to board
+BOARD_RASPBERRY_LIST_SUBDIRS	:=	custom_lib3/
+
+BOARD_ARDUINO_LIST_SUBDIRS		:=	custom_lib4/
+
+BOARD_OTHERS_LIST_SUBDIRS		:=
+
+# Set list of common subdirectories
+LIST_SUBDIRS_COMMON			:=	custom_lib1/ \
+								custom_lib2/
+
+# Set target rules
+TARGETS_LIST				:=	all \
+								clean realclean mrproper \
+								static shared \
+								install install_static install_shared \
+								version \
+								debug-base debug-lib
+
+# Include common makefile recipe
+include ../01-makefile/sub.make

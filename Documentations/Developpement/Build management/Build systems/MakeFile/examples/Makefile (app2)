@@ -1,0 +1,110 @@
+# ------------------------------------------------
+# This makefile use a common makefile used
+# to build applications
+# Date : 19/05/2023
+# ------------------------------------------------
+# Please refer to included makefile for arguments details:
+# - app.make
+#
+# Available command-line arguments:
+# - OPT_EXTENTED_FEATURES
+# When set to "1", enable extended features: SIGUSR management.
+# By default, this parameter is set to "1"
+#
+# - OPT_ENABLE_CAMERA
+# When set to "1", use board specific GStreamer pipeline, otherwise
+# streaming is simulated (nothing will be displayed but streaming loop will be started)
+# By default, this parameter is set to "1"
+# ------------------------------------------------
+
+# Optional arguments
+OPT_EXTENTED_FEATURES ?= 1
+OPT_ENABLE_CAMERA ?= 1
+
+# Set application informations
+TARGET_NAME := rp2_core
+TARGET_VERSION_SEMANTIC := 6.6.0
+
+APP_CFG_FILE_VERSION_SEMANTIC		:= 440
+
+# Set application needed headers
+HEADERS_SPECIFIC_LIST	:=
+
+HEADERS_LAYER_LIST		:=	custom_lib1/include \
+							custom_lib2/include
+
+HEADERS_SDK_LIST		:=	/usr/include/cairo \
+							/usr/include/glib-2.0 \
+							/usr/lib/glib-2.0/include \
+							/usr/include/gstreamer-1.0
+
+# Set application custom flags
+CFLAGS_TARGET 			:=	-DRP2_CORE_APP_CFG_VERSION=$(APP_CFG_FILE_VERSION_SEMANTIC)
+
+ifeq ($(OPT_EXTENTED_FEATURES), 1)
+	CFLAGS_TARGET		+=	-DRP2_EXTENDED_FEATURES
+endif
+
+ifeq ($(OPT_ENABLE_CAMERA), 0)
+	CFLAGS_TARGET		+=	-DRP2_DISABLE_CAMERA
+endif
+
+OPT_ADD_FLAGS_DETAILS	:=	0
+
+# Set application flags specific to board
+BOARD_RASPBERRY_CFLAGS	:=
+BOARD_ARDUINO_CFLAGS	:=
+BOARD_OTHERS_CFLAGS 	:=
+
+# Set application linking libraries paths
+PATHS_LIBS_LIST_SPECIFIC		:=
+OPT_LDFLAGS_USE_LAYER_DIR_LIB	:=	1
+
+# Set application needed libraries
+LDLIBS_SPECIFIC					:=	-lcustomlib1 \
+									-lcustomlib2 \
+									\
+									-lcairo \
+									-lcairo-gobject \
+									-lcjson \
+									-lcrypto \
+									-lexpat \
+									-lffi \
+									-lfontconfig \
+									-lfreetype \
+									-lglib-2.0 \
+									-lgmodule-2.0 \
+									-lgobject-2.0 \
+									-lgpiod \
+									-lgstbase-1.0 \
+									-lgstreamer-1.0 \
+									-lgstvideo-1.0 \
+									-lpcre \
+									-lpixman-1 \
+									-lpng16 \
+									-luuid \
+									-lz
+
+# Set application linking libraries paths specific to board
+BOARD_RASPBERRY_LIB_PATHS_LIST	:=
+
+BOARD_ARDUINO_LIB_PATHS_LIST	:=
+
+BOARD_OTHERS_LIB_PATHS_LIST		:=
+
+# Set application needed libraries specific to board
+BOARD_RASPBERRY_LDLIBS			:=	-lcustomlib3
+
+BOARD_ARDUINO_LDLIBS			:=	-lcustomlib4 \
+									\
+									-lEGL \
+									-lGAL \
+									-lGLESv2 \
+									-lOpenVG \
+									-lVSC
+									
+
+BOARD_OTHERS_LDLIBS				:=
+
+# Call generic application makefile
+include ../../01-makefile/app.make

@@ -1,0 +1,48 @@
+# ------------------------------------------------
+# This makefile use a common makefile used
+# to build test applications
+# Date : 17/05/2023
+# ------------------------------------------------
+# Description of available arguments of this Makefile :
+#
+# Please refer to included makefile for arguments details
+# ------------------------------------------------
+
+# Set test informations
+TARGET_NAME := test_helper_maths
+
+# Set test needed headers
+HEADERS_SPECIFIC_LIST	:=	../include
+
+HEADERS_SDK_LIST		:=
+
+# Set test custom flags
+CFLAGS_TARGET 			:=
+
+# Set test flags specific to board
+BOARD_RASPBERRY_CFLAGS	:=
+BOARD_ARDUINO_CFLAGS	:=
+BOARD_OTHERS_CFLAGS 	:=
+
+# Set test linking libraries paths
+PATHS_LIBS_LIST_SPECIFIC		:=	../bin/
+
+# Set test needed libraries
+LDLIBS_SPECIFIC					:=	-lhelpermaths
+
+# Set test linking libraries paths specific to board
+BOARD_RASPBERRY_LIB_PATHS_LIST	:=
+
+BOARD_ARDUINO_LIB_PATHS_LIST	:=
+
+BOARD_OTHERS_LIB_PATHS_LIST		:=
+
+# Set test needed libraries specific to board
+BOARD_RASPBERRY_LDLIBS			:=
+
+BOARD_ARDUINO_LDLIBS			:=
+
+BOARD_OTHERS_LDLIBS				:=
+
+# Call generic test makefile
+include ../../../01-makefile/test.make
