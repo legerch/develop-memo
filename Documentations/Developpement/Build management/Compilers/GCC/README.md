@@ -241,6 +241,7 @@ In order to enable this extension, you must:
   - [`Werror` is not your friend][article-embeddedartitry-werror-is-not-your-friend]
   - [Upstream Linux Developers Against "-O3" Optimizing The Kernel][news-phoronix-linux-kernel-against-o3-flag]
 - Tutorials
+  - [Build shared and static libraries][tutorial-edu-c-libs]
   - [Computed goto for efficient dispatch tables][tutorial-greenplace-computed-goto]
 - Thread
   - [thread-so--wimplicit-fallthrough-warnings-and-portable-way-to-clear-them]
@@ -271,6 +272,7 @@ In order to enable this extension, you must:
 [thread-so-disable-extensions]: https://stackoverflow.com/questions/38939991/how-to-disable-gnu-c-extensions
 
 [tutorial-greenplace-computed-goto]: https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables
+[tutorial-edu-c-libs]: https://docencia.ac.upc.edu/FIB/USO/Bibliografia/unix-c-libraries.html
 
 [manpage-feature-test-macros]: https://man7.org/linux/man-pages/man7/feature_test_macros.7.html
 
