@@ -3,7 +3,6 @@
 - [2. GCC Options](#2-gcc-options)
   - [2.1. Detailled useful warnings options](#21-detailled-useful-warnings-options)
   - [2.2. Detailled useful optimization options](#22-detailled-useful-optimization-options)
-  - [2.3. GCC options line to use in C Project](#23-gcc-options-line-to-use-in-c-project)
 - [3. GCC Attributes](#3-gcc-attributes)
 - [4. GCC Version](#4-gcc-version)
 - [5. GCC extensions](#5-gcc-extensions)
@@ -11,7 +10,8 @@
     - [5.1.1. Details](#511-details)
     - [5.1.2. GCC support](#512-gcc-support)
   - [5.2. GNU extensions](#52-gnu-extensions)
-- [6. Ressources](#6-ressources)
+- [6. Build project with GCC](#6-build-project-with-gcc)
+- [7. Ressources](#7-ressources)
 
 # 1. Introduction
 
@@ -52,6 +52,18 @@ Warn when a switch case falls through (a case doesn't have `break` keyword). Thi
 Warn whenever a local variable or type declaration shadows another variable, parameter, type, class member (in C++), or instance variable (in Objective-C) or whenever a built-in function is shadowed.
     > Example : local variable had same name as a global variable
 
+- `-Wformat=2`  
+By default, `-Wall` enables `-Wformat`, which is equivalent to using `-Wformat=1`. Increasing level verification can help to catch others issues.
+
+- `-Wlogical-op`  
+Warn when a logical operator is suspiciously always evaluating to true or false.
+
+- `-Wduplicated-cond`  
+Warn about duplicated conditions in an if-else-if chain.
+
+- `-Wduplicated-branches`  
+Warn about duplicated branches in if-else statements.
+
 - `-pedantic`  
 Issue all the warnings demanded by strict ISO C and ISO C++; reject all programs that use forbidden extensions, and some other programs that do not follow ISO C and ISO C++. For ISO C, follows the version of the ISO C standard specified by any -std option used.  
 In absence of -pedantic, even when a specific standard is requested, GCC will still allow some extensions that are not acceptable in the C standard.
@@ -86,24 +98,6 @@ Consider `-O2` like maximum level.
 Optimize for size. `-Os` enables all `-O2` optimizations except those that often increase code size.
 
 **Warning :** Please refer to doc before using non-default optimization flags. For example, with flag `-O2` (and `-Os` by extension), option `-fno-gcse` must be used for programs using GCC extension **Computed goto** ([official doc][gcc-doc-computed-goto] and [tutorial][tutorial-greenplace-computed-goto])
-
-## 2.3. GCC options line to use in C Project
-
-```shell
-EXTRA_CFLAGS  = -Wall -Wextra -Werror=format -Werror=return-type -Werror=implicit-function-declaration \
-				-Wstrict-prototypes -Wshadow \
-				-Wno-ignored-qualifiers
-
-# For arch x64/x86
-OPTIMIZATION_FLAG = -O2
-
-# For embedded devices
-OPTIMIZATION_FLAG = -Os
-```
-
-This means we enables all warnings, `-Wreturn-type` and `-Wimplicit-function-declaration` must be considered as errors. Plus, we added 2 more warnings : `-Wstrict-prototypes` and `-Wshadow`.  
-Warning `-Wignored-qualifiers` is disable (was added by `-Wextra`) because this warning is only useful in C++ (it is available in C for library wrote in C compatible in C++ for example).
-> `-pedantic` is not enabled, but it could be useful if you want to stick to standard C (without _POSIX_ or _GNU_ extensions)
 
 # 3. GCC Attributes
 
@@ -219,7 +213,34 @@ In order to enable this extension, you must:
 1. Set build option `-std=gnu<std_version>` (with _gnu_ part): this will enable part of GNU extension
 2. Define macro `_GNU_SOURCE` in your build system (makefile, cmake, etc...): This will enable all GNU extension features
 
-# 6. Ressources
+# 6. Build project with GCC
+
+An example of GCC flags than can be used to build a project:
+```shell
+CFLAGS_WARNING			:=	-Wall -Wextra -Werror=format -Werror=return-type -Werror=implicit-function-declaration \
+							-Wformat=2 -Wstrict-prototypes -Wshadow \
+							-Wlogical-op -Wduplicated-cond -Wduplicated-branches \
+							-Wno-ignored-qualifiers  \
+							\
+							-fdiagnostics-color=auto # -Werror -W -ansi -pedantic
+
+# For arch x64/x86
+CFLAGS_OPTIMIZATION = -O2
+
+# For embedded devices
+CFLAGS_OPTIMIZATION = -Os
+```
+
+This means:
+- Enable all warnings and extra warnings
+- `-Wreturn-type` and `-Wimplicit-function-declaration` must be considered as errors. 
+- Some warnings has been added: `-Wstrict-prototypes` and `-Wshadow`.  
+- Warning `-Wignored-qualifiers` is disable (was added by `-Wextra`) because this warning is only useful in C++ (it is available in C for library wrote in C compatible in C++ for example).
+> `-pedantic` is not enabled, but it could be useful if you want to stick to standard C (without _POSIX_ or _GNU_ extensions)
+
+For more details on _"how to build a project"_, see [Makefile tutorial][repo-makefile] which provide multiple examples.
+
+# 7. Ressources
 
 - Official documentation
   - [GCC options documentation][gcc-doc-home]
@@ -239,6 +260,8 @@ In order to enable this extension, you must:
   - [Disable GCC GNU (and POSIX) extensions][thread-so-disable-extensions]
 - Interesting articles :
   - [`Werror` is not your friend][article-embeddedartitry-werror-is-not-your-friend]
+  - [The Best and Worst GCC Compiler Flags For Embedded][article-interruptmemfault-best-worst-compiler-flags-embedded]
+  - [Airbus - Getting the maximum of your C compiler, for security][article-airbus-compiler-security-gcc]
   - [Upstream Linux Developers Against "-O3" Optimizing The Kernel][news-phoronix-linux-kernel-against-o3-flag]
 - Tutorials
   - [Build shared and static libraries][tutorial-edu-c-libs]
@@ -249,6 +272,7 @@ In order to enable this extension, you must:
 
 <!-- Links of this repository -->
 [repo-compilers-custom-header]: ../custom_compiler.h
+[repo-makefile]: ../../Build%20systems/MakeFile/
 
 <!-- Links to external ressources -->
 [gcc-doc-home]: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
@@ -264,6 +288,8 @@ In order to enable this extension, you must:
 [gcc-doc-warnings-implicit-fallthrough]: https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-fallthrough
 
 [article-embeddedartitry-werror-is-not-your-friend]: https://embeddedartistry.com/blog/2017/05/22/werror-is-not-your-friend/
+[article-interruptmemfault-best-worst-compiler-flags-embedded]: https://interrupt.memfault.com/blog/best-and-worst-gcc-clang-compiler-flags
+[article-airbus-compiler-security-gcc]: https://airbus-seclab.github.io/c-compiler-security/gcc_compilation.html
 [news-phoronix-linux-kernel-against-o3-flag]: https://www.phoronix.com/scan.php?page=news_item&px=Linux-Upstream-Against-O3-Kern
 
 [thread-so-purpose-of-using-pedantic]: https://stackoverflow.com/questions/2855121/what-is-the-purpose-of-using-pedantic-in-gcc-g-compiler/40580407
