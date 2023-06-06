@@ -3,6 +3,7 @@
 - [2. GCC Options](#2-gcc-options)
   - [2.1. Detailled useful warnings options](#21-detailled-useful-warnings-options)
   - [2.2. Detailled useful optimization options](#22-detailled-useful-optimization-options)
+  - [2.3. Detailled useful analyzer options](#23-detailled-useful-analyzer-options)
 - [3. GCC Attributes](#3-gcc-attributes)
 - [4. GCC Version](#4-gcc-version)
 - [5. GCC extensions](#5-gcc-extensions)
@@ -98,6 +99,19 @@ Consider `-O2` like maximum level.
 Optimize for size. `-Os` enables all `-O2` optimizations except those that often increase code size.
 
 **Warning :** Please refer to doc before using non-default optimization flags. For example, with flag `-O2` (and `-Os` by extension), option `-fno-gcse` must be used for programs using GCC extension **Computed goto** ([official doc][gcc-doc-computed-goto] and [tutorial][tutorial-greenplace-computed-goto])
+
+## 2.3. Detailled useful analyzer options
+
+- [`-fstack-usage`][gcc-doc-stack-usage]  
+In order to track stack used, very useful in an embedded context where there is often not a lot of RAM available to allocate for stack space (typically on the order of a few hundred to a few thousand bytes). This option will emit `.su` files for each c file you compile.  
+Furthermore, you can use warning `-Wstack-usage=<stack_limit_in_bytes>` which will emit a warning when stack usage exceeds defined value.  
+> On **Linux** filesystem, you can get stack size by using `ulimit -s` (`ulimit -a` will list all system limit values).  
+> Note than the _stack limit warning_ to set is for each function, not all call stack ! So you need to run a first analyze in order to determine your maximum value
+
+- [`-fanalyzer`][gcc-doc-static-analyzer]  
+This option enables an static analysis of program flow which looks for “interesting” interprocedural paths through the code, and issues warnings for problems found on them.  
+This analysis is much more expensive than other GCC warnings.  
+In technical terms, it performs coverage-guided symbolic execution of the code being compiled. It is neither sound nor complete: it can have false positives and false negatives. It is a bug-finding tool, rather than a tool for proving program correctness. 
 
 # 3. GCC Attributes
 
@@ -253,6 +267,8 @@ For more details on _"how to build a project"_, see [Makefile tutorial][repo-mak
   - [GCC implicit-fallthrough warning and attribute][gcc-doc-warnings-implicit-fallthrough]
   - [GCC optimization options][gcc-doc-optimizations]
   - [GCC computed goto][gcc-doc-computed-goto]
+  - [GCC static analyzer][gcc-doc-static-analyzer]
+  - [GCC stack usage][gcc-doc-stack-usage]
 - Extensions
   - [Manpage - Features test macros][manpage-feature-test-macros]
   - [POSIX standards][wiki-posix-standard]
@@ -282,7 +298,9 @@ For more details on _"how to build a project"_, see [Makefile tutorial][repo-mak
 [gcc-doc-dialects]: https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html
 [gcc-doc-functions-attributes]: https://gcc.gnu.org/onlinedocs/gcc/Function-Attributes.html
 [gcc-doc-optimizations]: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+[gcc-doc-stack-usage]: https://gcc.gnu.org/onlinedocs/gnat_ugn/Static-Stack-Usage-Analysis.html
 [gcc-doc-standards]: https://gcc.gnu.org/onlinedocs/gcc/Standards.html#Standards
+[gcc-doc-static-analyzer]: https://gcc.gnu.org/onlinedocs/gcc/Static-Analyzer-Options.html
 [gcc-doc-variables-attributes]: https://gcc.gnu.org/onlinedocs/gcc/Variable-Attributes.html
 [gcc-doc-warnings]: https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 [gcc-doc-warnings-implicit-fallthrough]: https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-fallthrough

@@ -12,19 +12,30 @@
 # Available command-line arguments:
 # - BOARD
 # Set to "default" by default.
-# If set to "arduino" : SDK for board Ciele will be used (cross-compiler + sysroot).
-# If set to "raspberry" : SDK for board Raspberry will be used (cross-compiler + sysroot)
+# If set to "arduino" : SDK for Arduino board will be used (cross-compiler + sysroot).
+# If set to "raspberry" : SDK for Raspberry board will be used (cross-compiler + sysroot)
 # Others : GCC host compiler will be used, with default GCC sysroot value
 #
 # - DEBUG
 # When set to 1, application is compile with flag : -g -DDEBUG.
-# This parameter is set to 0 by default.
+# By default, this parameter is set to 0.
 #
 # - RELEASE
 # Version application use semantic versionning : MAJOR.MINOR.FIX
 # When make argument RELEASE==0, a build version is added to the version.
 # This way, we have clean number version in production and detailed version in dev/test phases.
-# This parameter is set to 0 by default.
+# By default, this parameter is set to 0.
+#
+# - ANALYZE
+# Option used to trigger analyze options:
+# When set to 1: This will enable static analyzer tool (see https://gcc.gnu.org/onlinedocs/gcc/Static-Analyzer-Options.html)
+# When set to 2: Thi will enable stack memory usage for each compiled file (see https://gcc.gnu.org/onlinedocs/gnat_ugn/Static-Stack-Usage-Analysis.html)
+# By default, this value is empty.
+#
+# - CCOPT
+# Compiler option to pass, only used with command `compiler-option`.
+# This can be useful to retrieve compiler version, specs or available options.
+# By default, this parameter is set to `--help`
 # ------------------------------------------------
 # Arguments to set when calling this Makefile from another:
 #
@@ -59,6 +70,7 @@
 # Optional arguments
 DEBUG ?= 0
 RELEASE ?= 0
+CCOPT ?= --help
 
 # Verify used make version
 # - GNU make is required since we used custom features
@@ -104,6 +116,7 @@ ifeq ($(BOARD),raspberry)
 	LAYER_DIR_INSTALL_APP := $(PWD_LAYER_APPS)/apps/board_raspberry/
 
 	CFLAGS_BOARD := -DBOARD_RASPBERRY -DRUN=4 $(BOARD_RASPBERRY_CFLAGS)
+	STACK_LIMIT_BOARD := 512
 
 	CCPREFIX := $(SDK_CC_PATH)/aarch64-buildroot-linux-gnu-
 
@@ -119,6 +132,7 @@ else ifeq ($(BOARD),arduino)
 	LAYER_DIR_INSTALL_APP := $(PWD_LAYER_APPS)/apps/board_arduino/
 
 	CFLAGS_BOARD := -DBOARD_ARDUINO $(BOARD_ARDUINO_CFLAGS)
+	STACK_LIMIT_BOARD := 512
 
 	CCPREFIX := $(SDK_CC_PATH)/arm-buildroot-linux-gnueabihf-
 
@@ -158,7 +172,8 @@ CFLAGS_STANDARDS		:=	-D_GNU_SOURCE	# See https://www.gnu.org/software/libc/manua
                             # -std=gnu<number_std> needed but let at default value to get latest standard (currently set to -std=gnu17, see https://gcc.gnu.org/onlinedocs/gcc/Standards.html)
 
 CFLAGS_WARNING			:=	-Wall -Wextra -Werror=format -Werror=return-type -Werror=implicit-function-declaration \
-							-Wstrict-prototypes -Wshadow \
+							-Wformat=2 -Wstrict-prototypes -Wshadow \
+							-Wlogical-op -Wduplicated-cond -Wduplicated-branches \
 							-Wno-ignored-qualifiers  \
 							\
 							-fdiagnostics-color=auto # -Werror -W -ansi -pedantic
@@ -210,6 +225,16 @@ else
     CFLAGS += -Os
 endif
 
+# Analyze behaviour
+ifeq ($(ANALYZE), 1)		# Use static analyzer
+	CFLAGS += -fanalyzer
+else ifeq ($(ANALYZE), 2) 	# Verify stack usage
+	CFLAGS += -fstack-usage
+	ifneq ($(STACK_LIMIT_BOARD),)
+		CFLAGS += -Wstack-usage=$(STACK_LIMIT_BOARD)
+	endif
+endif
+
 # Release information
 BUILD_DATE := $(shell date +%s)
 ifeq ($(RELEASE), 0)
@@ -240,7 +265,9 @@ TARGET_VERSION_IN_DATA := $(file <$(TARGET_VERSION_IN_PATH))
 
 clean:
 	rm -f *.o
+	rm -f *.su
 	rm -f $(DIR_OBJ)/*.o
+	rm -f $(DIR_OBJ)/*.su
 
 realclean: clean
 	rm -f $(DIR_BIN)/*
@@ -256,3 +283,6 @@ debug-base:
 	@echo $(CFLAGS)
 	@echo "List of linker flags: $(LDFLAGS)"
 	@echo "List of library linker flags: $(LDLIBS)"
+
+compiler-option:
+	$(CCPREFIX)$(CC) $(CCOPT)
