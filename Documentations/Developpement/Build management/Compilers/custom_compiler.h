@@ -1,13 +1,13 @@
 /*----------------------------------------------------------------------------*/
 /**
- * \file        custom_compiler.h
+ * \file        custom_compilers.h
  * \brief       Compilers defined MACROs
  * \details
  * Helper documentation: 
  * https://blog.kowalczyk.info/article/j/guide-to-predefined-macros-in-c-compilers-gcc-clang-msvc-etc..html
  *
  * \author      Charlie Leger
- * \date        16-12-2016
+ * \date        06-04-2021
 /******************************************************************************/
 
 /******************************************************************************/
@@ -37,14 +37,18 @@
 /******************************************************************************/
 
 /******************************************************************************/
-/* Public macro definitions                                                   */
+/* Public macro definitions - CLANG                                           */
 /******************************************************************************/
 
-/* Clang compiler */
 #if defined(__clang__)
 #error "Specific CLANG compiler macros not supported yet!"
 
-/* GCC compiler */
+#define COMPILER_DIAGNOSTIC_PUSH    _Pragma("clang diagnostic push")
+#define COMPILER_DIAGNOSTIC_POP     _Pragma("clang diagnostic pop")
+
+/******************************************************************************/
+/* Public macro definitions - GCC                                             */
+/******************************************************************************/
 #elif defined(__GNUC__) || defined(__GNUG__)
 
 /**
@@ -100,11 +104,56 @@
 
 #endif
 
-/* MSVC compiler */
+/**
+ * Pragma directive use to manage diagnostic, allow to:
+ * - Ignore warnings not needed (can be useful when including external files, 
+ * like single header libraries for example)
+ * - Treat warning as error
+ * Can be used as:
+ * \code{.c}
+ * COMPILER_DIAGNOSTIC_PUSH                     // Save current diagnostic state
+ * 
+ * COMPILER_DIAGNOSTIC_IGNORE("-Wlogical-op")   // Disable "-Wlogical-op" warning
+ * #include "header.h"                          // Include file for which warning must be ignored
+ * 
+ * COMPILER_DIAGNOSTIC_POP                      // Restore previous diagnostic state (latest saved with "push")
+ * \endcode
+ * 
+ * For more details, please see:
+ * - Thread: https://stackoverflow.com/questions/3378560/how-to-disable-gcc-warnings-for-a-few-lines-of-code
+ * - Compiler documentation:
+ *  - GCC: https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html
+ *  - CLANG: https://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas
+ *  - MSVC: https://learn.microsoft.com/en-us/cpp/preprocessor/warning?redirectedfrom=MSDN&view=msvc-170
+ */
+#define _COMPILER_PRAGMA(x)                 _Pragma(#x)
+#define COMPILER_PRAGMA(x)                  _COMPILER_PRAGMA(x)
+
+#define COMPILER_DIAGNOSTIC_PUSH            _COMPILER_PRAGMA(GCC diagnostic push)
+#define COMPILER_DIAGNOSTIC_POP             _COMPILER_PRAGMA(GCC diagnostic pop)
+
+#define COMPILER_DIAGNOSTIC_ERROR(wopt)     COMPILER_PRAGMA(GCC diagnostic error wopt)
+#define COMPILER_DIAGNOSTIC_IGNORE(wopt)    COMPILER_PRAGMA(GCC diagnostic ignored wopt)
+
+// Very specific warnings which are usually not managed by external libraries
+#define COMPILER_DIAGNOSTIC_IGNORE_CUSTOM   COMPILER_DIAGNOSTIC_IGNORE("-Wlogical-op") \
+                                            COMPILER_DIAGNOSTIC_IGNORE("-Wduplicated-cond") \
+                                            COMPILER_DIAGNOSTIC_IGNORE("-Wduplicated-branches")
+
+/******************************************************************************/
+/* Public macro definitions - MSVC                                            */
+/******************************************************************************/
 #elif defined(_MSC_VER)
 #error "Specific MSVC compiler macros not supported yet!"
 
+#define COMPILER_DIAGNOSTIC_PUSH            __pragma(warning(push))
+#define COMPILER_DIAGNOSTIC_POP             __pragma(warning(pop))
+
 #endif
+
+/******************************************************************************/
+/* Public macro definitions                                                   */
+/******************************************************************************/                                       
 
 /******************************************************************************/
 /* Public type declarations                                                   */
