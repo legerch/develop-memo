@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-41-generic - 05/05/2023 :
+Save from : inspiron-55510 - Ubuntu 22.04.2 LTS - Kernel 5.19.0-43-generic - 10/06/2023 :
 
 ```shell
 ##
@@ -412,11 +412,11 @@ alias workspace-vscode='cd /home/charlie/Documents/workspaces/workspace-vscode'
 alias workspace-appimage='cd /home/charlie/Téléchargements/app-image'
 
 # Copy VsCode snippets to documentation folder
-alias snippet-c-export='cp ~/.config/Code/User/snippets/c.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json && printf "Done !\n"'
-alias snippet-c-import='cp ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/c.json ~/.config/Code/User/snippets/c.json && printf "Done !\n"'
+alias snippet-c-export='cp ~/.config/Code/User/snippets/c.json ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/c.json && printf "Done !\n"'
+alias snippet-c-import='cp ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/c.json ~/.config/Code/User/snippets/c.json && printf "Done !\n"'
 alias snippet-c-edit='code ~/.config/Code/User/snippets/c.json'
-alias snippet-sh-export='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json && printf "Done !\n"'
-alias snippet-sh-import='cp ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/IDE/VsCode/ressources/shellscript.json ~/.config/Code/User/snippets/shellscript.json && printf "Done !\n"'
+alias snippet-sh-export='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/shellscript.json && printf "Done !\n"'
+alias snippet-sh-import='cp ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/shellscript.json ~/.config/Code/User/snippets/shellscript.json && printf "Done !\n"'
 alias snippet-sh-edit='code ~/.config/Code/User/snippets/shellscript.json'
 
 # Used as a memo to load library into env variables
@@ -426,7 +426,7 @@ alias memo-png-to-fb='printf "fbv -0 ./my-picture.png  > /dev/null 2>&1\ndd if=/
 # Memo used to remain how to remove last line of a file
 alias memo-remove-last-line='printf "sed -i \"$ d\" file.txt\n"'
 # Use to save custom bash aliases do documentation folder
-alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/workspaces/workspace-vscode/DocumentationsCobra/Documentations/Developpement/Linux/linux/custom_bash_aliases.md && printf "Done !\n"'
+alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/Linux/linux/custom_bash_aliases.md && printf "Done !\n"'
 
 # Use to manage "bash_aliases" file
 alias bash-aliases-edit-vi='vi ~/.bash_aliases'
