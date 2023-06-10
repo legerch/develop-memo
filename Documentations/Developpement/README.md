@@ -1,6 +1,6 @@
 # Développement
 
-Dans ce répertoire se trouve toutes les "astuces" relatives au développement ainsi que les problèmes rencontrés
+Dans ce répertoire se trouve toutes les "astuces" relatives au développement
 
 ## Tutoriels
 
@@ -23,7 +23,3 @@ Dans ce répertoire se trouve toutes les "astuces" relatives au développement a
 - [Streaming](Streaming/ "Streaming")
 - [Valgrind](Valgrind/ "Valgrind")
 - [Windows](Windows/ "Windows")
-
-## Problèmes rencontrés
-
-- [Windows](Pbs%20rencontres/windows.md "Windows")

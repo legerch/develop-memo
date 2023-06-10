@@ -298,7 +298,7 @@ ls -1 *.dot | xargs -I{} dot -Tpng {} -o{}.png
     - [zbar][doc-gst-zbar]
 - Documentation officielle **NXP** :
   - [Processeurs IMX8][doc-nxp-imx8]
-  - [i.IMX8 GStreamer User Guide][doc-nxp-imx8-gst] (If link unavailable, this PDF can be found in **Datasheets** directory of Borea)
+  - [i.IMX8 GStreamer User Guide][doc-nxp-imx8-gst]
 - Documentation pour **Instructions NEON** :
   - [ARM Developer - Instruction sets - NEON][doc-armdev-neon-instructions-sets]
   - [ARM Developer - NEON Architecture overview][doc-armdev-neon-arch]

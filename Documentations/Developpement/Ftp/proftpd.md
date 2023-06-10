@@ -11,7 +11,7 @@ Proftpd permet de gérer un serveur FTP.
 # and a single anonymous login.  It assumes that you have a user/group
 # "nobody" and "ftp" for normal operation and anon.
 
-ServerName			"Borea ProFTPD"
+ServerName			"MyServerName ProFTPD"
 ServerType			standalone
 DefaultServer		on
 
@@ -57,7 +57,7 @@ AllowOverwrite		on
 
 # Limit login access to members of specified group
 <Limit LOGIN>
-    AllowGroup ftpborea
+    AllowGroup halestorm
     DenyAll
 </Limit>
 
@@ -86,12 +86,12 @@ echo "/bin/false" >> /etc/shells
 
 5- Créer le(s) groupe(s) autorisé(s)
 ```shell
-addgroup ftpborea
+addgroup halestorm
 ```
 
 6- Créer le(s) utilisateur(s)
 ```shell
-adduser userborea --shell /bin/false --home /home/user_data --ingroup ftpborea
+adduser lzzyhale --shell /bin/false --home /home/user_data --ingroup halestorm
 ```
 > `--shell` : Permet de préciser quel console l'utilisateur utilise. Ici, on ne souhaite que l'user n'est un accès seulement par FTP (non en SSH par exemple), ainsi, le shell précisé est `bin/false`  
 > --home : Utiliser le dossier spécifié comme dossier HOME de l'utilisateur. Si le dossier n'existe pas, il sera créé  

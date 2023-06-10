@@ -18,7 +18,7 @@ ffmpeg -ss 0 -t 5 -i intro.mp4 -c copy intro-cut.mp4
 ```
 
 3840x2160 -> 1920x1080 :
-ffmpeg -i Cobra_02-BlancBleu.mp4 -s 1920x1080 -c:a copy output.mp4
+ffmpeg -i input.mp4 -s 1920x1080 -c:a copy output.mp4
 
 1920x1080 -> 1080x1080 :
 ffmpeg -i output.mp4 -filter:v "crop=1080:1080:420:0" output-square.mp4

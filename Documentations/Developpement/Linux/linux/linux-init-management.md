@@ -15,49 +15,62 @@ Exemple d'un script d'initialisation
 ```shell
 #!/bin/sh
 #
-# BOREA        Starts BOREA - Exemple
-#              - Exemple RP2
+# This script is used as an example
 #
 
+#
+# Constants variables
+#
+DAEMON=usr/bin/rp2_core
+PID=/var/run/rp2_core.pid
 
-umask 077
-
-start() {
-    echo "Start BOREA - Exemple RP2" 
+#
+# Private methods
+#
+start()
+{
+    printf "${0} started..."
 
     # Via script shell - Load config file for camera
     ./home/ciele/tools/cmd_camera_v2.sh -l=/home/ciele/tools/config_camera.ini
 
     # Create process for application - RP2_core
-    start-stop-daemon -b -S -q -m -p /var/run/rp2_core.pid --exec usr/bin/rp2_core
-
+    start-stop-daemon -b -S -q -m -p ${PID} --exec ${DAEMON}
+    
+    printf "done !\n"
 }
 
-stop() {
+stop()
+{
     # Stop process
-    start-stop-daemon -K -q -p /var/run/rp2_core.pid
+    start-stop-daemon -K -q -p ${PID}
 
-	echo -n "Stop BOREA - Exemple"
+	printf "${0} stopped!\n"
 }
 
-restart() {
+restart()
+{
 	stop
+    sleep 1
 	start
 }
 
+#########################
+# MAIN
+#########################
 case "$1" in
-  start)
-	start
-	;;
-  stop)
-	stop
-	;;
-  restart|reload)
-	restart
-	;;
-  *)
-	echo "Usage: $0 {start|stop|restart}"
-	exit 1
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart|reload)
+        restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
 esac
 
 exit $?

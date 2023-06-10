@@ -1,16 +1,16 @@
 **Sommaire**
 
-- [Configuration d'une IP statique](#configuration-dune-ip-statique)
-  - [Windows](#windows)
-  - [Linux](#linux)
-  - [Android](#android)
-- [Contrôle des paramètres WIFI via les API systèmes](#contrôle-des-paramètres-wifi-via-les-api-systèmes)
-  - [API système](#api-système)
-  - [Solution existante](#solution-existante)
+- [1. Configuration d'une IP statique](#1-configuration-dune-ip-statique)
+  - [1.1. Windows](#11-windows)
+  - [1.2. Linux](#12-linux)
+  - [1.3. Android](#13-android)
+- [2. Contrôle des paramètres WIFI via les API systèmes](#2-contrôle-des-paramètres-wifi-via-les-api-systèmes)
+  - [2.1. API système](#21-api-système)
+  - [2.2. Solution existante](#22-solution-existante)
 
-# Configuration d'une IP statique
+# 1. Configuration d'une IP statique
 
-## Windows
+## 1.1. Windows
 
 1. Aller dans `Panneau de configuration` -> `Réseau et internet` -> `Centre réseau et partage` -> `Modifier les paramètres de la carte`
 2. Clic droit sur la carte réseau souhaitée -> `Propriétés`
@@ -31,7 +31,7 @@ De plus, la configuration sera appliquée pour tous les réseaux auxquels l'inte
 > ipconfig
 > ```
 
-## Linux
+## 1.2. Linux
 
 Sous linux, une configuration est associée à une interface et à un réseau, c'est à dire qu'il est possible pour une même interface de se connecter à un réseau A via DHCP et à un réseau B via une adresse IP statique, ce qui n'est pas le cas sous windows.
 
@@ -50,7 +50,7 @@ Sous linux, une configuration est associée à une interface et à un réseau, c
 > ifconfig
 > ```
 
-## Android
+## 1.3. Android
 
 Une adresse statique est affectée pour un réseau (comme sous linux), cela n'affectera pas les autres connexions.
 
@@ -64,9 +64,9 @@ Une adresse statique est affectée pour un réseau (comme sous linux), cela n'af
    6. DNS 1 : `8.8.8.8` (de même, champs obligatoire donc utilisation du _DNS Google_)
 3. Valider la configuration
 
-# Contrôle des paramètres WIFI via les API systèmes
+# 2. Contrôle des paramètres WIFI via les API systèmes
 
-## API système
+## 2.1. API système
 
 - Windows : 
   - [WlanAPI][wlanapi] : Permet le contrôle des réseaux wifi (scan, connexion, déconnexion, création profil, etc...) 
@@ -76,7 +76,7 @@ Une adresse statique est affectée pour un réseau (comme sous linux), cela n'af
 - Linux : 
   - DBus
   
-## Solution existante
+## 2.2. Solution existante
 
 Une API a été créée dans le but de gérer les actions relatives au WIFI (obtenir les propriétés des interfaces réseaux, scanner les réseaux, se connecter à un réseau connu/inconnu, etc...). Cette API a pour but d'utiliser les API systèmes sans se soucier du système sur lequel l'on tourne, l'API est compatible :
 - Windows

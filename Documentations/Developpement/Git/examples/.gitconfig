@@ -1,5 +1,5 @@
 [user]
-	email = c.leger@borea-dental.com
+	email = myemail
 	name = Leger Charlie
 	signingKey = ""
 [gpg]
@@ -11,7 +11,7 @@
 [sendemail]
 	smtpencryption = tls
 	smtpserver = smtp.office365.com
-	smtpuser = c.leger@borea-dental.com
+	smtpuser = myemail
 	smtpserverport = 587
 [core]
 	editor = flatpak run --file-forwarding re.sonny.Commit @@
