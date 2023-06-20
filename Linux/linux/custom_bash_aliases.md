@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : inspiron-55510 - Ubuntu 22.04.2 LTS - Kernel 5.19.0-43-generic - 10/06/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-45-generic - 20/06/2023 :
 
 ```shell
 ##
@@ -468,14 +468,14 @@ alias pi-ssh='ssh pi@raspberrypi'
 ##
 # Arduino specific aliases
 ##
-alias arduino-uart='sudo minicom -D /dev/ttyACM0 -b 115200'
+alias arduino-uart='sudo minicom -w -D /dev/ttyACM0 -b 115200'
 
 ##
 # Cobra specific aliases
 ##
 
 # Launch minicom session of Cobra (via UART)
-alias cobra-uart='sudo minicom -D /dev/ttyUSB0 -b 115200'
+alias cobra-uart='sudo minicom -w -D /dev/ttyUSB0 -b 115200'
 
 # Launch SSH session of Cobra
 alias cobra-ssh-root='ssh root@172.27.77.5'

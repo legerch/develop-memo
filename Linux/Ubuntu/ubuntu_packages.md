@@ -15,6 +15,7 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
     - [2.3.3. Configuration](#233-configuration)
       - [2.3.3.1. Fail to write](#2331-fail-to-write)
       - [2.3.3.2. Enable colors output](#2332-enable-colors-output)
+      - [2.3.3.3. Enable wrapping long lines](#2333-enable-wrapping-long-lines)
   - [2.4. Logs](#24-logs)
     - [2.4.1. Installation](#241-installation)
     - [2.4.2. Custom configuration](#242-custom-configuration)
@@ -171,7 +172,7 @@ sudo apt install minicom
 
 - Start a session :
 ```shell
-sudo minicom -D /dev/ttyUSB0 -b 115200 -c on
+sudo minicom -D /dev/ttyUSB0 -b 115200 -c on -w
 ```
 
 - Display help : `CTRL+A Z`
@@ -204,6 +205,10 @@ Minicom **read** properly but **writing** failed (no entry is written when press
 To enable color output with _minicom_, you need to use option : `minicom -c on`
 > Ressources used :
 > - [debian.org : color for minicom ?][minicom-color-option-thread-debianorg]
+
+#### 2.3.3.3. Enable wrapping long lines
+
+To enable wrap with _minicom_, use option `-w` (`--wrap`).
 
 ## 2.4. Logs
 ### 2.4.1. Installation
