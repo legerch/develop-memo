@@ -6,7 +6,6 @@ Dans ce répertoire se trouve toutes les "astuces" relatives au développement
 
 - [Bit-operators](Bit%20operators/ "Bit-operators")
 - [C](C/ "C")
-- [Debug](Debug/ "Debug")
 - [FFMPEG](FFMPEG/ "FFMPEG")
 - [FTP](Ftp/ "FTP")
 - [GIT](Git/ "GIT")
