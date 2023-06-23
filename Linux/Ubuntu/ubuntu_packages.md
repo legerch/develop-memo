@@ -144,7 +144,7 @@ fwupdmgr update         # This option download and apply all updates for your sy
 ## 2.1. Standard
 
 ```shell
-sudo apt install build-essential git git-email tree
+sudo apt install build-essential moreutils git git-email tree
 ```
 > If you intend to contribute to mainline project, use a git editor which allow to follow 50/72 rule (see [git editor compatible with 50/72 rule][anchor-git-ui-50-72]
 

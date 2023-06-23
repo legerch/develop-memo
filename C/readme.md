@@ -3,7 +3,9 @@
 - [1. Limits](#1-limits)
 - [2. Tips](#2-tips)
   - [2.1. Printf](#21-printf)
-  - [2.2. Enum errors](#22-enum-errors)
+  - [2.2. Error management](#22-error-management)
+    - [2.2.1. Errno](#221-errno)
+    - [2.2.2. Custom enum error](#222-custom-enum-error)
   - [2.3. Buffer](#23-buffer)
   - [2.4. Dynamic allocation](#24-dynamic-allocation)
     - [2.4.1. Malloc](#241-malloc)
@@ -63,7 +65,19 @@ printf("My value: %" G_GSIZE_FORMAT "\n", sizeBuffer);
 > Note that the `%` is not part of the macro.  
 > For macro documentation, please check : [GLib-BasicTypes][glib-basictypes]
 
-## 2.2. Enum errors
+## 2.2. Error management
+
+### 2.2.1. Errno
+
+See [man errno][man-errno] for details on this error code.  
+You can get details of its values through `errno` utility:
+```shell
+errno --list
+```
+> Used to list all existing errno values and their descriptions, shorter version is available with `-l`.  
+> More options are available through `--help` 
+
+### 2.2.2. Custom enum error
 
 In this case, we want negative errors value. This way, for function using this enums as returned value, if value is positive, operation is successful, otherwise, it failed.
 
@@ -617,6 +631,7 @@ HTOOLS_enuErrors HTOOLS_stringMatchesPatternStr(const char *str, const char *pat
 [cpp-stdint]: https://www.cplusplus.com/reference/cstdint/
 [c-stdint]: https://devdocs.io/c/types/integer
 
+[man-errno]: https://man7.org/linux/man-pages/man3/errno.3.html
 [linux-asprintf]: https://linux.die.net/man/3/vasprintf
 [linux-vasprintf]: https://linux.die.net/man/3/asprintf  
 
