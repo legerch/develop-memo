@@ -15,10 +15,14 @@
   - [5.1. How to set](#51-how-to-set)
   - [5.2. Which to set](#52-which-to-set)
 - [6. Ressources](#6-ressources)
+- [7. Debug session](#7-debug-session)
+  - [7.1. Remote debug using gdbserver](#71-remote-debug-using-gdbserver)
+- [8. Ressources used](#8-ressources-used)
 
 # 1. Introduction
 
-Official website : [VsCode][vscode-official]
+Official website : [VsCode][vscode-home]  
+Variables reference of VsCode: [VsCode - Variable reference][vscode-vars-refs]
 
 # 2. First thing to do
 
@@ -78,15 +82,19 @@ Go to :
 5. Press `Enter` to save
 
 ### 2.3.2. Which one ?
-List of default keyboard shortcut to changed :
-- Switch between Header/Source is `Alt + O`. Better to use `F4`
+List of default keyboard shortcut to change:
+
+| Title | Default | Custom |
+|:-:|:-:|:-:|
+| Switch between Header/Source | `Alt + O` | `F4` |
 
 # 3. Plugins
 
 _Visual Studio Code_ allow usage of plugin, list of useful plugins and somes associated settings :
-- [Arduino][plugin-arduino] (a [tutorial][doc-arduino] is available in this repository)
+- [Arduino][plugin-arduino] (a [tutorial][repo-arduino] is available in this repository)
 - [Back & Forth][plugin-back-forth]
 - [C/C++][plugin-c-cpp]
+- [Native Debug][plugin-native-debug]
 - [Doxygen Documentation Generator][plugin-doxygen]
 - [Keep a Changelog][plugin-changelog]
 - [Markdown All in One][plugin-markdown]
@@ -106,7 +114,7 @@ _VsCode_ allow us to create custom snippets for each supported languages : [VsCo
 Furthermore, some useful variables are available : `TM_FILENAME`, `CURRENT_DATE`, etc...
 
 Generate our snippets at _VsCode_ format can become difficult, use [Snippet generator][snippet-generator] to do so.
-> An exemple for C language snippets can be found at : [dev/ide/vscode/res/c.json][doc-snippets-c]
+> An exemple for C language snippets can be found at : [dev/ide/vscode/res/c.json][repo-snippets-c]
 
 ## 4.2. Particular case
 ### 4.2.1. C language
@@ -136,7 +144,7 @@ To set language associated to a file extension:
 # 6. Ressources
 
 - Official documentation : 
-  - [Website][vscode-official]
+  - [Website][vscode-home]
   - [Snippets][vscode-snippets]
 - Tutorials
   - https://sqldbawithabeard.com/2017/04/24/setting-the-default-file-type-for-a-new-file-in-vs-code/
@@ -146,17 +154,67 @@ To set language associated to a file extension:
   - [Snippet can not work in C header file (#1476)][issue-c-headers-not-triggered]
   - [Open files always in a new tab](https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab)
 
+# 7. Debug session
+
+To help to debug, plugin [Native Debug][plugin-native-debug] will be needed.  
+Please read plugin documentation since this tutorial will concentrate on the `launch.json` configuration file.
+
+## 7.1. Remote debug using gdbserver
+
+If not already set, take a look to [how to debug remotely tutorial][repo-debug-gdbserver].  
+
+1. To debug your remote directly inside VsCode instead of your terminal, set one `configuration` element of your `launch.json` as below:
+```json
+{
+    "name": "DBG - SDK Remote - MyApp",
+    "type": "gdb",
+    
+    "request": "attach",
+    "remote": true,
+    "target": "192.168.10.130:2000",
+    
+    "cwd": "${workspaceRoot}",
+    "executable": "./relative-path-from-cwd/my_custom_app",
+    "gdbpath": "native-path-to-my-compiler-debugger/aarch64-buildroot-linux-gnu-gdb",
+
+    "stopAtEntry": true
+}
+```
+This will attach to the running process managed by gdbserver on `192.168.10.130:2000`.
+> Note for some specific variables of this example:
+> - `gdbpath`: Set to a custom toolchain but if native _GDB_ must be used, use `/usr/bin/gdb`.  
+> - `cwd`: This value is set to `${workspaceRoot}` which is part of [variables reference][vscode-vars-refs] automatically set by VsCode
+> - `executable`: Path of application set here must be relative to path set in `cwd` field
+> - `stopAtEntry`: Setting this value to `true` allow us to set breakpoint when debug session is started (since program will not start right away, it is paused at entry)
+
+2. Set your breakpoints. Note than breakpoint can be added when debug session is active but you must **pause** current session, otherwise breakpoint will fail to be set.
+3. Run debug session
+
+# 8. Ressources used
+
+- VsCode
+  - [Home][vscode-home]
+  - [Snippets][vscode-snippets]
+  - [Variables reference][vscode-vars-refs]
+- Tools
+  - [snippet-generator]
+- Threads
+  - [VsCode - CppTools - Snippet can not work in C header file][issue-c-headers-not-triggered]
+  - [Stackoverflow - Is it possible to attach to a remote gdb target with vscode ?][thread-so-attach-to-remote-gdb-with-vscode1]
+  - [Stackoverflow - How to attach to remote gdb with vscode ?][thread-so-attach-to-remote-gdb-with-vscode2]
 
 <!-- Anchor to this file -->
 [anchor-file-assocation]: #5-file-association
 
 <!-- Links to this repository -->
-[doc-arduino]: ../../Arduino/
-[doc-snippets-c]: ../../IDE/VsCode/ressources/c.json
+[repo-arduino]: ../../Arduino/
+[repo-snippets-c]: ../../IDE/VsCode/ressources/c.json
+[repo-debug-gdbserver]: ../../Toolchains/Debuggers/README.md#1-instructions-de-débuggage---débugguer-sur-une-cible-remote
 
 <!-- External links -->
-[vscode-official]: https://code.visualstudio.com/
+[vscode-home]: https://code.visualstudio.com/
 [vscode-snippets]: https://code.visualstudio.com/docs/editor/userdefinedsnippets
+[vscode-vars-refs]: https://code.visualstudio.com/docs/editor/variables-reference
 
 [plugin-arduino]: https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.vscode-arduino
 [plugin-back-forth]: https://marketplace.visualstudio.com/items?itemName=nick-rudenko.back-n-forth
@@ -167,11 +225,15 @@ To set language associated to a file extension:
 [plugin-kernel-dev]: https://marketplace.visualstudio.com/items?itemName=microhobby.linuxkerneldev
 [plugin-markdown]: https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
 [plugin-markdown-emoji]: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji
+[plugin-native-debug]: https://marketplace.visualstudio.com/items?itemName=webfreak.debug
 [plugin-todo-tree]: https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
 [plugin-vscode-icons]: https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons
 
 [github-list-emoji]: https://github.com/ikatyang/emoji-cheat-sheet
 
 [snippet-generator]: https://snippet-generator.app/
+
+[thread-so-attach-to-remote-gdb-with-vscode1]: https://stackoverflow.com/questions/38089178/is-it-possible-to-attach-to-a-remote-gdb-target-with-vscode
+[thread-so-attach-to-remote-gdb-with-vscode2]: https://stackoverflow.com/questions/53519668/how-to-attach-to-remote-gdb-with-vscode
 
 [issue-c-headers-not-triggered]: https://github.com/Microsoft/vscode-cpptools/issues/1476

@@ -60,7 +60,8 @@ arm-buildroot-linux-gnueabihf_sdk-buildroot//bin//arm-buildroot-linux-gnueabihf-
 target remote 192.168.1.10:2000
 ```
 
-Désormais, nous pouvons utiliser les commandes classiques de `GDB`.
+Désormais, nous pouvons utiliser les [commandes classiques de `GDB`][anchor-gd-cmds].
+> You can also use [VsCode to debug remotely][repo-vscode-dgb-remote]
 
 # 2. Instructions de débuggage - Fichier _core dump_
 
@@ -198,6 +199,12 @@ kill -<id-signal> <id-process-app>
   - [thread-busybox-br-ddbg-strip]
   - [thread-so-analyze-core-dump]
   - [thread-so-dbg-signal-handler]
+
+<!-- Anchor -->
+[anchor-gd-cmds]: #3-utilisation-de-gdb
+
+<!-- Links of this repository -->
+[repo-vscode-dgb-remote]: ../../IDE/VsCode/README.md
 
 <!-- External links -->
 [doc-man-setrlimit]: https://linux.die.net/man/2/setrlimit
