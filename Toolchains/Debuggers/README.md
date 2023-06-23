@@ -142,6 +142,10 @@ Permet d'obtenir une trace de la mémoire au moment du crash (_stack trace_).
 Chaque invocation de fonctions comportera un identifiant, il est possible d'utiliser `frame <identifiant>` pour sélectionner une fonction particulière.  
 Il est ensuite possible d'utiliser `list` pour voir le code associé et `info locals``pour voir les variables locales. 
 
+- Démarrer le programme : `run` ou `r`
+- Continuer jusqu'à la fin du programme ou le prochain _breakpoint_: `continue` ou `c`
+- Step over : `next` ou `n`
+- Step into : `step` ou `s`
 - Afficher la valeur d'une variable : `print <nomVariable>` ou `p <nomVariable>`
 - Lister les fonctions du programme : `info functions`
 - Voir l'état du programme : `info frame`
@@ -150,6 +154,9 @@ Il est ensuite possible d'utiliser `list` pour voir le code associé et `info lo
 - Lister le mappage mémoire : `info target`
 - Afficher l'aide : `help`
 - Quitter GDB : `quit` ou `q`
+> Ressources used:
+> - [Command list][gdb-cmd-list]
+> - [Continuing and stepping][gdb-continuing-stepping]
 
 Les **breakpoints**, via le mot-clé `break` ou `b` :
 - `break <function>` : Placer un breakpoint sur une fonction
@@ -180,6 +187,7 @@ kill -<id-signal> <id-process-app>
   - GDB:
     - [Command list][gdb-cmd-list]
     - [Breakpoints][gdb-breakpoints]
+    - [Continuing and stepping][gdb-continuing-stepping]
     - [`Set solib-search-path`][gdb-cmd-lib-search-path]
   - Linux:
     - [man `setrlimit`][doc-man-setrlimit]
@@ -197,6 +205,7 @@ kill -<id-signal> <id-process-app>
 [gdb-cmd-list]: https://visualgdb.com/gdbreference/commands/
 [gdb-cmd-lib-search-path]: https://visualgdb.com/gdbreference/commands/set_solib-search-path
 [gdb-breakpoints]: https://ftp.gnu.org/old-gnu/Manuals/gdb/html_node/gdb_28.html#SEC29
+[gdb-continuing-stepping]: https://sourceware.org/gdb/download/onlinedocs/gdb/Continuing-and-Stepping.html
 
 [thread-busybox-br-ddbg-strip]: http://lists.busybox.net/pipermail/buildroot/2012-May/053310.html
 [thread-so-analyze-core-dump]: https://stackoverflow.com/questions/5115613/core-dump-file-analysis
