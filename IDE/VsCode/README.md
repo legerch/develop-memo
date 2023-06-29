@@ -14,10 +14,9 @@
 - [5. File association](#5-file-association)
   - [5.1. How to set](#51-how-to-set)
   - [5.2. Which to set](#52-which-to-set)
-- [6. Ressources](#6-ressources)
-- [7. Debug session](#7-debug-session)
-  - [7.1. Remote debug using gdbserver](#71-remote-debug-using-gdbserver)
-- [8. Ressources used](#8-ressources-used)
+- [6. Debug session](#6-debug-session)
+  - [6.1. Remote debug using gdbserver](#61-remote-debug-using-gdbserver)
+- [7. Ressources used](#7-ressources-used)
 
 # 1. Introduction
 
@@ -141,25 +140,12 @@ To set language associated to a file extension:
 | `*.h` | `c` |
 | `*.make` | `makefile` |
 
-# 6. Ressources
-
-- Official documentation : 
-  - [Website][vscode-home]
-  - [Snippets][vscode-snippets]
-- Tutorials
-  - https://sqldbawithabeard.com/2017/04/24/setting-the-default-file-type-for-a-new-file-in-vs-code/
-- Threads :
-  - [How can I create templates for file extensions in Visual Studio Code ?](https://stackoverflow.com/questions/50571130/how-can-i-create-templates-for-file-extensions-in-visual-studio-code)
-  - [When creating a VSCode snippet, how can I transform a variable to title-case (like TitleCase) ?](https://stackoverflow.com/questions/52874954/when-creating-a-vscode-snippet-how-can-i-transform-a-variable-to-title-case-li)
-  - [Snippet can not work in C header file (#1476)][issue-c-headers-not-triggered]
-  - [Open files always in a new tab](https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab)
-
-# 7. Debug session
+# 6. Debug session
 
 To help to debug, plugin [Native Debug][plugin-native-debug] will be needed.  
 Please read plugin documentation since this tutorial will concentrate on the `launch.json` configuration file.
 
-## 7.1. Remote debug using gdbserver
+## 6.1. Remote debug using gdbserver
 
 If not already set, take a look to [how to debug remotely tutorial][repo-debug-gdbserver].  
 
@@ -190,7 +176,7 @@ This will attach to the running process managed by gdbserver on `192.168.10.130:
 2. Set your breakpoints. Note than breakpoint can be added when debug session is active but you must **pause** current session, otherwise breakpoint will fail to be set.
 3. Run debug session
 
-# 8. Ressources used
+# 7. Ressources used
 
 - VsCode
   - [Home][vscode-home]
@@ -200,6 +186,9 @@ This will attach to the running process managed by gdbserver on `192.168.10.130:
   - [snippet-generator]
 - Threads
   - [VsCode - CppTools - Snippet can not work in C header file][issue-c-headers-not-triggered]
+  - [Stackoverflow - How can I create templates for file extensions in Visual Studio Code ?][thread-so-create-templates-for-file-with-vscode]
+  - [Stackoverflow - When creating a VSCode snippet, how can I transform a variable to title-case (like TitleCase) ?][thread-so-transform-vars-of-vscode]
+  - [Stackoverflow - Open files always in a new tab][thread-so-vscode-open-files-new-tab]
   - [Stackoverflow - Is it possible to attach to a remote gdb target with vscode ?][thread-so-attach-to-remote-gdb-with-vscode1]
   - [Stackoverflow - How to attach to remote gdb with vscode ?][thread-so-attach-to-remote-gdb-with-vscode2]
 
@@ -233,6 +222,9 @@ This will attach to the running process managed by gdbserver on `192.168.10.130:
 
 [snippet-generator]: https://snippet-generator.app/
 
+[thread-so-create-templates-for-file-with-vscode]: https://stackoverflow.com/questions/50571130/how-can-i-create-templates-for-file-extensions-in-visual-studio-code
+[thread-so-transform-vars-of-vscode]: https://stackoverflow.com/questions/52874954/when-creating-a-vscode-snippet-how-can-i-transform-a-variable-to-title-case-li
+[thread-so-vscode-open-files-new-tab]: https://stackoverflow.com/questions/38713405/open-files-always-in-a-new-tab
 [thread-so-attach-to-remote-gdb-with-vscode1]: https://stackoverflow.com/questions/38089178/is-it-possible-to-attach-to-a-remote-gdb-target-with-vscode
 [thread-so-attach-to-remote-gdb-with-vscode2]: https://stackoverflow.com/questions/53519668/how-to-attach-to-remote-gdb-with-vscode
 
