@@ -1,4 +1,4 @@
-This file will resume how to create an access point.
+This file will resume how to manage connection with an access point.
 
 **Table of contents :**
 - [1. IEEE802.11 specifications](#1-ieee80211-specifications)
@@ -56,7 +56,8 @@ This amendment provides **Dynamic Frequency Selection (DFS)** and **Transmit Pow
 If **DFS** is not enabled, your device will only have access to **UNII-1** channels, see [band-5Ghz section][anchor-band-5ghz-channels] for more details.
 
 > **Hostapd keyword:** _ieee80211h_  
-> **Availability:** With protocols **n/ac/ax**, **5GHz** band
+> **Availability:** With protocols **n/ac/ax**, **5GHz** band  
+> Also note than **DFS** channels have their own issues (like longer time to be available for example), see [this article][doc-wifi-5-dfs-channels-article] for more details.
 
 ## 1.3. Band Channels
 ### 1.3.1. 2.4GHz
@@ -68,9 +69,10 @@ If **DFS** is not enabled, your device will only have access to **UNII-1** chann
 ### 1.3.2. 5GHz
 
 ![List of 5GHz channels][asset-img-list-channel-5]
-
+  
 > **Source:** [FR - Comprendre et configurer le DFS][doc-wifi-5-dfs-fr]  
-> **Alternative:** [EN - Introduction to 5 GHz WiFi Channels][doc-wifi-5-dfs-en]
+> **Alternative:** [EN - Introduction to 5 GHz WiFi Channels][doc-wifi-5-dfs-en]  
+> Note than above bands are for **US** (may vary for others countries ! See [List of WLAN channels][doc-wiki-list-wlan-channels] for more details).
 
 # 2. Generate an access point (AP mode)
 
@@ -103,6 +105,7 @@ Please refer to [use STATION and AP modes simultaneously tutorial][doc-mode-ap-s
   - Understand 5GHz band
     - [FR - Comprendre et configurer le DFS][doc-wifi-5-dfs-fr]  
     - [EN - Introduction to 5 GHz WiFi Channels][doc-wifi-5-dfs-en]
+    - [DFS channels and why to avoid them][doc-wifi-5-dfs-channels-article]
 - Useful apps
   - **Linux:**
     - [Sparrow-wifi][app-sparrow-wifi] : Sparrow-wifi has been built from the ground up to be the next generation 2.4 GHz and 5 GHz Wifi spectral awareness tool
@@ -138,3 +141,4 @@ Please refer to [use STATION and AP modes simultaneously tutorial][doc-mode-ap-s
 
 [doc-wifi-5-dfs-fr]: https://toubox.fr/wi-fi-comprendre-et-configurer-le-dfs/
 [doc-wifi-5-dfs-en]: https://www.accessagility.com/blog/introduction-to-5-ghz-wifi-channels
+[doc-wifi-5-dfs-channels-article]: https://wifinc.net/dfs-channels-and-why-to-avoid-them-even-though-you-say-you-cannot/
