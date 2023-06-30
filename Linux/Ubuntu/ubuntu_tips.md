@@ -10,8 +10,9 @@
 - [4. `tracker` process](#4-tracker-process)
 - [5. Graphics cards support](#5-graphics-cards-support)
   - [5.1. Nvidia](#51-nvidia)
-- [6. System freeze](#6-system-freeze)
-- [7. Ressources](#7-ressources)
+- [6. Switch GCC version to use](#6-switch-gcc-version-to-use)
+- [7. System freeze](#7-system-freeze)
+- [8. Ressources](#8-ressources)
 
 # 1. Introduction
 
@@ -100,7 +101,15 @@ sudo reboot
 _Under construction_ 
 > Use this tutorial : [Ubuntu - Install NVidia driver latest proprietary driver][tutorial-nvidia-driver]
 
-# 6. System freeze
+# 6. Switch GCC version to use
+
+_Under construction_
+> In the meantime, please refer to:
+> - https://linuxconfig.org/how-to-switch-between-multiple-gcc-and-g-compiler-versions-on-ubuntu-20-04-lts-focal-fossa
+> - https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version  
+> Note than if you need a custom compiler for a Qt toolkit for example, installing GCC (`gcc` and `g++`) version associated package will be enough !
+
+# 7. System freeze
 
 _under construction_
 > - [How to properly shutdown Ubuntu even if all is freezed][doc-os-freeze-ubuntu]
@@ -109,7 +118,7 @@ _under construction_
 > - [doc-os-freeze-configuration] (by default only SUB part of REISUB cmd is enable, so you need to configure it before this command is needed...)  
 > **Note :** don't forget to print those pages...  
 
-# 7. Ressources
+# 8. Ressources
 
 - Official documentation :
   - [FR Ubuntu - PPA][doc-ppa-ubuntu]

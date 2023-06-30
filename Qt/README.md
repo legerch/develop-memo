@@ -1,7 +1,10 @@
 **Table of contents :**
 - [1. Introduction](#1-introduction)
 - [2. Installation](#2-installation)
-- [3. Customization](#3-customization)
+- [3. Qt Creator](#3-qt-creator)
+  - [3.1. Themes](#31-themes)
+  - [3.2. Kit](#32-kit)
+  - [3.3. Compiler](#33-compiler)
 - [4. Deploy](#4-deploy)
   - [4.1. Windows OS](#41-windows-os)
   - [4.2. Linux OS](#42-linux-os)
@@ -22,10 +25,20 @@ In this folder, you will find all Qt relatives informations
 Qt official installer is available at [Qt - Installer][qt-installer]
 > Qt can be obtained through tree licences : **GPL**, **LGPL** and **Commercial**. Please review all available modules and conditions of each at [Qt - Licenses][qt-licenses] 
 
-# 3. Customization
+# 3. Qt Creator
+## 3.1. Themes
 
 Available themes :
 - [QDarksky][theme-qdarsky-official] (a [Pull request][theme-qdarsky-pr-qtc5] is in pending to make this theme compatible with QtCreator 5 and later)
+
+## 3.2. Kit
+
+_in construction_
+
+## 3.3. Compiler
+
+To use a custom compiler, you have to set compiler used in toolkit preferences. Custom compilers is set only for a specific Qt kit.
+> See [Qt Creator - Add compiler][qt-creator-doc-add-compiler]
 
 # 4. Deploy
 
@@ -151,6 +164,8 @@ When generate binary files, it is recommended to include the arch build on the g
 <!-- External link -->
 [qt-installer]: https://www.qt.io/download-qt-installer
 [qt-licenses]: https://www.qt.io/product/features
+
+[qt-creator-doc-add-compiler]: https://doc.qt.io/qtcreator/creator-tool-chains.html
 
 [theme-qdarsky-official]: https://github.com/foxoman/qDarkSky
 [theme-qdarsky-pr-qtc5]: https://github.com/foxoman/qDarkSky/pull/2
