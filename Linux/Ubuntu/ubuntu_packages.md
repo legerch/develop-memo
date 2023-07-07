@@ -354,7 +354,8 @@ To get more infomations about **50/72 rule**, see [git commit message][doc-git-c
 
 ```shell
 sudo apt install htop lm-sensors udisks2
-sudo apt install y-ppa-manager # a PPA exist for this package
+sudo apt install baobab         # Disk Usage Analyzer, representation of a disk drive's contents (see https://gitlab.gnome.org/GNOME/baobab)
+sudo apt install y-ppa-manager  # a PPA exist for this package
 ```
 
 # 7. Networking tools
