@@ -108,6 +108,6 @@ To [update VCPKG libraries][vcpkg-update-lib], use subcommand:
 [vcpkg-repo]: https://github.com/microsoft/vcpkg
 [vcpkg-packages]: https://vcpkg.io/en/packages.html
 
-[vcpgk-faq]: https://github.com/microsoft/vcpkg/blob/master/docs/about/faq.md
-[vcpgk-update-itself]: https://github.com/microsoft/vcpkg/blob/master/docs/about/faq.md#how-do-i-update-vcpkg
-[vcpkg-update-lib]: https://github.com/microsoft/vcpkg/blob/master/docs/about/faq.md#how-do-i-update-libraries
+[vcpgk-faq]: https://learn.microsoft.com/en-us/vcpkg/about/faq
+[vcpgk-update-itself]: https://learn.microsoft.com/en-us/vcpkg/about/faq#how-do-i-update-vcpkg
+[vcpkg-update-lib]: https://learn.microsoft.com/en-us/vcpkg/about/faq#how-do-i-update-libraries
