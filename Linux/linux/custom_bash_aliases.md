@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-46-generic - 30/06/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-50-generic - 26/07/2023 :
 
 ```shell
 ##
@@ -348,6 +348,35 @@ function set-lamp-properties()
     local message="${2}"
 
     sudo systemctl "${cmd}" apache2 && sudo systemctl "${cmd}" mysql && printf "${message}\n"
+}
+
+# Function used to rename all files extensions
+# Doc: https://manpages.ubuntu.com/manpages/jammy/en/man1/file-rename.1p.html
+function rename-file-extension()
+{
+    local oldExt="${1}"
+    local newExt="${2}"
+
+    if [ -z "${oldExt}" ] || [ -z "${newExt}" ]; then
+        printf "Usage: rename-file-extension oldExt newExt\n"
+        printf "Note: Only files in current directory will be renamed\n"
+    else
+        printf "Files will be renamed as follow:\n"
+        file-rename -v -n "s/.${oldExt}/.${newExt}/" *".${oldExt}"
+
+        read -p "Proceed (yes/no) ?" userInput
+
+        case "${userInput}" in 
+            Y|y|YES|Yes|yes)
+                file-rename "s/.${oldExt}/.${newExt}/" *".${oldExt}"
+                printf "Done. \n"
+                ;;
+
+            *)
+                printf "Operation canceled. \n"
+                ;;
+        esac
+    fi
 }
 
 ##
