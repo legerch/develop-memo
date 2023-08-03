@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-50-generic - 26/07/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-50-generic - 03/08/2023 :
 
 ```shell
 ##
@@ -377,6 +377,33 @@ function rename-file-extension()
                 ;;
         esac
     fi
+}
+
+# Functions used to manage kernel perf property
+# Doc: https://askubuntu.com/questions/1400874/what-does-perf-paranoia-level-four-do
+function perf-level-get()
+{
+    sysctl kernel.perf_event_paranoid
+}
+
+function perf-level-set()
+{
+    local level="${1}"
+
+    printf "This command will be executed:\n"
+    printf "sudo sysctl kernel.perf_event_paranoid=${level}\n"
+    
+    read -p "Proceed (yes/no) ?" userInput
+    case "${userInput}" in 
+        Y|y|YES|Yes|yes)
+            sudo sysctl kernel.perf_event_paranoid="${level}"
+            printf "Done. \n"
+            ;;
+
+        *)
+            printf "Operation canceled. \n"
+            ;;
+    esac
 }
 
 ##
