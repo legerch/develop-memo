@@ -1,8 +1,9 @@
-# Développement
+This repository is used as a **personal "memo"** for multiples subjects/applications/configurations/etc...  
+Some parts are really detailled, some are brief and some are still in construction (but with links to alternative ressources).
 
-Dans ce répertoire se trouve toutes les "astuces" relatives au développement
+> Note: It is mainly written in _English_ but some parts are still in _French_ (which is my native language, mainly used when lacking time on writing tutorial)
 
-## Tutoriels
+**Table of contents:**
 
 - [Bit-operators](Bit%20operators/ "Bit-operators")
 - [C](C/ "C")
