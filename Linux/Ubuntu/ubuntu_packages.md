@@ -45,6 +45,8 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
 - [8. Emails](#8-emails)
 - [9. Graphics libraries](#9-graphics-libraries)
 - [10. Multimedia tools](#10-multimedia-tools)
+  - [10.1. Generic](#101-generic)
+  - [10.2. GStreamer](#102-gstreamer)
 - [11. GNOME Customization](#11-gnome-customization)
   - [11.1. GNOME Plugins](#111-gnome-plugins)
   - [11.2. GNOME Editor](#112-gnome-editor)
@@ -392,7 +394,7 @@ sudo apt install mesa-utils
 ```
 
 # 10. Multimedia tools
-
+## 10.1. Generic
 ```shell
 sudo apt install vlc gimp mediainfo-gui
 sudo apt install ffmpeg
@@ -401,6 +403,25 @@ sudo apt install libreoffice # a PPA also exist for libreoffice
 
 sudo snap install discord
 ``` 
+
+## 10.2. GStreamer
+
+List of plugins:
+```shell
+sudo apt install libgstreamer1.0-0  # Mandatory 
+sudo apt install gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
+sudo apt install gstreamer1.0-libav # Useful for codecs
+```
+
+GStreamer utilities:
+```shell
+sudo apt install gstreamer1.0-tools
+```
+
+Useful for development with GStreamer API:
+```shell
+sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+```
 
 # 11. GNOME Customization
 ## 11.1. GNOME Plugins
