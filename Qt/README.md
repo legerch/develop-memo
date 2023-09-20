@@ -1,48 +1,60 @@
-**Table of contents :**
-- [1. Introduction](#1-introduction)
-- [2. Installation](#2-installation)
-- [3. Qt Creator](#3-qt-creator)
-  - [3.1. Themes](#31-themes)
-  - [3.2. Kit](#32-kit)
-  - [3.3. Compiler](#33-compiler)
-- [4. Deploy](#4-deploy)
-  - [4.1. Windows OS](#41-windows-os)
-  - [4.2. Linux OS](#42-linux-os)
-    - [4.2.1. Create _AppDir_ structure](#421-create-appdir-structure)
-      - [4.2.1.1. Preparing your application](#4211-preparing-your-application)
-      - [4.2.1.2. Using `linuxdeploy` tool](#4212-using-linuxdeploy-tool)
-    - [4.2.2. Generate _AppImage_ application](#422-generate-appimage-application)
-      - [4.2.2.1. linuxdeploy-plugin-appimage](#4221-linuxdeploy-plugin-appimage)
-      - [4.2.2.2. AppImageKit](#4222-appimagekit)
-- [5. Ressources](#5-ressources)
-
-# 1. Introduction
-
 In this folder, you will find all Qt relatives informations
 
-# 2. Installation
+**Table of contents :**
+- [1. Installation](#1-installation)
+- [2. Qt Creator](#2-qt-creator)
+  - [2.1. Themes](#21-themes)
+  - [2.2. Kit](#22-kit)
+  - [2.3. Compiler](#23-compiler)
+  - [2.4. Analyzers](#24-analyzers)
+- [3. Deploy](#3-deploy)
+  - [3.1. Windows OS](#31-windows-os)
+  - [3.2. Linux OS](#32-linux-os)
+    - [3.2.1. Create _AppDir_ structure](#321-create-appdir-structure)
+      - [3.2.1.1. Preparing your application](#3211-preparing-your-application)
+      - [3.2.1.2. Using `linuxdeploy` tool](#3212-using-linuxdeploy-tool)
+    - [3.2.2. Generate _AppImage_ application](#322-generate-appimage-application)
+      - [3.2.2.1. linuxdeploy-plugin-appimage](#3221-linuxdeploy-plugin-appimage)
+      - [3.2.2.2. AppImageKit](#3222-appimagekit)
+- [4. Ressources](#4-ressources)
+
+# 1. Installation
 
 Qt official installer is available at [Qt - Installer][qt-installer]
 > Qt can be obtained through tree licences : **GPL**, **LGPL** and **Commercial**. Please review all available modules and conditions of each at [Qt - Licenses][qt-licenses] 
 
-# 3. Qt Creator
-## 3.1. Themes
+# 2. Qt Creator
+## 2.1. Themes
 
 Available themes :
 - [QDarksky][theme-qdarsky-official] (a [Pull request][theme-qdarsky-pr-qtc5] is in pending to make this theme compatible with QtCreator 5 and later)
 
-## 3.2. Kit
+## 2.2. Kit
 
 _in construction_
 
-## 3.3. Compiler
+## 2.3. Compiler
 
 To use a custom compiler, you have to set compiler used in toolkit preferences. Custom compilers is set only for a specific Qt kit.
 > See [Qt Creator - Add compiler][qt-creator-doc-add-compiler]
 
-# 4. Deploy
+## 2.4. Analyzers
 
-## 4.1. Windows OS
+QtCreator allow to perform multiple analyze:
+
+| Analyze type | Tool | Linux | Windows | Mac |
+|:-:|:-:|:-:|:-:|:-:|
+| Memory | [**Valgrind**][qt-creator-doc-analyze-valgrind] | :white_check_mark: | :dizzy: | :dizzy: |
+| Performance (CPU) | [**perf**][qt-creator-doc-analyze-perf] | :white_check_mark: | :x: | :x: |
+
+> Support:
+> - :white_check_mark: Complete support
+> - :dizzy: Partial support
+> - :x: No support
+
+# 3. Deploy
+
+## 3.1. Windows OS
 
 Under windows, libraries are needed next to executable, otherwise it cannot be launch.  
 To do so, you must launch `cmd.exe` with the Qt environment to used :
@@ -60,17 +72,17 @@ windeployqt --release myApp.exe
 
 Now, the directory must contains our application `myApp.exe` and all needed Qt libraries (`Qt5Core.dll`, `Qt5Widgets.dll`, etc...)
 
-## 4.2. Linux OS
+## 3.2. Linux OS
 
 Under Linux OS, if you have needed libraries installed on the target, you can use the generated release file without problem. This solution can be useful for a developper desktop but for average users, this can't work, we need to bundle all needed libraries.  
 Tutorial below applies for all linux application bundle into an _AppImage_ file, not only for _Qt_ applications.
 
-### 4.2.1. Create _AppDir_ structure
+### 3.2.1. Create _AppDir_ structure
 
 To create an _AppDir_ structure, we can use the dedicated project [linuxdeploy] (don't confuse with the other project [linuxdeployqt].    
 To create _AppDir_ structure of your application :
 
-#### 4.2.1.1. Preparing your application
+#### 3.2.1.1. Preparing your application
 
 1. Create basic structure of an **AppDir** which should look something like this :
 ```shell
@@ -102,7 +114,7 @@ Categories=Office;
 > See [`.desktop specs`][linux-specs-desktop] for more details about available fields.  
 > To assure good bundle with other tools like `linuxdeploy`, use the name application for **binary**, **icon** and **desktop** files.
 
-#### 4.2.1.2. Using `linuxdeploy` tool
+#### 3.2.1.2. Using `linuxdeploy` tool
 
 Official documentation of this tool is available at [_linuxdeploy_ : User guide][linuxdeploy-doc]
 
@@ -121,7 +133,7 @@ LD_LIBRARY_PATH=/home/<user>/Qt/5.15.2/gcc_64/lib QMAKE=/home/<user>/Qt/5.15.2/g
 > By default, plugin will use `QMake` installed in `/usr/lib/` (when Qt is installed with distribution packages). If you installed Qt with official installer (recommended !), then Qt files will be located at `/home/<user>/Qt`.  
 > If plugin `linuxdeploy-plugin-appimage` is installed, you can add `--output appimage` to the command line to generate the **AppImage** after creation of **AppDir**
 
-### 4.2.2. Generate _AppImage_ application
+### 3.2.2. Generate _AppImage_ application
 
 Once your **AppDir** is created and complete, we can create our **AppImage** file, to do so, two solutions :
 - [linuxdeploy-plugin-appimage][linuxdeploy-plugin-appimage]
@@ -134,12 +146,12 @@ When generate binary files, it is recommended to include the arch build on the g
 - myApp-v1.0.0-armhf.AppImage
 > Don't forget to add executable right on the file if needed with `chmod +x ./myApp.AppImage`.  
 
-#### 4.2.2.1. linuxdeploy-plugin-appimage
+#### 3.2.2.1. linuxdeploy-plugin-appimage
 
 1. Download plugin file from [linuxdeploy-plugin-appimage/releases][linuxdeploy-plugin-appimage-releases] and put it next to `linuxdeploy` main app
 2. When building **AppDir**, add command `--output appimage`
 
-#### 4.2.2.2. AppImageKit
+#### 3.2.2.2. AppImageKit
 
 1. Download release file from [AppImageKit/releases][appimagekit-releases]
 2. Create your `AppImage` file :
@@ -151,7 +163,7 @@ When generate binary files, it is recommended to include the arch build on the g
 ./myApp.AppImage
 ```
 
-# 5. Ressources
+# 4. Ressources
 
 - Software :
   - [linuxdeploy]
@@ -166,6 +178,8 @@ When generate binary files, it is recommended to include the arch build on the g
 [qt-licenses]: https://www.qt.io/product/features
 
 [qt-creator-doc-add-compiler]: https://doc.qt.io/qtcreator/creator-tool-chains.html
+[qt-creator-doc-analyze-valgrind]: https://doc.qt.io/qtcreator/creator-valgrind-overview.html
+[qt-creator-doc-analyze-perf]: https://doc.qt.io/qtcreator/creator-cpu-usage-analyzer.html
 
 [theme-qdarsky-official]: https://github.com/foxoman/qDarkSky
 [theme-qdarsky-pr-qtc5]: https://github.com/foxoman/qDarkSky/pull/2
