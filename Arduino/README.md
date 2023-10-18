@@ -22,7 +22,7 @@
 
 | Board | Guide | Datasheet | Native Port Serial USB | Programming Port Serial |
 |:-:|:-:|:-:|:-:|:-:|
-| [Arduino Due][arduino-due-store] | [Guide (new)][arduino-due-guide-new]<br>[Guide (old)][arduino-due-guide-old] | [Datasheet][arduino-due-datasheet] | Yes | Yes |
+| [Arduino Due][arduino-due-store] | [Guide (new)][arduino-due-guide-new]<br>[Guide (old)][arduino-due-guide-old] | [Datasheet][arduino-due-datasheet] | Yes | Yes (next to jack port) |
 
 # 2. Development
 ## 2.1. Installation
@@ -97,8 +97,11 @@ Under **VsCode**, those settings will be put in `.vscode/arduino.json` file of t
 {
     "sketch": "blink/blink.ino",
     "board": "arduino:sam:arduino_due_x_dbg",
+    "port": "/dev/ttyACM0",
     "output": "../build-arduino_examples_blink/",
-    "port": "/dev/ttyACM0"
+    "buildPreferences": [
+        ["compiler.cpp.extra_flags", "-Wall -Wextra -Werror=format -Werror=return-type -Werror=implicit-function-declaration -Wformat=2 -Wshadow -Wlogical-op -Wno-ignored-qualifiers"]
+    ]
 }
 ```
 
@@ -204,7 +207,7 @@ Once, board list is working in command-line, you may not be able to use it under
 
 [arduino-due-store]: https://store.arduino.cc/arduino-due
 [arduino-due-guide-new]: https://www.arduino.cc/en/Guide/ArduinoDue
-[arduino-due-guide-old]: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiDl-3QgvH5AhXXwYUKHWd8DlIQFnoECBYQAQ&url=https%3A%2F%2Fwww.arduino.cc%2Fen%2FGuide%2FArduinoDue%2F&usg=AOvVaw2keWTNubni4sdksLhBBk8G]
+[arduino-due-guide-old]: https://web.archive.org/web/20210723193416/https://www.arduino.cc/en/Guide/ArduinoDue
 [arduino-due-datasheet]: http://www.atmel.com/Images/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf
 
 [arduino-ide]: https://www.arduino.cc/en/software
