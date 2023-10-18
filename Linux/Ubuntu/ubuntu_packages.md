@@ -20,6 +20,7 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
     - [2.4.1. Installation](#241-installation)
     - [2.4.2. Custom configuration](#242-custom-configuration)
       - [2.4.2.1. glogg](#2421-glogg)
+      - [2.4.2.2. klogg](#2422-klogg)
   - [2.5. File comparaison viewer](#25-file-comparaison-viewer)
   - [2.6. Hexadecimal viewer](#26-hexadecimal-viewer)
   - [2.7. Documentation](#27-documentation)
@@ -233,6 +234,11 @@ sudo apt install glogg
 | Any failure messages | `fail` | true | red | white |
 | Board is started | `syslog.info syslogd started` | false | black | lime |
 | Application is restarted | `Scheduling for restart` | false | black | fuchsia |
+
+#### 2.4.2.2. klogg
+
+[klogg][klogg-repository] allow to import/export a group of highlighters, doesn't need to set it manually accross multiple devices.  
+A custom _klogg highlighters_ configuration can be found at [klogg-highlighters][res-klogg-highlighter].
 
 ## 2.5. File comparaison viewer
 
@@ -459,6 +465,8 @@ Useful properties :
 [doc-git-commit-message]: ../../Git/git-commit-message.md
 [doc-qt]: ../../Qt/
 [doc-vscode]: ../../IDE/VsCode/
+
+[res-klogg-highlighter]: ressources/logs.conf
 
 <!-- External links -->
 [br-getting-started]: https://buildroot.org/downloads/manual/manual.html#_getting_started
