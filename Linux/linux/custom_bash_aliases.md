@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.2 LTS - Kernel 5.19.0-50-generic - 03/08/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.2.0-34-generic - 18/10/2023 :
 
 ```shell
 ##
@@ -459,6 +459,9 @@ alias vg-memcheck='valgrind --tool=memcheck --leak-check=full --show-leak-kinds=
 alias vg-helgrind='valgrind --tool=helgrind'
 alias memo-vg-memcheck='printf "valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes\n"'
 
+# CMake command
+alias memo-cmake='printf "mkdir build\ncd build/\ncmake ..\ncmake --build . --config Release\n./Release/main.exe\n\ncmake --build . --target clean\n"'
+
 # Go to worspaces
 alias workspace-apache='cd /var/www/'
 alias workspace-qt='cd /home/charlie/Documents/workspaces/workspace-qt'
@@ -471,6 +474,9 @@ alias workspace-appimage='cd /home/charlie/Téléchargements/app-image'
 alias snippet-c-export='cp ~/.config/Code/User/snippets/c.json ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/c.json && printf "Done !\n"'
 alias snippet-c-import='cp ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/c.json ~/.config/Code/User/snippets/c.json && printf "Done !\n"'
 alias snippet-c-edit='code ~/.config/Code/User/snippets/c.json'
+alias snippet-cpp-export='cp ~/.config/Code/User/snippets/cpp.json ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/cpp.json && printf "Done !\n"'
+alias snippet-cpp-import='cp ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/cpp.json ~/.config/Code/User/snippets/cpp.json && printf "Done !\n"'
+alias snippet-cpp-edit='code ~/.config/Code/User/snippets/cpp.json'
 alias snippet-sh-export='cp ~/.config/Code/User/snippets/shellscript.json ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/shellscript.json && printf "Done !\n"'
 alias snippet-sh-import='cp ~/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/IDE/VsCode/ressources/shellscript.json ~/.config/Code/User/snippets/shellscript.json && printf "Done !\n"'
 alias snippet-sh-edit='code ~/.config/Code/User/snippets/shellscript.json'
