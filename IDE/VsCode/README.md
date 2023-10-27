@@ -100,6 +100,7 @@ _Visual Studio Code_ allow usage of plugin, list of useful plugins and somes ass
   - `Mardown/extension/print/Absolute Img Path`: By default, this setting is enable, disable it to make your `.html` **moveable** when using an `images` folder
   - `Mardown/extension/print/Img To Base64`: Can be useful to include images directly into `.html` files to get ride of the `images` folder when generate `.html`
 - [Markdown emoji][plugin-markdown-emoji]: Use to add support for emoji in markdwon files (see [Github emoji cheat-sheet][github-list-emoji] for available emoji)
+- [Markdown PDF][plugin-markdown-pdf]: Use to perform markdown conversions (`.pdf`, `.html`, `.jpeg`, etc...)
 - [Todo Tree][plugin-todo-tree]
 - [Vscode-icons][plugin-vscode-icons]
 - [Color Highlight][plugin-color-highlight]
@@ -215,6 +216,7 @@ This will attach to the running process managed by gdbserver on `192.168.10.130:
 [plugin-kernel-dev]: https://marketplace.visualstudio.com/items?itemName=microhobby.linuxkerneldev
 [plugin-markdown]: https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
 [plugin-markdown-emoji]: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji
+[plugin-markdown-pdf]: https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf
 [plugin-native-debug]: https://marketplace.visualstudio.com/items?itemName=webfreak.debug
 [plugin-todo-tree]: https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
 [plugin-vscode-icons]: https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons
