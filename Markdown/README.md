@@ -87,6 +87,11 @@ Some useful settings can be customized:
     <div style="font-size: 9px; margin: 0 auto;"> <span class='pageNumber'></span> / <span class='totalPages'></span></div>
     ```
 
+When exporting to PDF, it can be useful to go to next page (to not have text cut), to do so, you can use:
+```html
+<div style="page-break-before:always"></div>
+```
+
 <!-- Links for markdown syntax -->
 [markdown-syntax-basic]: https://www.markdownguide.org/basic-syntax/
 [markdown-syntax-extended]: https://www.markdownguide.org/extended-syntax/
