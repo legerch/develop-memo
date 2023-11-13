@@ -14,9 +14,12 @@
 - [5. File association](#5-file-association)
   - [5.1. How to set](#51-how-to-set)
   - [5.2. Which to set](#52-which-to-set)
-- [6. Debug session](#6-debug-session)
-  - [6.1. Remote debug using gdbserver](#61-remote-debug-using-gdbserver)
-- [7. Ressources used](#7-ressources-used)
+- [6. Tips](#6-tips)
+  - [6.1. Multiline-selection](#61-multiline-selection)
+  - [6.2. Set cursor to end of all lines](#62-set-cursor-to-end-of-all-lines)
+- [7. Debug session](#7-debug-session)
+  - [7.1. Remote debug using gdbserver](#71-remote-debug-using-gdbserver)
+- [8. Ressources used](#8-ressources-used)
 
 # 1. Introduction
 
@@ -142,12 +145,25 @@ To set language associated to a file extension:
 | `*.h` | `c` |
 | `*.make` | `makefile` |
 
-# 6. Debug session
+# 6. Tips
+## 6.1. Multiline-selection
+
+Use:
+1. `CTRL + SHIFT` 
+2. `LEFT-CLICK`
+
+## 6.2. Set cursor to end of all lines
+
+Use:
+- `CTRL + A`: select all
+- `ALT + SHIFT + I`: set cursor to end of all lines
+
+# 7. Debug session
 
 To help to debug, plugin [Native Debug][plugin-native-debug] will be needed.  
 Please read plugin documentation since this tutorial will concentrate on the `launch.json` configuration file.
 
-## 6.1. Remote debug using gdbserver
+## 7.1. Remote debug using gdbserver
 
 If not already set, take a look to [how to debug remotely tutorial][repo-debug-gdbserver].  
 
@@ -178,7 +194,7 @@ This will attach to the running process managed by gdbserver on `192.168.10.130:
 2. Set your breakpoints. Note than breakpoint can be added when debug session is active but you must **pause** current session, otherwise breakpoint will fail to be set.
 3. Run debug session
 
-# 7. Ressources used
+# 8. Ressources used
 
 - VsCode
   - [Home][vscode-home]
