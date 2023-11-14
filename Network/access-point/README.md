@@ -15,7 +15,8 @@ This file will resume how to manage connection with an access point.
 - [4. Manage multiple modes](#4-manage-multiple-modes)
   - [4.1. Switch from/to AP/STATION mode](#41-switch-fromto-apstation-mode)
   - [4.2. Manage AP/STATION simultaneously](#42-manage-apstation-simultaneously)
-- [5. Ressources used](#5-ressources-used)
+- [5. Perform scan analysis](#5-perform-scan-analysis)
+- [6. Ressources used](#6-ressources-used)
 
 # 1. IEEE802.11 specifications
 
@@ -91,7 +92,17 @@ Please refer to [switch network mode tutorial][doc-mode-switch] for more details
 
 Please refer to [use STATION and AP modes simultaneously tutorial][doc-mode-ap-sta] for more details.
 
-# 5. Ressources used
+# 5. Perform scan analysis
+
+Multiple tools exist to perform access-point scan:
+
+| Name | Windows support | Linux support | Mac support | Notes |
+|:-:|:-:|:-:|:-:|:-|
+| [Wifi Analyzer][app-wifi-analyzer] | :white_check_mark: | :x: | :x: |
+| [Linssid][app-linssid] | :x: | :white_check_mark: | :x: | Ubuntu: `apt install linssid` |
+| [Sparrow-wifi][app-sparrow-wifi] | :x: | :white_check_mark: | :x: |
+
+# 6. Ressources used
 
 - Wikipedia :
   - [IEEE 802.11][doc-wiki-ieee80211]
@@ -106,11 +117,6 @@ Please refer to [use STATION and AP modes simultaneously tutorial][doc-mode-ap-s
     - [FR - Comprendre et configurer le DFS][doc-wifi-5-dfs-fr]  
     - [EN - Introduction to 5 GHz WiFi Channels][doc-wifi-5-dfs-en]
     - [DFS channels and why to avoid them][doc-wifi-5-dfs-channels-article]
-- Useful apps
-  - **Linux:**
-    - [Sparrow-wifi][app-sparrow-wifi] : Sparrow-wifi has been built from the ground up to be the next generation 2.4 GHz and 5 GHz Wifi spectral awareness tool
-  - **Windows:**
-    - [Wifi Analyzer][app-wifi-analyzer]
 
 <!-- Anchor of this file -->
 [anchor-band-5ghz-channels]: #132-5ghz
@@ -126,6 +132,7 @@ Please refer to [use STATION and AP modes simultaneously tutorial][doc-mode-ap-s
 [doc-mode-ap-sta]: mode-ap-sta.md
 
 <!-- External links -->
+[app-linssid]: https://sourceforge.net/projects/linssid/]
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
 [app-wifi-analyzer]: https://apps.microsoft.com/store/detail/wifi-analyzer/9NBLGGH33N0N?hl=fr-fr&gl=fr
 

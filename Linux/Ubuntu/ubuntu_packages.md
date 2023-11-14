@@ -368,12 +368,22 @@ sudo apt install y-ppa-manager  # a PPA exist for this package
 
 # 7. Networking tools
 
+- Network management:
 ```shell
 sudo apt install net-tools libpcap-dev libnet1-dev rpcbind openssh-client openssh-server nmap
-sudo apt install wireshark
-sudo apt install filezilla
-sudo apt install iperf3
 ```
+
+- Network analyze:
+```shell
+sudo apt install wireshark iperf3
+```
+
+- Network transfer:
+```shell
+sudo apt install filezilla
+```
+
+- Access-point analyze: see [access-point ressource][doc-net-access-point] documentation
 
 # 8. Emails
 
@@ -381,6 +391,7 @@ sudo apt install iperf3
 ```shell
 sudo apt install thunderbird thunderbird-locale-fr
 ```
+> Note than a [thunderbird snap][snap-package-thunderbird] version also exist.
 
 - GNOME Evolution :
 ```shell
@@ -463,6 +474,7 @@ Useful properties :
 <!-- Links of this repository -->
 [doc-arduino]: ../../Arduino/
 [doc-git-commit-message]: ../../Git/git-commit-message.md
+[doc-net-access-point]: ../../Network/access-point/
 [doc-qt]: ../../Qt/
 [doc-vscode]: ../../IDE/VsCode/
 
@@ -505,5 +517,7 @@ Useful properties :
 
 [snapcraft-repositories]: https://snapcraft.io/
 [snapcraft-documentation]: https://snapcraft.io/docs
+[snap-package-thunderbird]: https://snapcraft.io/thunderbird
+
 [theme-gedit-dracula]: https://draculatheme.com/gedit
 
