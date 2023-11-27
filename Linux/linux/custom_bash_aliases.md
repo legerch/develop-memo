@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.2.0-34-generic - 18/10/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.2.0-37-generic - 27/11/2023 :
 
 ```shell
 ##
@@ -494,6 +494,9 @@ alias bash-aliases-update-doc='save-custom-bash-aliases ~/Documents/workspaces/w
 alias bash-aliases-edit-vi='vi ~/.bash_aliases'
 alias bash-aliases-edit-vscode='code ~/.bash_aliases'
 alias bash-aliases-reload='source ~/.bash_aliases && printf "Done !\n"'
+
+# Use to manage environment file
+alias env-edit-vi='sudo vi /etc/environment'
 
 # Create alias for gitui program, which doesn't yet have a proper system installation, so we use binaries (https://github.com/extrawurst/gitui)
 alias gituibin='~/Téléchargements/Fichiers\ Setup/gitui-linux-musl/gitui'
