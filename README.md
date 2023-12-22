@@ -24,4 +24,3 @@ Some parts are really detailled, some are brief and some are still in constructi
 - [Toolchains](Toolchains/)
 - [Valgrind](Valgrind/)
 - [Web Browsers](Web%20Browsers/)
-- [Windows](Windows/)

@@ -1,6 +1,9 @@
 **Table of contents:**
 - [1. Installation](#1-installation)
   - [1.1. Prerequisites](#11-prerequisites)
+    - [1.1.1. Common](#111-common)
+    - [1.1.2. Windows](#112-windows)
+    - [1.1.3. Linux](#113-linux)
   - [1.2. How to ?](#12-how-to-)
   - [1.3. Integration](#13-integration)
     - [1.3.1. Qt projects](#131-qt-projects)
@@ -17,10 +20,19 @@ This README file is based on repository README itself but with some additionals 
 # 1. Installation
 ## 1.1. Prerequisites
 
-In order to use [Vcpkg][vcpkg-repo], you need:
-- Windows 7 or newer
+In order to use [Vcpkg][vcpkg-repo], you need some prerequisites.
+
+### 1.1.1. Common
 - [Git][git-official] (or any git client than can be used to clone vcpkg repository)
+
+### 1.1.2. Windows
 - [Visual Studio][visual-studio-official] with the English language pack
+
+### 1.1.3. Linux
+- Developer tools will be needed:
+```shell
+sudo apt install build-essential tar curl zip unzip autoconf-archive
+```
 
 ## 1.2. How to ?
 
@@ -39,6 +51,7 @@ git clone git@github.com:microsoft/vcpkg.git
 ```shell
 .\vcpkg\vcpkg integrate install
 ```
+> Note than this command is only needed under **Windows OS** with _Visual Studio_
 
 Result of this command should print something like:
 ```
