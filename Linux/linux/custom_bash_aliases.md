@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.2.0-37-generic - 27/11/2023 :
+Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.5.0-14-generic - 16/01/2024 :
 
 ```shell
 ##
@@ -504,6 +504,9 @@ alias gituibin='~/Téléchargements/Fichiers\ Setup/gitui-linux-musl/gitui'
 # Create alias for application used to create an AppImage, which are released under binaries
 alias linuxdeploy.AppImage='~/Téléchargements/apps/linuxdeploy/linuxdeploy-x86_64.AppImage'
 alias appimagetool.AppImage='~/Téléchargements/apps/appimagekit/appimagetool-x86_64.AppImage'
+
+# Create alias to python tools
+alias py-b4='~/.local/bin/b4'
 
 # Create aliases used to generate documentation of multiple projects
 alias doc-cobra-libs='generate-project-documentation /home/charlie/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/03-libs Doxyfile'

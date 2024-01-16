@@ -2,15 +2,16 @@ Dans ce document seront décrit toutes les procédures liées à la gestion de p
 
 **Sommaire :**
 - [1. Management](#1-management)
-  - [1.1. Générer un patch](#11-générer-un-patch)
-  - [1.2. Appliquer un patch](#12-appliquer-un-patch)
+  - [1.1. Générer un patch local](#11-générer-un-patch-local)
+  - [1.2. Générer un patch depuis une source online](#12-générer-un-patch-depuis-une-source-online)
+  - [1.3. Appliquer un patch](#13-appliquer-un-patch)
 - [2. Contribuer à un projet open-source](#2-contribuer-à-un-projet-open-source)
   - [2.1. Configuration Git](#21-configuration-git)
   - [2.2. Projets](#22-projets)
 - [3. Ressources](#3-ressources)
 
 # 1. Management
-## 1.1. Générer un patch
+## 1.1. Générer un patch local
 
 - Générer un patch pour chaque commit depuis le commit <SHA1> spécifié (non inclus) :
 ```shell
@@ -34,6 +35,8 @@ git format-patch --reroll-count=2 -o outgoing/ <SHA1>
 git format-patch -1 <SHA1>
 ```
 
+## 1.2. Générer un patch depuis une source online
+
 - Générer un patch depuis un commit _Github_ :
 Ajouter `.patch` (ou `.diff`) à l'URL du commit permet de le formatter :
 ```shell
@@ -41,7 +44,17 @@ https://github.com/foo/bar/commit/${SHA}.patch
 ```
 > Reference : [StackOverflow - How to download a single commit from Github][thread-so-dl-patch-github]
 
-## 1.2. Appliquer un patch
+- Générer un patch depuis une mailing list
+Utiliser l'outil [b4][b4-docs] (voir [documentation][b4-docs] et [dépôt][b4-repository]) :
+```shell
+# Example for this patch series: https://lore.kernel.org/buildroot/20240107105539.1214363-1-thomas@devoogdt.com/
+b4 am -c -l -3 20240107105539.1214363-1-thomas@devoogdt.com
+```
+> `-c`: Use to check Check if newer patch revisions exist
+> `-l`: Add a link with message-id lookup URL to every patch
+> `-3`: Prepare for a 3-way merge
+
+## 1.3. Appliquer un patch
 
 - Appliquer un patch à un dépôt _Git_ :
 ```shell
@@ -143,3 +156,7 @@ Pour pouvoir _contribuer_ à un projet, il est nécessaire que _Git_ soit correc
 [tutorial-how-to-use-git-send-email]: https://www.freedesktop.org/wiki/Software/PulseAudio/HowToUseGitSendEmail/
 
 [thread-so-dl-patch-github]: https://stackoverflow.com/questions/21903805/how-to-download-a-single-commit-diff-from-github
+
+[b4-home]: https://pypi.org/project/b4/
+[b4-docs]: https://b4.docs.kernel.org/en/latest/
+[b4-repository]: https://git.kernel.org/pub/scm/utils/b4/b4.git/about/
