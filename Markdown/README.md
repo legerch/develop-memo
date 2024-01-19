@@ -2,6 +2,8 @@ This file is use as a memo for _Markdown_ syntax
 
 **Table of contents :**
 - [1. Syntax](#1-syntax)
+  - [1.1. Tutorials](#11-tutorials)
+  - [1.2. Set a dropdown](#12-set-a-dropdown)
 - [2. Advice rules](#2-advice-rules)
   - [2.1. Links](#21-links)
 - [3. Markdown editor](#3-markdown-editor)
@@ -10,10 +12,31 @@ This file is use as a memo for _Markdown_ syntax
     - [3.2.1. Settings](#321-settings)
 
 # 1. Syntax
-
+## 1.1. Tutorials
 - [Basic syntax][markdown-syntax-basic] : headings, line breaks, text transformation, blockquotes, lists, images, links
 - [Extended syntax][markdown-syntax-extended] : tables, code blocks, footnotes, task lists, emoji, highlight
 - [Code blocks syntax][markdown-syntax-code] : list of supported languages and keywork to use when creating a block of code
+
+## 1.2. Set a dropdown
+
+<details>
+<summary>How do I dropdown?</summary>
+<br>
+This is how you dropdown.
+<br><br>
+<pre>
+&lt;details&gt;
+&lt;summary&gt;How do I dropdown?&lt;&#47;summary&gt;
+&lt;br&gt;
+This is how you dropdown.
+&lt;&#47;details&gt;
+</pre>
+</details>
+
+> Syntax notes:
+> - `<details>`: Define dropdown **wrapper** (can be _open_ by default by using `<details open>`)
+> - `<summary>`: Define dropdown **title**  
+> See [this tutorial][markdown-syntax-dropdown] for more complex dropdown scenario
 
 # 2. Advice rules
 ## 2.1. Links
@@ -74,15 +97,18 @@ Some useful settings can be customized:
 - PDF options
   - `markdown-pdf.headerTemplate`:
     - Default value:
+
     ```html
     <div style="font-size: 9px; margin-left: 1cm;"> <span class='title'></span></div> <div style="font-size: 9px; margin-left: auto; margin-right: 1cm; ">%%ISO-DATE%%</div>
     ```
     - Custom value:
+
     ```html
     <div style="font-size: 9px; margin-left: 1cm;"> <span class='title'></span></div>
     ```
   - `markdown-pdf.footerTemplate`:
     - Default value:
+
     ```html
     <div style="font-size: 9px; margin: 0 auto;"> <span class='pageNumber'></span> / <span class='totalPages'></span></div>
     ```
@@ -97,6 +123,7 @@ When exporting to PDF, it can be useful to go to next page (to not have text cut
 [markdown-syntax-extended]: https://www.markdownguide.org/extended-syntax/
 [markdown-syntax-linking-heading-ids]: https://www.markdownguide.org/extended-syntax/#linking-to-heading-ids
 [markdown-syntax-code]: https://support.codebasehq.com/articles/tips-tricks/syntax-highlighting-in-markdown
+[markdown-syntax-dropdown]: https://dev.to/asyraf/how-to-add-dropdown-in-markdown-o78
 
 <!-- Links for markdown editor -->
 [vscode]: https://code.visualstudio.com/
