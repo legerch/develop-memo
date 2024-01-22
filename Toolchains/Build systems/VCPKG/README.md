@@ -13,6 +13,8 @@
 - [3. Update](#3-update)
   - [3.1. Update VCPKG itself](#31-update-vcpkg-itself)
   - [3.2. Update libraries](#32-update-libraries)
+- [4. Known issues](#4-known-issues)
+  - [4.1. Antivirus block package build](#41-antivirus-block-package-build)
 
 [Vcpkg][vcpkg-repo] helps you manage C and C++ libraries on Windows, Linux and MacOS, official documentation can be found at [vcpkg.io][vcpkg-official].  
 This README file is based on repository README itself but with some additionals tips.
@@ -113,6 +115,12 @@ To [update VCPKG libraries][vcpkg-update-lib], use subcommand:
 .\vcpkg\vcpkg update
 ```
 
+# 4. Known issues
+## 4.1. Antivirus block package build
+
+Since _VCPKG_ binaries are not always signed, it can be useful to add a rules to it regarding VCPKG usage :
+- [Windows defender][av-exclude-win-defenders]
+
 <!-- External links -->
 [git-official]: https://git-scm.com/downloads
 [visual-studio-official]: https://visualstudio.microsoft.com/fr/
@@ -124,3 +132,5 @@ To [update VCPKG libraries][vcpkg-update-lib], use subcommand:
 [vcpgk-faq]: https://learn.microsoft.com/en-us/vcpkg/about/faq
 [vcpgk-update-itself]: https://learn.microsoft.com/en-us/vcpkg/about/faq#how-do-i-update-vcpkg
 [vcpkg-update-lib]: https://learn.microsoft.com/en-us/vcpkg/about/faq#how-do-i-update-libraries
+
+[av-exclude-win-defenders]: https://support.microsoft.com/en-us/windows/add-an-exclusion-to-windows-security-811816c0-4dfd-af4a-47e4-c301afe13b26#ID0EBF=Windows_11
