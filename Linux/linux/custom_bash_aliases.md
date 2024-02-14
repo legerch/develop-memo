@@ -208,24 +208,21 @@ function update-arduino-cli-binary()
     # Check than mandatory tools are available to proceed to update
     which curl &> /dev/null
     local curlStatus=$?
-    if [ ${curlStatus} -eq 0 ]; then
-        
-        # Ask user before proceed to FW update
-        doUpdateArduinoCli=$(user-answer-is-yes "Do you want to update arduino-cli binary")
-
-        # Display update status perform
-        if [ ${doUpdateArduinoCli} -eq 1 ]; then
-            printf "arduino-cli will be updated...\n"
-            
-            update-arduino-cli-binary-get-infos-latest
-            update-arduino-cli-binary-get-binary
-
-        else
-            printf "No arduino-cli binary update have been performed\n"
-        fi
-        
-    else
+    if [ ${curlStatus} -ne 0 ]; then
         printf "You need curl as download tool. Please install it first before continuing\n"
+        return 1
+    fi
+
+    # Ask user before proceed to FW update
+    doUpdateArduinoCli=$(user-answer-is-yes "Do you want to update arduino-cli binary")
+    if [ ${doUpdateArduinoCli} -eq 1 ]; then
+        printf "arduino-cli will be updated...\n"
+        
+        update-arduino-cli-binary-get-infos-latest
+        update-arduino-cli-binary-get-binary
+
+    else
+        printf "No arduino-cli binary update have been performed\n"
     fi
 }
 
@@ -241,24 +238,23 @@ function github-dl-tarball()
     # Check than mandatory tools are available to download tarball
     which curl &> /dev/null
     local curlStatus=$?
-    if [ ${curlStatus} -eq 0 ]; then
-        local url="https://github.com/${owner}/${repo}/archive/${version}.tar.gz"
-
-        # Ask user before proceed to download
-        printf "Tarball URL is: ${url}\n\n"
-
-        printf "Expected format is: github-dl-tarball <owner> <repo> <version_or_sha1>\n"
-        doDlTarball=$(user-answer-is-yes "Proceed")
-
-        # Perfor download in current directory
-        if [ ${doDlTarball} -eq 1 ]; then
-            curl -L ${url} -o "${repo}-${version}.tar.gz"
-
-        else
-            printf "No file has been downloaded\n"
-        fi
-    else
+    if [ ${curlStatus} -ne 0 ]; then
         printf "You need curl as download tool. Please install it first before continuing\n"
+        return 1
+    fi
+
+    # Ask user before proceed to download
+    local url="https://github.com/${owner}/${repo}/archive/${version}.tar.gz"
+    printf "Tarball URL is: ${url}\n\n"
+
+    printf "Expected format is: github-dl-tarball <owner> <repo> <version_or_sha1>\n"
+    doDlTarball=$(user-answer-is-yes "Proceed")
+
+    # Perform download in current directory
+    if [ ${doDlTarball} -eq 1 ]; then
+        curl -L ${url} -o "${repo}-${version}.tar.gz"
+    else
+        printf "No file has been downloaded\n"
     fi
 }
 
@@ -305,26 +301,26 @@ function generate-wifi-qrcode()
 function print-passwd-wifi-specific()
 {
     local ssid="${1}"
-
     if [ -z "${ssid}" ]; then
         printf "Cannot retrieve passwd, no arguments was supplied\n"
-    else
-        local ssidInfos="/etc/NetworkManager/system-connections/${ssid}.nmconnection"
-        if [ -f "${ssidInfos}" ]; then            
-            local security="$(sudo cat ${ssidInfos} | grep "key-mgmt=" | cut -d "=" -f 2)"
-            local passwd="$(sudo cat ${ssidInfos} | grep "psk=" | cut -d "=" -f 2)"
-            
-            printf "\nSSID: ${ssid}\nSecurity: ${security}\nPassword: ${passwd}\n"
+        return 1
+    fi
 
-            which qrencode &> /dev/null
-            local qrStatus=$?
-            if [ ${qrStatus} -eq 0 ]; then
-                generate-wifi-qrcode "${ssid}" "${security}" "${passwd}"
-            fi
+    local ssidInfos="/etc/NetworkManager/system-connections/${ssid}.nmconnection"
+    if [ -f "${ssidInfos}" ]; then            
+        local security="$(sudo cat ${ssidInfos} | grep "key-mgmt=" | cut -d "=" -f 2)"
+        local passwd="$(sudo cat ${ssidInfos} | grep "psk=" | cut -d "=" -f 2)"
+        
+        printf "\nSSID: ${ssid}\nSecurity: ${security}\nPassword: ${passwd}\n"
 
-        else
-            printf "Cannot retrieve passwd, ssid [${ssid}] is unknown\n"
+        which qrencode &> /dev/null
+        local qrStatus=$?
+        if [ ${qrStatus} -eq 0 ]; then
+            generate-wifi-qrcode "${ssid}" "${security}" "${passwd}"
         fi
+
+    else
+        printf "Cannot retrieve passwd, ssid [${ssid}] is unknown\n"
     fi
 }
 
@@ -349,17 +345,18 @@ function rename-file-extension()
     if [ -z "${oldExt}" ] || [ -z "${newExt}" ]; then
         printf "Usage: rename-file-extension oldExt newExt\n"
         printf "Note: Only files in current directory will be renamed\n"
-    else
-        printf "Files will be renamed as follow:\n"
-        file-rename -v -n "s/.${oldExt}/.${newExt}/" *".${oldExt}"
+        return 1
+    fi
 
-        doRenaming=$(user-answer-is-yes "Proceed")
-        if [ ${doRenaming} -eq 1 ]; then
-            file-rename "s/.${oldExt}/.${newExt}/" *".${oldExt}"
-            printf "Done. \n"
-        else
-            printf "Operation canceled. \n"
-        fi
+    printf "Files will be renamed as follow:\n"
+    file-rename -v -n "s/.${oldExt}/.${newExt}/" *".${oldExt}"
+
+    doRenaming=$(user-answer-is-yes "Proceed")
+    if [ ${doRenaming} -eq 1 ]; then
+        file-rename "s/.${oldExt}/.${newExt}/" *".${oldExt}"
+        printf "Done. \n"
+    else
+        printf "Operation canceled. \n"
     fi
 }
 
