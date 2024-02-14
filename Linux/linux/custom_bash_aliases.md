@@ -35,6 +35,19 @@ function user-answer-is-yes()
     echo "${isYes}"
 }
 
+function verify-min-bash-version()
+{
+    local targetVersion="${1}"
+    local currentVersion="${BASH_VERSINFO[0]}.${BASH_VERSINFO[1]}.${BASH_VERSINFO[2]}"
+    local isValid=0
+
+    if [[ "${currentVersion}" > "${targetVersion}" || "${currentVersion}" == "${targetVersion}" ]]; then
+        isValid=1
+    fi
+
+    echo "${isValid}"
+}
+
 # Function used to create a copy of ~/.bash_aliases into a markdown file :
 # ${1} : file to write (ex : file.md)
 function save-custom-bash-aliases()
@@ -71,11 +84,23 @@ function save-custom-bash-aliases()
 # - List all available configs from "/configs" directory
 function memo-cobra-build()
 {
+    # Verify bash version superior to 4.2.0 (to use a negative index)
+    local canRun=$(verify-min-bash-version "4.2.0")
+    if [ ${canRun} -ne 1 ]; then 
+        printf "Unable to perform command, require bash version 4.2.0\n"
+        return 1
+    fi
+
+    # Retrieve list of configurations files (use "find" with "-print0" because don't parse 'ls': https://mywiki.wooledge.org/ParsingLs)
     local pathCfgFiles="${HOME}/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-Buildroot/RAYPLICKER-V2/bsp-external-rayplicker-v2/configs/"
     
-    printf "make PROJECT_DEFCONFIG=imx8_armadeus_run2_debug PROJECT_USE_BR_CUSTOM_PATCHES=1 clean\n"
+    local listCfg=($(find ${pathCfgFiles} -type f -name "*defconfig" -print0 | xargs -0 basename -a | sed 's/_defconfig//'))
+    local lastCfg=${listCfg[-1]}
+
+    # Print informations
+    printf "make PROJECT_DEFCONFIG=${lastCfg} PROJECT_USE_BR_CUSTOM_PATCHES=1 clean\n"
     printf "Available configs files:\n"
-    for i in `ls ${pathCfgFiles} | grep "\defconfig"`; do
+    for i in "${listCfg[@]}"; do
         printf "\t${i}\n"
     done
 }
