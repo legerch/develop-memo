@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.5.0-14-generic - 16/01/2024 :
+Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.5.0-17-generic - 14/02/2024 :
 
 ```shell
 ##
@@ -15,6 +15,24 @@ function set-title()
   fi
   TITLE="\[\e]2;$*\a\]"
   PS1="${ORIG}${TITLE}"
+}
+
+function user-answer-is-yes()
+{
+    local isYes=0
+
+    read -p "${1} (y/n) ? " answer
+    case ${answer:0:1} in
+        Y|y|YES|Yes|yes)
+            isYes=1
+        ;;
+
+        *)
+            isYes=0
+        ;;
+    esac
+
+    echo "${isYes}"
 }
 
 # Function used to create a copy of ~/.bash_aliases into a markdown file :
@@ -120,18 +138,7 @@ function update-host-fw()
     fwupdmgr get-updates
 
     # Ask user before proceed to FW update
-    read -p "Do you want to update host firmware ? (yes/no) " userInput
-
-    case "${userInput}" in 
-        Y|y|YES|Yes|yes)
-            doUpdateFw=1
-            ;;
-
-        *)
-            doUpdateFw=0
-            ;;
-    esac
-
+    doUpdateFw=$(user-answer-is-yes "Do you want to update host firmware")
     if [ ${doUpdateFw} -eq 1 ]; then
         printf "Host firmware will be updated...\n"
         fwupdmgr update
@@ -204,17 +211,7 @@ function update-arduino-cli-binary()
     if [ ${curlStatus} -eq 0 ]; then
         
         # Ask user before proceed to FW update
-        read -p "Do you want to update arduino-cli binary ? (yes/no) " userInput
-
-        case "${userInput}" in 
-            Y|y|YES|Yes|yes)
-                doUpdateArduinoCli=1
-                ;;
-
-            *)
-                doUpdateArduinoCli=0
-                ;;
-        esac
+        doUpdateArduinoCli=$(user-answer-is-yes "Do you want to update arduino-cli binary")
 
         # Display update status perform
         if [ ${doUpdateArduinoCli} -eq 1 ]; then
@@ -251,17 +248,7 @@ function github-dl-tarball()
         printf "Tarball URL is: ${url}\n\n"
 
         printf "Expected format is: github-dl-tarball <owner> <repo> <version_or_sha1>\n"
-        read -p "Proceed ? (yes/no)" userInput
-
-        case "${userInput}" in 
-            Y|y|YES|Yes|yes)
-                doDlTarball=1
-                ;;
-
-            *)
-                doDlTarball=0
-                ;;
-        esac
+        doDlTarball=$(user-answer-is-yes "Proceed")
 
         # Perfor download in current directory
         if [ ${doDlTarball} -eq 1 ]; then
@@ -357,6 +344,8 @@ function rename-file-extension()
     local oldExt="${1}"
     local newExt="${2}"
 
+    local doRenaming=0
+
     if [ -z "${oldExt}" ] || [ -z "${newExt}" ]; then
         printf "Usage: rename-file-extension oldExt newExt\n"
         printf "Note: Only files in current directory will be renamed\n"
@@ -364,18 +353,13 @@ function rename-file-extension()
         printf "Files will be renamed as follow:\n"
         file-rename -v -n "s/.${oldExt}/.${newExt}/" *".${oldExt}"
 
-        read -p "Proceed (yes/no) ?" userInput
-
-        case "${userInput}" in 
-            Y|y|YES|Yes|yes)
-                file-rename "s/.${oldExt}/.${newExt}/" *".${oldExt}"
-                printf "Done. \n"
-                ;;
-
-            *)
-                printf "Operation canceled. \n"
-                ;;
-        esac
+        doRenaming=$(user-answer-is-yes "Proceed")
+        if [ ${doRenaming} -eq 1 ]; then
+            file-rename "s/.${oldExt}/.${newExt}/" *".${oldExt}"
+            printf "Done. \n"
+        else
+            printf "Operation canceled. \n"
+        fi
     fi
 }
 
@@ -389,21 +373,18 @@ function perf-level-get()
 function perf-level-set()
 {
     local level="${1}"
+    local doSetPerfLevel=0
 
     printf "This command will be executed:\n"
     printf "sudo sysctl kernel.perf_event_paranoid=${level}\n"
     
-    read -p "Proceed (yes/no) ?" userInput
-    case "${userInput}" in 
-        Y|y|YES|Yes|yes)
-            sudo sysctl kernel.perf_event_paranoid="${level}"
-            printf "Done. \n"
-            ;;
-
-        *)
-            printf "Operation canceled. \n"
-            ;;
-    esac
+    doSetPerfLevel=$(user-answer-is-yes "Proceed")
+    if [ ${doSetPerfLevel} -eq 1 ]; then
+        sudo sysctl kernel.perf_event_paranoid="${level}"
+        printf "Done. \n"
+    else
+        printf "Operation canceled. \n"
+    fi
 }
 
 ##
