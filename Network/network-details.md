@@ -9,8 +9,13 @@
 
 # 1. Perform network measurements
 
-To perform network measurements, we can use tool utility [iPerf3][iperf-official].  
-All documentation can be found at [iPerf - documentation][iperf-doc].
+To perform network measurements, we can use tool utility [iPerf3][iperf-official] ([source code repository][iperf-repo]).  
+All documentation can be found at [iPerf - documentation][iperf-doc].  
+
+> Note: _iPerf_ provide binaries only for _Linux based OSes_ as we can see in [obtaining iPerf3 section][iperf-binaries].  
+> But some people provide **Windows** binaries:
+> - [Budman builds][iperf-bin-win-budman] (see [this discussion thread][iperf-bin-win-budman-thread] for details)
+> - [ar51an/iperf3-win-builds][iperf-bin-win-ar51an]
 
 ## 1.1. Speed measures server/client
 ### 1.1.1. Configure server
@@ -56,8 +61,13 @@ The Internet Assigned Numbers Authority (IANA) has reserved the following three 
 To easily calculate properties of a network (possible network addresses, usable host ranges, subnet mask, and IP class, among others), you can use [IP Subnet Calculator][ip-calculator].
 
 <!-- External links -->
-[iperf-official]: https://iperf.fr/
-[iperf-doc]: https://iperf.fr/iperf-doc.php#3doc
+[iperf-official]: https://software.es.net/iperf/
+[iperf-repo]: https://github.com/esnet/iperf
+[iperf-doc]: https://software.es.net/iperf/invoking.html#iperf3-manual-page
+[iperf-binaries]: https://software.es.net/iperf/obtaining.html
+[iperf-bin-win-budman]: https://files.budman.pw/
+[iperf-bin-win-budman-thread]: https://www.neowin.net/forum/topic/1234695-iperf/
+[iperf-bin-win-ar51an]: https://github.com/ar51an/iperf3-win-builds
 
 [ip-calculator]: https://www.calculator.net/ip-subnet-calculator.html
 [ip-doc-private-ranges-avast]: https://www.avast.com/c-ip-address-public-vs-private
