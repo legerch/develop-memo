@@ -6,6 +6,7 @@
     - [1.3.1. Modifier le contenu d'un commit](#131-modifier-le-contenu-dun-commit)
       - [1.3.1.1. Remplacer un commit : **fixup**](#1311-remplacer-un-commit--fixup)
       - [1.3.1.2. Editer un commit : **rebase interactive**](#1312-editer-un-commit--rebase-interactive)
+    - [1.3.2. Retrouver un index perdu](#132-retrouver-un-index-perdu)
 - [2. Git UI](#2-git-ui)
   - [2.1. Real UI](#21-real-ui)
   - [2.2. Terminal UI](#22-terminal-ui)
@@ -209,6 +210,35 @@ $ git rebase --continue
 
 6. Since history has been rewritten, if push must be done to a remote repository, you need to use option `--force` from `git push` command. Use this command **carefully !**
 
+### 1.3.2. Retrouver un index perdu
+
+Après une réecriture de l'historique, il peut arriver d'avoir besoin de retourner à l'état initial... le problème étant : que faire si aucune autre copie locale et que la version remote a elle aussi été réécrite ?
+Pour pouvoir retourner sur un index particulier, il faut connaître son _SHA-1_ ou sa référence _HEAD@{?}_
+
+> Ressources utilisées :
+> - [Stackoverflow - How can I recover from an erronous git push -f origin master?][thread-so-recover-err-git-push]
+> - [Git reflog][git-cmd-reflog]
+
+Pour cela, on peut utiliser la commande `git reflog` qui va lister toutes les actions git effectuées (checkout, rebase, etc...):
+```shell
+$ git reflog
+
+# ...
+afaa73d0 HEAD@{78}: rebase (pick): [clb::pp] Add support for P/P color reference values
+08f3edf4 HEAD@{79}: rebase (pick): [clib:pp] Create custom type to store P/P coefficients
+d5546c69 HEAD@{80}: rebase (start): checkout dev/4.1.x
+815b94f8 HEAD@{81}: checkout: moving from dev/4.1.x to dev/add-pp-ref-white-rgb
+# ...
+```
+
+Dans notre cas, nous souhaitons revenir à l'état avant le `rebase`, nous pouvons ainsi utiliser la commande:
+```shell
+git reset --hard HEAD@{81}
+```
+
+A partir d'ici, il est alors possible de créer une branche pour ensuite l'envoyer sur notre dépôt.
+> Il est à noté que le résultat de `git reflog` peut varier selon la configuration/utilisation de `git gc` ou `git prune`
+
 # 2. Git UI
 
 ## 2.1. Real UI
@@ -249,6 +279,7 @@ Plusieurs projets de GIT UI ont également vu le jour pour fonctionner avec le t
 
 <!-- Links -->
 
+[git-cmd-reflog]: https://git-scm.com/docs/git-reflog
 [git-merge-strategies]: https://git-scm.com/docs/git-merge/en#_merge_strategies
 [git-merge-strategy-ours]: https://git-scm.com/docs/git-merge/en#_merge_strategies
 
@@ -267,3 +298,4 @@ Plusieurs projets de GIT UI ont également vu le jour pour fonctionner avec le t
 
 [thread-so-print-commit-message-of-a-given-commit]: https://stackoverflow.com/questions/3357280/print-commit-message-of-a-given-commit-in-git
 [thread-so-caret-git-usage]: https://stackoverflow.com/questions/1955985/what-does-the-caret-character-mean-in-git
+[thread-so-recover-err-git-push]: https://stackoverflow.com/questions/3973994/how-can-i-recover-from-an-erronous-git-push-f-origin-master
