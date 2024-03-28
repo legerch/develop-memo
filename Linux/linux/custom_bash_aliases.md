@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.5.0-17-generic - 14/02/2024 :
+Save from : charlie-B660M - Ubuntu 22.04.4 LTS - Kernel 6.5.0-26-generic - 27/03/2024 :
 
 ```shell
 ##
@@ -8,13 +8,18 @@ Save from : charlie-B660M - Ubuntu 22.04.3 LTS - Kernel 6.5.0-17-generic - 14/02
 ##
 
 # Function to set terminal title
+function default-ps1-set-title()
+{
+    if [[ -z "$ORIG" ]]; then
+        ORIG="$PS1"
+    fi
+    TITLE="\[\e]2;$*\a\]"
+    PS1="${ORIG}${TITLE}"
+}
+
 function set-title()
 {
-  if [[ -z "$ORIG" ]]; then
-    ORIG="$PS1"
-  fi
-  TITLE="\[\e]2;$*\a\]"
-  PS1="${ORIG}${TITLE}"
+    TERM_TITLE="$@"
 }
 
 function user-answer-is-yes()
@@ -554,6 +559,9 @@ alias cobra-ssh-root='ssh root@172.27.77.5'
 # Generate new ssh key with Cobra device
 alias cobra-keygen='ssh-keygen -f "/home/charlie/.ssh/known_hosts" -R "172.27.77.5"'
 
+# To setup Cobra dev environment
+alias cobra-setup='~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/07-host/setup-workstation.sh'
+
 # Go to Cobra workspace
 alias cobra-libs='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/03-libs'
 alias cobra-apps='cd ~/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/06-app_layer/04-apps'
@@ -561,9 +569,6 @@ alias cobra-build='cd ~/Documents/workspaces/workspace-cobra/Cobra-BuildTarget-B
 alias cobra-bsp='cd ~/Documents/workspaces/workspace-cobra/bsp/'
 alias cobra-kernels='cd ~/Documents/workspaces/workspace-cobra/kernels/'
 alias cobra-releases='cd ~/Documents/workspaces/workspace-cobra/cobra-releases/'
-
-# Cobra SDK properties
-alias cobra-sdk-gdb-armadeus='/home/charlie/Documents/workspaces/workspace-cobra/Cobra-applicationLayer/05-bsp/02-armadeus-imx8-bsp/01-sdk/aarch64-buildroot_borea-linux-gnu_sdk-buildroot/bin/aarch64-buildroot_borea-linux-gnu-gdb'
 
 # Display streaming send by Cobra device (use Intel Graphics Card instead of NVidia)
 alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc port=1234 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, payload=(int)96, encoding-name=(string)H264" ! queue ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink'

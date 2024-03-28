@@ -15,9 +15,8 @@ Table of contents :
 - [9. Libraries](#9-libraries)
 - [10. Modules](#10-modules)
 - [11. Symlinks](#11-symlinks)
-- [12. Custom terminal commands](#12-custom-terminal-commands)
-- [13. Linux versionning](#13-linux-versionning)
-- [14. Ressources](#14-ressources)
+- [12. Linux versionning](#12-linux-versionning)
+- [13. Ressources](#13-ressources)
 
 # 1. Hardware properties 
 - List hardwares properties and driver informations
@@ -206,65 +205,15 @@ $ symlinks .
 dangling: /tmp/b -> a
 ```
 
-# 12. Custom terminal commands
-
-Linux operating system allows users to create commands. To create custom commands :
-1. Check that `~/.bashrc` have routine to load custom commands :
-```shell
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-```
-> You can create custom commands directly in `~/.bashrc` file, but it's recommanded to export them in specific file (`~/.bash_aliases` in the example)
-
-2. Open file where to put custom commands :
-```shell
-vi ~/.bash_aliases
-```
-
-3. Add functions and aliases :
-```shell
-##
-# Host specific functions
-##
-
-# Function to set terminal title
-function set-title(){
-  if [[ -z "$ORIG" ]]; then
-    ORIG="$PS1"
-  fi
-  TITLE="\[\e]2;$*\a\]"
-  PS1="${ORIG}${TITLE}"
-}
-
-##
-# Host specific aliases
-##
-
-# To perform host updates
-alias maj='sudo apt update && sudo apt full-upgrade'
-```
-> Find complete custom `bash_aliases` here : ["Custom bash aliases"](custom_bash_aliases.md)
-
-1. To reload `~/.bashrc` file :
-- Open new tab
-- Or : `source ~/.bashrc`
-
-# 13. Linux versionning
+# 12. Linux versionning
 
 Linux distros used a file which contains operating system identification data, this file is `etc/os-release` which is a symlink to `/usr/lib/os-release`
 
 doc of the file : https://www.freedesktop.org/software/systemd/man/os-release.html
 check version from your shell : https://unix.stackexchange.com/questions/88644/how-to-check-os-and-version-using-a-linux-command
 
-# 14. Ressources
+# 13. Ressources
 
 - https://askubuntu.com/questions/318530/generate-md5-checksum-for-all-files-in-a-directory
 - https://stackoverflow.com/questions/1341467/find-filenames-not-ending-in-specific-extensions-on-unix
 - https://askubuntu.com/questions/662339/sort-files-alphabetically-before-processing
-- https://www.digitalocean.com/community/tutorials/an-introduction-to-useful-bash-aliases-and-functions
