@@ -27,3 +27,17 @@ ffmpeg -i output.mp4 -filter:v "crop=1080:1080:420:0" output-square.mp4
 ffmpeg -i output-square.mp4 -s 128x128 -c:a copy output-squares-128.mp4
 
 https://superuser.com/questions/624563/how-to-resize-a-video-to-make-it-smaller-with-ffmpeg
+
+# Create from image
+## Single image
+
+https://stackoverflow.com/questions/25891342/creating-a-video-from-a-single-image-for-a-specific-duration-in-ffmpeg
+
+```shell
+ffmpeg -loop 1 -i image.png -t 5 out.mp4
+ffmpeg -loop 1 -i image.png -t 5 -c:v libx264 -framerate 25 -pix_fmt yuv420p out2.mp4
+```
+
+## Multiple images
+
+https://stackoverflow.com/questions/24961127/how-to-create-a-video-from-images-with-ffmpeg

@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.4 LTS - Kernel 6.5.0-26-generic - 27/03/2024 :
+Save from : charlie-B660M - Ubuntu 22.04.4 LTS - Kernel 6.5.0-26-generic - 05/04/2024 :
 
 ```shell
 ##
@@ -108,6 +108,32 @@ function memo-cobra-build()
     for i in "${listCfg[@]}"; do
         printf "\t${i}\n"
     done
+}
+
+# Function used to create a Cobra video from a single image
+function cobra-create-video-from-img()
+{
+    # Verify that ressource exists
+    if [ ! -f "${1}" ]; then
+        printf "Image '${1}' do not exist\n"
+        return 1
+    fi
+
+    # Verify that output ressource has been set
+    if [ -z "${2}" ]; then
+        printf "Output filename has not been set\n"
+        return 1
+    fi
+
+    # Generate video
+    local outFile="${2}.mp4"
+    ffmpeg -loop 1 -i "${1}" -t 3 -c:v libx264 -framerate 25 -pix_fmt yuv420p "${outFile}"
+    if [ $? -ne 0 ]; then
+        printf "Error during FFMPEG conversion\n"
+        return 1
+    fi
+
+    printf "Succeed to convert ${1} to ${outFile}\n"
 }
 
 # Function used to copy Cobra firmware to localhost :
