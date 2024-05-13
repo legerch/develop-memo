@@ -215,8 +215,27 @@ function update-host-fw()
     fi
 }
 
+# Function use to retrieve latest tag of a github project
+# Arg1: Repo owner
+# Arg2: Project name
+function retrieve-github-repo-latest-release-infos()
+{
+    # Check tools
+    if ! check-tools curl; then return 1; fi
+    if ! check-tools jq; then return 1; fi
+
+    # Retrieve infos
+    m_fileReleaseInfo="/tmp/info-latest-rel-${1}-${2}.json"
+    curl -SsL "https://api.github.com/repos/${1}/${2}/releases/latest" -o "${m_fileReleaseInfo}"
+    
+    # Retrieve last tag"
+    local latestTag=$(jq -r '.tag_name' ${m_fileReleaseInfo})
+    printf "Latest available version is: ${latestTag}\n"
+}
+
 # Function used to retrieve all arduino-cli informations to proceed to update
-function update-arduino-cli-binary-get-infos-latest()
+## Arg1: Path to JSON release informations
+function update-arduino-cli-binary-install()
 {
     # Find current architecture
     local hostArch=$(uname -m)
@@ -232,37 +251,42 @@ function update-arduino-cli-binary-get-infos-latest()
     i386) hostArch="32bit" ;;
     esac
 
-    # Use the GitHub releases webpage to find the latest version for this project
-    local projectOwner="arduino"
-    local projectName="arduino-cli"
+    # Search URL of binary
+    local url=$(jq -r --arg arch "Linux_${hostArch}" '.assets[] | select(.name | contains($arch)) | .browser_download_url' "${1}")
+    local name=$(basename "${url}")
+    local version=$(jq -r '.tag_name' "${1}")
 
-    local versionRegex="[0-9][A-Za-z0-9\.-]*"
-    local latestVersionUrl="https://github.com/${projectOwner}/${projectName}/releases/latest"
+    # Download binary
+    local tmpFile="/tmp/${name}"
+    
+    printf "Download ${url} to ${tmpFile}...\n"
+    curl -sL "${url}" -o "${tmpFile}"
+    if [ $? -ne 0 ]; then
+        printf "Failed to download file!\n"
+        return 1;
+    fi
 
-    m_arduinoCliLatestVersionTag=$(curl -SsL ${latestVersionUrl} | grep -o "<title>Release ${versionRegex} · ${projectOwner}/${projectName}" | grep -o "${versionRegex}")
-    m_arduinoCliLatestVersionArchive="${projectName}_${m_arduinoCliLatestVersionTag}_Linux_${hostArch}.tar.gz"
-    m_arduinoCliLatestVersionUrl="https://downloads.arduino.cc/${projectName}/${m_arduinoCliLatestVersionArchive}"
-}
+    # Extract files
+    local dirExtract="/tmp/arduino-cli-binaries"
 
-# Function used to download latest binary of arduino-cli
-function update-arduino-cli-binary-get-binary()
-{
-    local locationDirTmp="/tmp/"
-    local locationOutTmp="${locationDirTmp}/${m_arduinoCliLatestVersionArchive}"
+    printf "Extract ${tmpFile} into ${dirExtract}...\n"
+    mkdir -p "${dirExtract}"
+    tar -xf "${tmpFile}" -C "${dirExtract}"
+    if [ $? -ne 0 ]; then
+        printf "Failed to extract binaries!\n"
+        return 1;
+    fi
 
-    local binFile="arduino-cli"
-    local locationDirFinal="/usr/local/bin"
-    local locationOutFinal="${locationDirFinal}/${binFile}"
+    # Install arduino client
+    local binName="arduino-cli"
+    local binFileIn="${dirExtract}/${binName}"
+    local binFileOut="/usr/local/bin/${binName}"
 
-    printf "Download ${m_arduinoCliLatestVersionUrl}...\n"
-    curl -sL ${m_arduinoCliLatestVersionUrl} -o "${locationOutTmp}"
-    tar -xf ${locationOutTmp} -C ${locationDirTmp}
+    printf "Install \"${binFileIn}\" at \"${binFileOut}\"\n"
+    sudo cp "${binFileIn}" "${binFileOut}"
+    sudo chmod +x "${binFileOut}"
 
-    printf "Install ${binFile} at \"${locationDirFinal}\"\n"
-    sudo cp "${locationDirTmp}/${binFile}" "${locationOutFinal}"
-    sudo chmod +x "${locationOutFinal}"
-
-    printf "${binFile} ${m_arduinoCliLatestVersionTag} have been installed to ${locationOutFinal}\n"
+    printf "${binName} ${version} have been installed to ${binFileOut}\n"
 }
 
 # Function used to update arduino-cli binary
@@ -272,22 +296,13 @@ function update-arduino-cli-binary()
 
     # Check current version
     arduino-cli version
-
-    # Check than mandatory tools are available to proceed to update
-    which curl &> /dev/null
-    local curlStatus=$?
-    if [ ${curlStatus} -ne 0 ]; then
-        printf "You need curl as download tool. Please install it first before continuing\n"
-        return 1
-    fi
+    retrieve-github-repo-latest-release-infos "arduino" "arduino-cli"
 
     # Ask user before proceed to FW update
     doUpdateArduinoCli=$(user-answer-is-yes "Do you want to update arduino-cli binary")
     if [ ${doUpdateArduinoCli} -eq 1 ]; then
         printf "arduino-cli will be updated...\n"
-        
-        update-arduino-cli-binary-get-infos-latest
-        update-arduino-cli-binary-get-binary
+        update-arduino-cli-binary-install "${m_fileReleaseInfo}"
 
     else
         printf "No arduino-cli binary update have been performed\n"
