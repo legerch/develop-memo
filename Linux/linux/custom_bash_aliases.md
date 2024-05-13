@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Save from : charlie-B660M - Ubuntu 22.04.4 LTS - Kernel 6.5.0-26-generic - 05/04/2024 :
+Saved from : Ubuntu 22.04.4 LTS - Kernel 6.5.0-28-generic - 13/05/2024 :
 
 ```shell
 ##
@@ -53,6 +53,19 @@ function verify-min-bash-version()
     echo "${isValid}"
 }
 
+# Function used to verify that needed tools is installed
+## Arg1: Tools name (example: curl)
+## Usage: if ! check-tools curl; then return 1; fi
+function check-tools()
+{
+    which "${1}" &> /dev/null
+    local toolStatus=$?
+    if [ ${toolStatus} -ne 0 ]; then
+        printf "You need \"${1}\" tool. Please install it first before continuing\n"
+        return 1
+    fi
+}
+
 # Function used to create a copy of ~/.bash_aliases into a markdown file :
 # ${1} : file to write (ex : file.md)
 function save-custom-bash-aliases()
@@ -65,7 +78,6 @@ function save-custom-bash-aliases()
 
     local fileDest="${1}"
     local fileSrc="${HOME}/.bash_aliases"
-    local infoUnameNodename=$( uname -n )
     local infoUnameKernel=$( uname -r )
     local infoOsRelease=$( grep -oP '(?<=^PRETTY_NAME=).+' /etc/os-release | tr -d '"' )
     local infoDate=$( date +%d/%m/%Y )
@@ -76,7 +88,7 @@ function save-custom-bash-aliases()
     # Write into file
     ## Context informations
     printf "# Custom bash aliases\n\n" >> "${fileDest}"
-    printf "Save from : ${infoUnameNodename} - ${infoOsRelease} - Kernel ${infoUnameKernel} - ${infoDate} :\n\n" >> "${fileDest}"
+    printf "Saved from : ${infoOsRelease} - Kernel ${infoUnameKernel} - ${infoDate} :\n\n" >> "${fileDest}"
 
     ## Bash aliases script
     printf "\`\`\`shell\n" >> "${fileDest}"
@@ -292,12 +304,7 @@ function github-dl-tarball()
     local doDlTarball=0
 
     # Check than mandatory tools are available to download tarball
-    which curl &> /dev/null
-    local curlStatus=$?
-    if [ ${curlStatus} -ne 0 ]; then
-        printf "You need curl as download tool. Please install it first before continuing\n"
-        return 1
-    fi
+    if ! check-tools curl; then return 1; fi
 
     # Ask user before proceed to download
     local url="https://github.com/${owner}/${repo}/archive/${version}.tar.gz"
@@ -330,6 +337,9 @@ function generate-wifi-qrcode()
     local argPasswd="${3}"
     
     local security=""
+
+    # Verify that needed tools are installed
+    if ! check-tools qrencode; then return 1; fi
 
     # Found out security type
     if [[ "${argSecurity}" == *"WPA"* ]]; then
@@ -368,12 +378,7 @@ function print-passwd-wifi-specific()
         local passwd="$(sudo cat ${ssidInfos} | grep "psk=" | cut -d "=" -f 2)"
         
         printf "\nSSID: ${ssid}\nSecurity: ${security}\nPassword: ${passwd}\n"
-
-        which qrencode &> /dev/null
-        local qrStatus=$?
-        if [ ${qrStatus} -eq 0 ]; then
-            generate-wifi-qrcode "${ssid}" "${security}" "${passwd}"
-        fi
+        generate-wifi-qrcode "${ssid}" "${security}" "${passwd}"
 
     else
         printf "Cannot retrieve passwd, ssid [${ssid}] is unknown\n"
