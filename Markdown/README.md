@@ -4,6 +4,7 @@ This file is use as a memo for _Markdown_ syntax
 - [1. Syntax](#1-syntax)
   - [1.1. Tutorials](#11-tutorials)
   - [1.2. Set a dropdown](#12-set-a-dropdown)
+  - [1.3. Customize images](#13-customize-images)
 - [2. Advice rules](#2-advice-rules)
   - [2.1. Links](#21-links)
 - [3. Markdown editor](#3-markdown-editor)
@@ -37,6 +38,19 @@ This is how you dropdown.
 > - `<details>`: Define dropdown **wrapper** (can be _open_ by default by using `<details open>`)
 > - `<summary>`: Define dropdown **title**  
 > See [this tutorial][markdown-syntax-dropdown] for more complex dropdown scenario
+
+## 1.3. Customize images
+
+```markdown
+<!-- Set custom size -->
+![asset-img]{: width="100" }
+
+<!-- Add links -->
+[![asset-img]{: width="100" }][custom-links]
+
+[asset-img]: myImage.png
+[custom-links]: https://www.google.com/
+```
 
 # 2. Advice rules
 ## 2.1. Links
