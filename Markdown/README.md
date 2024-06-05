@@ -5,6 +5,10 @@ This file is use as a memo for _Markdown_ syntax
   - [1.1. Tutorials](#11-tutorials)
   - [1.2. Set a dropdown](#12-set-a-dropdown)
   - [1.3. Customize images](#13-customize-images)
+  - [1.4. Add alerts](#14-add-alerts)
+    - [1.4.1. Github](#141-github)
+    - [1.4.2. Jekyll themes](#142-jekyll-themes)
+      - [1.4.2.1. Just The Docs](#1421-just-the-docs)
 - [2. Advice rules](#2-advice-rules)
   - [2.1. Links](#21-links)
 - [3. Markdown editor](#3-markdown-editor)
@@ -51,6 +55,59 @@ This is how you dropdown.
 [asset-img]: myImage.png
 [custom-links]: https://www.google.com/
 ```
+
+## 1.4. Add alerts
+
+Some platforms and themes extends markdown syntax allowing to provide alerts.
+
+### 1.4.1. Github
+
+Using those [alerts][alerts-syntax-github]:
+```markdown
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+```
+
+Will render:  
+
+![alerts-render-github]
+
+### 1.4.2. Jekyll themes
+#### 1.4.2.1. Just The Docs
+
+[Just The Docs][jekyll-theme-jtd] jekyll theme also use [alerts][alerts-syntax-jekyll-theme-jtd] (called _callouts_) :
+```markdown
+{: .note }
+Useful information that users should know, even when skimming content.
+
+{: .highlight }
+Helpful advice for doing things better or more easily.
+
+{: .important }
+Key information users need to know to achieve their goal.
+
+{: .warning }
+Urgent info that needs immediate user attention to avoid problems.
+
+{: .new }
+This feature was just added in `v4.0.0`
+```
+
+Will render:  
+
+![alerts-render-jekyll-theme-jtd]
 
 # 2. Advice rules
 ## 2.1. Links
@@ -138,6 +195,14 @@ When exporting to PDF, it can be useful to go to next page (to not have text cut
 [markdown-syntax-linking-heading-ids]: https://www.markdownguide.org/extended-syntax/#linking-to-heading-ids
 [markdown-syntax-code]: https://support.codebasehq.com/articles/tips-tricks/syntax-highlighting-in-markdown
 [markdown-syntax-dropdown]: https://dev.to/asyraf/how-to-add-dropdown-in-markdown-o78
+
+[alerts-syntax-github]: https://docs.github.com/fr/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts
+[alerts-syntax-jekyll-theme-jtd]: https://just-the-docs.com/docs/ui-components/callouts/
+
+[alerts-render-github]: alerts-rendered-github.png
+[alerts-render-jekyll-theme-jtd]: alerts-rendered-jekyll-jtd.png
+
+[jekyll-theme-jtd]: https://just-the-docs.com
 
 <!-- Links for markdown editor -->
 [vscode]: https://code.visualstudio.com/
