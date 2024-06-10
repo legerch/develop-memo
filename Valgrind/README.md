@@ -68,7 +68,7 @@ In this section, we gonna used an example, where all files can be found here : [
 ##### 2.1.3.1.1. List of existant _suppression file_
 Some libraries already have a suppression file :
 - GLib : [glib.supp][vg-sup-file-glib] (also installed in `/usr/share/glib-2.0/valgrind/glib.supp`)
-- GStreamer : [gst.supp][vg-sup-file-gstreamer] (note than you need to define `G_SLICE=always-malloc G_DEBUG=gc-friendly` to use GStreamer with Valgrind)
+- GStreamer : [gst.supp][vg-sup-file-gstreamer] (note that you need to define `G_SLICE=always-malloc G_DEBUG=gc-friendly` to use GStreamer with Valgrind)
 
 ##### 2.1.3.1.2. Generate own _suppression file_
 

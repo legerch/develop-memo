@@ -107,7 +107,7 @@ _Under construction_
 > In the meantime, please refer to:
 > - https://linuxconfig.org/how-to-switch-between-multiple-gcc-and-g-compiler-versions-on-ubuntu-20-04-lts-focal-fossa
 > - https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version  
-> Note than if you need a custom compiler for a Qt toolkit for example, installing GCC (`gcc` and `g++`) version associated package will be enough !
+> Note that if you need a custom compiler for a Qt toolkit for example, installing GCC (`gcc` and `g++`) version associated package will be enough !
 
 # 7. System freeze
 

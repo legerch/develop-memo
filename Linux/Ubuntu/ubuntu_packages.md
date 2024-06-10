@@ -319,7 +319,7 @@ sudo apt install jfsutils flex bison util-linux reiserfsprogs xfsprogs btrfs-pro
 - Buildroot GUI with _ncurses5_ : `sudo apt install libncurses-dev`
 - Buildroot GUI with _qt_ : `sudo apt install qtbase5-dev`
 - Buildroot GUI with _gtk_ : `sudo apt install libglade2-dev libglib2.0-dev libgtk2.0-dev`
-> Note than `buildroot GUI` is `KConfig` which is also used in others projects: kernel, busybox, u-boot, etc...
+> Note that `buildroot GUI` is `KConfig` which is also used in others projects: kernel, busybox, u-boot, etc...
 
 # 4. Edition tools
 ## 4.1. Qt
@@ -391,7 +391,7 @@ sudo apt install filezilla
 ```shell
 sudo apt install thunderbird thunderbird-locale-fr
 ```
-> Note than a [thunderbird snap][snap-package-thunderbird] version also exist.
+> Note that a [thunderbird snap][snap-package-thunderbird] version also exist.
 
 - GNOME Evolution :
 ```shell

@@ -25,7 +25,7 @@ This README file is based on repository README itself but with some additionals 
 In order to use [Vcpkg][vcpkg-repo], you need some prerequisites.
 
 ### 1.1.1. Common
-- [Git][git-official] (or any git client than can be used to clone vcpkg repository)
+- [Git][git-official] (or any git client that can be used to clone `vcpkg` repository)
 
 ### 1.1.2. Windows
 - [Visual Studio][visual-studio-official] with the English language pack
@@ -53,7 +53,7 @@ git clone git@github.com:microsoft/vcpkg.git
 ```shell
 .\vcpkg\vcpkg integrate install
 ```
-> Note than this command is only needed under **Windows OS** with _Visual Studio_
+> Note that this command is only needed under **Windows OS** with _Visual Studio_
 
 Result of this command should print something like:
 ```

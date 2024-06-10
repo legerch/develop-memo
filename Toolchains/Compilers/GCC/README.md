@@ -17,7 +17,7 @@
 # 1. Introduction
 
 Official GCC documentation can be found here : [GCC documentation][gcc-doc-home].  
-> Note than a custom header for compiler attributes is available at [Compilers/custom_compiler.h][repo-compilers-custom-header]
+> Note that a custom header for compiler attributes is available at [Compilers/custom_compiler.h][repo-compilers-custom-header]
 
 # 2. GCC Options
 ## 2.1. Detailled useful warnings options
@@ -106,7 +106,7 @@ Optimize for size. `-Os` enables all `-O2` optimizations except those that often
 In order to track stack used, very useful in an embedded context where there is often not a lot of RAM available to allocate for stack space (typically on the order of a few hundred to a few thousand bytes). This option will emit `.su` files for each c file you compile.  
 Furthermore, you can use warning `-Wstack-usage=<stack_limit_in_bytes>` which will emit a warning when stack usage exceeds defined value.  
 > On **Linux** filesystem, you can get stack size by using `ulimit -s` (`ulimit -a` will list all system limit values).  
-> Note than the _stack limit warning_ to set is for each function, not all call stack ! So you need to run a first analyze in order to determine your maximum value
+> Note that the _stack limit warning_ to set is for each function, not all call stack ! So you need to run a first analyze in order to determine your maximum value
 
 - [`-fanalyzer`][gcc-doc-static-analyzer]  
 This option enables an static analysis of program flow which looks for “interesting” interprocedural paths through the code, and issues warnings for problems found on them.  
@@ -229,7 +229,7 @@ In order to enable this extension, you must:
 
 # 6. Build project with GCC
 
-An example of GCC flags than can be used to build a project:
+An example of GCC flags that can be used to build a project:
 ```shell
 CFLAGS_WARNING			:=	-Wall -Wextra -Werror=format -Werror=return-type -Werror=implicit-function-declaration \
 							-Wformat=2 -Wstrict-prototypes -Wshadow \

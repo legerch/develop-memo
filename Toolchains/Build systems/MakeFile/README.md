@@ -171,7 +171,7 @@ Templates are available in [templates/][repo-makefile-templates] directory of th
   - [lib.make][repo-makefile-template-test]
   - [test.make][repo-makefile-template-app]
 - [sub.make][repo-makefile-template-sub]
-> Note than boards used in this documentation (arduino, raspberry) are just **examples**, _buildroot SDK_ path used may not be accurate (because those infos are board specific), set those templates infos to **your** supported boards.
+> Note that boards used in this documentation (arduino, raspberry) are just **examples**, _buildroot SDK_ path used may not be accurate (because those infos are board specific), set those templates infos to **your** supported boards.
 
 Makefiles examples which used those templates can be found in [examples/][repo-makefile-examples] directory of this documentation.
 

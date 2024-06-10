@@ -191,7 +191,7 @@ This will attach to the running process managed by gdbserver on `192.168.10.130:
 > - `executable`: Path of application set here must be relative to path set in `cwd` field
 > - `stopAtEntry`: Setting this value to `true` allow us to set breakpoint when debug session is started (since program will not start right away, it is paused at entry)
 
-2. Set your breakpoints. Note than breakpoint can be added when debug session is active but you must **pause** current session, otherwise breakpoint will fail to be set.
+2. Set your breakpoints. Note that breakpoint can be added when debug session is active but you must **pause** current session, otherwise breakpoint will fail to be set.
 3. Run debug session
 
 # 8. Ressources used

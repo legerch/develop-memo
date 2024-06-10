@@ -22,7 +22,7 @@ This file will resume how to connect to an access point, also called **STATION M
 
 
 This tutorial is written for system using [wpa_supplicant][tutorial-wpa-supplicant-details-arch], multiples methods will be describe.  
-Note than needed network driver must be loaded (`modprobe` utility) or directly compiled with kernel to use this feature.
+Note that needed network driver must be loaded (`modprobe` utility) or directly compiled with kernel to use this feature.
 
 **Warning:** Be careful, use only one network manager at a time ! Here is some of this utilities:
 - [NetworkManager][doc-arch-network-manager]: used on modern desktop distribution

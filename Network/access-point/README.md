@@ -58,7 +58,7 @@ If **DFS** is not enabled, your device will only have access to **UNII-1** chann
 
 > **Hostapd keyword:** _ieee80211h_  
 > **Availability:** With protocols **n/ac/ax**, **5GHz** band  
-> Also note than **DFS** channels have their own issues (like longer time to be available for example), see [this article][doc-wifi-5-dfs-channels-article] for more details.
+> Also note that **DFS** channels have their own issues (like longer time to be available for example), see [this article][doc-wifi-5-dfs-channels-article] for more details.
 
 ## 1.3. Band Channels
 ### 1.3.1. 2.4GHz
