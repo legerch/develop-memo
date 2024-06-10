@@ -13,10 +13,13 @@
     - [2.6.2. VsCode](#262-vscode)
   - [2.7. Use multiples sources files and classes](#27-use-multiples-sources-files-and-classes)
   - [2.8. Documentation](#28-documentation)
-  - [2.9. Known issues](#29-known-issues)
-    - [2.9.1. Linux - Snap installation](#291-linux---snap-installation)
-      - [2.9.1.1. Cannot find Arduino IDE](#2911-cannot-find-arduino-ide)
-      - [2.9.1.2. Unable to list board](#2912-unable-to-list-board)
+  - [2.9. Tips and tricks](#29-tips-and-tricks)
+    - [2.9.1. `millis()` overflow](#291-millis-overflow)
+    - [2.9.2. Don't manage hardware in class constructors](#292-dont-manage-hardware-in-class-constructors)
+  - [2.10. Known issues](#210-known-issues)
+    - [2.10.1. Linux - Snap installation](#2101-linux---snap-installation)
+      - [2.10.1.1. Cannot find Arduino IDE](#21011-cannot-find-arduino-ide)
+      - [2.10.1.2. Unable to list board](#21012-unable-to-list-board)
 
 # 1. Arduino boards
 
@@ -74,7 +77,7 @@ arduino-cli upgrade # Proceed to upgrade of all cores and libraries
 
 ## 2.3. Configure sample project
 
-Just to verify than we can used Arduino setup, let's start a simple project with [provided built-in examples][arduino-builtin-examples].  
+Just to verify that we can used Arduino setup, let's start a simple project with [provided built-in examples][arduino-builtin-examples].  
 We choose [blink][arduino-builtin-example-blink] here:
 1. Create directory structure
 ```shell
@@ -82,7 +85,8 @@ We choose [blink][arduino-builtin-example-blink] here:
 └── blink
     └── blink.ino
 ```
-> **Note:** In order to build a `.ino` file, parent directory **must** be named same as `.ino` file.  
+> [!CAUTION]
+> In order to build a `.ino` file, parent directory **must** be named same as `.ino` file.  
 > In our case, our main file is `blink.ino`, so it must be added to `blink` folder.
 
 2. Set project properties
@@ -114,7 +118,8 @@ To compile a sketch, use command `verify`
 ## 2.5. Upload and run
 
 To upload (and run) your sketch, use command `upload`.
-> **Note:** Some Arduino boards use two USB ports (**Native Port Serial USB** and **Programming Port Serial**).  
+> [!NOTE]
+> Some Arduino boards use two USB ports (**Native Port Serial USB** and **Programming Port Serial**).  
 > Upload is only available on **Programming Port Serial** on those boards and serial communication is available on both ports.
 
 Under a _Linux OS_, it may be necessary to proceed to few more steps to be able to upload your sketch to the board, see [Troubleshooting - Fix port access on Linux][arduino-troubleshooting-linux-port-access].
@@ -148,7 +153,7 @@ To manage libraries under **VsCode**, use command panel **Arduino: Library manag
 ## 2.7. Use multiples sources files and classes
 
 In order to use multiple sources files, you need a `src` folder in your project, a project example is available at [Arduino example - Find Ascii][repo-arduino-example-find-ascii].  
-Note than to use _classes_, you need to include `#include <Arduino.h>`.
+Note that to use _classes_, you need to include `#include <Arduino.h>`.
 
 ## 2.8. Documentation
 
@@ -163,9 +168,36 @@ Then, `.ino` file must contains tag `\file` at top of the file, otherwise file w
 /** @file sketch_1.ino */
 ```
 
-## 2.9. Known issues
-### 2.9.1. Linux - Snap installation
-#### 2.9.1.1. Cannot find Arduino IDE
+## 2.9. Tips and tricks
+### 2.9.1. `millis()` overflow
+
+Be careful when using time methods since they can overflow:
+- `millis()` will overflow after _50 days_ approximately
+- `micros` will overflow after _70 minutes_ approximately
+
+> [!NOTE]
+> Returned values of those methods are of type `unsigned long` which is **32 bits** value on those platforms.  
+> So when on `((2^32) -1)`, value will restart from `0`.
+
+The trick is to simply compare the **time difference** instead of comparing the **two times values**.
+
+> [!TIP]
+> More examples can be found at:
+> - [Arduino Tutorial: Avoiding the Overflow Issue When Using millis() and micros()][thread-arduino-millis-overflow-1]
+> - [Arduino StackExchange: How can I handle the millis() rollover ?][thread-arduino-millis-overflow-2]
+
+### 2.9.2. Don't manage hardware in class constructors
+
+For any class written, always provide a `setup()` method (alternative can be: `begin()`, `init()`, etc...).  
+This is in this method that hardware operations will be managed: `pinMode()`, `digitalRead()`, etc... **Don't perform those operations in class constructors !**  
+Constructor should be use for minimal configuration or to register pins needed, but setting those only in the `setup` method.  
+
+This behaviour is because Arduino environment is set _just_ before calling the `setup()` method. So if an object is created before (like with a global object), operations from the contructor may not succeed (this is platform dependant).  
+This is why Arduino documentation recommend to [always provide a setup() method to your classes][arduino-doc-library-guide]
+
+## 2.10. Known issues
+### 2.10.1. Linux - Snap installation
+#### 2.10.1.1. Cannot find Arduino IDE
 
 This problem is specific to **snap installation** and **VsCode environment**, it may appears this can of message error: _"Cannot find Arduino IDE. Please specify the 'arduino.path"_ even after [extension configuration][anchor-install-vscode]. To fix this issue, set those parameters in extension parameter:
 - **Use Arduino Cli**: `true`
@@ -182,7 +214,7 @@ Global file `settings.json` must have those entries:
 > **Related issue :** [issue 1346][arduino-vscode-extension-issues-1346]  
 > **Comment used to solve issue:** [issue 1346 - Comment][arduino-vscode-extension-issues-1346-resolve]
 
-#### 2.9.1.2. Unable to list board
+#### 2.10.1.2. Unable to list board
 
 This problem is specific to **snap installation**, it may be issues when listing boards (and sketch upload).  
 Please refer to official documentation of [arduino-cli snap][arduino-cli-snap] which **clearly** explain what to do in this case.
@@ -205,6 +237,8 @@ Once, board list is working in command-line, you may not be able to use it under
 [arduino-cli-official]: https://arduino.github.io/arduino-cli/latest/
 [arduino-cli-snap]: https://snapcraft.io/arduino-cli
 
+[arduino-doc-library-guide]: https://docs.arduino.cc/learn/contributions/arduino-creating-library-guide/
+
 [arduino-due-store]: https://store.arduino.cc/arduino-due
 [arduino-due-guide-new]: https://www.arduino.cc/en/Guide/ArduinoDue
 [arduino-due-guide-old]: https://web.archive.org/web/20210723193416/https://www.arduino.cc/en/Guide/ArduinoDue
@@ -222,3 +256,6 @@ Once, board list is working in command-line, you may not be able to use it under
 [arduino-vscode-extension-issues-1346-resolve]: https://github.com/microsoft/vscode-arduino/issues/1346#issuecomment-996972001
 
 [doxygen-official]: https://doxygen.nl/index.html
+
+[thread-arduino-millis-overflow-1]: https://www.norwegiancreations.com/2018/10/arduino-tutorial-avoiding-the-overflow-issue-when-using-millis-and-micros/
+[thread-arduino-millis-overflow-2]: https://arduino.stackexchange.com/questions/12587/how-can-i-handle-the-millis-rollover
