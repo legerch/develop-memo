@@ -1,6 +1,6 @@
 # Custom bash aliases
 
-Saved from : Ubuntu 22.04.4 LTS - Kernel 6.5.0-28-generic - 13/05/2024 :
+Saved from : Ubuntu 22.04.4 LTS - Kernel 6.5.0-41-generic - 09/07/2024 :
 
 ```shell
 ##
@@ -148,26 +148,6 @@ function cobra-create-video-from-img()
     printf "Succeed to convert ${1} to ${outFile}\n"
 }
 
-# Function used to copy Cobra firmware to localhost :
-# ${1} : Path to localhost directory
-# ${2} : Firmare version with hyphen separator
-function copy-cobra-fw-release-to-localhost()
-{
-    local dstFw="${1}"
-
-    local fwNameHyphen="${2}"
-    local fwNameUnderscore=${fwNameHyphen//[-]/_}
-
-    local pathFw="${HOME}/Documents/workspaces/workspace-cobra/cobra-releases/${fwNameHyphen}/${fwNameUnderscore}-imx8_armadeus_run2_release/image/rayplicker-v2-${fwNameUnderscore}"
-
-    if [ -f "${pathFw}" ]; then
-        cp "${pathFw}" "${dstFw}"
-        printf "Firmware \"${pathFw}\" has been copied to \"${dstFw}\"\n"
-    else
-        printf "Firmware \"${pathFw}\" can't be found\n"
-    fi
-}
-
 # Function used to generate doxygen documentation :
 # ${1} : path to root project
 # ${2} : Doxyfile name to use
@@ -192,6 +172,76 @@ function generate-project-documentation()
 
     # Return to previous directory
     cd ${OLDPWD}
+}
+
+function html-add-stylesheet()
+{
+    local originFile="${1}"
+    local titleFile="${2}"
+
+    # Verify file validity
+    if [ ! -f "${originFile}" ]; then
+        printf "USAGE : html-add-stylesheet <html-file> <title-file>\n"
+        return 1
+    fi
+
+    # Verify title validity
+    if [ -z "${titleFile}" ]; then
+        printf "USAGE : html-add-stylesheet <html-file> <title-file>\n"
+        return 1
+    fi
+    
+    local tmpFile="${originFile}.tmp"
+
+    # Format headers (using "heredoc" feature, don't quote EOF to keep variable expansion feature)
+    local headers=$(cat <<EOF
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>${titleFile}</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.6.1/github-markdown-dark.min.css" integrity="sha512-mzPe5Bxap921sKCNI3lXEi5FxCue4M1Ei65ZVFi1UdCMnr4+BFOpBuWnfpJ8WLBxvyhf7z45Jsa5jWiseE57rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            .markdown-body {
+                box-sizing: border-box;
+                min-width: 200px;
+                max-width: 980px;
+                margin: 0 auto;
+                padding: 45px;
+            }
+        
+            @media (max-width: 767px) {
+                .markdown-body {
+                    padding: 15px;
+                }
+            }
+        </style>
+
+    </head>
+    <body class="markdown-body">
+
+EOF
+    )
+
+    # Format end of file
+    local endfile=$(cat <<EOF
+    </body>
+    </html>
+
+EOF
+    )
+
+    # Create temporary file
+    printf "${headers}" > "${tmpFile}"
+    cat "${originFile}" >> "${tmpFile}"
+    printf "${endfile}" >> "${tmpFile}"
+
+    # Replace original file
+    mv "${tmpFile}" "${originFile}"
+    printf "Stylesheet added to ${originFile}\n"
 }
 
 # Function used to update host firmwares
@@ -552,9 +602,6 @@ alias bash-aliases-reload='source ~/.bash_aliases && printf "Done !\n"'
 # Use to manage environment file
 alias env-edit-vi='sudo vi /etc/environment'
 
-# Create alias for gitui program, which doesn't yet have a proper system installation, so we use binaries (https://github.com/extrawurst/gitui)
-alias gituibin='~/Téléchargements/Fichiers\ Setup/gitui-linux-musl/gitui'
-
 # Create alias for application used to create an AppImage, which are released under binaries
 alias linuxdeploy.AppImage='~/Téléchargements/apps/linuxdeploy/linuxdeploy-x86_64.AppImage'
 alias appimagetool.AppImage='~/Téléchargements/apps/appimagekit/appimagetool-x86_64.AppImage'
@@ -622,5 +669,4 @@ alias cobra-gst-get-stream='LIBVA_DRIVER_NAME=iHD gst-launch-1.0 -v udpsrc port=
 # Cobra firmware management
 ## Localhost
 alias cobra-fw-localhost-index-update='cp /home/charlie/Documents/workspaces/workspace-qt/Cobra-AppCommunication/RP_CobraApplication/configurations/examples/server-localhost-cobra-fw-list.json /var/www/html/cobra-firmware/'
-alias cobra-fw-localhost-add='copy-cobra-fw-release-to-localhost /var/www/html/cobra-firmware/cobra-fw-list/'
 ```
