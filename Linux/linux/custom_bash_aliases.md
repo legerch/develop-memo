@@ -373,8 +373,11 @@ function perf-level-set()
 # Scripts constants vars
 ##########################
 
-_DIR_REPO_DEV_MEMO="${HOME}/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/"
+_DIR_DL="${HOME}/Téléchargements/"
 _DIR_WORKSPACES="${HOME}/Documents/workspaces/"
+_DIR_VSCODE_SNIPPETS="${HOME}/.config/Code/User/snippets/"
+_DIR_REPO_DEV_MEMO="${HOME}/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/"
+
 _FILE_BASH_ALIASES="${HOME}/.bash_aliases"
 _FILE_BASH_ALIASES_COMPANY="${HOME}/.bash_aliases_company"
 
@@ -560,9 +563,11 @@ alias maj-arduino-cli-bin='_arduino-cli-binary-update'
 alias apt-uninstall="sudo apt purge --autoremove"
 alias apt-list-installed="apt list --installed"
 # To uninstall a snap package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/1130791/how-to-uninstall-a-package-installed-from-snapcraft)
-alias snap-uninstall="sudo snap remove --purge"
 alias snap-list-revs="snap list --all"
-alias snap-revert="sudo snap revert"
+alias snap-package-info="snap info"
+alias snap-package-revert="sudo snap revert"
+alias snap-package-update="sudo snap refresh"
+alias snap-package-uninstall="sudo snap remove --purge"
 
 # PPA related commands for easier install/uninstall
 # Blog helper: https://blog.desdelinux.net/fr/ppa-purge-como-remover-un-repositorio-ppa-en-forma-segura/
@@ -606,22 +611,22 @@ alias workspace-qt='cd ${_DIR_WORKSPACES}/workspace-qt'
 alias workspace-vscode='cd ${_DIR_WORKSPACES}/workspace-vscode'
 
 # Go to AppImage folder
-alias workspace-appimage='cd ${HOME}/Téléchargements/app-image'
+alias workspace-appimage='cd ${_DIR_DL}/app-image'
 
 # Create alias for application used to create an AppImage, which are released under binaries
-alias linuxdeploy.AppImage='${HOME}/Téléchargements/apps/linuxdeploy/linuxdeploy-x86_64.AppImage'
-alias appimagetool.AppImage='${HOME}/Téléchargements/apps/appimagekit/appimagetool-x86_64.AppImage'
+alias linuxdeploy.AppImage='${_DIR_DL}/apps/linuxdeploy/linuxdeploy-x86_64.AppImage'
+alias appimagetool.AppImage='${_DIR_DL}/apps/appimagekit/appimagetool-x86_64.AppImage'
 
 # Copy VsCode snippets to documentation folder
-alias snippet-c-export='cp ${HOME}/.config/Code/User/snippets/c.json ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/c.json && printf "Done !\n"'
-alias snippet-c-import='cp ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/c.json ${HOME}/.config/Code/User/snippets/c.json && printf "Done !\n"'
-alias snippet-c-edit='code ${HOME}/.config/Code/User/snippets/c.json'
-alias snippet-cpp-export='cp ${HOME}/.config/Code/User/snippets/cpp.json ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/cpp.json && printf "Done !\n"'
-alias snippet-cpp-import='cp ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/cpp.json ${HOME}/.config/Code/User/snippets/cpp.json && printf "Done !\n"'
-alias snippet-cpp-edit='code ${HOME}/.config/Code/User/snippets/cpp.json'
-alias snippet-sh-export='cp ${HOME}/.config/Code/User/snippets/shellscript.json ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/shellscript.json && printf "Done !\n"'
-alias snippet-sh-import='cp ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/shellscript.json ${HOME}/.config/Code/User/snippets/shellscript.json && printf "Done !\n"'
-alias snippet-sh-edit='code ${HOME}/.config/Code/User/snippets/shellscript.json'
+alias snippet-c-export='cp ${_DIR_VSCODE_SNIPPETS}/c.json ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/c.json && printf "Done !\n"'
+alias snippet-c-import='cp ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/c.json ${_DIR_VSCODE_SNIPPETS}/c.json && printf "Done !\n"'
+alias snippet-c-edit='code ${_DIR_VSCODE_SNIPPETS}/c.json'
+alias snippet-cpp-export='cp ${_DIR_VSCODE_SNIPPETS}/cpp.json ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/cpp.json && printf "Done !\n"'
+alias snippet-cpp-import='cp ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/cpp.json ${_DIR_VSCODE_SNIPPETS}/cpp.json && printf "Done !\n"'
+alias snippet-cpp-edit='code ${_DIR_VSCODE_SNIPPETS}/cpp.json'
+alias snippet-sh-export='cp ${_DIR_VSCODE_SNIPPETS}/shellscript.json ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/shellscript.json && printf "Done !\n"'
+alias snippet-sh-import='cp ${_DIR_REPO_DEV_MEMO}/IDE/VsCode/ressources/shellscript.json ${_DIR_VSCODE_SNIPPETS}/shellscript.json && printf "Done !\n"'
+alias snippet-sh-edit='code ${_DIR_VSCODE_SNIPPETS}/shellscript.json'
 
 # Used as a memo to load library into env variables
 alias memo-lib-ld='printf "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../../helper_tools/bin:../../custom_error/bin:../bin\n"'
