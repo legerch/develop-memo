@@ -98,9 +98,11 @@ Multiple tools exist to perform access-point scan:
 
 | Name | Windows support | Linux support | Mac support | Notes |
 |:-:|:-:|:-:|:-:|:-|
-| [Wifi Analyzer][app-wifi-analyzer] | :white_check_mark: | :x: | :x: |
+| [Kermet][app-kismet] | :x: | :white_check_mark: | :x: | / |
 | [Linssid][app-linssid] | :x: | :white_check_mark: | :x: | Ubuntu: `apt install linssid` |
-| [Sparrow-wifi][app-sparrow-wifi] | :x: | :white_check_mark: | :x: |
+| [Sparrow-wifi][app-sparrow-wifi] | :x: | :white_check_mark: | :x: | / |
+| [inSSIDer][app-inssider] | :white_check_mark: | :x: | :x: | Can be worth it to also take a look at their tools [Chanalyzer][app-chanalyzer] |
+| [Wifi Analyzer][app-wifi-analyzer] | :dizzy: | :x: | :x: | Seeing SSIDs names is now a paid feature |
 
 # 6. Ressources used
 
@@ -132,6 +134,9 @@ Multiple tools exist to perform access-point scan:
 [doc-mode-ap-sta]: mode-ap-sta.md
 
 <!-- External links -->
+[app-chanalyzer]: https://www.metageek.com/chanalyzer/
+[app-inssider]: https://www.metageek.com/inssider/
+[app-kismet]: https://www.kismetwireless.net/
 [app-linssid]: https://sourceforge.net/projects/linssid/]
 [app-sparrow-wifi]: https://github.com/ghostop14/sparrow-wifi
 [app-wifi-analyzer]: https://apps.microsoft.com/store/detail/wifi-analyzer/9NBLGGH33N0N?hl=fr-fr&gl=fr
