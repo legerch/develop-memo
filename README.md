@@ -8,6 +8,7 @@ Some parts are really detailled, some are brief and some are still in constructi
 - [Arduino](Arduino/)
 - [Bit-operators](Bit%20operators/)
 - [C](C/)
+- [CI / CD](CI_CD/)
 - [FFMPEG](FFMPEG/)
 - [FTP](Ftp/)
 - [GStreamer](GStreamer/)
