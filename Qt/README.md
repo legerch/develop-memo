@@ -27,7 +27,7 @@ Qt official installer is available at [Qt - Installer][qt-installer]
 ## 2.1. Themes
 
 Available themes :
-- [QDarksky][theme-qdarsky-official] (a [Pull request][theme-qdarsky-pr-qtc5] is in pending to make this theme compatible with QtCreator 5 and later)
+- [QDarksky][theme-qdarsky-official] (a [fork][theme-qdarsky-fork] is maintained to be compatible with QtCreator 5 and later)
 
 ## 2.2. Kit
 
@@ -183,6 +183,7 @@ When generate binary files, it is recommended to include the arch build on the g
 
 [theme-qdarsky-official]: https://github.com/foxoman/qDarkSky
 [theme-qdarsky-pr-qtc5]: https://github.com/foxoman/qDarkSky/pull/2
+[theme-qdarsky-fork]: https://github.com/legerch/qDarkSky
 
 [linuxdeploy-repo]: https://github.com/linuxdeploy/linuxdeploy
 [linuxdeploy-doc]: https://docs.appimage.org/packaging-guide/from-source/linuxdeploy-user-guide.html
