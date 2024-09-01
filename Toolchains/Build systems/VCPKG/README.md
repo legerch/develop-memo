@@ -33,7 +33,7 @@ In order to use [Vcpkg][vcpkg-repo], you need some prerequisites.
 ### 1.1.3. Linux
 - Developer tools will be needed:
 ```shell
-sudo apt install build-essential tar curl zip unzip autoconf-archive
+sudo apt install build-essential tar curl zip unzip autoconf-archive pkg-config
 ```
 
 ## 1.2. How to ?
