@@ -49,7 +49,7 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [10.1. Generic](#101-generic)
   - [10.2. GStreamer](#102-gstreamer)
 - [11. GNOME Customization](#11-gnome-customization)
-  - [11.1. GNOME Plugins](#111-gnome-plugins)
+  - [11.1. GNOME Extensions](#111-gnome-extensions)
   - [11.2. GNOME Editor](#112-gnome-editor)
 - [12. Microsoft tools](#12-microsoft-tools)
 
@@ -248,6 +248,11 @@ sudo apt install meld
 
 ## 2.6. Hexadecimal viewer
 
+- [ImHex][imhex]
+```shell
+flatpak install flathub net.werwolv.ImHex
+```
+
 - [Gnome hex editor][gnome-hex-editor]
 ```shell
 sudo apt install ghex
@@ -261,7 +266,8 @@ sudo apt install doxygen doxygen-gui doxygen-doc
 
 ## 2.8. CTRL-C memory
 
-See [CopyQ][copyq-official] official doumentation for more details.
+- [Clipboard history][gnome-clipboard-history]
+- [CopyQ][copyq-official] (note that this utility doesn't properly work with _wayland_ environment).
 
 ## 2.9. Charts tools
 
@@ -441,11 +447,11 @@ sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 ```
 
 # 11. GNOME Customization
-## 11.1. GNOME Plugins
-```shell
-sudo apt install gnome-tweaks chrome-gnome-shell
-sudo apt install gnome-shell-extension-freon # See https://github.com/UshakovVasilii/gnome-shell-extension-freon
-```
+## 11.1. GNOME Extensions
+
+To manage gnome extension, we can use [Gnome extension manager][gnome-extension-manager].
+Some useful extensions:
+- [Temperature informations - Freon][gnome-freon]
 
 ## 11.2. GNOME Editor
 
@@ -491,7 +497,11 @@ Useful properties :
 [eyedropper-repository]: https://github.com/FineFindus/eyedropper
 [git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
 [gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
+[gnome-clipboard-history]: https://extensions.gnome.org/extension/4839/clipboard-history/
+[gnome-extension-manager]: https://flathub.org/apps/com.mattjakeman.ExtensionManager
+[gnome-freon]: https://github.com/UshakovVasilii/gnome-shell-extension-freon
 [gnome-hex-editor]: https://wiki.gnome.org/Apps/Ghex
+[imhex]: https://github.com/WerWolv/ImHex
 [qrencode-man]: https://linux.die.net/man/1/qrencode
 
 [glogg-repository]: https://github.com/nickbnf/glogg
