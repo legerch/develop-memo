@@ -679,7 +679,16 @@ alias pi-ssh='ssh pi@raspberrypi'
 ##
 alias arduino-uart='sudo minicom -w -D /dev/ttyACM0 -b 115200'
 
+# Custom fixes
+## Dual boot time issues: linux use RTC time but Windows OS use local time (more details at: https://itsfoss.com/wrong-time-dual-boot/)
+## So we can set Linux to use local time: see the specified alias
+## Or fix the problem on Windows (via registry key): https://ubuntuhandbook.org/index.php/2021/06/incorrect-time-windows-11-dual-boot-ubuntu/amp/
+## Since Windows is not really "aware" that he is not alone on the market, some apps may still consider that bios time is in UTC and not in local, so I prefer to "fix" it linux side
+alias fix-dual-boot-time="timedatectl set-local-rtc 1 && timedatectl"
+
+##
 # Alias definitions related to company
+##
 if [ -f ${HOME}/.bash_aliases_company ]; then
     . ${HOME}/.bash_aliases_company
 fi
