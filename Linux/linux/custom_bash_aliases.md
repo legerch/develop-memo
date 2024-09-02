@@ -390,7 +390,7 @@ function _user-answer-is-yes()
 {
     local isYes=0
 
-    read -p "${1} (y/n) ? " answer
+    read -p "${1} (y/N) ? " answer
     case ${answer:0:1} in
         Y|y|YES|Yes|yes)
             isYes=1
@@ -568,6 +568,10 @@ alias snap-package-info="snap info"
 alias snap-package-revert="sudo snap revert"
 alias snap-package-update="sudo snap refresh"
 alias snap-package-uninstall="sudo snap remove --purge"
+# To uninstall a flatpak package and all dependencies not used elsewhere (source: https://docs.flathub.org/docs/for-users/uninstallation/)
+alias flatpak-list="flatpak list"
+alias flatpak-uninstall="flatpak uninstall --delete-data"
+alias flatpak-clean="flatpak uninstall --unused"
 
 # PPA related commands for easier install/uninstall
 # Blog helper: https://blog.desdelinux.net/fr/ppa-purge-como-remover-un-repositorio-ppa-en-forma-segura/
