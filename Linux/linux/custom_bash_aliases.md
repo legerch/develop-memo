@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Linux/linux/linux-terminal.md) for more details
 
-Saved from : Ubuntu 22.04.4 LTS - Kernel 6.5.0-41-generic - 10/07/2024 :
+Saved from : Ubuntu 24.04.1 LTS - Kernel 6.8.0-41-generic - 02/09/2024 :
 
 ```shell
 ##########################
@@ -425,7 +425,11 @@ function _check-tools()
     which "${1}" &> /dev/null
     local toolStatus=$?
     if [ ${toolStatus} -ne 0 ]; then
-        printf "You need \"${1}\" tool. Please install it first before continuing\n"
+        
+        local displayMess=${2:-1}   # Use variable ${2} if set, otherwise use default value "1"
+        if [ ${displayMess} -eq 1 ]; then
+            printf "You need \"${1}\" tool. Please install it first before continuing\n"
+        fi
         return 1
     fi
 }
@@ -520,7 +524,9 @@ function _arduino-cli-binary-update()
     local doUpdateArduinoCli=0
 
     # Check current version
-    arduino-cli version
+    if _check-tools arduino-cli 0; then
+        arduino-cli version
+    fi
     _repo-github-retrieve-latest-release-infos "arduino" "arduino-cli"
 
     # Ask user before proceed to FW update
