@@ -263,6 +263,8 @@ sudo apt install ghex
 ```shell
 sudo apt install doxygen doxygen-gui doxygen-doc
 ```
+> [!NOTE]
+> If graphs are needed, package `graphviz` will also be necessary
 
 ## 2.8. CTRL-C memory
 
