@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Linux/linux/linux-terminal.md) for more details
 
-Saved from : Ubuntu 24.04.1 LTS - Kernel 6.8.0-41-generic - 02/09/2024 :
+Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-40-generic - 17/09/2024 :
 
 ```shell
 ##########################
@@ -374,6 +374,8 @@ function perf-level-set()
 ##########################
 
 _DIR_DL="${HOME}/Téléchargements/"
+_DIR_PACKAGES_STANDALONE="${_DIR_DL}/standalone-packages/"
+_DIR_PACKAGES_DEBIAN="${_DIR_DL}/debian-packages/"
 _DIR_WORKSPACES="${HOME}/Documents/workspaces/"
 _DIR_VSCODE_SNIPPETS="${HOME}/.config/Code/User/snippets/"
 _DIR_REPO_DEV_MEMO="${HOME}/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/"
@@ -668,6 +670,8 @@ alias custom-raw2rgbpnm='${_DIR_WORKSPACES}/workspace-vscode/raw2rgbpnm/raw2rgbp
 
 alias memo-yavta='printf "raw10: yavta -f SGRBG16 -s 648x648 -c8 -F/tmp/frame-#.bin /dev/video0\nraw8: yavta -f SGRBG8 -s 640x640 -c8 -F/tmp/frame-#.bin /dev/video0\nyuyv: yavta -f YUYV -s 640x640 -c8 -F/tmp/frame-#.bin /dev/video0\n"'
 alias memo-raw2rgbpnm='printf "raw10: raw2rgbpnm -s 648x648 -f SGRBG10 frame-000000.bin frame-000000.ppm\nraw8: raw2rgbpnm -s 640x640 -f SGRBG8 frame-000000.bin frame-000000.ppm\nyuyv: raw2rgbpnm -s 640x640 -f YUYV frame-000000.bin frame-000000.ppm\n"'
+
+alias custom-qt-creator-13.0.2='${_DIR_PACKAGES_STANDALONE}/qtcreator-13.0.2/bin/qtcreator'
 
 ##
 # Pi specific aliases
