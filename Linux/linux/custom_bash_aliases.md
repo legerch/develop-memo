@@ -370,6 +370,16 @@ function perf-level-set()
 }
 
 ##########################
+# Host specific functions
+#     Inotify related
+##########################
+function inotify-cfg-get
+{
+    sysctl fs.inotify
+    _sysctl-validate-properties "fs.inotify.<field>"
+}
+
+##########################
 # Scripts constants vars
 ##########################
 
@@ -434,6 +444,14 @@ function _check-tools()
         fi
         return 1
     fi
+}
+
+function _sysctl-validate-properties()
+{
+    printf "\nTo edit sysctl properties permanently, edit file \"/etc/sysctl.conf\". Example:\n"
+    printf "${1}=your_value\n\n"
+
+    printf "Once file modified, we can apply those changes either by rebooting device or by running command: \"sysctl -p\"\n"
 }
 
 ##########################
@@ -655,6 +673,8 @@ alias bash-aliases-update-doc='save-custom-bash-aliases ${_FILE_BASH_ALIASES} ${
 
 # Use to manage environment file
 alias env-edit-vi='sudo vi /etc/environment'
+alias syscfg-edit-vi='sudo vi /etc/sysctl.conf && memo-syscfg'
+alias memo-syscfg='_sysctl-validate-properties "range.field.property"'
 
 # Create alias to python tools
 alias py-b4='${HOME}/.local/bin/b4'
