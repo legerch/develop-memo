@@ -82,7 +82,7 @@ function save-custom-bash-aliases()
     ## Context informations
     printf "# Custom bash aliases\n\n" >> "${fileDest}"
     printf "> [!NOTE]\n" >> "${fileDest}"
-    printf "> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Linux/linux/linux-terminal.md) for more details\n\n" >> "${fileDest}"
+    printf "> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details\n\n" >> "${fileDest}"
     printf "Saved from : ${infoOsRelease} - Kernel ${infoUnameKernel} - ${infoDate} :\n\n" >> "${fileDest}"
 
     ## Bash aliases script
@@ -669,7 +669,7 @@ alias memo-remove-last-line='printf "sed -i \"$ d\" file.txt\n"'
 alias bash-aliases-edit-vi='vi ${_FILE_BASH_ALIASES}'
 alias bash-aliases-edit-vscode='code ${_FILE_BASH_ALIASES}'
 alias bash-aliases-reload='source ${_FILE_BASH_ALIASES} && printf "Done !\n"'
-alias bash-aliases-update-doc='save-custom-bash-aliases ${_FILE_BASH_ALIASES} ${_DIR_REPO_DEV_MEMO}/Linux/linux/custom_bash_aliases.md'
+alias bash-aliases-update-doc='save-custom-bash-aliases ${_FILE_BASH_ALIASES} "${_DIR_REPO_DEV_MEMO}/Operating System/Linux/Common/custom_bash_aliases.md"'
 
 # Use to manage environment file
 alias env-edit-vi='sudo vi /etc/environment'
