@@ -7,6 +7,9 @@ In this folder, you will find all Qt relatives informations
   - [2.2. Kit](#22-kit)
   - [2.3. Compiler](#23-compiler)
   - [2.4. Analyzers](#24-analyzers)
+  - [2.5. Miscellaneous behaviour](#25-miscellaneous-behaviour)
+    - [2.5.1. Qt creator based on Qt kits \> 6.7.0](#251-qt-creator-based-on-qt-kits--670)
+    - [2.5.2. Install older versions of Qt Creator](#252-install-older-versions-of-qt-creator)
 - [3. Deploy](#3-deploy)
   - [3.1. Windows OS](#31-windows-os)
   - [3.2. Linux OS](#32-linux-os)
@@ -51,6 +54,31 @@ QtCreator allow to perform multiple analyze:
 > - :white_check_mark: Complete support
 > - :dizzy: Partial support
 > - :x: No support
+
+## 2.5. Miscellaneous behaviour
+### 2.5.1. Qt creator based on Qt kits > 6.7.0
+
+For _Qt Creator_ versions built with Qt kits superior to `6.7.0`, **Qt Designer** lost ability to properly generate `.ui` files for Qt `5.15.x` projects.  
+Below, we can find list of things to manually manage in order to keep compatibility:
+- **Spacer** elements: replace `Qt::Orientation` with `Qt::`
+
+> [!NOTE]
+> We can find related issues at:
+> - https://forum.qt.io/topic/157569
+> - https://forum.qt.io/topic/158064
+> 
+> And the registered tickets issues at:
+> - https://bugreports.qt.io/browse/QTBUG-126966 
+> - https://bugreports.qt.io/browse/QTBUG-127179
+
+### 2.5.2. Install older versions of Qt Creator
+
+Qt keep archives of older Qt Creator versions which can be find at:
+- [Latest 3 releases][qt-creator-archives-recent]
+- [Old releases][qt-creator-archives-old]
+
+> [!TIP]
+> In order to not break current installation, it will be better to use the one inside `qtcreator/MAJOR.0/MAJOR.Minor.patch/installer_source/` which contains standalone version.
 
 # 3. Deploy
 
@@ -180,6 +208,9 @@ When generate binary files, it is recommended to include the arch build on the g
 [qt-creator-doc-add-compiler]: https://doc.qt.io/qtcreator/creator-tool-chains.html
 [qt-creator-doc-analyze-valgrind]: https://doc.qt.io/qtcreator/creator-valgrind-overview.html
 [qt-creator-doc-analyze-perf]: https://doc.qt.io/qtcreator/creator-cpu-usage-analyzer.html
+
+[qt-creator-archives-recent]: https://download.qt.io/official_releases/qtcreator/
+[qt-creator-archives-old]: https://download.qt.io/archive/qtcreator/
 
 [theme-qdarsky-official]: https://github.com/foxoman/qDarkSky
 [theme-qdarsky-pr-qtc5]: https://github.com/foxoman/qDarkSky/pull/2
