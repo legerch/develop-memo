@@ -1,9 +1,7 @@
 # Custom bash aliases
 
 > [!NOTE]
-> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Linux/linux/linux-terminal.md) for more details
-
-Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-40-generic - 17/09/2024 :
+> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details\n\nSaved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-40-generic - 18/09/2024 :
 
 ```shell
 ##########################
@@ -67,7 +65,7 @@ function save-custom-bash-aliases()
     local fileDest="${2}"
 
     if [[ ! -f "${1}" || -z "${2}" ]]; then
-        printf "USAGE : save-custom-bash-aliases <alias_input> <markdown_output>\n"
+        printf "USAGE: save-custom-bash-aliases <alias_input> <markdown_output>\n"
         return 1
     fi
 
@@ -82,7 +80,7 @@ function save-custom-bash-aliases()
     ## Context informations
     printf "# Custom bash aliases\n\n" >> "${fileDest}"
     printf "> [!NOTE]\n" >> "${fileDest}"
-    printf "> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details\n\n" >> "${fileDest}"
+    printf "%s" "> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details\n\n" >> "${fileDest}"
     printf "Saved from : ${infoOsRelease} - Kernel ${infoUnameKernel} - ${infoDate} :\n\n" >> "${fileDest}"
 
     ## Bash aliases script
