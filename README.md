@@ -9,6 +9,7 @@ Some parts are really detailled, some are brief and some are still in constructi
 - [Bit-operators](Bit%20operators/)
 - [C](C/)
 - [CI / CD](CI_CD/)
+- [Documentation generation](Documentation/)
 - [FFMPEG](FFMPEG/)
 - [FTP](Ftp/)
 - [GStreamer](GStreamer/)

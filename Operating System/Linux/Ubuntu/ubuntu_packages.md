@@ -264,7 +264,8 @@ sudo apt install ghex
 sudo apt install doxygen doxygen-gui doxygen-doc
 ```
 > [!NOTE]
-> If graphs are needed, package `graphviz` will also be necessary
+> If graphs are needed, package `graphviz` will also be necessary.    
+> See [Doxygen tutorial][doc-doxygen] to see how to use _Doxygen_ tool.
 
 ## 2.8. CTRL-C memory
 
@@ -480,11 +481,12 @@ Useful properties :
 [anchor-git-ui-50-72]: #52-compatibe-5072-rule
 
 <!-- Links of this repository -->
-[doc-arduino]: ../../Arduino/
-[doc-git-commit-message]: ../../Git/git-commit-message.md
-[doc-net-access-point]: ../../Network/access-point/
-[doc-qt]: ../../Qt/
-[doc-vscode]: ../../IDE/VsCode/
+[doc-arduino]: ../../../Arduino/
+[doc-doxygen]: ../../../Documentation/
+[doc-git-commit-message]: ../../../Git/git-commit-message.md
+[doc-net-access-point]: ../../../Network/access-point/
+[doc-qt]: ../../../Qt/
+[doc-vscode]: ../../../IDE/VsCode/
 
 [res-klogg-highlighter]: ressources/logs.conf
 
