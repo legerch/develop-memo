@@ -1,7 +1,9 @@
 # Custom bash aliases
 
 > [!NOTE]
-> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details\n\nSaved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-40-generic - 18/09/2024 :
+> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
+
+Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-40-generic - 20/09/2024 :
 
 ```shell
 ##########################
@@ -80,7 +82,7 @@ function save-custom-bash-aliases()
     ## Context informations
     printf "# Custom bash aliases\n\n" >> "${fileDest}"
     printf "> [!NOTE]\n" >> "${fileDest}"
-    printf "%s" "> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details\n\n" >> "${fileDest}"
+    printf "%s\n\n" "> See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details" >> "${fileDest}"
     printf "Saved from : ${infoOsRelease} - Kernel ${infoUnameKernel} - ${infoDate} :\n\n" >> "${fileDest}"
 
     ## Bash aliases script
@@ -690,6 +692,7 @@ alias memo-yavta='printf "raw10: yavta -f SGRBG16 -s 648x648 -c8 -F/tmp/frame-#.
 alias memo-raw2rgbpnm='printf "raw10: raw2rgbpnm -s 648x648 -f SGRBG10 frame-000000.bin frame-000000.ppm\nraw8: raw2rgbpnm -s 640x640 -f SGRBG8 frame-000000.bin frame-000000.ppm\nyuyv: raw2rgbpnm -s 640x640 -f YUYV frame-000000.bin frame-000000.ppm\n"'
 
 alias custom-qt-creator-13.0.2='${_DIR_PACKAGES_STANDALONE}/qtcreator-13.0.2/bin/qtcreator'
+alias custom-caesium='${_DIR_PACKAGES_STANDALONE}/caesium/Caesium_Image_Compressor-x86_64_v2.6.0_ubu20_qt66.AppImage'
 
 ##
 # Pi specific aliases
