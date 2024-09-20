@@ -48,6 +48,7 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
 - [10. Multimedia tools](#10-multimedia-tools)
   - [10.1. Generic](#101-generic)
   - [10.2. GStreamer](#102-gstreamer)
+  - [10.3. Smileys](#103-smileys)
 - [11. GNOME Customization](#11-gnome-customization)
   - [11.1. GNOME Extensions](#111-gnome-extensions)
   - [11.2. GNOME Editor](#112-gnome-editor)
@@ -373,6 +374,8 @@ To get more infomations about **50/72 rule**, see [git commit message][doc-git-c
 sudo apt install htop lm-sensors udisks2
 sudo apt install baobab         # Disk Usage Analyzer, representation of a disk drive's contents (see https://gitlab.gnome.org/GNOME/baobab)
 sudo apt install y-ppa-manager  # a PPA exist for this package
+
+flatpak install flathub net.nokyan.Resources # Task manager which provide more infos than Ubuntu default (see https://github.com/nokyan/resources)
 ```
 
 # 7. Networking tools
@@ -449,6 +452,13 @@ Useful for development with GStreamer API:
 sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 ```
 
+## 10.3. Smileys
+
+- [Smile][smile-app]
+```shell
+flatpak install flathub it.mijorus.smile
+```
+
 # 11. GNOME Customization
 ## 11.1. GNOME Extensions
 
@@ -507,6 +517,7 @@ Useful properties :
 [gnome-hex-editor]: https://wiki.gnome.org/Apps/Ghex
 [imhex]: https://github.com/WerWolv/ImHex
 [qrencode-man]: https://linux.die.net/man/1/qrencode
+[smile-app]: https://flathub.org/apps/it.mijorus.smile
 
 [glogg-repository]: https://github.com/nickbnf/glogg
 [klogg-repository]: https://github.com/variar/klogg
