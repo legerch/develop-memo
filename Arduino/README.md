@@ -251,7 +251,7 @@ Once, board list is working in command-line, you may not be able to use it under
 
 [arduino-troubleshooting-linux-port-access]: https://support.arduino.cc/hc/en-us/articles/360016495679-Fix-port-access-on-Linux
 
-[arduino-vscode-extension]: https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.vscode-arduino
+[arduino-vscode-extension]: https://marketplace.visualstudio.com/items?itemName=vscode-arduino.vscode-arduino-community
 [arduino-vscode-extension-issues-1346]: https://github.com/microsoft/vscode-arduino/issues/1346
 [arduino-vscode-extension-issues-1346-resolve]: https://github.com/microsoft/vscode-arduino/issues/1346#issuecomment-996972001
 

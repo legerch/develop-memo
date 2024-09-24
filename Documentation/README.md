@@ -11,6 +11,9 @@ A small memo on how to manage documentation of projects using [Doxygen][doxy-hom
 - [4. Generate documentation](#4-generate-documentation)
   - [4.1. Locally](#41-locally)
   - [4.2. Online](#42-online)
+  - [4.3. Manage _public API_ and _internal_ documentation](#43-manage-public-api-and-internal-documentation)
+    - [4.3.1. Using fragments](#431-using-fragments)
+    - [4.3.2. Using conditions](#432-using-conditions)
 - [5. Customization](#5-customization)
 
 # 1. Installation
@@ -115,11 +118,61 @@ doxygen ./Doxyfile
 
 An easy way to automatically generate documentation and hosting it is to use **Continuous Integration/Development tools**, please see dedicated [CI/CD tutorial][tutorial-cicd] to know how to deploy it. 
 
+## 4.3. Manage _public API_ and _internal_ documentation
+
+We have multiple ways to manage documentation generation to manage _public API documentation_ and _internal API documentation_.
+
+### 4.3.1. Using fragments
+
+**Doxygen** allow to include an other _Doxyfile_ into it via `@INCLUDE` command.  
+We can define a `Doxyfile-common.in` fragment which will contains most _Doxygen_ configuration and then have a _Doxyfile fragment_ for each type of documentation to generate (which will include the _common part_):
+- `Doxyfile-internal.in`
+- `Doxyfile-public-api.in`
+
+> [!TIP]
+> Example of this are available in the [docs fragment][docs-fragments] folder
+
+> [!NOTE]
+> We could go further and automatically fill those _Doxyfile files_ (specially the `INPUT` part) via the _build system (like CMake_) or via a _python script_ for example.  
+> Library [libcamera][libcamera-home] recently [used this solution][libcamera-patch-doc] to separate internal and public API
+
+### 4.3.2. Using conditions
+
+We can also use [condition][doxy-cmd-cond] command in order to enable/disable sections according to each kind of documentation to generate.  
+For example, in our custom class, we can use:
+```cpp
+/*!
+ * \cond INTERNAL
+ */
+
+/*!
+ * \brief My custom class with a brief description
+ * \details
+ * Add details to the usage of this class
+ */
+class MyClass
+{
+public:
+    ...
+};
+
+/*!
+ * \endcond
+ */
+```
+
+Then, we can enable/disable section simply by using `ENABLED_SECTIONS` configuration option. For our example, we will add section `INTERNAL` in order to generate documentation for our custom class.
+
+> [!NOTE]
+> Note that if your configuration include all files, those conditions must appears for your _headers_ **and** _sources_ files.
+
 # 5. Customization
 
 Generated Doxygen documentation can feel..._outdated!_ I can only recommend the [Doxygen Awesome CSS][doxy-theme-awesome] theme which provide a more modern look to the generated documentation, [highly configurable][doxy-theme-awesome-cfg] and which also provide some really useful [extensions][doxy-theme-awesome-extensions].
 
 <!-- Repository links -->
+[docs-fragments]: fragments/
+
 [tutorial-arduino]: ../Arduino/
 [tutorial-cicd]: ../CI_CD/
 
@@ -127,8 +180,12 @@ Generated Doxygen documentation can feel..._outdated!_ I can only recommend the 
 [doxy-home]: https://www.doxygen.nl/index.html
 [doxy-dl]: https://www.doxygen.nl/download.html
 [doxy-commands]: https://www.doxygen.nl/manual/commands.html
+[doxy-cmd-cond]: https://www.doxygen.nl/manual/commands.html#cmdcond
 [doxy-usage]: https://www.doxygen.nl/manual/doxygen_usage.html
 
 [doxy-theme-awesome]: https://github.com/jothepro/doxygen-awesome-css
 [doxy-theme-awesome-cfg]: https://jothepro.github.io/doxygen-awesome-css/md_docs_2customization.html
 [doxy-theme-awesome-extensions]: https://jothepro.github.io/doxygen-awesome-css/md_docs_2extensions.html
+
+[libcamera-home]: https://libcamera.org/
+[libcamera-patch-doc]: https://git.libcamera.org/libcamera/libcamera.git/commit/?id=7dc38adcb5b59f5347fcfbcc8b5df261eda704a1

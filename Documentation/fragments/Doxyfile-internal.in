@@ -1,0 +1,20 @@
+# Doxyfile 1.9.1
+
+# This file is used to generate internal API documentation for "example"
+# project.
+# Please refer to "Doxyfile-common.in" file for more syntax details
+
+#---------------------------------------------------------------------------
+# Doxyfile fragments to include
+#---------------------------------------------------------------------------
+@INCLUDE                =   docs/fragments/Doxyfile-common.in
+
+#---------------------------------------------------------------------------
+# Custom configurations
+#---------------------------------------------------------------------------
+INPUT                   =   README.md \
+                            include \
+                            src
+
+HTML_OUTPUT             =   api-internal
+EXTRACT_LOCAL_CLASSES   =   YES

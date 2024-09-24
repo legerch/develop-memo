@@ -1,0 +1,27 @@
+# Doxyfile 1.9.1
+
+# This file is used to generate public API documentation for "example"
+# project.
+# Please refer to "Doxyfile-common.in" file for more syntax details
+
+#---------------------------------------------------------------------------
+# Doxyfile fragments to include
+#---------------------------------------------------------------------------
+@INCLUDE                =   docs/fragments/Doxyfile-common.in
+
+#---------------------------------------------------------------------------
+# Custom configurations
+#---------------------------------------------------------------------------
+INPUT                   =   README.md \
+                            include \
+                            \
+                            src/customdir/customclass1.cpp \
+                            src/customdir/customclass2.cpp \
+                            \
+                            src/otherdir/otherclass1.cpp \
+                            src/otherdir/otherclass2.cpp \
+                            \
+                            src/mainclass.cpp
+
+HTML_OUTPUT             =   api-public
+EXTRACT_LOCAL_CLASSES   =   NO
