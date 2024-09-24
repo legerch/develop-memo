@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-40-generic - 20/09/2024 :
+Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-40-generic - 24/09/2024 :
 
 ```shell
 ##########################
@@ -124,24 +124,32 @@ function alias-search()
 # Function used to generate doxygen documentation :
 # ${1} : path to root project
 # ${2} : Doxyfile name to use
+# ${3} : Set to 1 to use custom doxygen path (optional, if not set, installed Doxygen will be used)
 function generate-project-documentation()
 {
     local docPath="${1}"
     local docFile="${2}"
+    local docUseCustomBin="${3}"
 
     local docDoxygen="${docPath}/${docFile}"
 
     # Check that project doc file is valid
     if [ ! -f "${docDoxygen}" ]; then
-        printf "USAGE : generate-project-documentation <project_path> <doxygen_file>\n"
+        printf "USAGE: generate-project-documentation <project_path> <doxygen_file> <use_custom_doxygen_bin>\n"
         return 1
+    fi
+
+    # Set doxygen binary to use
+    local binDoxygen="doxygen"  # Default to global
+    if [ "${docUseCustomBin}" == "1" ]; then
+        binDoxygen="${_BIN_DOXYGEN_CUSTOM}"
     fi
 
     # Go to project directory
     cd ${docPath}
 
     # Generate documentation
-    doxygen ${docFile}
+    ${binDoxygen} "${docFile}"
 
     # Return to previous directory
     cd ${OLDPWD}
@@ -392,6 +400,8 @@ _DIR_REPO_DEV_MEMO="${HOME}/Documents/workspaces/workspace-cobra/Cobra-documenta
 
 _FILE_BASH_ALIASES="${HOME}/.bash_aliases"
 _FILE_BASH_ALIASES_COMPANY="${HOME}/.bash_aliases_company"
+
+_BIN_DOXYGEN_CUSTOM="${_DIR_PACKAGES_STANDALONE}/doxygen/doxygen-1.12.0/bin/doxygen"
 
 ##########################
 # Scripts functions
@@ -693,6 +703,7 @@ alias memo-raw2rgbpnm='printf "raw10: raw2rgbpnm -s 648x648 -f SGRBG10 frame-000
 
 alias custom-qt-creator-13.0.2='${_DIR_PACKAGES_STANDALONE}/qtcreator-13.0.2/bin/qtcreator'
 alias custom-caesium='${_DIR_PACKAGES_STANDALONE}/caesium/Caesium_Image_Compressor-x86_64_v2.6.0_ubu20_qt66.AppImage'
+alias custom-doxygen='${_BIN_DOXYGEN_CUSTOM}'
 
 ##
 # Pi specific aliases
