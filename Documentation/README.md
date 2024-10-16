@@ -40,9 +40,11 @@ Below, a simple reminder of options that are generally useful when configuring a
   - `PROJECT_NAME`
   - `PROJECT_BRIEF`
   - `PROJECT_LOGO`
+  - `PROJECT_ICON`
   - `OUTPUT_DIRECTORY` (example: `docs`)
   - `OPTIMIZE_OUTPUT_FOR_<language_name>`
   - `MARKDOWN_SUPPORT`: Set to enable it
+  - `MARKDOWN_ID_STYLE`
 - Input :
   - `INPUT`: Directory or files used as input by Doxygen (example : `src`, `lib`, `doc-mainpage.md`) 
   - `USE_MDFILE_AS_MAINPAGE` (example: `doc-mainpage.md` or `README.md`)
@@ -51,7 +53,9 @@ Below, a simple reminder of options that are generally useful when configuring a
   - `EXAMPLE_PATH`: Directory or files to use for examples that can be used with `\include` Doxygen command when writing doxumentation (example: `docs/examples/`)
   - `EXAMPLE_PATTERNS`: (example: `*.cpp *.h`)
   - `IMAGE_PATH`
-- `GENERATE_HTML`: Set to enable it 
+- `GENERATE_HTML`: Set to enable it
+- `SHOW_ENUM_VALUES`: Set to `YES` to show enums values that are explicitly defined
+- `TIMESTAMP`: Set to `YES` to display datetime of generated documentation
 - Disable generation of: Latex, RTF, Man, XML, Docbook, AutoGen, PerlMod
 - Preprocessor:
   - `ENABLE_PREPROCESSING`: Set to enable it (if some code depends to an `ifdef`, this can be useful to add a condition for Doxygen to document it. Doxygen automatically define the macro `DOXYGEN`)
