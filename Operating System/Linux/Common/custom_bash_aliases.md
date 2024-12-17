@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-40-generic - 24/09/2024 :
+Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-49-generic - 17/12/2024 :
 
 ```shell
 ##########################
@@ -397,9 +397,12 @@ _DIR_PACKAGES_DEBIAN="${_DIR_DL}/debian-packages/"
 _DIR_WORKSPACES="${HOME}/Documents/workspaces/"
 _DIR_VSCODE_SNIPPETS="${HOME}/.config/Code/User/snippets/"
 _DIR_REPO_DEV_MEMO="${HOME}/Documents/workspaces/workspace-cobra/Cobra-documentation/Documentations/develop-memo/"
+_DIR_TIO_CFG="${HOME}/.config/tio/"
 
 _FILE_BASH_ALIASES="${HOME}/.bash_aliases"
 _FILE_BASH_ALIASES_COMPANY="${HOME}/.bash_aliases_company"
+
+_FILE_TIO_CFG="${_DIR_TIO_CFG}/config"
 
 _BIN_DOXYGEN_CUSTOM="${_DIR_PACKAGES_STANDALONE}/doxygen/doxygen-1.12.0/bin/doxygen"
 
@@ -685,6 +688,10 @@ alias bash-aliases-update-doc='save-custom-bash-aliases ${_FILE_BASH_ALIASES} "$
 alias env-edit-vi='sudo vi /etc/environment'
 alias syscfg-edit-vi='sudo vi /etc/sysctl.conf && memo-syscfg'
 alias memo-syscfg='_sysctl-validate-properties "range.field.property"'
+
+# Use to manage TIO related files
+alias tio-edit='code -n ${_DIR_TIO_CFG}'
+alias tio-edit-cfg-file='code ${_FILE_TIO_CFG}'
 
 # Create alias to python tools
 alias py-b4='${HOME}/.local/bin/b4'

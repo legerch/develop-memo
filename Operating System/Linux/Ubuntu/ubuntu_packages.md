@@ -10,12 +10,14 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [2.1. Standard](#21-standard)
   - [2.2. Terminal](#22-terminal)
   - [2.3. Serial communication](#23-serial-communication)
-    - [2.3.1. Installation](#231-installation)
-    - [2.3.2. Usage](#232-usage)
-    - [2.3.3. Configuration](#233-configuration)
-      - [2.3.3.1. Fail to write](#2331-fail-to-write)
-      - [2.3.3.2. Enable colors output](#2332-enable-colors-output)
-      - [2.3.3.3. Enable wrapping long lines](#2333-enable-wrapping-long-lines)
+    - [2.3.1. Tio](#231-tio)
+    - [2.3.2. Minicom](#232-minicom)
+      - [2.3.2.1. Installation](#2321-installation)
+      - [2.3.2.2. Usage](#2322-usage)
+      - [2.3.2.3. Configuration](#2323-configuration)
+        - [2.3.2.3.1. Fail to write](#23231-fail-to-write)
+        - [2.3.2.3.2. Enable colors output](#23232-enable-colors-output)
+        - [2.3.2.3.3. Enable wrapping long lines](#23233-enable-wrapping-long-lines)
   - [2.4. Logs](#24-logs)
     - [2.4.1. Installation](#241-installation)
     - [2.4.2. Custom configuration](#242-custom-configuration)
@@ -167,12 +169,20 @@ Terminal is shipped by default but some customizations can help for development 
     - **Palette** : `Tango`
 
 ## 2.3. Serial communication
-### 2.3.1. Installation
+### 2.3.1. Tio
+
+A fully-featured serial communication terminal can be found at [_Tio_ repository][tio-repo] (the documentation is more than complete !).
+
+> [!TIP] 
+> [Custom configuration file][tio-cfg] and [custom scripts][tio-scripts] are also available
+
+### 2.3.2. Minicom
+#### 2.3.2.1. Installation
 ```shell
 sudo apt install minicom
 ```
 
-### 2.3.2. Usage
+#### 2.3.2.2. Usage
 
 - Start a session :
 ```shell
@@ -188,9 +198,9 @@ sudo minicom -D /dev/ttyUSB0 -b 115200 -c on -w
 > Ressources used :
 > - [StackExchange - File transfer using YMODEM sz][minicom-send-file]
 
-### 2.3.3. Configuration
+#### 2.3.2.3. Configuration
 
-#### 2.3.3.1. Fail to write
+##### 2.3.2.3.1. Fail to write
 
 Minicom **read** properly but **writing** failed (no entry is written when pressing keyboard) :
 1. Start _minicom_ configuration : `sudo minicom -o -s`
@@ -204,13 +214,13 @@ Minicom **read** properly but **writing** failed (no entry is written when press
 > - [AskUbuntu - Minicom doesn't work][minicom-write-failure-thread-askubuntu]
 > - [Tutorial : Configure minicom for a USB-to-Serial Converter][minicom-write-failure-tutorial]
 
-#### 2.3.3.2. Enable colors output
+##### 2.3.2.3.2. Enable colors output
 
 To enable color output with _minicom_, you need to use option : `minicom -c on`
 > Ressources used :
 > - [debian.org : color for minicom ?][minicom-color-option-thread-debianorg]
 
-#### 2.3.3.3. Enable wrapping long lines
+##### 2.3.2.3.3. Enable wrapping long lines
 
 To enable wrap with _minicom_, use option `-w` (`--wrap`).
 
@@ -498,7 +508,7 @@ Useful properties :
 [doc-qt]: ../../../Qt/
 [doc-vscode]: ../../../IDE/VsCode/
 
-[res-klogg-highlighter]: ressources/logs.conf
+[res-klogg-highlighter]: ressources/klogg/logs.conf
 
 <!-- External links -->
 [br-getting-started]: https://buildroot.org/downloads/manual/manual.html#_getting_started
@@ -546,3 +556,6 @@ Useful properties :
 
 [theme-gedit-dracula]: https://draculatheme.com/gedit
 
+[tio-repo]: https://github.com/tio/tio
+[tio-cfg]: ressources/tio/config
+[tio-scripts]: ressources/tio/scripts/

@@ -1,0 +1,50 @@
+###############################
+# tio - https://tio.github.io #
+# Latest modified: 2024-12-17
+###############################
+
+# Place file in any of the following locations:
+#  $XDG_CONFIG_HOME/tio/config
+#  $HOME/.config/tio/config
+#  $HOME/.tioconfig
+
+# Applied by default
+
+[default]
+baudrate = 115200
+databits = 8
+flow = none
+stopbits = 1
+parity = none
+output-delay = 0
+output-line-delay = 0
+auto-connect = direct
+no-reconnect = false
+local-echo = false
+input-mode = normal
+output-mode = normal
+timestamp = true
+timestamp-format = iso8601
+log = true
+log-directory = /home/<my_user>/Documents/logs/tio
+log-append = true
+log-strip = true
+color = 7
+alert = none
+prefix-ctrl-key = a
+
+# Configuration profiles
+
+[arduino]
+baudrate = 115200
+device = /dev/ttyACM0
+log-file = /home/<my_user>/Documents/logs/tio/arduino-uart.log
+log-append = true
+
+[mydevice]
+baudrate = 115200
+device = <dev-id>
+log-file = /home/<my_user>/Documents/logs/tio/<my_device>-uart.log
+log-append = true
+timestamp = false
+script-file = /home/<my_user>/.config/tio/scripts/auto-linux-login.lua
