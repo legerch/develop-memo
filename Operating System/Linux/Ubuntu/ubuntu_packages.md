@@ -18,20 +18,21 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
         - [2.3.2.3.1. Fail to write](#23231-fail-to-write)
         - [2.3.2.3.2. Enable colors output](#23232-enable-colors-output)
         - [2.3.2.3.3. Enable wrapping long lines](#23233-enable-wrapping-long-lines)
-  - [2.4. Logs](#24-logs)
-    - [2.4.1. Installation](#241-installation)
-    - [2.4.2. Custom configuration](#242-custom-configuration)
-      - [2.4.2.1. glogg](#2421-glogg)
-      - [2.4.2.2. klogg](#2422-klogg)
-  - [2.5. File comparaison viewer](#25-file-comparaison-viewer)
-  - [2.6. Hexadecimal viewer](#26-hexadecimal-viewer)
-  - [2.7. Documentation](#27-documentation)
-  - [2.8. CTRL-C memory](#28-ctrl-c-memory)
-  - [2.9. Charts tools](#29-charts-tools)
-  - [2.10. Box of tools for developers](#210-box-of-tools-for-developers)
-  - [2.11. Color picker](#211-color-picker)
-  - [2.12. QrCode](#212-qrcode)
-  - [2.13. Arduino development](#213-arduino-development)
+  - [2.4. Input simulator](#24-input-simulator)
+  - [2.5. Logs](#25-logs)
+    - [2.5.1. Installation](#251-installation)
+    - [2.5.2. Custom configuration](#252-custom-configuration)
+      - [2.5.2.1. glogg](#2521-glogg)
+      - [2.5.2.2. klogg](#2522-klogg)
+  - [2.6. File comparaison viewer](#26-file-comparaison-viewer)
+  - [2.7. Hexadecimal viewer](#27-hexadecimal-viewer)
+  - [2.8. Documentation](#28-documentation)
+  - [2.9. CTRL-C memory](#29-ctrl-c-memory)
+  - [2.10. Charts tools](#210-charts-tools)
+  - [2.11. Box of tools for developers](#211-box-of-tools-for-developers)
+  - [2.12. Color picker](#212-color-picker)
+  - [2.13. QrCode](#213-qrcode)
+  - [2.14. Arduino development](#214-arduino-development)
 - [3. Buildroot/kernels requirements](#3-buildrootkernels-requirements)
   - [3.1. Mandatory packages](#31-mandatory-packages)
   - [3.2. Optional packages](#32-optional-packages)
@@ -224,15 +225,22 @@ To enable color output with _minicom_, you need to use option : `minicom -c on`
 
 To enable wrap with _minicom_, use option `-w` (`--wrap`).
 
-## 2.4. Logs
-### 2.4.1. Installation
+## 2.4. Input simulator
+
+Sometimes, it can be useful to emulate keyboard/mouse events, below a list of such utilities:
+- [tio/input-emulator][input-sim-tio]
+- [ydotool][input-sim-ydotool]
+- [xdotool][input-sim-xdotool] (only works with **X11**)
+
+## 2.5. Logs
+### 2.5.1. Installation
 ```shell
 sudo apt install glogg
 ```
 > [glogg][glogg-repository] hasn't been updated since _august 2018_, [klogg][klogg-repository] seems to be a really good fork but doesn't provide any `apt` packaging yet...
 
-### 2.4.2. Custom configuration
-#### 2.4.2.1. glogg
+### 2.5.2. Custom configuration
+#### 2.5.2.1. glogg
 
 | Description | Filters | Ignore case | Fore Color | Back Color |
 |:-:|:-:|:-:|:-:|:-:|
@@ -246,18 +254,18 @@ sudo apt install glogg
 | Board is started | `syslog.info syslogd started` | false | black | lime |
 | Application is restarted | `Scheduling for restart` | false | black | fuchsia |
 
-#### 2.4.2.2. klogg
+#### 2.5.2.2. klogg
 
 [klogg][klogg-repository] allow to import/export a group of highlighters, doesn't need to set it manually accross multiple devices.  
 A custom _klogg highlighters_ configuration can be found at [klogg-highlighters][res-klogg-highlighter].
 
-## 2.5. File comparaison viewer
+## 2.6. File comparaison viewer
 
 ```shell
 sudo apt install meld
 ```
 
-## 2.6. Hexadecimal viewer
+## 2.7. Hexadecimal viewer
 
 - [ImHex][imhex]
 ```shell
@@ -269,7 +277,7 @@ flatpak install flathub net.werwolv.ImHex
 sudo apt install ghex
 ```
 
-## 2.7. Documentation
+## 2.8. Documentation
 
 ```shell
 sudo apt install doxygen doxygen-gui doxygen-doc
@@ -278,25 +286,25 @@ sudo apt install doxygen doxygen-gui doxygen-doc
 > If graphs are needed, package `graphviz` will also be necessary.    
 > See [Doxygen tutorial][doc-doxygen] to see how to use _Doxygen_ tool.
 
-## 2.8. CTRL-C memory
+## 2.9. CTRL-C memory
 
 - [Clipboard history][gnome-clipboard-history]
 - [CopyQ][copyq-official] (note that this utility doesn't properly work with _wayland_ environment).
 
-## 2.9. Charts tools
+## 2.10. Charts tools
 
 ```shell
 sudo snap install drawio
 ```
 
-## 2.10. Box of tools for developers
+## 2.11. Box of tools for developers
 
 - [Dev toolbox][developer-toolbox]
 ```shell
 flatpak install flathub me.iepure.devtoolbox
 ```
 
-## 2.11. Color picker
+## 2.12. Color picker
 
 - [eyedropper][eyedropper-repository] :
 ```shell
@@ -308,14 +316,14 @@ flatpak install flathub com.github.finefindus.eyedropper
 sudo snap install color-picker
 ```
 
-## 2.12. QrCode
+## 2.13. QrCode
 
 - [qrencode][qrencode-man] :
 ```shell
 sudo apt install qrencode
 ```
 
-## 2.13. Arduino development
+## 2.14. Arduino development
 
 See [Doc - Arduino development][doc-arduino] for more details.
 
@@ -534,6 +542,10 @@ Useful properties :
 
 [flatpak-documentation]: https://docs.flatpak.org/en/latest/using-flatpak.html
 [flatpak-repositories]: https://flathub.org/home
+
+[input-sim-tio]: https://github.com/tio/input-emulator
+[input-sim-xdotool]: https://github.com/jordansissel/xdotool
+[input-sim-ydotool]: https://github.com/ReimuNotMoe/ydotool
 
 [lvfs-official]: https://fwupd.org/
 [lvfs-repository]: https://github.com/fwupd/fwupd
