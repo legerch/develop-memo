@@ -4,6 +4,8 @@ https://trac.ffmpeg.org/wiki/StreamingGuide#Latency
 
 probesize : https://www.ffmpeg.org/ffmpeg-formats.html
 
+# Render video stream
+
 - Play video stream (may have delay):
 ```shell
 ffplay -protocol_whitelist file,rtp,udp -i rp_video.sdp
@@ -36,3 +38,13 @@ Side note :
 ffplay -probesize 32 -sync ext INPUT
 ```
 > See here for more infos: https://ffmpeg.org/ffplay.html
+
+# Emit video stream
+
+To emit a video stream from a local file (can be useful to simulate streaming video), we can use:
+```shell
+.\ffmpeg.exe -re -i .\test.mp4 -an -f rtp rtp://localhost:5004 -sdp_file output.sdp
+```
+> [!TIP]
+> - `-an`: Use to disable audio stream if any
+> - `-sdp_file output.sdp`: video stream file to read to access the stream will be `output.sdp`
