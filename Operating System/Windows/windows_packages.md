@@ -51,7 +51,7 @@ See [VCPKG tutorial][vcpkg-tutorial] for more details
 
 ## 1.5. Logs
 
-- [klogg][klogg-repository] (A custom _klogg highlighters_ configuration can be found at [klogg-highlighters][res-klogg-highlighter])
+- [klogg][klogg-home] (A custom _klogg highlighters_ configuration can be found at [klogg-highlighters][res-klogg-highlighter])
 
 ## 1.6. File comparaison viewer
 
@@ -59,7 +59,7 @@ See [VCPKG tutorial][vcpkg-tutorial] for more details
 
 ## 1.7. Hexadecimal viewer
 
-- [ImHex][imhex]
+- [ImHex][imhex-home]
 
 ## 1.8. Documentation
 
@@ -71,13 +71,15 @@ See [VCPKG tutorial][vcpkg-tutorial] for more details
 
 ## 1.10. Color picker
 
-- [MS Powertools][powertools-home]
+- [MS Powertools][powertoys-home]
 
 ## 1.11. Compression tools
+
 - [Caesium Image Compressor][caesium-home]
 
 ## 1.12. Hash tools
-- [hashtab][hashtab-home]
+
+- [OpenHashTab][hashtab-home]
 
 ## 1.13. Arduino development
 
@@ -96,7 +98,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 
 - Network analyze:
   - [Wireshark][wireshark-home]
-  - [Iperf3][iperf-home]
+  - [Iperf3][iperf-home] (and [iperfbin][iperf-bin])
 - Network transfer:
   - [Filezilla][filezilla-home]
 - Access-point analyze: see [access-point ressource][doc-net-access-point] documentation
@@ -129,8 +131,8 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
   - [ChapterMakerMkv][chapter-maker-mkv-home]: Create chapter file for MKV videos
   - [MKVToolNix Batch Tool][mkvtoolnix-batch-tool-home]: Batch multiple MKVs file
 - Create MKVs
-  - [MakeMKV][makemkv]: Create MKV from DVDs, Bluray or ISOs files
-  - [HD-DVD/Blu-Ray Stream Extractor][hdbrstreamextractor-home]: GUI application to [eac3to][eac3to] utility
+  - [MakeMKV][makemkv-home]: Create MKV from DVDs, Bluray or ISOs files
+  - [HD-DVD/Blu-Ray Stream Extractor][hdbrstreamextractor-home]: GUI application to [eac3to][eac3to-home] utility
 - Rename files
   - [Rename My TV Series][rename-tv-series-home]: Use to rename TV series video files
 - Manage video database
@@ -165,10 +167,47 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 [doc-qt]: ../../Qt/
 [doc-vscode]: ../../IDE/VsCode/
 
-[res-klogg-highlighter]: ressources/logs.conf
+[res-klogg-highlighter]: ../Linux/Ubuntu/ressources/klogg/logs.conf
+
+[vcpkg-tutorial]: ../../Toolchains/Build%20systems/VCPKG/README.md
 
 <!-- External links -->
+[caesium-home]: https://github.com/Lymphatus/caesium-image-compressor
+[chapter-maker-mkv-home]:
+[compiler-msvc]: https://visualstudio.microsoft.com/fr/downloads/
+[doxygen-home]: https://www.doxygen.nl/
+[drawio-home]: https://github.com/jgraph/drawio-desktop
+[eac3to-home]: https://www.videohelp.com/software/eac3to
+[emdb-home]: https://www.emdb.eu/
+[ffmpeg-home]: https://ffmpeg.org/
+[filezilla-home]: https://filezilla-project.org/
+[git-home]: https://git-scm.com/
+[gitkraken-home]: https://www.gitkraken.com/
 [gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
-[imhex]: https://github.com/WerWolv/ImHex
-
-[klogg-repository]: https://github.com/variar/klogg
+[handbrake-home]: https://github.com/HandBrake/HandBrake
+[hashtab-home]: https://github.com/namazso/OpenHashTab
+[hdbrstreamextractor-home]: https://www.videohelp.com/software/HD-DVD-Blu-Ray-Stream-Extractor
+[imhex-home]: https://github.com/WerWolv/ImHex
+[iperf-home]: https://github.com/esnet/iperf
+[iperf-bin]: https://files.budman.pw/
+[klogg-home]: https://github.com/variar/klogg
+[libdvdcss-home]: https://github.com/allienx/libdvdcss-dll
+[libreoffice-home]: https://fr.libreoffice.org/download/telecharger-libreoffice/
+[losslesscut-home]: https://github.com/mifi/lossless-cut
+[makemkv-home]: https://www.makemkv.com/
+[meld-home]: https://meldmerge.org/
+[mkvextract-home]:
+[mkvtoolnix-home]:
+[mp3tag-home]:
+[mpc-be-home]:
+[mtputty-home]: https://ttyplus.com/multi-tabbed-putty/
+[office365-home]:
+[open-video-dl-home]:
+[powertoys-home]: https://github.com/microsoft/PowerToys
+[putty-home]: https://www.putty.org/
+[rename-tv-series-home]: https://www.tweaking4all.com/home-theatre/rename-my-tv-series-v2/
+[subtitle-edit-home]: https://github.com/SubtitleEdit/subtitleedit
+[subtitle-speech-sync-home]: https://github.com/sc0ty/subsync
+[thunderbird-home]: https://www.thunderbird.net
+[vlc-home]: https://www.videolan.org/vlc/
+[wireshark-home]: https://www.wireshark.org/
