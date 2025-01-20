@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-49-generic - 17/12/2024 :
+Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-50-generic - 20/01/2025 :
 
 ```shell
 ##########################
@@ -182,6 +182,26 @@ function rename-file-extension()
     fi
 }
 
+# Use to read a QrCode from image
+# It will try to display raw content
+# Online alternative could be:
+# https://www.onlinebarcodereader.com/
+#
+# ${1}: Path to img, if not exist, help is printed
+function qrcode-read-from-img()
+{
+    if ! _check-tools zbarimg; then return 1; fi
+
+    # Verify file validity
+    if [ ! -f "${1}" ]; then
+        printf "USAGE: qrcode-read-from-img <img-path>\n"
+        return 1
+    fi
+
+    # Display QrCode content
+    zbarimg --raw "${1}"
+}
+
 function html-add-stylesheet()
 {
     local originFile="${1}"
@@ -292,8 +312,9 @@ function repo-github-dl-tarball()
 # - https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11
 # - https://feeding.cloud.geek.nz/posts/encoding-wifi-access-point-passwords-qr-code/
 # - https://pocketables.com/2022/01/how-to-format-that-wifi-qr-code-in-plain-text.html
+# - https://thelinuxexperiment.com/share-your-wifi-info-via-qr-code/comment-page-1/
 #
-function wifi-generate-qrcode()
+function wifi-qrcode-generate()
 {
     local argSsid="${1}"
     local argSecurity="${2^^}"
@@ -341,7 +362,7 @@ function wifi-display-ssid-infos-custom()
         local passwd="$(sudo cat ${ssidInfos} | grep "psk=" | cut -d "=" -f 2)"
         
         printf "\nSSID: ${ssid}\nSecurity: ${security}\nPassword: ${passwd}\n"
-        wifi-generate-qrcode "${ssid}" "${security}" "${passwd}"
+        wifi-qrcode-generate "${ssid}" "${security}" "${passwd}"
 
     else
         printf "Cannot retrieve passwd, ssid [${ssid}] is unknown\n"
