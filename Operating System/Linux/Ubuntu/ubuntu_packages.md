@@ -18,21 +18,25 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
         - [2.3.2.3.1. Fail to write](#23231-fail-to-write)
         - [2.3.2.3.2. Enable colors output](#23232-enable-colors-output)
         - [2.3.2.3.3. Enable wrapping long lines](#23233-enable-wrapping-long-lines)
-  - [2.4. Input simulator](#24-input-simulator)
-  - [2.5. Logs](#25-logs)
-    - [2.5.1. Installation](#251-installation)
-    - [2.5.2. Custom configuration](#252-custom-configuration)
-      - [2.5.2.1. glogg](#2521-glogg)
-      - [2.5.2.2. klogg](#2522-klogg)
-  - [2.6. File comparaison viewer](#26-file-comparaison-viewer)
-  - [2.7. Hexadecimal viewer](#27-hexadecimal-viewer)
-  - [2.8. Documentation](#28-documentation)
-  - [2.9. CTRL-C memory](#29-ctrl-c-memory)
-  - [2.10. Charts tools](#210-charts-tools)
-  - [2.11. Box of tools for developers](#211-box-of-tools-for-developers)
-  - [2.12. Color picker](#212-color-picker)
-  - [2.13. QrCode](#213-qrcode)
-  - [2.14. Arduino development](#214-arduino-development)
+  - [2.4. Analyzers](#24-analyzers)
+    - [2.4.1. Memory profiler](#241-memory-profiler)
+    - [2.4.2. Function/performance profiler](#242-functionperformance-profiler)
+    - [2.4.3. Thread profiler](#243-thread-profiler)
+  - [2.5. Input simulator](#25-input-simulator)
+  - [2.6. Logs](#26-logs)
+    - [2.6.1. Installation](#261-installation)
+    - [2.6.2. Custom configuration](#262-custom-configuration)
+      - [2.6.2.1. glogg](#2621-glogg)
+      - [2.6.2.2. klogg](#2622-klogg)
+  - [2.7. File comparaison viewer](#27-file-comparaison-viewer)
+  - [2.8. Hexadecimal viewer](#28-hexadecimal-viewer)
+  - [2.9. Documentation](#29-documentation)
+  - [2.10. CTRL-C memory](#210-ctrl-c-memory)
+  - [2.11. Charts tools](#211-charts-tools)
+  - [2.12. Box of tools for developers](#212-box-of-tools-for-developers)
+  - [2.13. Color picker](#213-color-picker)
+  - [2.14. QrCode](#214-qrcode)
+  - [2.15. Arduino development](#215-arduino-development)
 - [3. Buildroot/kernels requirements](#3-buildrootkernels-requirements)
   - [3.1. Mandatory packages](#31-mandatory-packages)
   - [3.2. Optional packages](#32-optional-packages)
@@ -225,22 +229,46 @@ To enable color output with _minicom_, you need to use option : `minicom -c on`
 
 To enable wrap with _minicom_, use option `-w` (`--wrap`).
 
-## 2.4. Input simulator
+## 2.4. Analyzers
+### 2.4.1. Memory profiler
+
+- Valgrind memcheck
+```shell
+valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes
+```
+
+### 2.4.2. Function/performance profiler
+
+- Valgrind callgrind
+```shell
+valgrind --tool=callgrind
+```
+> [!TIP]
+> To be able to read generated files, we can use [KCachegrind utility][kcachegrind]
+
+### 2.4.3. Thread profiler
+
+- Valgrind hellgrind
+```shell
+valgrind --tool=helgrind
+```
+
+## 2.5. Input simulator
 
 Sometimes, it can be useful to emulate keyboard/mouse events, below a list of such utilities:
 - [tio/input-emulator][input-sim-tio]
 - [ydotool][input-sim-ydotool]
 - [xdotool][input-sim-xdotool] (only works with **X11**)
 
-## 2.5. Logs
-### 2.5.1. Installation
+## 2.6. Logs
+### 2.6.1. Installation
 ```shell
 sudo apt install glogg
 ```
 > [glogg][glogg-repository] hasn't been updated since _august 2018_, [klogg][klogg-repository] seems to be a really good fork but doesn't provide any `apt` packaging yet...
 
-### 2.5.2. Custom configuration
-#### 2.5.2.1. glogg
+### 2.6.2. Custom configuration
+#### 2.6.2.1. glogg
 
 | Description | Filters | Ignore case | Fore Color | Back Color |
 |:-:|:-:|:-:|:-:|:-:|
@@ -254,18 +282,18 @@ sudo apt install glogg
 | Board is started | `syslog.info syslogd started` | false | black | lime |
 | Application is restarted | `Scheduling for restart` | false | black | fuchsia |
 
-#### 2.5.2.2. klogg
+#### 2.6.2.2. klogg
 
 [klogg][klogg-repository] allow to import/export a group of highlighters, doesn't need to set it manually accross multiple devices.  
 A custom _klogg highlighters_ configuration can be found at [klogg-highlighters][res-klogg-highlighter].
 
-## 2.6. File comparaison viewer
+## 2.7. File comparaison viewer
 
 ```shell
 sudo apt install meld
 ```
 
-## 2.7. Hexadecimal viewer
+## 2.8. Hexadecimal viewer
 
 - [ImHex][imhex]
 ```shell
@@ -277,7 +305,7 @@ flatpak install flathub net.werwolv.ImHex
 sudo apt install ghex
 ```
 
-## 2.8. Documentation
+## 2.9. Documentation
 
 ```shell
 sudo apt install doxygen doxygen-gui doxygen-doc
@@ -286,25 +314,25 @@ sudo apt install doxygen doxygen-gui doxygen-doc
 > If graphs are needed, package `graphviz` will also be necessary.    
 > See [Doxygen tutorial][doc-doxygen] to see how to use _Doxygen_ tool.
 
-## 2.9. CTRL-C memory
+## 2.10. CTRL-C memory
 
 - [Clipboard history][gnome-clipboard-history]
 - [CopyQ][copyq-official] (note that this utility doesn't properly work with _wayland_ environment).
 
-## 2.10. Charts tools
+## 2.11. Charts tools
 
 ```shell
 sudo snap install drawio
 ```
 
-## 2.11. Box of tools for developers
+## 2.12. Box of tools for developers
 
 - [Dev toolbox][developer-toolbox]
 ```shell
 flatpak install flathub me.iepure.devtoolbox
 ```
 
-## 2.12. Color picker
+## 2.13. Color picker
 
 - [eyedropper][eyedropper-repository] :
 ```shell
@@ -316,14 +344,14 @@ flatpak install flathub com.github.finefindus.eyedropper
 sudo snap install color-picker
 ```
 
-## 2.13. QrCode
+## 2.14. QrCode
 
 - [qrencode][qrencode-man] :
 ```shell
 sudo apt install qrencode
 ```
 
-## 2.14. Arduino development
+## 2.15. Arduino development
 
 See [Doc - Arduino development][doc-arduino] for more details.
 
@@ -534,6 +562,7 @@ Useful properties :
 [gnome-freon]: https://github.com/UshakovVasilii/gnome-shell-extension-freon
 [gnome-hex-editor]: https://wiki.gnome.org/Apps/Ghex
 [imhex]: https://github.com/WerWolv/ImHex
+[kcachegrind]: https://apps.kde.org/fr/kcachegrind/
 [qrencode-man]: https://linux.die.net/man/1/qrencode
 [smile-app]: https://flathub.org/apps/it.mijorus.smile
 
