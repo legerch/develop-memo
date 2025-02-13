@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-51-generic - 22/01/2025 :
+Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-52-generic - 13/02/2025 :
 
 ```shell
 ##########################
@@ -635,9 +635,9 @@ alias flatpak-clean="flatpak uninstall --unused"
 
 # PPA related commands for easier install/uninstall
 # Blog helper: https://blog.desdelinux.net/fr/ppa-purge-como-remover-un-repositorio-ppa-en-forma-segura/
-alias ppa-add-repo="sudo add-apt-repository"
-alias ppa-remove-repo="sudo ppa-purge" # Use "ppa-purge" command instead of "add-apt-repository --remove" in order to perform a real clean
-alias ppa-list="grep -i ppa.launchpad.net /etc/apt/sources.list.d/*.list"
+alias ppa-repo-add="sudo add-apt-repository"
+alias ppa-repo-remove="sudo ppa-purge" # Use "ppa-purge" command instead of "add-apt-repository --remove" in order to perform a real clean
+alias ppa-repo-list="ls -l /etc/apt/sources.list.d/"
 
 # In order to "disallow" some commands (It is use for my embedded target and I don't want to perform them on my host machine)
 alias poweroff='printf "I m not gonna do that !\n"'
