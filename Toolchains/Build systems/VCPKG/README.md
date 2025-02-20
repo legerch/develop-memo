@@ -4,6 +4,7 @@
     - [1.1.1. Common](#111-common)
     - [1.1.2. Windows](#112-windows)
     - [1.1.3. Linux](#113-linux)
+    - [1.1.4. MacOS](#114-macos)
   - [1.2. How to ?](#12-how-to-)
   - [1.3. Integration](#13-integration)
     - [1.3.1. Qt projects](#131-qt-projects)
@@ -36,6 +37,15 @@ In order to use [Vcpkg][vcpkg-repo], you need some prerequisites.
 sudo apt install build-essential tar curl zip unzip autoconf-archive pkg-config
 ```
 
+### 1.1.4. MacOS
+
+- Developer tools will be needed:
+```shell
+brew install pkg-config
+```
+> [!TIP]
+> For issues related to **Brew** utility, please refer to [Brew tutorial][doc-mac-brew]
+
 ## 1.2. How to ?
 
 1. Clone [Vcpkg repository][vcpkg-repo] in a global path, _vcpkg_ itself recommends to install it in `C:\src\vcpkg` or `C:\dev\vcpkg` to prevent from any path issues
@@ -46,20 +56,20 @@ git clone git@github.com:microsoft/vcpkg.git
 
 2. Bootstrap _vcpkg_ :
 ```shell
-.\vcpkg\bootstrap-vcpkg.bat
+.\vcpkg\bootstrap-vcpkg.bat # Windows
+.\vcpkg\bootstrap-vcpkg.sh  # Bash (Linux, MacOS)
 ```
 
-3. For easier integration of _vcpkg_ installed libraries, you need to open a terminal with administrator rights and run:
+> [!TIP]
+> For easier integration of _vcpkg_ installed libraries under **Windows OS** only, you can open a terminal with administrator rights and run:
+> ```shell
+> .\vcpkg\vcpkg integrate install
+> ```
+
+3. Keep references to **CMake toolchain** which should look like (external tools will required it):
 ```shell
-.\vcpkg\vcpkg integrate install
+-DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake
 ```
-> Note that this command is only needed under **Windows OS** with _Visual Studio_
-
-Result of this command should print something like:
-```
-CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"All MSBuild C++ projects can now #include any installed libraries. Linking will be handled automatically. Installing new libraries will make them instantly available.
-```
-Copy-paste somewhere the `-DCMAKE_TOOLCHAIN_FILE=` part (in a tmp notepad for example).
 
 ## 1.3. Integration
 ### 1.3.1. Qt projects
@@ -120,6 +130,9 @@ To [update VCPKG libraries][vcpkg-update-lib], use subcommand:
 
 Since _VCPKG_ binaries are not always signed, it can be useful to add a rules to it regarding VCPKG usage :
 - [Windows defender][av-exclude-win-defenders]
+
+<!-- Links to this repository -->
+[doc-mac-brew]: ../../../Operating%20System/MacOS/brew.md
 
 <!-- External links -->
 [git-official]: https://git-scm.com/downloads
