@@ -22,6 +22,7 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
     - [2.4.1. Memory profiler](#241-memory-profiler)
     - [2.4.2. Function/performance profiler](#242-functionperformance-profiler)
     - [2.4.3. Thread profiler](#243-thread-profiler)
+    - [2.4.4. Include analyzer](#244-include-analyzer)
   - [2.5. Input simulator](#25-input-simulator)
   - [2.6. Logs](#26-logs)
     - [2.6.1. Installation](#261-installation)
@@ -252,6 +253,13 @@ valgrind --tool=callgrind
 ```shell
 valgrind --tool=helgrind
 ```
+
+### 2.4.4. Include analyzer
+
+Multiple project can help to remove uneeded includes directives:
+- [minclude][minclude]
+- [cland][clangd-doc-unused-header]
+- [include-what-you-use]
 
 ## 2.5. Input simulator
 
@@ -550,6 +558,7 @@ Useful properties :
 [br-getting-started]: https://buildroot.org/downloads/manual/manual.html#_getting_started
 [br-requirements]: https://buildroot.org/downloads/manual/manual.html#requirement
 
+[clangd-doc-unused-header]: https://clangd.llvm.org/guides/include-cleaner
 [copyq-official]: https://hluk.github.io/CopyQ/
 [colorpicker-repository]: https://github.com/keshavbhatt/ColorPicker
 [dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
@@ -562,7 +571,9 @@ Useful properties :
 [gnome-freon]: https://github.com/UshakovVasilii/gnome-shell-extension-freon
 [gnome-hex-editor]: https://wiki.gnome.org/Apps/Ghex
 [imhex]: https://github.com/WerWolv/ImHex
+[include-what-you-use]: https://github.com/include-what-you-use/include-what-you-use
 [kcachegrind]: https://apps.kde.org/fr/kcachegrind/
+[minclude]: https://github.com/jhasse/minclude
 [qrencode-man]: https://linux.die.net/man/1/qrencode
 [smile-app]: https://flathub.org/apps/it.mijorus.smile
 

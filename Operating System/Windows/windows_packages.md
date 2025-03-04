@@ -6,15 +6,17 @@ This file list all needed packages for **Windows OS** according to each usage.
   - [1.2. VCPKG](#12-vcpkg)
   - [1.3. Git](#13-git)
   - [1.4. Serial communication](#14-serial-communication)
-  - [1.5. Logs](#15-logs)
-  - [1.6. File comparaison viewer](#16-file-comparaison-viewer)
-  - [1.7. Hexadecimal viewer](#17-hexadecimal-viewer)
-  - [1.8. Documentation](#18-documentation)
-  - [1.9. Charts tools](#19-charts-tools)
-  - [1.10. Color picker](#110-color-picker)
-  - [1.11. Compression tools](#111-compression-tools)
-  - [1.12. Hash tools](#112-hash-tools)
-  - [1.13. Arduino development](#113-arduino-development)
+  - [1.5. Analyzers](#15-analyzers)
+    - [1.5.1. Include analyzer](#151-include-analyzer)
+  - [1.6. Logs](#16-logs)
+  - [1.7. File comparaison viewer](#17-file-comparaison-viewer)
+  - [1.8. Hexadecimal viewer](#18-hexadecimal-viewer)
+  - [1.9. Documentation](#19-documentation)
+  - [1.10. Charts tools](#110-charts-tools)
+  - [1.11. Color picker](#111-color-picker)
+  - [1.12. Compression tools](#112-compression-tools)
+  - [1.13. Hash tools](#113-hash-tools)
+  - [1.14. Arduino development](#114-arduino-development)
 - [2. Edition tools](#2-edition-tools)
   - [2.1. Qt](#21-qt)
   - [2.2. Visual Studio Code](#22-visual-studio-code)
@@ -49,39 +51,47 @@ See [VCPKG tutorial][vcpkg-tutorial] for more details
 - [Putty][putty-home]
 - [Multi-tab Putty][mtputty-home]
 
-## 1.5. Logs
+## 1.5. Analyzers
+### 1.5.1. Include analyzer
+
+Multiple project can help to remove uneeded includes directives:
+- [minclude][minclude]
+- [cland][clangd-doc-unused-header]
+- [include-what-you-use]
+
+## 1.6. Logs
 
 - [klogg][klogg-home] (A custom _klogg highlighters_ configuration can be found at [klogg-highlighters][res-klogg-highlighter])
 
-## 1.6. File comparaison viewer
+## 1.7. File comparaison viewer
 
 - [meld][meld-home]
 
-## 1.7. Hexadecimal viewer
+## 1.8. Hexadecimal viewer
 
 - [ImHex][imhex-home]
 
-## 1.8. Documentation
+## 1.9. Documentation
 
 - [Doxygen][doxygen-home]
 
-## 1.9. Charts tools
+## 1.10. Charts tools
 
 - [DrawIO][drawio-home]
 
-## 1.10. Color picker
+## 1.11. Color picker
 
 - [MS Powertools][powertoys-home]
 
-## 1.11. Compression tools
+## 1.12. Compression tools
 
 - [Caesium Image Compressor][caesium-home]
 
-## 1.12. Hash tools
+## 1.13. Hash tools
 
 - [OpenHashTab][hashtab-home]
 
-## 1.13. Arduino development
+## 1.14. Arduino development
 
 See [Doc - Arduino development][doc-arduino] for more details.
 
@@ -174,6 +184,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 <!-- External links -->
 [caesium-home]: https://github.com/Lymphatus/caesium-image-compressor
 [chapter-maker-mkv-home]:
+[clangd-doc-unused-header]: https://clangd.llvm.org/guides/include-cleaner
 [compiler-msvc]: https://visualstudio.microsoft.com/fr/downloads/
 [doxygen-home]: https://www.doxygen.nl/
 [drawio-home]: https://github.com/jgraph/drawio-desktop
@@ -188,6 +199,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 [hashtab-home]: https://github.com/namazso/OpenHashTab
 [hdbrstreamextractor-home]: https://www.videohelp.com/software/HD-DVD-Blu-Ray-Stream-Extractor
 [imhex-home]: https://github.com/WerWolv/ImHex
+[include-what-you-use]: https://github.com/include-what-you-use/include-what-you-use
 [iperf-home]: https://github.com/esnet/iperf
 [iperf-bin]: https://files.budman.pw/
 [klogg-home]: https://github.com/variar/klogg
@@ -198,6 +210,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 [meld-home]: https://meldmerge.org/
 [mkvextract-home]:
 [mkvtoolnix-home]:
+[minclude]: https://github.com/jhasse/minclude
 [mp3tag-home]:
 [mpc-be-home]:
 [mtputty-home]: https://ttyplus.com/multi-tabbed-putty/
