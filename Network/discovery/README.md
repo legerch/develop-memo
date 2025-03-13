@@ -37,6 +37,12 @@ In order to simplify management between all those implementations, we can find m
   - [QtZeroConf][qtzeroconf]
   - [Felgo ZeroConf][felgo-zeroconf]
 
+> [!IMPORTANT]
+> If using [Apple Bonjour Service Package][apple-bonjour-package-win] on **Windows OS**, the official link provide a very outdated _Bonjour_ version (2.0.2.0).  
+> To use a more recent version (currently 3.1.0.1), either use the one provided by Apple products on Windows (like Itunes, etc...) or thanks to people like contributors to [Winget][winget-home] project, we can use the link they used:  
+> - Winget Apple Bonjour package is presented at [winget.AppleBonjour][winget-package-apple-bonjour]
+> - All we need is to look inside the repository, in the [package repository][winget-repo-apple-bonjour] to see which URL they use (be careful, links always change, even for the same version, so keep a copy of the installer)
+
 # 3. mDNS publisher
 
 Common things to remind:
@@ -273,4 +279,8 @@ avahi-discover
 [man-logger]: https://linux.die.net/man/1/logger
 
 [stack-mdns-windows]: https://superuser.com/questions/491747/how-can-i-resolve-local-addresses-in-windows
+
+[winget-home]: https://winstall.app/
+[winget-package-apple-bonjour]: https://winstall.app/apps/Apple.Bonjour
+[winget-repo-apple-bonjour]: https://github.com/microsoft/winget-pkgs/commits/master/manifests/a/Apple/Bonjour
 
