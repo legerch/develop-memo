@@ -34,6 +34,7 @@
 - Créer une branche sur un commit spécifique : `git branch <branchname> <sha1-of-commit>`
 - Hard reset sur la HEAD : `git reset --hard HEAD`
 - Hard reset sur un commit spécifique : `git reset --hard <commid_id> && git clean -f`
+- Hard reset d'une branche qu'on ne peut checkout : `git branch -f master dev` -> This moves _master_ to point to _dev_ without checking it out)
 - Supprimer les fichiers locaux non trackés de la branche courante :
 ```shell
 # If you want to see which files will be deleted you can use the -n option
