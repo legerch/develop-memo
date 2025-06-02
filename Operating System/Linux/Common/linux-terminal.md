@@ -1,8 +1,10 @@
 This fill will resume all related terminal commands/operations.
 
 **Table of content:**
-- [1. How to add custom commands](#1-how-to-add-custom-commands)
-- [2. How to set terminal terminal](#2-how-to-set-terminal-terminal)
+- [1. Custom commands and aliases](#1-custom-commands-and-aliases)
+  - [1.1. Add aliases](#11-add-aliases)
+  - [1.2. Enable auto-completion](#12-enable-auto-completion)
+- [2. How to set terminal title](#2-how-to-set-terminal-title)
   - [2.1. Set title of current terminal](#21-set-title-of-current-terminal)
   - [2.2. Set title of a terminal tab to open](#22-set-title-of-a-terminal-tab-to-open)
     - [2.2.1. Why doesn't work](#221-why-doesnt-work)
@@ -10,8 +12,8 @@ This fill will resume all related terminal commands/operations.
     - [2.2.3. What about opening tab programmatically ?](#223-what-about-opening-tab-programmatically-)
 
 
-# 1. How to add custom commands
-
+# 1. Custom commands and aliases
+## 1.1. Add aliases
 Linux operating system allows users to create commands:
 1. Check that `~/.bashrc` have routine to load custom commands :
 ```shell
@@ -55,7 +57,30 @@ alias maj='sudo apt update && sudo apt full-upgrade'
 - Open new tab
 - Source alias with: `source ~/.bashrc`
 
-# 2. How to set terminal terminal
+## 1.2. Enable auto-completion
+
+It can be useful to have auto-completion enable on some aliases.  
+Let's take this example where we create a custom `makej` command used to call `make` utility but with parallel jobs set:
+```bash
+function makej()
+{
+    local nbProcs=$(nproc)
+    make -j"${nbProcs}" --output-sync=target "$@"
+}
+```
+
+But now, we don't have auto-completion for this command, our _Makefile_ command will not be completed when using `<TAB>` key. In order to fix that, we can use `bash-completion` package (which is already installed on most distributions like _Ubuntu, Fedora, etc..._).  
+To set our custom alias to actually use `make` completion behaviour, simply add this instructions in your bash aliases file:
+```bash
+complete -F _make makej
+```
+> [!TIP]
+> All completions "keywords" can be found inside `/usr/share/bash-completion/completions/` directory. When looking inside the `make` related file, we can actually see the line `complete -F _make make gmake gnumake pmake colormake bmake` which indicate that the keyword to use is `_make`.
+
+On some systems, we can have the error: _function << \_make >> not found_.  
+This is due to the fact that _completion_ part inside `~/.bashrc` is called after sourcing `~/.bash_aliases`, simply move the completion part before sourcing aliases and all should be ready to run !
+
+# 2. How to set terminal title
 
 Weirdly... setting terminal title is not trivial under recent distribution... let's try it!
 
