@@ -46,18 +46,24 @@ CFLAGS += -DAPP_VERSION=\"$(TARGET_VERSION)\"
 
 all: $(TARGET_NAME)
 
-$(TARGET_NAME): $(OBJ)
+$(TARGET_NAME): $(OBJ) | $(DIR_BIN)
 	@echo "Generate binary application"
 	$(CCPREFIX)$(CC) -o $(DIR_BIN)/$@ $^ $(LDFLAGS) $(LDLIBS)
 	@echo "Generate version file at : $(TARGET_VERSION_IN_PATH)"
 	$(file >$(TARGET_VERSION_IN_PATH),$(TARGET_VERSION))
 
-$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c $(HDR)
+$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c | $(DIR_OBJ)
 	@echo "Generate objects"
 	$(CCPREFIX)$(CC) -o $@ -c $< $(CFLAGS)
 
 install:
 	install -p -m 755 $(DIR_BIN)/$(TARGET_NAME) $(DIR_INSTALL)
 
+send-app:
+	scp $(DIR_BIN)/$(TARGET_NAME) $(TARGET_IDS):
+
 debug-app: debug-base
 	@echo "Install directory: $(DIR_INSTALL)"
+
+debug-run:
+	$(CCPREFIX)$(CCDB) -ex "target remote $(TARGET_IP):$(TARGET_DGB_PORT)" $(DIR_BIN)/$(TARGET_NAME)

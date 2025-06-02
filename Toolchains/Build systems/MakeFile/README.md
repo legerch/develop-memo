@@ -101,6 +101,7 @@ Templates here are based of project following this structure:
 ├── 01-makefile/
 │   ├── app.make
 │   ├── base.make
+|   ├── credentials.make
 │   ├── lib.make
 │   ├── sub.make
 │   └── test.make
@@ -166,6 +167,7 @@ Templates here are based of project following this structure:
 ```
 
 Templates are available in [templates/][repo-makefile-templates] directory of this documentation:
+- [credentials.make][repo-makefile-credentials]
 - [base.make][repo-makefile-template-base]
   - [app.make][repo-makefile-template-lib]
   - [lib.make][repo-makefile-template-test]
@@ -175,7 +177,6 @@ Templates are available in [templates/][repo-makefile-templates] directory of th
 
 Makefiles examples which used those templates can be found in [examples/][repo-makefile-examples] directory of this documentation.
 
-
 <!-- Links of this repository -->
 
 [repo-doc-compilers]: ../../Compilers/
@@ -183,6 +184,7 @@ Makefiles examples which used those templates can be found in [examples/][repo-m
 [repo-makefile-cheatsheet]: makefile-cheatsheet.md
 
 [repo-makefile-templates]: templates/
+[repo-makefile-credentials]: templates/credentials.make
 [repo-makefile-template-base]: templates/base.make
 [repo-makefile-template-lib]: templates/lib.make
 [repo-makefile-template-test]: templates/test.make

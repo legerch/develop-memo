@@ -11,7 +11,7 @@
 # Set to "1" to disable any output on stdout/stderr.
 # By default, this value is set to "0"
 # - BOARD
-# Set to "default" by default.
+# Set to "host" by default.
 # If set to "arduino" : SDK for board Arduino will be used (cross-compiler + sysroot).
 # If set to "raspberry" : SDK for board Raspberry will be used (cross-compiler + sysroot)
 # Others : GCC host compiler will be used, with default GCC sysroot value
@@ -32,16 +32,19 @@
 SILENT	?= 0
 
 # Board target
-BOARD ?= default
+BOARD ?= host
 ifeq ($(BOARD),raspberry)
 	LIST_SUBDIRS_BOARD	:=	$(BOARD_RASPBERRY_LIST_SUBDIRS)
 
 else ifeq ($(BOARD),arduino)
 	LIST_SUBDIRS_BOARD	:=	$(BOARD_ARDUINO_LIST_SUBDIRS)
 
-else
+else ifeq ($(BOARD),host)
 	LIST_SUBDIRS_BOARD	:=	$(BOARD_OTHERS_LIST_SUBDIRS)
 
+else
+    $(error Selected board [$(BOARD)] is not supported, cannot pursuit)
+	
 endif
 
 # Set subdirectories to make

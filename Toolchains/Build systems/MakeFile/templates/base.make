@@ -11,10 +11,11 @@
 # ------------------------------------------------
 # Available command-line arguments:
 # - BOARD
-# Set to "default" by default.
+# Set to "host" by default.
 # If set to "arduino" : SDK for Arduino board will be used (cross-compiler + sysroot).
 # If set to "raspberry" : SDK for Raspberry board will be used (cross-compiler + sysroot)
-# Others : GCC host compiler will be used, with default GCC sysroot value
+# If set to "host" : GCC host compiler will be used (with default GCC sysroot value)
+# Any other values will trigger an error indicating that selected board is not supported.
 #
 # - DEBUG
 # When set to 1, application is compile with flag : -g -DDEBUG.
@@ -105,8 +106,11 @@ PWD_LAYER_COMMON	:= $(PWD_LAYER)/02-common/
 PWD_LAYER_LIBS		:= $(PWD_LAYER)/03-libs/
 PWD_LAYER_APPS		:= $(PWD_LAYER)/04-apps/
 
+# Include credentials makefile recipe
+include $(PWD_TEMPLATE_BASE)credentials.make
+
 # Board target
-BOARD ?= default
+BOARD ?= host
 ifeq ($(BOARD),raspberry)
 	SDK_ROOT := $(PWD_BSP)/02-raspberry-bsp/01-sdk/aarch64-buildroot-linux-gnu_sdk-buildroot/
 	SDK_CC_PATH := $(SDK_ROOT)/bin/
@@ -139,7 +143,7 @@ else ifeq ($(BOARD),arduino)
 	PATHS_LIBS_LIST_BOARD := $(BOARD_ARDUINO_LIB_PATHS_LIST)
 	LDLIBS_BOARD := $(BOARD_ARDUINO_LDLIBS)
 
-else 
+else ifeq ($(BOARD),host)
 	SDK_ROOT :=
 	SDK_CC_PATH :=
 	SDK_SYSROOT :=
@@ -153,10 +157,14 @@ else
 
 	PATHS_LIBS_LIST_BOARD := $(BOARD_OTHERS_LIB_PATHS_LIST)
 	LDLIBS_BOARD := $(BOARD_OTHERS_LDLIBS)
+
+else
+    $(error Selected board [$(BOARD)] is not supported, cannot pursuit)
 endif
 
 # Compiler
 CC := gcc
+CCDB := gdb
 
 # Sysroot flags
 ifeq ($(SDK_ROOT),)
@@ -171,7 +179,7 @@ CFLAGS_STANDARDS		:=	-D_GNU_SOURCE	# See https://www.gnu.org/software/libc/manua
                             # -D_POSIX_C_SOURCE is also needed, but already set by -std=gnu<number_std>
                             # -std=gnu<number_std> needed but let at default value to get latest standard (currently set to -std=gnu17, see https://gcc.gnu.org/onlinedocs/gcc/Standards.html)
 
-CFLAGS_WARNING			:=	-Wall -Wextra -Werror=format -Werror=return-type -Werror=implicit-function-declaration \
+CFLAGS_WARNING			:=	-Wall -Wextra -Werror=format -Werror=return-type -Werror=implicit-function-declaration -Werror=incompatible-pointer-types \
 							-Wformat=2 -Wstrict-prototypes -Wshadow \
 							-Wlogical-op -Wduplicated-cond -Wduplicated-branches \
 							-Wno-ignored-qualifiers  \
@@ -193,6 +201,8 @@ CFLAGS					:=	$(CFLAGS_SYSROOT) \
 							$(CFLAGS_HEADERS_SPECIFIC) \
 							$(CFLAGS_HEADERS_LAYER) \
 							$(CFLAGS_HEADERS_SDK)
+
+PICFLAG					:=	-fPIC
 
 # Linker flags
 
@@ -263,6 +273,12 @@ TARGET_VERSION_IN_DATA := $(file <$(TARGET_VERSION_IN_PATH))
 
 .PHONY: clean realclean mrproper
 
+$(DIR_OBJ):
+	mkdir -p $(DIR_OBJ)
+
+$(DIR_BIN):
+	mkdir -p $(DIR_BIN)
+
 clean:
 	rm -f *.o
 	rm -f *.su
@@ -286,3 +302,9 @@ debug-base:
 
 compiler-option:
 	$(CCPREFIX)$(CC) $(CCOPT)
+
+tool-clean-headers:
+	minclude --build_command "make"
+
+help:
+	@echo "Available boards: [arduino, raspberry, host]"

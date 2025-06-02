@@ -34,19 +34,18 @@ CFLAGS += -DLIB_VERSION=\"$(TARGET_VERSION)\"
 
 all: shared #static
 
-static: $(HDR)
+$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c | $(DIR_OBJ)
+	$(CCPREFIX)$(CC) -c $< -o $@ $(CFLAGS) $(PICFLAG)
+
+static: $(OBJ) | $(DIR_BIN)
 	@echo "Generate static library $(TARGET_NAME).a"
-	$(CCPREFIX)$(CC) -c $(SRC) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
-	mv *.o $(DIR_OBJ)/
 	$(CCPREFIX)ar rvs $(DIR_BIN)/$(TARGET_NAME).a $(OBJ)
 	$(CCPREFIX)ranlib $(DIR_BIN)/$(TARGET_NAME).a
 	du -sh $(DIR_BIN)/$(TARGET_NAME).a
 
-shared: $(HDR)
+shared: $(OBJ) | $(DIR_BIN)
 	@echo "Generate dynamic library $(DIR_BIN)/$(TARGET_NAME).so.$(TARGET_VERSION)"
-	$(CCPREFIX)$(CC) -c $(SRC) $(CFLAGS) -fpic $(LDFLAGS) $(LDLIBS)
-	mv *.o $(DIR_OBJ)/
-	$(CCPREFIX)$(CC) -shared -o $(DIR_BIN)/$(TARGET_NAME).so.$(TARGET_VERSION) $(OBJ)
+	$(CCPREFIX)$(CC) -shared -o $(DIR_BIN)/$(TARGET_NAME).so.$(TARGET_VERSION) $(OBJ) $(LDFLAGS) $(LDLIBS)
 	ln -sf $(TARGET_NAME).so.$(TARGET_VERSION) $(DIR_BIN)/$(TARGET_NAME).so
 	du -sh $(DIR_BIN)/$(TARGET_NAME).so.$(TARGET_VERSION)
 	@echo "Generate version file at : $(TARGET_VERSION_IN_PATH)"
@@ -63,6 +62,9 @@ install_shared:
 	to allow the application to find dynamic library at execution !"
 
 install: install_shared
+
+send-lib:
+	scp $(DIR_BIN)/$(TARGET_NAME).so.$(TARGET_VERSION_IN_DATA) $(TARGET_IDS):
 
 debug-lib: debug-base
 	@echo "Install directory: $(DIR_INSTALL)"
