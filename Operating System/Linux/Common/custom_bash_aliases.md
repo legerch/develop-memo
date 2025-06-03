@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-52-generic - 13/02/2025 :
+Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-60-generic - 03/06/2025 :
 
 ```shell
 ##########################
@@ -297,6 +297,16 @@ function repo-github-dl-tarball()
     else
         printf "No file has been downloaded\n"
     fi
+}
+
+##########################
+# Host specific functions
+#   Build/Compilation
+##########################
+function makej()
+{
+    local nbProcs=$(nproc)
+    make -j"${nbProcs}" --output-sync=target "$@"
 }
 
 ##########################
@@ -754,9 +764,17 @@ alias arduino-uart='sudo minicom -w -D /dev/ttyACM0 -b 115200'
 ## Since Windows is not really "aware" that he is not alone on the market, some apps may still consider that bios time is in UTC and not in local, so I prefer to "fix" it linux side
 alias fix-dual-boot-time="timedatectl set-local-rtc 1 && timedatectl"
 
-##
-# Alias definitions related to company
-##
+##########################
+# Enable completion of
+#        aliases
+##########################
+complete -F _make makej
+
+##########################
+# Alias definitions related
+#      to company
+##########################
+
 if [ -f ${HOME}/.bash_aliases_company ]; then
     . ${HOME}/.bash_aliases_company
 fi
