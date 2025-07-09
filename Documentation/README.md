@@ -36,7 +36,7 @@ _Doxyfile_ contains all configuration used to generate documentation of the proj
 ## 2.1. Generic projects
 
 Below, a simple reminder of options that are generally useful when configuring a **Doxyfile** for a new project:
-- Project :
+- Project:
   - `PROJECT_NAME`
   - `PROJECT_BRIEF`
   - `PROJECT_LOGO`
@@ -45,7 +45,7 @@ Below, a simple reminder of options that are generally useful when configuring a
   - `OPTIMIZE_OUTPUT_FOR_<language_name>`
   - `MARKDOWN_SUPPORT`: Set to enable it
   - `MARKDOWN_ID_STYLE`
-- Input :
+- Input:
   - `INPUT`: Directory or files used as input by Doxygen (example : `src`, `lib`, `doc-mainpage.md`) 
   - `USE_MDFILE_AS_MAINPAGE` (example: `doc-mainpage.md` or `README.md`)
   - `RECURSIVE`: Set the value according to the current project
@@ -53,7 +53,12 @@ Below, a simple reminder of options that are generally useful when configuring a
   - `EXAMPLE_PATH`: Directory or files to use for examples that can be used with `\include` Doxygen command when writing doxumentation (example: `docs/examples/`)
   - `EXAMPLE_PATTERNS`: (example: `*.cpp *.h`)
   - `IMAGE_PATH`
-- `GENERATE_HTML`: Set to enable it
+- Build:
+  - `SORT_MEMBER_DOCS`: Set to `NO` to keep the function declarations order
+- HTML output:
+  - `GENERATE_HTML`: Set to enable it
+  - `HTML_COLORSTYLE`: Theme to use
+  - `HTML_COPY_CLIPBOARD`: Allow to enable/disable the _copy clipboard_ feature for blocks of code
 - `SHOW_ENUM_VALUES`: Set to `YES` to show enums values that are explicitly defined
 - `TIMESTAMP`: Set to `YES` to display datetime of generated documentation
 - Disable generation of: Latex, RTF, Man, XML, Docbook, AutoGen, PerlMod
