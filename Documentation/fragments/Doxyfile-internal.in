@@ -1,8 +1,12 @@
-# Doxyfile 1.9.1
+# Doxyfile 1.12.0
 
-# This file is used to generate internal API documentation for "example"
+# This file is used to generate internal API documentation for "LibraryName"
 # project.
 # Please refer to "Doxyfile-common.in" file for more syntax details
+#
+# Based on project template repository: https://github.com/legerch/projects-template
+# Template file version: 2025-07-24
+#
 
 #---------------------------------------------------------------------------
 # Doxyfile fragments to include
@@ -15,6 +19,8 @@
 INPUT                   =   README.md \
                             include \
                             src
+
+ENABLED_SECTIONS        =   INTERNAL
 
 HTML_OUTPUT             =   api-internal
 EXTRACT_LOCAL_CLASSES   =   YES

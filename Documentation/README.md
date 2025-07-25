@@ -23,6 +23,8 @@ On Linux distro, you can also use:
 ```shell
 sudo apt install doxygen doxygen-gui doxygen-doc
 ```
+
+> [!NOTE]
 > This will install:
 > - Doxygen binaries
 > - Doxygen GUI called _Doxywizard_
@@ -30,7 +32,9 @@ sudo apt install doxygen doxygen-gui doxygen-doc
 # 2. Project configuration
 
 Once [Doxygen][doxy-home] is installed, you must create a **Doxyfile** associated to the project we want to document.  
-_Doxyfile_ contains all configuration used to generate documentation of the project.  
+_Doxyfile_ contains all configuration used to generate documentation of the project.
+
+> [!TIP]
 > Also note that _Doxygen_ also provide [a way][doxy-usage] to update your _Doxyfile_ to a new version easily
 
 ## 2.1. Generic projects
@@ -111,15 +115,10 @@ WlanTypeDefs::WlanBssType WlanTypeDefs::convertBssTypeFromWinApi(DOT11_BSS_TYPE 
 # 4. Generate documentation
 ## 4.1. Locally
 
-To generate documentation locally, this is really easy:
+To generate documentation locally, we can use:
 ```shell
-# Run documentation generation
 doxygen ./Doxyfile
-
-# Under Windows, maybe doxygen is not added to the $PATH
-"C:\Program Files\doxygen\bin\doxygen.exe" ./Doxyfile
 ```
-
 > [!TIP]
 > You can also load the _Doxyfile_ into _Doxywizard_ (Doxygen GUI) and run generation.
 
