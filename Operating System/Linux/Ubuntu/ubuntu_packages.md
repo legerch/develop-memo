@@ -56,7 +56,8 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
 - [10. Multimedia tools](#10-multimedia-tools)
   - [10.1. Generic](#101-generic)
   - [10.2. GStreamer](#102-gstreamer)
-  - [10.3. Smileys](#103-smileys)
+  - [10.3. Music](#103-music)
+  - [10.4. Smileys](#104-smileys)
 - [11. GNOME Customization](#11-gnome-customization)
   - [11.1. GNOME Extensions](#111-gnome-extensions)
   - [11.2. GNOME Editor](#112-gnome-editor)
@@ -506,7 +507,18 @@ Useful for development with GStreamer API:
 sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 ```
 
-## 10.3. Smileys
+## 10.3. Music
+
+We can install **Spotify** via snap package:
+```shell
+sudo snap install spotify
+```
+
+> [!TIP]
+> For better integration with **Gnome**, we can use an extension which provide tray icons and controls:
+> - [Spotify Controls][spotify-extension-home] (see [source repository][spotify-extension-repo])
+
+## 10.4. Smileys
 
 - [Smile][smile-app]
 ```shell
@@ -605,6 +617,9 @@ Useful properties :
 [snapcraft-repositories]: https://snapcraft.io/
 [snapcraft-documentation]: https://snapcraft.io/docs
 [snap-package-thunderbird]: https://snapcraft.io/thunderbird
+
+[spotify-extension-home]: https://extensions.gnome.org/extension/7406/spotify-controls/
+[spotify-extension-repo]: https://github.com/Sonath21/spotify-controls
 
 [theme-gedit-dracula]: https://draculatheme.com/gedit
 
