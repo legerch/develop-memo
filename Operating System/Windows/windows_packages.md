@@ -183,7 +183,6 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 
 <!-- External links -->
 [caesium-home]: https://github.com/Lymphatus/caesium-image-compressor
-[chapter-maker-mkv-home]:
 [clangd-doc-unused-header]: https://clangd.llvm.org/guides/include-cleaner
 [compiler-msvc]: https://visualstudio.microsoft.com/fr/downloads/
 [doxygen-home]: https://www.doxygen.nl/
@@ -208,14 +207,8 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 [losslesscut-home]: https://github.com/mifi/lossless-cut
 [makemkv-home]: https://www.makemkv.com/
 [meld-home]: https://meldmerge.org/
-[mkvextract-home]:
-[mkvtoolnix-home]:
 [minclude]: https://github.com/jhasse/minclude
-[mp3tag-home]:
-[mpc-be-home]:
 [mtputty-home]: https://ttyplus.com/multi-tabbed-putty/
-[office365-home]:
-[open-video-dl-home]:
 [powertoys-home]: https://github.com/microsoft/PowerToys
 [putty-home]: https://www.putty.org/
 [rename-tv-series-home]: https://www.tweaking4all.com/home-theatre/rename-my-tv-series-v2/
