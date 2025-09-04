@@ -20,6 +20,7 @@ This file list all needed packages for **Windows OS** according to each usage.
 - [2. Edition tools](#2-edition-tools)
   - [2.1. Qt](#21-qt)
   - [2.2. Visual Studio Code](#22-visual-studio-code)
+  - [2.3. Others](#23-others)
 - [3. Networking tools](#3-networking-tools)
 - [4. Emails](#4-emails)
 - [5. Multimedia tools](#5-multimedia-tools)
@@ -85,6 +86,7 @@ Multiple project can help to remove uneeded includes directives:
 
 ## 1.12. Compression tools
 
+- [7zip][7zip-home]
 - [Caesium Image Compressor][caesium-home]
 
 ## 1.13. Hash tools
@@ -103,6 +105,10 @@ See [Doc - Qt][doc-qt] for more details
 ## 2.2. Visual Studio Code
 
 See [Doc - Visual Studio Code][doc-vscode] for more details
+
+## 2.3. Others
+
+- [Notepad++][notepad-home]
 
 # 3. Networking tools
 
@@ -182,6 +188,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 [vcpkg-tutorial]: ../../Toolchains/Build%20systems/VCPKG/README.md
 
 <!-- External links -->
+[7zip-home]: https://www.7-zip.org/
 [caesium-home]: https://github.com/Lymphatus/caesium-image-compressor
 [clangd-doc-unused-header]: https://clangd.llvm.org/guides/include-cleaner
 [compiler-msvc]: https://visualstudio.microsoft.com/fr/downloads/
@@ -209,6 +216,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 [meld-home]: https://meldmerge.org/
 [minclude]: https://github.com/jhasse/minclude
 [mtputty-home]: https://ttyplus.com/multi-tabbed-putty/
+[notepad-home]: https://notepad-plus-plus.org/
 [powertoys-home]: https://github.com/microsoft/PowerToys
 [putty-home]: https://www.putty.org/
 [rename-tv-series-home]: https://www.tweaking4all.com/home-theatre/rename-my-tv-series-v2/
