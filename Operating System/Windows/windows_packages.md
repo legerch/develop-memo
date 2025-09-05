@@ -32,6 +32,8 @@ This file list all needed packages for **Windows OS** according to each usage.
     - [5.1.5. Videos editors](#515-videos-editors)
     - [5.1.6. Downloaders](#516-downloaders)
   - [5.2. Text media](#52-text-media)
+- [6. Windows specific behaviours](#6-windows-specific-behaviours)
+  - [6.1. Right click menu](#61-right-click-menu)
 
 # 1. Developer tools
 ## 1.1. Compilers
@@ -143,7 +145,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 
 - Manage MKVs
   - [MkvToolnix][mkvtoolnix-home]: Create MKV files
-  - [gMKVExtractGUI][mkvextract-home]: Extract tracks from MkVs
+  - [gMKVExtractGUI][mkvextractgui-home]: Extract tracks from MkVs
   - [ChapterMakerMkv][chapter-maker-mkv-home]: Create chapter file for MKV videos
   - [MKVToolNix Batch Tool][mkvtoolnix-batch-tool-home]: Batch multiple MKVs file
 - Create MKVs
@@ -172,8 +174,26 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 
 ## 5.2. Text media
 
-- [office365][office365-home]
+- office365
 - [libreoffice][libreoffice-home]
+
+# 6. Windows specific behaviours
+## 6.1. Right click menu
+
+An admin terminal need to be open to perform those actions (_reboot_ will also be necessary):
+
+- To restore _old/win10_ behaviour:
+```bash
+reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+```
+
+- To restore to _win11_ behaviour:
+```bash
+reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f
+```
+
+> [!NOTE]
+> Ressources used for this tutorial are on [Microsoft FAQ - Restore old right-click context menu][doc-win-right-clic] article.
 
 <!-- Anchor of this page -->
 
@@ -213,8 +233,12 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 [libreoffice-home]: https://fr.libreoffice.org/download/telecharger-libreoffice/
 [losslesscut-home]: https://github.com/mifi/lossless-cut
 [makemkv-home]: https://www.makemkv.com/
+[mediainfo-home]: https://mediaarea.net/fr/MediaInfo
 [meld-home]: https://meldmerge.org/
 [minclude]: https://github.com/jhasse/minclude
+[mkvtoolnix-home]: https://mkvtoolnix.download/
+[mkvextractgui-home]: https://github.com/Gpower2/gMKVExtractGUI
+[mp3tag-home]: https://www.mp3tag.de/en/index.html
 [mtputty-home]: https://ttyplus.com/multi-tabbed-putty/
 [notepad-home]: https://notepad-plus-plus.org/
 [powertoys-home]: https://github.com/microsoft/PowerToys
@@ -225,3 +249,5 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 [thunderbird-home]: https://www.thunderbird.net
 [vlc-home]: https://www.videolan.org/vlc/
 [wireshark-home]: https://www.wireshark.org/
+
+[doc-win-right-clic]: https://learn.microsoft.com/en-us/answers/questions/2287432/(article)-restore-old-right-click-context-menu-in
