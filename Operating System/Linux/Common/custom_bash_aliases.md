@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 22.04.5 LTS - Kernel 6.8.0-60-generic - 03/06/2025 :
+Saved from : Ubuntu 24.04.3 LTS - Kernel 6.14.0-29-generic - 11/09/2025 :
 
 ```shell
 ##########################
@@ -628,6 +628,7 @@ alias maj-snap='sudo snap refresh'
 alias maj-flatpak='flatpak update'
 alias maj-firmware='update-host-fw'
 alias maj-arduino-cli-bin='_arduino-cli-binary-update'
+alias maj-python='pipx upgrade-all'
 
 # To uninstall a package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/151941/how-can-you-completely-remove-a-package)
 alias apt-uninstall="sudo apt purge --autoremove"
@@ -642,6 +643,10 @@ alias snap-package-uninstall="sudo snap remove --purge"
 alias flatpak-list="flatpak list"
 alias flatpak-uninstall="flatpak uninstall --delete-data"
 alias flatpak-clean="flatpak uninstall --unused"
+# Python packages management
+alias python-list="pipx list"
+alias python-install="pipx install"
+alias python-uninstall="pipx uninstall"
 
 # PPA related commands for easier install/uninstall
 # Blog helper: https://blog.desdelinux.net/fr/ppa-purge-como-remover-un-repositorio-ppa-en-forma-segura/
