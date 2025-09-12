@@ -1,0 +1,33 @@
+[project]
+name = "project_name"
+version = "0.0.1"
+description = "A custom description explaining purpose of the package/script"
+readme = "README.md"
+license = "MIT"
+license-files = [
+    "LICENSE.md",
+]
+
+authors = [
+    { name = "My Name", email = "my.name@example.com" },
+]
+maintainers = [
+    { name = "My Name", email = "my.name@example.com" },
+]
+
+requires-python = ">=3.12"
+dependencies = [
+    # list runtime deps here, e.g.
+    # "requests >=2.32",
+]
+
+[project.urls]
+Homepage = "https://example.com"
+Documentation = "https://readthedocs.org"
+Repository = "https://github.com/me/spam.git"
+Issues = "https://github.com/me/spam/issues"
+Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"
