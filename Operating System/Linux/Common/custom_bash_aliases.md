@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 24.04.3 LTS - Kernel 6.14.0-29-generic - 11/09/2025 :
+Saved from : Ubuntu 24.04.3 LTS - Kernel 6.14.0-29-generic - 25/09/2025 :
 
 ```shell
 ##########################
@@ -324,7 +324,7 @@ function makej()
 # - https://pocketables.com/2022/01/how-to-format-that-wifi-qr-code-in-plain-text.html
 # - https://thelinuxexperiment.com/share-your-wifi-info-via-qr-code/comment-page-1/
 #
-function wifi-qrcode-generate()
+function _wifi-qrcode-generate()
 {
     local argSsid="${1}"
     local argSecurity="${2^^}"
@@ -356,6 +356,36 @@ function wifi-qrcode-generate()
 # A QrCode will be generated if "qrencode" package available, otherwise
 # wifi infos are only displayed.
 #
+# Note: This is the old behaviour of NetworkManager
+# via .nmconnection files
+#
+# ${1} : SSID to retrieve
+#
+function wifi-display-ssid-infos-custom-old()
+{
+    local ssid="${1}"
+    if [ -z "${ssid}" ]; then
+        printf "USAGE : wifi-display-ssid-infos-custom-old <ssid>\n"
+        return 1
+    fi
+
+    local ssidInfos="/etc/NetworkManager/system-connections/${ssid}.nmconnection"
+    if [ -f "${ssidInfos}" ]; then            
+        local security="$(sudo cat ${ssidInfos} | grep "key-mgmt=" | cut -d "=" -f 2)"
+        local passwd="$(sudo cat ${ssidInfos} | grep "psk=" | cut -d "=" -f 2)"
+        
+        printf "\nSSID: ${ssid}\nSecurity: ${security}\nPassword: ${passwd}\n"
+        _wifi-qrcode-generate "${ssid}" "${security}" "${passwd}"
+
+    else
+        printf "Cannot retrieve passwd, ssid [${ssid}] is unknown\n"
+    fi
+}
+
+# Function used to get wifi password of specific network.
+# A QrCode will be generated if "qrencode" package available, otherwise
+# wifi infos are only displayed.
+#
 # ${1} : SSID to retrieve
 #
 function wifi-display-ssid-infos-custom()
@@ -366,17 +396,18 @@ function wifi-display-ssid-infos-custom()
         return 1
     fi
 
-    local ssidInfos="/etc/NetworkManager/system-connections/${ssid}.nmconnection"
-    if [ -f "${ssidInfos}" ]; then            
-        local security="$(sudo cat ${ssidInfos} | grep "key-mgmt=" | cut -d "=" -f 2)"
-        local passwd="$(sudo cat ${ssidInfos} | grep "psk=" | cut -d "=" -f 2)"
-        
-        printf "\nSSID: ${ssid}\nSecurity: ${security}\nPassword: ${passwd}\n"
-        wifi-qrcode-generate "${ssid}" "${security}" "${passwd}"
-
-    else
+    local output=$(nmcli -s -g 802-11-wireless-security.psk,802-11-wireless-security.key-mgmt connection show "${ssid}" 2>/dev/null)
+    if [[ -z "${output}" ]]; then
         printf "Cannot retrieve passwd, ssid [${ssid}] is unknown\n"
+        return 1
     fi
+
+    local passwd=""
+    local security=""
+    read -r passwd security <<< "$(echo "${output}" | tr '\n' ' ')"
+    
+    printf "\nSSID: ${ssid}\nSecurity: ${security}\nPassword: ${passwd}\n"
+    _wifi-qrcode-generate "${ssid}" "${security}" "${passwd}"
 }
 
 ##########################
