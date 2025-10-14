@@ -5,7 +5,8 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [1.1. Apt manager](#11-apt-manager)
   - [1.2. Snap](#12-snap)
   - [1.3. Flatpak](#13-flatpak)
-  - [1.4. Firmware update](#14-firmware-update)
+  - [1.4. AppImages](#14-appimages)
+  - [1.5. Firmware update](#15-firmware-update)
 - [2. Developer tools](#2-developer-tools)
   - [2.1. Standard](#21-standard)
   - [2.2. Terminal](#22-terminal)
@@ -124,7 +125,12 @@ flatpak install <package_name>
 flatpak list --app
 ```
 
-## 1.4. Firmware update
+## 1.4. AppImages
+
+AppImage are standalone packages, those can be "tricky" to manage, so some utilities are available to help with:
+- [GearLevel][gearlevel-repository]
+
+## 1.5. Firmware update
 
 Host firmware can be updated too (bios, device firmware, etc...).  
 This is possible thanks to [Linux Vendor Firmware Service][lvfs-official] which is a secure portal which allows hardware vendors to upload firmware.
@@ -576,6 +582,7 @@ Useful properties :
 [dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
 [developer-toolbox]: https://beta.flathub.org/apps/me.iepure.devtoolbox
 [eyedropper-repository]: https://github.com/FineFindus/eyedropper
+[gearlevel-repository]: https://github.com/mijorus/gearlever
 [git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
 [gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
 [gnome-clipboard-history]: https://extensions.gnome.org/extension/4839/clipboard-history/

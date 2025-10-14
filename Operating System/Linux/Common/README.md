@@ -1,4 +1,6 @@
-- [Linux password management](linux-pwd-management.md)
-- [Linux init management](linux-init-management.md)
+- [Linux bash aliases](custom_bash_aliases.md)
+- [Linux applications](linux-apps.md)
 - [Linux logs](linux-logs.md)
+- [Linux password management](linux-pwd-management.md)
+- [Linux terminal](linux-terminal.md)
 - [Linux tips](linux-tips.md)
