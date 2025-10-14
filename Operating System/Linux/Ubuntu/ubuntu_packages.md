@@ -536,7 +536,9 @@ flatpak install flathub it.mijorus.smile
 
 To manage gnome extension, we can use [Gnome extension manager][gnome-extension-manager].
 Some useful extensions:
-- [Temperature informations - Freon][gnome-freon]
+- System informations
+  - [Vitals][gnome-vitals]: Allow to see multiple system informations directly in panel (temperature, CPU usage, RAM usage, network, etc...)
+  - [Freon][gnome-freon]: Simply monitor temperature (**warning:** Can induce _lags_ on polling, verify if extension is still maintained...)
 
 ## 11.2. GNOME Editor
 
@@ -547,6 +549,7 @@ gsettings get <path_element> <property>
 # To set value
 gsettings set <path_element> <property>
 ```
+> [!TIP]
 > If GUI solution is preferred, you can use [dconf-editor] tool.
 
 Useful properties :
@@ -588,6 +591,7 @@ Useful properties :
 [gnome-clipboard-history]: https://extensions.gnome.org/extension/4839/clipboard-history/
 [gnome-extension-manager]: https://flathub.org/apps/com.mattjakeman.ExtensionManager
 [gnome-freon]: https://github.com/UshakovVasilii/gnome-shell-extension-freon
+[gnome-vitals]: https://github.com/corecoding/Vitals
 [gnome-hex-editor]: https://wiki.gnome.org/Apps/Ghex
 [imhex]: https://github.com/WerWolv/ImHex
 [include-what-you-use]: https://github.com/include-what-you-use/include-what-you-use
