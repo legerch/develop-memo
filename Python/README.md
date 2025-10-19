@@ -5,16 +5,18 @@ In this folder, you will find all Python related informations
   - [1.1. Basic tools](#11-basic-tools)
   - [1.2. Package manager](#12-package-manager)
 - [2. Developping in python](#2-developping-in-python)
-  - [2.1. Install poetry](#21-install-poetry)
-  - [2.2. Create the project](#22-create-the-project)
-  - [2.3. Template project - Hello World](#23-template-project---hello-world)
-    - [2.3.1. Manage project properties](#231-manage-project-properties)
-    - [2.3.2. Init file](#232-init-file)
-    - [2.3.3. Main file](#233-main-file)
-  - [2.4. Build the project](#24-build-the-project)
-  - [2.5. Run the project](#25-run-the-project)
-  - [2.6. Manage project dependencies](#26-manage-project-dependencies)
-  - [2.7. Publish package](#27-publish-package)
+  - [2.1. Simple script](#21-simple-script)
+  - [2.2. Python project](#22-python-project)
+    - [2.2.1. Install poetry](#221-install-poetry)
+    - [2.2.2. Create the project](#222-create-the-project)
+    - [2.2.3. Template project - Hello World](#223-template-project---hello-world)
+      - [2.2.3.1. Manage project properties](#2231-manage-project-properties)
+      - [2.2.3.2. Init file](#2232-init-file)
+      - [2.2.3.3. Main file](#2233-main-file)
+    - [2.2.4. Build the project](#224-build-the-project)
+    - [2.2.5. Run the project](#225-run-the-project)
+    - [2.2.6. Manage project dependencies](#226-manage-project-dependencies)
+    - [2.2.7. Publish package](#227-publish-package)
 - [3. Additional ressources](#3-additional-ressources)
 
 
@@ -47,19 +49,30 @@ Some useful commands:
 - Uninstall package: `pipx uninstall`
 
 # 2. Developping in python
+## 2.1. Simple script
+
+For simple scripts, we can use an _virtual environment_:
+1. Go inside your project directory
+2. Initialize a _virtual environment_ via: `python -m venv venv`
+3. Load virtual environment:
+   1. On linux: `source venv/bin/activate`
+   2. On Windows: `venv\Scripts\Activate.ps1` (Powershell) or `venv\Scripts\activate.bat` (cmd)
+4. Then we can install package that will be installed only in this envirnonment, like: `pip install beautifulsoup4`
+
+## 2.2. Python project
 
 When developping in python (either an application or a package), managing dependencies can become cumbersome, let's use an utility that will simplify that for us: [Poetry][poetry-home].  
 
 > [!NOTE]
 > All informations of the section below can be found at [Poetry usage documentation][poetry-usage]
 
-## 2.1. Install poetry
+### 2.2.1. Install poetry
 
 ```shell
 pipx install poetry
 ```
 
-## 2.2. Create the project
+### 2.2.2. Create the project
 
 Initialize the project with needed files by calling:
 ```shell
@@ -78,19 +91,19 @@ my-project
     └── __init__.py
 ```
 
-## 2.3. Template project - Hello World
+### 2.2.3. Template project - Hello World
 
 A template project can be find in this repository at [template - helloworld][repo-template].  
 Let's explain some files.
 
-### 2.3.1. Manage project properties
+#### 2.2.3.1. Manage project properties
 
 The most important file here is the `pyproject.toml`, which is a standardized file (via [PEP 621][pep-621]) used to declares all metadatas informations of a package (_versions_, _dependencies_, etc...), it and can be used by multiple utilities (this tutorial will use _Poetry_).  
 
 > [!IMPORTANT]
 > More details can be found in the [python documentation - Writing your _pyproject.toml_][doc-pyproject]
 
-### 2.3.2. Init file
+#### 2.2.3.2. Init file
 
 This file generally contains some package methods or properties (like the _version_ for example). It is needed in order to declare your module. For example, for a module like this:
 ```shell
@@ -107,14 +120,14 @@ from helloworld import module
 > In the templated version, we have used _metadata_ package in order to read version value defined inside `pyproject.toml` file, this way version is set at only one place.
 > Some utility exists like [poetry-dynamic-version plugin][poetry-plugin-dver] to go further.
 
-### 2.3.3. Main file
+#### 2.2.3.3. Main file
 
 Used to define an _entry point_ to the package, that can be run via:
 ```shell
 python -m helloworld
 ```
 
-## 2.4. Build the project
+### 2.2.4. Build the project
 
 Once the minimal package is created, we can install needed dependencies, simply by running:
 ```shell
@@ -122,7 +135,7 @@ poetrix install
 ```
 > If it doesn't exist yet, this command should also generate a `poetry.lock`. This file is used to be able to reproduce the exact same build across multiple developers for example. It will be automatically updated or can be refreshed via: `poetry lock`
 
-## 2.5. Run the project
+### 2.2.5. Run the project
 
 To run the project, we can use:
 ```shell
@@ -138,7 +151,7 @@ poetrix run python -m helloworld
 >
 > This way, we only have to call: `poetry run helloworld`
 
-## 2.6. Manage project dependencies 
+### 2.2.6. Manage project dependencies 
 
 To add/remove a project dependency, simply call:
 ```shell
@@ -164,7 +177,7 @@ But this command only install the **minimal dependencies**, to install the neede
 poetry install --with dev
 ```
 
-## 2.7. Publish package
+### 2.2.7. Publish package
 
 To publish our package on [Pypi][pypi-home], _Poetry_ [help to create the package][poetry-package]:
 ```shell
