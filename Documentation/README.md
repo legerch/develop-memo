@@ -8,6 +8,9 @@ A small memo on how to manage documentation of projects using [Doxygen][doxy-hom
 - [3. Document the code](#3-document-the-code)
   - [3.1. How to ?](#31-how-to-)
   - [3.2. Specific behaviour](#32-specific-behaviour)
+    - [3.2.1. Preprocessing](#321-preprocessing)
+    - [3.2.2. Aliases](#322-aliases)
+      - [3.2.2.1. Qt projects](#3221-qt-projects)
 - [4. Generate documentation](#4-generate-documentation)
   - [4.1. Locally](#41-locally)
   - [4.2. Online](#42-online)
@@ -68,6 +71,7 @@ Below, a simple reminder of options that are generally useful when configuring a
 - Disable generation of: Latex, RTF, Man, XML, Docbook, AutoGen, PerlMod
 - Preprocessor:
   - `ENABLE_PREPROCESSING`: Set to enable it (if some code depends to an `ifdef`, this can be useful to add a condition for Doxygen to document it. Doxygen automatically define the macro `DOXYGEN`)
+  - `MACRO_EXPANSION`
 - Dot:
   - `CLASS_DIAGRAMS` : Set to enable it
   - `HAVE_DOT` : Set the value according to the project (you and team members of the project must have **Dot** utility installed on their system to set this value to `true`)
@@ -82,7 +86,7 @@ For Arduino projects, please refer to [Arduino tutorial][tutorial-arduino] for m
 See [Doxygen - Special commands][doxy-commands] for more details.
 
 ## 3.2. Specific behaviour
-
+### 3.2.1. Preprocessing
 We have previously see that Doxygen define a macro named `DOXYGEN`. This macro will be useful to generate documentation of specific code (like OS function for example).  
 Example on how to use:
 ```cpp
@@ -93,7 +97,7 @@ static WlanCipherAlgorithm convertCipherAlgorithmFromWinApi(DOT11_CIPHER_ALGORIT
 #endif
 ```
 
-In this example, those methods are only available for Windows OS but we need to generate documentation for those methods. If we are using a Linux system (like with a server) to generate our documentation, documentation will not be available... So, this is why we need to define this macro for Doxygen.  
+In this example, those methods are only available for Windows OS but we need to generate documentation for those methods. If we are using a Linux system (like with a CI/CD pipeline) to generate our documentation, documentation will not be available... So, this is why we need to define this macro for Doxygen.  
 
 Then, when you provide documentation for the concerned method, you can add doxygen `\warning` command :
 ```cpp
@@ -110,6 +114,57 @@ Then, when you provide documentation for the concerned method, you can add doxyg
  * Return associated WlanTypeDefs::WlanBssType
  */
 WlanTypeDefs::WlanBssType WlanTypeDefs::convertBssTypeFromWinApi(DOT11_BSS_TYPE apiBssType){...}
+```
+
+### 3.2.2. Aliases
+#### 3.2.2.1. Qt projects
+
+For Qt projects, somes aliases can be useful to be defined :
+
+- **Flags enums:**
+
+Define needed aliases:
+```ini
+ALIASES                = qtFlagsNote{2}="\note The \1 type is a typedef for <tt>QFlags\<\2\></tt>. It stores an OR combination of \2 values.</p>" \
+                         qtFlagsDef{1}="\brief \c QFlags type for \ref \1 enum"
+[...]
+PREDEFINED             = "Q_DECLARE_FLAGS(flagsType,enumType)=enum flagsType {};"
+```
+
+Then we can use it for our Qt enum flags:
+
+```cpp
+namespace mnc
+{
+
+/*!
+* \brief My class specific options
+* \details
+* Provide more details of nature of options.
+*
+* \qtFlagsNote{mnc::Options,mnc::Option}
+*/
+enum Option
+{
+    OPT_NONE        = 0,            /**< No option set */
+
+    OPT_CUSTOM_1    = 1 << 0,       /**< Enable this option to allow to [...] and continue
+                                         your sentence on new line. To actually use newline, add \n
+                                         And this sentence will appear on a newline in the documentation. 
+                                    */
+
+    OPT_DEFAULT     = OPT_CUSTOM_1  /**< Default options */
+};
+
+/*!
+* \qtFlagsDef{mnc::Option}
+*/
+Q_DECLARE_FLAGS(Options, Option)
+Q_FLAG_NS(Options)
+
+} // namespace mnc
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(mnc::Options)
 ```
 
 # 4. Generate documentation
