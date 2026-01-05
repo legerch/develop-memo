@@ -51,18 +51,19 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [5.1. Generic](#51-generic)
   - [5.2. Compatibe 50/72 rule](#52-compatibe-5072-rule)
 - [6. System management](#6-system-management)
-- [7. Networking tools](#7-networking-tools)
-- [8. Emails](#8-emails)
-- [9. Graphics libraries](#9-graphics-libraries)
-- [10. Multimedia tools](#10-multimedia-tools)
-  - [10.1. Generic](#101-generic)
-  - [10.2. GStreamer](#102-gstreamer)
-  - [10.3. Music](#103-music)
-  - [10.4. Smileys](#104-smileys)
-- [11. GNOME Customization](#11-gnome-customization)
-  - [11.1. GNOME Extensions](#111-gnome-extensions)
-  - [11.2. GNOME Editor](#112-gnome-editor)
-- [12. Microsoft tools](#12-microsoft-tools)
+- [7. Data recovery tools](#7-data-recovery-tools)
+- [8. Networking tools](#8-networking-tools)
+- [9. Emails](#9-emails)
+- [10. Graphics libraries](#10-graphics-libraries)
+- [11. Multimedia tools](#11-multimedia-tools)
+  - [11.1. Generic](#111-generic)
+  - [11.2. GStreamer](#112-gstreamer)
+  - [11.3. Music](#113-music)
+  - [11.4. Smileys](#114-smileys)
+- [12. GNOME Customization](#12-gnome-customization)
+  - [12.1. GNOME Extensions](#121-gnome-extensions)
+  - [12.2. GNOME Editor](#122-gnome-editor)
+- [13. Microsoft tools](#13-microsoft-tools)
 
 # 1. Mandatory commands
 
@@ -439,7 +440,11 @@ sudo apt install y-ppa-manager  # a PPA exist for this package
 flatpak install flathub net.nokyan.Resources # Task manager which provide more infos than Ubuntu default (see https://github.com/nokyan/resources)
 ```
 
-# 7. Networking tools
+# 7. Data recovery tools
+
+- [ddrescue][ddrescue-official] (multiple tutorials are also available: [Ubuntu][ddrescue-ubuntu], [Malekal][ddrescue-malekal] and [Tutox][ddrescue-tutox])
+
+# 8. Networking tools
 
 - Network management:
 ```shell
@@ -458,7 +463,7 @@ sudo apt install filezilla
 
 - Access-point analyze: see [access-point ressource][doc-net-access-point] documentation
 
-# 8. Emails
+# 9. Emails
 
 - Thunderbird :
 ```shell
@@ -471,7 +476,7 @@ sudo apt install thunderbird thunderbird-locale-fr
 sudo apt install evolution
 ```
 
-# 9. Graphics libraries
+# 10. Graphics libraries
 
 [OpenGL][opengl] :
 ```shell
@@ -483,8 +488,8 @@ Mesa :
 sudo apt install mesa-utils
 ```
 
-# 10. Multimedia tools
-## 10.1. Generic
+# 11. Multimedia tools
+## 11.1. Generic
 ```shell
 sudo apt install vlc gimp mediainfo-gui
 sudo apt install ffmpeg
@@ -494,7 +499,7 @@ sudo apt install libreoffice # a PPA also exist for libreoffice
 sudo snap install discord
 ``` 
 
-## 10.2. GStreamer
+## 11.2. GStreamer
 
 List of plugins:
 ```shell
@@ -513,7 +518,7 @@ Useful for development with GStreamer API:
 sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 ```
 
-## 10.3. Music
+## 11.3. Music
 
 We can install **Spotify** via snap package:
 ```shell
@@ -524,15 +529,15 @@ sudo snap install spotify
 > For better integration with **Gnome**, we can use an extension which provide tray icons and controls:
 > - [Spotify Controls][spotify-extension-home] (see [source repository][spotify-extension-repo])
 
-## 10.4. Smileys
+## 11.4. Smileys
 
 - [Smile][smile-app]
 ```shell
 flatpak install flathub it.mijorus.smile
 ```
 
-# 11. GNOME Customization
-## 11.1. GNOME Extensions
+# 12. GNOME Customization
+## 12.1. GNOME Extensions
 
 To manage gnome extension, we can use [Gnome extension manager][gnome-extension-manager].
 Some useful extensions:
@@ -540,7 +545,7 @@ Some useful extensions:
   - [Vitals][gnome-vitals]: Allow to see multiple system informations directly in panel (temperature, CPU usage, RAM usage, network, etc...)
   - [Freon][gnome-freon]: Simply monitor temperature (**warning:** Can induce _lags_ on polling, verify if extension is still maintained...)
 
-## 11.2. GNOME Editor
+## 12.2. GNOME Editor
 
 GNOME allow preferences customization of properties with `gsettings` tool :
 ```shell
@@ -556,7 +561,7 @@ Useful properties :
 - Show hidden files : `gsettings set org.gnome.nautilus.preferences show-hidden-files true`
 - Remove trash icon from the dock : `gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false`
 
-# 12. Microsoft tools
+# 13. Microsoft tools
 
 - Microsoft teams : `sudo snap install teams`
 
@@ -599,6 +604,11 @@ Useful properties :
 [minclude]: https://github.com/jhasse/minclude
 [qrencode-man]: https://linux.die.net/man/1/qrencode
 [smile-app]: https://flathub.org/apps/it.mijorus.smile
+
+[ddrescue-official]: https://www.gnu.org/software/ddrescue/
+[ddrescue-ubuntu]: http://doc.ubuntu-fr.org/ddrescue
+[ddrescue-malekal]: https://www.malekal.com/ddrescue-comment-recuperer-les-donnees-disque-endommage/
+[ddrescue-tutox]: https://tutox.fr/2025/03/30/ddrescue-mon-dernier-espoir/
 
 [glogg-repository]: https://github.com/nickbnf/glogg
 [klogg-repository]: https://github.com/variar/klogg
