@@ -48,7 +48,7 @@ It is also possible to develop for Arduino under [VsCode][repo-ide-vscode]. In o
       2. Use official install script from [arduino-cli][arduino-cli-official] (this script can fail if trying to install in location own by root, this is why I use a custom bash alias instead)
       3. Use [snap version][arduino-cli-snap] (but currently incompatible to be used with [VsCode][repo-ide-vscode], see [issues related to Linux snap package][anchor-issues-linux-snap])
 
-2. Install _VsCode_ extension [vscode-arduino][arduino-vscode-extension]
+2. Install _VsCode_ extension [vscode-arduino][arduino-vscode-extension] (this extension is **deprecated**, [arduino-maker-workshop][arduino-vscode-extension-alt] seems like a good alternative)
 3. Configure extension (those parameters will set global `settings.json` of _VsCode_):
     - **Windows :**
     ```json
@@ -254,6 +254,7 @@ Once, board list is working in command-line, you may not be able to use it under
 [arduino-vscode-extension]: https://marketplace.visualstudio.com/items?itemName=vscode-arduino.vscode-arduino-community
 [arduino-vscode-extension-issues-1346]: https://github.com/microsoft/vscode-arduino/issues/1346
 [arduino-vscode-extension-issues-1346-resolve]: https://github.com/microsoft/vscode-arduino/issues/1346#issuecomment-996972001
+[arduino-vscode-extension-alt]: https://github.com/thelastoutpostworkshop/arduino-maker-workshop
 
 [doxygen-official]: https://doxygen.nl/index.html
 
