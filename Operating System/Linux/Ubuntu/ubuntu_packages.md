@@ -544,6 +544,9 @@ Some useful extensions:
 - System informations
   - [Vitals][gnome-vitals]: Allow to see multiple system informations directly in panel (temperature, CPU usage, RAM usage, network, etc...)
   - [Freon][gnome-freon]: Simply monitor temperature (**warning:** Can induce _lags_ on polling, verify if extension is still maintained...)
+- Custom behaviours
+  - [Custom Command Menu][gnome-ccm]: Allow to create custom commands button grouped inside a drop-down menu to launch custom commands/scripts
+  - [Custom Command Toggle][gnome-cct]: Allow to create a custom button toggle in the **Gnome quick menu** to launch custom commands/scripts
 
 ## 12.2. GNOME Editor
 
@@ -593,6 +596,8 @@ Useful properties :
 [gearlevel-repository]: https://github.com/mijorus/gearlever
 [git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
 [gitkraken-doc-install]: https://support.gitkraken.com/how-to-install/
+[gnome-ccm]: https://extensions.gnome.org/extension/7024/custom-command-list/
+[gnome-cct]: https://extensions.gnome.org/extension/7012/custom-command-toggle/
 [gnome-clipboard-history]: https://extensions.gnome.org/extension/4839/clipboard-history/
 [gnome-extension-manager]: https://flathub.org/apps/com.mattjakeman.ExtensionManager
 [gnome-freon]: https://github.com/UshakovVasilii/gnome-shell-extension-freon
