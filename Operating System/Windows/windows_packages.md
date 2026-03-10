@@ -131,6 +131,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 
 - [VLC][vlc-home]
 - [Media Player Classic][mpc-be-home]
+- [KODI][kodi-home] (also available via Linux distributions like [LibreElec][librelec-home] or [OSMC][osmc-home])
 
 ### 5.1.2. Metadata informations
 
@@ -147,7 +148,10 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
   - [MkvToolnix][mkvtoolnix-home]: Create MKV files
   - [gMKVExtractGUI][mkvextractgui-home]: Extract tracks from MkVs
   - [ChapterMakerMkv][chapter-maker-mkv-home]: Create chapter file for MKV videos
-  - [MKVToolNix Batch Tool][mkvtoolnix-batch-tool-home]: Batch multiple MKVs file
+- Batch MKVs operations
+  - [MKVToolNix Batch Tool][mkv-batch-subs-merge]: Use to merge subtitles to MKVs
+  - [MKV Batch muxing GUI][mkv-batch-muxing-gui]: Batch multiple MKVs operations
+  - [JMkvpropedit][mkv-batch-metadatas] ([Java 8 Runtime][java8-runtime-dl] is needed): Allow to edit MKVs metadatas easily
 - Create MKVs
   - [MakeMKV][makemkv-home]: Create MKV from DVDs, Bluray or ISOs files
   - [HD-DVD/Blu-Ray Stream Extractor][hdbrstreamextractor-home]: GUI application to [eac3to][eac3to-home] utility
@@ -165,6 +169,7 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 
 ### 5.1.5. Videos editors
 
+- [Handbrake][handbrake-home]: Use to encode videos
 - [LosslessCut][losslesscut-home]
 - [FFMPEG][ffmpeg-home]
 
@@ -210,6 +215,7 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 <!-- External links -->
 [7zip-home]: https://www.7-zip.org/
 [caesium-home]: https://github.com/Lymphatus/caesium-image-compressor
+[chapter-maker-mkv-home]:https://www.videohelp.com/software/ChapterMaker
 [clangd-doc-unused-header]: https://clangd.llvm.org/guides/include-cleaner
 [compiler-msvc]: https://visualstudio.microsoft.com/fr/downloads/
 [doxygen-home]: https://www.doxygen.nl/
@@ -228,8 +234,11 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 [include-what-you-use]: https://github.com/include-what-you-use/include-what-you-use
 [iperf-home]: https://github.com/esnet/iperf
 [iperf-bin]: https://files.budman.pw/
+[java8-runtime-dl]: https://www.java.com/en/download/manual.jsp
 [klogg-home]: https://github.com/variar/klogg
+[kodi-home]: https://kodi.tv/
 [libdvdcss-home]: https://github.com/allienx/libdvdcss-dll
+[librelec-home]: https://libreelec.tv/
 [libreoffice-home]: https://fr.libreoffice.org/download/telecharger-libreoffice/
 [losslesscut-home]: https://github.com/mifi/lossless-cut
 [makemkv-home]: https://www.makemkv.com/
@@ -237,10 +246,15 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 [meld-home]: https://meldmerge.org/
 [minclude]: https://github.com/jhasse/minclude
 [mkvtoolnix-home]: https://mkvtoolnix.download/
+[mkv-batch-subs-merge]: https://github.com/iPzard/mkvtoolnix-batch-tool
+[mkv-batch-muxing-gui]: https://github.com/yaser01/mkv-muxing-batch-gui
+[mkv-batch-metadatas]: https://github.com/BrunoReX/jmkvpropedit
 [mkvextractgui-home]: https://github.com/Gpower2/gMKVExtractGUI
 [mp3tag-home]: https://www.mp3tag.de/en/index.html
 [mtputty-home]: https://ttyplus.com/multi-tabbed-putty/
 [notepad-home]: https://notepad-plus-plus.org/
+[open-video-dl-home]: https://github.com/jely2002/youtube-dl-gui
+[osmc-home]: https://osmc.tv/
 [powertoys-home]: https://github.com/microsoft/PowerToys
 [putty-home]: https://www.putty.org/
 [rename-tv-series-home]: https://www.tweaking4all.com/home-theatre/rename-my-tv-series-v2/
