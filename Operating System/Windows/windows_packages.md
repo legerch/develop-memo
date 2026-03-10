@@ -29,8 +29,9 @@ This file list all needed packages for **Windows OS** according to each usage.
     - [5.1.2. Metadata informations](#512-metadata-informations)
     - [5.1.3. MKV video files utilities](#513-mkv-video-files-utilities)
     - [5.1.4. Subtitles utilities](#514-subtitles-utilities)
-    - [5.1.5. Videos editors](#515-videos-editors)
-    - [5.1.6. Downloaders](#516-downloaders)
+    - [5.1.5. Video encoders](#515-video-encoders)
+    - [5.1.6. Videos editors](#516-videos-editors)
+    - [5.1.7. Downloaders](#517-downloaders)
   - [5.2. Text media](#52-text-media)
 - [6. Windows specific behaviours](#6-windows-specific-behaviours)
   - [6.1. Right click menu](#61-right-click-menu)
@@ -167,13 +168,16 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 - Synchronization
   - [Subtitle Speech Synchronizer][subtitle-speech-sync-home]
 
-### 5.1.5. Videos editors
+### 5.1.5. Video encoders
 
-- [Handbrake][handbrake-home]: Use to encode videos
+- [Handbrake][handbrake-home]
+
+### 5.1.6. Videos editors
+
 - [LosslessCut][losslesscut-home]
 - [FFMPEG][ffmpeg-home]
 
-### 5.1.6. Downloaders
+### 5.1.7. Downloaders
 
 - [Open Video Downloader][open-video-dl-home]
 
