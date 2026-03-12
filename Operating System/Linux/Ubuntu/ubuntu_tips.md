@@ -1,31 +1,27 @@
+This files will list multiple _tips_ related to **Ubuntu OS**
+
 **Table of contents :**
-- [1. Introduction](#1-introduction)
-- [2. PPA - Personal Package Archives](#2-ppa---personal-package-archives)
-  - [2.1. Description](#21-description)
-  - [2.2. Usage](#22-usage)
-    - [2.2.1. Terminal](#221-terminal)
-    - [2.2.2. Graphical interface](#222-graphical-interface)
-  - [2.3. Softwares](#23-softwares)
-- [3. Standalone packages](#3-standalone-packages)
-- [4. `tracker` process](#4-tracker-process)
-- [5. Graphics cards support](#5-graphics-cards-support)
-  - [5.1. Nvidia](#51-nvidia)
-- [6. Switch GCC version to use](#6-switch-gcc-version-to-use)
-- [7. System freeze](#7-system-freeze)
-- [8. Ressources](#8-ressources)
+- [1. PPA - Personal Package Archives](#1-ppa---personal-package-archives)
+  - [1.1. Description](#11-description)
+  - [1.2. Usage](#12-usage)
+    - [1.2.1. Terminal](#121-terminal)
+    - [1.2.2. Graphical interface](#122-graphical-interface)
+  - [1.3. Softwares](#13-softwares)
+- [2. Standalone packages](#2-standalone-packages)
+- [3. `tracker` process](#3-tracker-process)
+- [4. Graphics cards support](#4-graphics-cards-support)
+  - [4.1. Nvidia](#41-nvidia)
+- [5. Switch GCC version to use](#5-switch-gcc-version-to-use)
+- [6. System freeze](#6-system-freeze)
+- [7. Ressources](#7-ressources)
 
-# 1. Introduction
-
-In this files, all advices for an Ubuntu OS
-
-# 2. PPA - Personal Package Archives
-
-## 2.1. Description
+# 1. PPA - Personal Package Archives
+## 1.1. Description
 
 [What is a _PPA_ ?][doc-ppa-ubuntu]
 
-## 2.2. Usage
-### 2.2.1. Terminal
+## 1.2. Usage
+### 1.2.1. Terminal
 
 - Add **PPA** repository :
 ```shell
@@ -50,14 +46,14 @@ sudo ppa-purge ppa:<repository_name>
 ls -l /etc/apt/sources.list.d/
 ```
 
-### 2.2.2. Graphical interface
+### 1.2.2. Graphical interface
 
 A graphical interface solution is available for easily manage **PPA** repository : [`Y PPA Manager`][doc-ppa-manager-official]
 > - [Fostips - Y-PPA-Manager : Graphical tool manage Ubuntu PPAs][doc-ppa-manager-fostips]
 > - [Itsfoss - Y-PPA-Manager][doc-ppa-manager-itsfoss]
 > - [Addictive Tips - Update Ubuntu PPA to 20.04 release][doc-ppa-manager-addictivetips]
 
-## 2.3. Softwares
+## 1.3. Softwares
 
 List of softwares using PPA repository :
 - [Gimp][ppa-gimp]
@@ -69,12 +65,12 @@ List of softwares using PPA repository :
 - [thunderbird][ppa-thunderbird]
 - [vscode][ppa-vscode]
 
-# 3. Standalone packages
+# 2. Standalone packages
 
 Some package can be installed without using package manager (apt, snapd, etc...). This become a problem when we need to uninstall the package.  
 > Section under construction, check this tutorial : [Install/Uninstall packages in Ubuntu from tar.gz][tutorial-package-tar-gz]
 
-# 4. `tracker` process
+# 3. `tracker` process
 
 `tracker` was introduced in _Ubuntu 19.10_ (it's a **Gnome** dependency). It indexes your files to allow for fast searching for content in files from Files or Gnome Documents, find pictures in Gnome Photos, allow to rename files based on metadata, and so on.
 
@@ -95,13 +91,13 @@ sudo reboot
 > More details on this procedure in the concerned thread from Ubuntu forum : [Tracker process taking lot of CPU][thread-tracker-process-cpu].  
 > **Don't forget** to re-enable services before performing major upgrades of Ubuntu OS to prevent from unexpected behaviour.
 
-# 5. Graphics cards support
-## 5.1. Nvidia
+# 4. Graphics cards support
+## 4.1. Nvidia
 
 _Under construction_ 
 > Use this tutorial : [Ubuntu - Install NVidia driver latest proprietary driver][tutorial-nvidia-driver]
 
-# 6. Switch GCC version to use
+# 5. Switch GCC version to use
 
 _Under construction_
 > In the meantime, please refer to:
@@ -109,7 +105,7 @@ _Under construction_
 > - https://askubuntu.com/questions/26498/how-to-choose-the-default-gcc-and-g-version  
 > Note that if you need a custom compiler for a Qt toolkit for example, installing GCC (`gcc` and `g++`) version associated package will be enough !
 
-# 7. System freeze
+# 6. System freeze
 
 _under construction_
 > - [How to properly shutdown Ubuntu even if all is freezed][doc-os-freeze-ubuntu]
@@ -118,7 +114,7 @@ _under construction_
 > - [doc-os-freeze-configuration] (by default only SUB part of REISUB cmd is enable, so you need to configure it before this command is needed...)  
 > **Note :** don't forget to print those pages...  
 
-# 8. Ressources
+# 7. Ressources
 
 - Official documentation :
   - [FR Ubuntu - PPA][doc-ppa-ubuntu]
