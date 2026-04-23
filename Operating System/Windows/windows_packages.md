@@ -115,12 +115,13 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 
 # 3. Networking tools
 
-- Network analyze:
+- Network analyzer:
   - [Wireshark][wireshark-home]
   - [Iperf3][iperf-home] (and [iperfbin][iperf-bin])
 - Network transfer:
+  - [QuickShare][quickshare-home] (a client is also available for Linux, please see [Linux packages][doc-package-linux] for more details)
   - [Filezilla][filezilla-home]
-- Access-point analyze: see [access-point ressource][doc-net-access-point] documentation
+- Access-point analyzer: see [access-point ressource][doc-net-access-point] documentation
 
 # 4. Emails
 
@@ -209,6 +210,7 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 <!-- Links of this repository -->
 [doc-arduino]: ../../Arduino/
 [doc-net-access-point]: ../../Network/access-point/
+[doc-package-linux]: ../Linux/Ubuntu/ubuntu_packages.md
 [doc-qt]: ../../Qt/
 [doc-vscode]: ../../IDE/VsCode/
 
@@ -261,6 +263,7 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 [osmc-home]: https://osmc.tv/
 [powertoys-home]: https://github.com/microsoft/PowerToys
 [putty-home]: https://www.putty.org/
+[quickshare-home]: https://www.android.com/intl/fr_fr/better-together/quick-share-app/
 [rename-tv-series-home]: https://www.tweaking4all.com/home-theatre/rename-my-tv-series-v2/
 [subtitle-edit-home]: https://github.com/SubtitleEdit/subtitleedit
 [subtitle-speech-sync-home]: https://github.com/sc0ty/subsync

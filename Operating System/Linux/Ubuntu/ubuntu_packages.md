@@ -451,17 +451,19 @@ flatpak install flathub net.nokyan.Resources # Task manager which provide more i
 sudo apt install net-tools libpcap-dev libnet1-dev rpcbind openssh-client openssh-server nmap
 ```
 
-- Network analyze:
+- Network analyzer:
 ```shell
 sudo apt install wireshark iperf3
 ```
 
 - Network transfer:
+  - QuickShare support via [Packet][packet]
+  - FTP:
 ```shell
 sudo apt install filezilla
 ```
-
-- Access-point analyze: see [access-point ressource][doc-net-access-point] documentation
+  
+- Access-point analyzer: see [access-point ressource][doc-net-access-point] documentation
 
 # 9. Emails
 
@@ -607,6 +609,7 @@ Useful properties :
 [include-what-you-use]: https://github.com/include-what-you-use/include-what-you-use
 [kcachegrind]: https://apps.kde.org/fr/kcachegrind/
 [minclude]: https://github.com/jhasse/minclude
+[packet]: https://flathub.org/en/apps/io.github.nozwock.Packet
 [qrencode-man]: https://linux.die.net/man/1/qrencode
 [smile-app]: https://flathub.org/apps/it.mijorus.smile
 
