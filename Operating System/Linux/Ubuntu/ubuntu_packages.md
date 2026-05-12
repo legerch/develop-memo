@@ -166,7 +166,7 @@ fwupdmgr update         # This option download and apply all updates for your sy
 ```shell
 sudo apt install build-essential moreutils git git-email tree
 ```
-> If you intend to contribute to mainline project, use a git editor which allow to follow 50/72 rule (see [git editor compatible with 50/72 rule][anchor-git-ui-50-72]
+> If you intend to contribute to mainline project, use a git editor which allow to follow 50/72 rule (see [git editor compatible with 50/72 rule][anchor-git-ui-50-72])
 
 ## 2.2. Terminal
 
@@ -388,10 +388,11 @@ sudo apt install jfsutils flex bison util-linux reiserfsprogs xfsprogs btrfs-pro
 
 ## 3.2. Optional packages
 
-- Buildroot GUI with _ncurses5_ : `sudo apt install libncurses-dev`
-- Buildroot GUI with _qt_ : `sudo apt install qtbase5-dev`
-- Buildroot GUI with _gtk_ : `sudo apt install libglade2-dev libglib2.0-dev libgtk2.0-dev`
-> Note that `buildroot GUI` is `KConfig` which is also used in others projects: kernel, busybox, u-boot, etc...
+- **KConfig GUI** (used for _buildroot, kernel, busybox, u-boot, etc..._)
+  - Using _ncurses5_ : `sudo apt install libncurses-dev`
+  - Using _Qt_ : `sudo apt install qtbase5-dev`
+  - Using _gtk_ : `sudo apt install libglade2-dev libglib2.0-dev libgtk2.0-dev`
+- **Statistics tools** (used to create graphs): `sudo apt install python3-matplotlib`
 
 # 4. Edition tools
 ## 4.1. Qt
