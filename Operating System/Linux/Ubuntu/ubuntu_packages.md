@@ -60,6 +60,9 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
   - [11.2. GStreamer](#112-gstreamer)
   - [11.3. Music](#113-music)
   - [11.4. Smileys](#114-smileys)
+  - [11.5. Screen tools](#115-screen-tools)
+    - [11.5.1. Screen sharing](#1151-screen-sharing)
+    - [11.5.2. Screen mirroring](#1152-screen-mirroring)
 - [12. GNOME Customization](#12-gnome-customization)
   - [12.1. GNOME Extensions](#121-gnome-extensions)
   - [12.2. GNOME Editor](#122-gnome-editor)
@@ -539,6 +542,19 @@ sudo snap install spotify
 flatpak install flathub it.mijorus.smile
 ```
 
+## 11.5. Screen tools
+### 11.5.1. Screen sharing
+
+- [DwService][dwservice-home]
+- [AnyDesk][anydesk-home] (available on [flathub][anydesk-flathub])
+
+### 11.5.2. Screen mirroring
+
+To mirror a screen to an external display via network, we can use [Gnome Network Displays][gnome-net-displays]:
+```shell
+flatpak install flathub org.gnome.NetworkDisplays
+```
+
 # 12. GNOME Customization
 ## 12.1. GNOME Extensions
 
@@ -590,11 +606,14 @@ Useful properties :
 [br-getting-started]: https://buildroot.org/downloads/manual/manual.html#_getting_started
 [br-requirements]: https://buildroot.org/downloads/manual/manual.html#requirement
 
+[anydesk-home]: https://anydesk.com/fr
+[anydesk-flathub]: https://flathub.org/en/apps/com.anydesk.Anydesk
 [clangd-doc-unused-header]: https://clangd.llvm.org/guides/include-cleaner
 [copyq-official]: https://hluk.github.io/CopyQ/
 [colorpicker-repository]: https://github.com/keshavbhatt/ColorPicker
 [dconf-editor]: https://doc.ubuntu-fr.org/dconf-editor
 [developer-toolbox]: https://beta.flathub.org/apps/me.iepure.devtoolbox
+[dwservice-home]: https://www.dwservice.net/fr/home.html
 [eyedropper-repository]: https://github.com/FineFindus/eyedropper
 [gearlevel-repository]: https://github.com/mijorus/gearlever
 [git-app-commit]: https://apps.gnome.org/fr/app/re.sonny.Commit/
@@ -604,8 +623,9 @@ Useful properties :
 [gnome-clipboard-history]: https://extensions.gnome.org/extension/4839/clipboard-history/
 [gnome-extension-manager]: https://flathub.org/apps/com.mattjakeman.ExtensionManager
 [gnome-freon]: https://github.com/UshakovVasilii/gnome-shell-extension-freon
-[gnome-vitals]: https://github.com/corecoding/Vitals
 [gnome-hex-editor]: https://wiki.gnome.org/Apps/Ghex
+[gnome-net-displays]: https://flathub.org/en/apps/org.gnome.NetworkDisplays
+[gnome-vitals]: https://github.com/corecoding/Vitals
 [imhex]: https://github.com/WerWolv/ImHex
 [include-what-you-use]: https://github.com/include-what-you-use/include-what-you-use
 [kcachegrind]: https://apps.kde.org/fr/kcachegrind/
