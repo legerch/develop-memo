@@ -11,12 +11,13 @@ This file list all needed packages for **Windows OS** according to each usage.
   - [1.6. Logs](#16-logs)
   - [1.7. File comparaison viewer](#17-file-comparaison-viewer)
   - [1.8. Hexadecimal viewer](#18-hexadecimal-viewer)
-  - [1.9. Documentation](#19-documentation)
-  - [1.10. Charts tools](#110-charts-tools)
-  - [1.11. Color picker](#111-color-picker)
-  - [1.12. Compression tools](#112-compression-tools)
-  - [1.13. Hash tools](#113-hash-tools)
-  - [1.14. Arduino development](#114-arduino-development)
+  - [1.9. Image comparaison viewer](#19-image-comparaison-viewer)
+  - [1.10. Documentation](#110-documentation)
+  - [1.11. Charts tools](#111-charts-tools)
+  - [1.12. Color picker](#112-color-picker)
+  - [1.13. Compression tools](#113-compression-tools)
+  - [1.14. Hash tools](#114-hash-tools)
+  - [1.15. Arduino development](#115-arduino-development)
 - [2. Edition tools](#2-edition-tools)
   - [2.1. Qt](#21-qt)
   - [2.2. Visual Studio Code](#22-visual-studio-code)
@@ -78,28 +79,33 @@ Multiple project can help to remove uneeded includes directives:
 
 - [ImHex][imhex-home]
 
-## 1.9. Documentation
+## 1.9. Image comparaison viewer
+
+- [Image Compare][img-compare-repo]
+- [Online Image Comparator][img-comparator-online]
+
+## 1.10. Documentation
 
 - [Doxygen][doxygen-home]
 
-## 1.10. Charts tools
+## 1.11. Charts tools
 
 - [DrawIO][drawio-home]
 
-## 1.11. Color picker
+## 1.12. Color picker
 
 - [MS Powertools][powertoys-home]
 
-## 1.12. Compression tools
+## 1.13. Compression tools
 
 - [7zip][7zip-home]
 - [Caesium Image Compressor][caesium-home]
 
-## 1.13. Hash tools
+## 1.14. Hash tools
 
 - [OpenHashTab][hashtab-home]
 
-## 1.14. Arduino development
+## 1.15. Arduino development
 
 See [Doc - Arduino development][doc-arduino] for more details.
 
@@ -256,6 +262,8 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 [include-what-you-use]: https://github.com/include-what-you-use/include-what-you-use
 [iperf-home]: https://github.com/esnet/iperf
 [iperf-bin]: https://files.budman.pw/
+[img-comparator-online]: https://www.textcompare.org/image/
+[img-compare-repo]: https://github.com/gimletlove/imagecompare
 [java8-runtime-dl]: https://www.java.com/en/download/manual.jsp
 [klogg-home]: https://github.com/variar/klogg
 [kodi-home]: https://kodi.tv/

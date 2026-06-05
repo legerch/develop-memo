@@ -31,14 +31,15 @@ This file list all needed packages for **Ubuntu OS** according to each usage.
       - [2.6.2.1. glogg](#2621-glogg)
       - [2.6.2.2. klogg](#2622-klogg)
   - [2.7. File comparaison viewer](#27-file-comparaison-viewer)
-  - [2.8. Hexadecimal viewer](#28-hexadecimal-viewer)
-  - [2.9. Documentation](#29-documentation)
-  - [2.10. CTRL-C memory](#210-ctrl-c-memory)
-  - [2.11. Charts tools](#211-charts-tools)
-  - [2.12. Box of tools for developers](#212-box-of-tools-for-developers)
-  - [2.13. Color picker](#213-color-picker)
-  - [2.14. QrCode](#214-qrcode)
-  - [2.15. Arduino development](#215-arduino-development)
+  - [2.8. Image comparaison viewer](#28-image-comparaison-viewer)
+  - [2.9. Hexadecimal viewer](#29-hexadecimal-viewer)
+  - [2.10. Documentation](#210-documentation)
+  - [2.11. CTRL-C memory](#211-ctrl-c-memory)
+  - [2.12. Charts tools](#212-charts-tools)
+  - [2.13. Box of tools for developers](#213-box-of-tools-for-developers)
+  - [2.14. Color picker](#214-color-picker)
+  - [2.15. QrCode](#215-qrcode)
+  - [2.16. Arduino development](#216-arduino-development)
 - [3. Buildroot/kernels requirements](#3-buildrootkernels-requirements)
   - [3.1. Mandatory packages](#31-mandatory-packages)
   - [3.2. Optional packages](#32-optional-packages)
@@ -312,7 +313,12 @@ A custom _klogg highlighters_ configuration can be found at [klogg-highlighters]
 sudo apt install meld
 ```
 
-## 2.8. Hexadecimal viewer
+## 2.8. Image comparaison viewer
+
+- [Image Compare][img-compare-repo] (available on [Flathub][img-compare-flatpak])
+- [Online Image Comparator][img-comparator-online]
+
+## 2.9. Hexadecimal viewer
 
 - [ImHex][imhex]
 ```shell
@@ -324,7 +330,7 @@ flatpak install flathub net.werwolv.ImHex
 sudo apt install ghex
 ```
 
-## 2.9. Documentation
+## 2.10. Documentation
 
 ```shell
 sudo apt install doxygen doxygen-gui doxygen-doc
@@ -333,25 +339,25 @@ sudo apt install doxygen doxygen-gui doxygen-doc
 > If graphs are needed, package `graphviz` will also be necessary.    
 > See [Doxygen tutorial][doc-doxygen] to see how to use _Doxygen_ tool.
 
-## 2.10. CTRL-C memory
+## 2.11. CTRL-C memory
 
 - [Clipboard history][gnome-clipboard-history]
 - [CopyQ][copyq-official] (note that this utility doesn't properly work with _wayland_ environment).
 
-## 2.11. Charts tools
+## 2.12. Charts tools
 
 ```shell
 sudo snap install drawio
 ```
 
-## 2.12. Box of tools for developers
+## 2.13. Box of tools for developers
 
 - [Dev toolbox][developer-toolbox]
 ```shell
 flatpak install flathub me.iepure.devtoolbox
 ```
 
-## 2.13. Color picker
+## 2.14. Color picker
 
 - [eyedropper][eyedropper-repository] :
 ```shell
@@ -363,14 +369,14 @@ flatpak install flathub com.github.finefindus.eyedropper
 sudo snap install color-picker
 ```
 
-## 2.14. QrCode
+## 2.15. QrCode
 
 - [qrencode][qrencode-man] :
 ```shell
 sudo apt install qrencode
 ```
 
-## 2.15. Arduino development
+## 2.16. Arduino development
 
 See [Doc - Arduino development][doc-arduino] for more details.
 
@@ -626,6 +632,9 @@ Useful properties :
 [gnome-hex-editor]: https://wiki.gnome.org/Apps/Ghex
 [gnome-net-displays]: https://flathub.org/en/apps/org.gnome.NetworkDisplays
 [gnome-vitals]: https://github.com/corecoding/Vitals
+[img-comparator-online]: https://www.textcompare.org/image/
+[img-compare-flatpak]: https://flathub.org/en/apps/io.github.gimletlove.imagecompare
+[img-compare-repo]: https://github.com/gimletlove/imagecompare
 [imhex]: https://github.com/WerWolv/ImHex
 [include-what-you-use]: https://github.com/include-what-you-use/include-what-you-use
 [kcachegrind]: https://apps.kde.org/fr/kcachegrind/
