@@ -112,6 +112,7 @@ Open editors panel by defult sort by latest used (I've encountered case when eve
 _Visual Studio Code_ allow usage of plugin, list of useful plugins and somes associated settings :
 - [Arduino][plugin-arduino] (a [tutorial][repo-arduino] is available in this repository)
 - [Back & Forth][plugin-back-forth]
+- [Black Formatter][plugin-py-fmt]: Allow to easily format Python files
 - [C/C++][plugin-c-cpp]
 - [Native Debug][plugin-native-debug]
 - [Doxygen Documentation Generator][plugin-doxygen]
@@ -121,7 +122,7 @@ _Visual Studio Code_ allow usage of plugin, list of useful plugins and somes ass
   - `Mardown/extension/print/Absolute Img Path`: By default, this setting is enable, disable it to make your `.html` **moveable** when using an `images` folder
   - `Mardown/extension/print/Img To Base64`: Can be useful to include images directly into `.html` files to get ride of the `images` folder when generate `.html`
 - [Markdown emoji][plugin-markdown-emoji]: Use to add support for emoji in markdwon files (see [Github emoji cheat-sheet][github-list-emoji] for available emoji)
-- [Todo Tree][plugin-todo-tree]
+- [Better Todo Tree][plugin-todo-tree-fork] (a fork of unmaintened original [Todo Tree][plugin-todo-tree] extension)
 - [Vscode-icons][plugin-vscode-icons]
 - [Color Highlight][plugin-color-highlight]
 - [Workspace Storage Cleanup][plugin-workspace-cleanup]: To use it, you can use palette command `workspaces: cleanup storage`
@@ -239,7 +240,9 @@ This will attach to the running process managed by gdbserver on `192.168.10.130:
 [plugin-markdown]: https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
 [plugin-markdown-emoji]: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji
 [plugin-native-debug]: https://marketplace.visualstudio.com/items?itemName=webfreak.debug
+[plugin-py-fmt]: https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter
 [plugin-todo-tree]: https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
+[plugin-todo-tree-fork]: https://marketplace.visualstudio.com/items?itemName=FanaticPythoner.better-todo-tree
 [plugin-vscode-icons]: https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons
 [plugin-workspace-cleanup]: https://marketplace.visualstudio.com/items?itemName=mehyaa.workspace-storage-cleanup
 
