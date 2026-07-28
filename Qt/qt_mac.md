@@ -5,6 +5,7 @@ This file will provide all informations related to [Qt Framework][qt-home] under
   - [1.1. Set metadata ressources](#11-set-metadata-ressources)
   - [1.2. Generate bundle](#12-generate-bundle)
   - [1.3. Sign application](#13-sign-application)
+  - [1.4. Notarize the application](#14-notarize-the-application)
 
 
 # 1. Deploy
@@ -106,6 +107,13 @@ codesign --force --deep --sign - MyApp.app
 # If distributing the app, use your Apple Developer ID:
 codesign --force --sign "Developer ID Application: Your Name" MyApp.app
 ```
+
+> [!NOTE]
+> To sign it in development phases, the element to sign is not `MyApp.app` but `MyApp/Contents/MacOS/MyApp-0.0.1`.
+
+## 1.4. Notarize the application
+
+_TODO: explain how notarization is working_
 
 <!-- External links -->
 
