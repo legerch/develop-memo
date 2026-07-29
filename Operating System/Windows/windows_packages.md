@@ -30,9 +30,10 @@ This file list all needed packages for **Windows OS** according to each usage.
     - [5.1.2. Metadata informations](#512-metadata-informations)
     - [5.1.3. MKV video files utilities](#513-mkv-video-files-utilities)
     - [5.1.4. Subtitles utilities](#514-subtitles-utilities)
-    - [5.1.5. Video encoders](#515-video-encoders)
-    - [5.1.6. Videos editors](#516-videos-editors)
-    - [5.1.7. Downloaders](#517-downloaders)
+    - [5.1.5. Video Broadcast](#515-video-broadcast)
+    - [5.1.6. Video encoders](#516-video-encoders)
+    - [5.1.7. Videos editors](#517-videos-editors)
+    - [5.1.8. Downloaders](#518-downloaders)
   - [5.2. Text media](#52-text-media)
   - [5.3. Screen tools](#53-screen-tools)
     - [5.3.1. Screen sharing](#531-screen-sharing)
@@ -178,16 +179,29 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
 - Synchronization
   - [Subtitle Speech Synchronizer][subtitle-speech-sync-home]
 
-### 5.1.5. Video encoders
+### 5.1.5. Video Broadcast
+
+- [OBS Studio][obs-studio-home]: Use to handle streaming features (handle multiple sources, generate a virtual camera, etc...)
+  - Use smartphone as webcam:
+    - **Google Pixels** can be used as webcam when wired to computer
+    - We can also use alternative: [OBS Smartphone Camera Guide][obs-studio-smartphone]
+  - Control OBS via remote (don't forget to enable **WebSocket Server** in parameters via `Tools -> WebSocket Server -> Enable`):
+    - Smartphone:
+      - [Stream Control][obs-remote-stream-ctrl]
+      - [OBS Blade][obs-remote-blade]
+    - Dedicated hardware:
+      - [Stream Deck][obs-remote-stream-deck]
+
+### 5.1.6. Video encoders
 
 - [Handbrake][handbrake-home]
 
-### 5.1.6. Videos editors
+### 5.1.7. Videos editors
 
 - [LosslessCut][losslesscut-home]
 - [FFMPEG][ffmpeg-home]
 
-### 5.1.7. Downloaders
+### 5.1.8. Downloaders
 
 - [Open Video Downloader][open-video-dl-home]
 
@@ -283,6 +297,11 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 [mp3tag-home]: https://www.mp3tag.de/en/index.html
 [mtputty-home]: https://ttyplus.com/multi-tabbed-putty/
 [notepad-home]: https://notepad-plus-plus.org/
+[obs-studio-home]: https://obsproject.com/fr
+[obs-studio-smartphone]: https://obsproject.com/kb/smartphone-camera-guide
+[obs-remote-blade]: https://github.com/Kounex/obs_blade
+[obs-remote-stream-deck]: https://www.elgato.com/fr/fr/s/explore-stream-deck
+[obs-remote-stream-ctrl]: https://play.google.com/store/apps/details?id=dev.t4ils.obs_remote
 [open-video-dl-home]: https://github.com/jely2002/youtube-dl-gui
 [osmc-home]: https://osmc.tv/
 [powertoys-home]: https://github.com/microsoft/PowerToys
