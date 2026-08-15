@@ -191,6 +191,11 @@ See [Doc - Visual Studio Code][doc-vscode] for more details
       - [OBS Blade][obs-remote-blade]
     - Dedicated hardware:
       - [Stream Deck][obs-remote-stream-deck]
+  - Useful plugins:
+    - [Move transition][obs-plugin-move]: More natural transitions
+
+> [!NOTE]
+> _TODO: Talk about nested scenes_
 
 ### 5.1.6. Video encoders
 
@@ -297,6 +302,7 @@ reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a
 [mp3tag-home]: https://www.mp3tag.de/en/index.html
 [mtputty-home]: https://ttyplus.com/multi-tabbed-putty/
 [notepad-home]: https://notepad-plus-plus.org/
+[obs-plugin-move]: https://obsproject.com/forum/resources/move.913/
 [obs-studio-home]: https://obsproject.com/fr
 [obs-studio-smartphone]: https://obsproject.com/kb/smartphone-camera-guide
 [obs-remote-blade]: https://github.com/Kounex/obs_blade
