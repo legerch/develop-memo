@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 24.04.3 LTS - Kernel 6.14.0-29-generic - 25/09/2025 :
+Saved from : Ubuntu 24.04.4 LTS - Kernel 7.0.0-31-generic - 10/09/2026 :
 
 ```shell
 ##########################
@@ -637,6 +637,35 @@ function _arduino-cli-binary-update()
 
 ##########################
 # Scripts functions
+#   NVM (NodeJS)
+##########################
+
+# Used to manage update of NVM Node Manager
+# More infos at: https://github.com/nvm-sh/nvm
+function _node-nvm-update()
+{
+    local doUpdate=0
+
+    # Check current version
+    nvm --version
+    _repo-github-retrieve-latest-release-infos "nvm-sh" "nvm"
+
+    # Ask user before proceed to FW update
+    doUpdate=$(_user-answer-is-yes "Do you want to update NVM script")
+    if [ ${doUpdate} -eq 1 ]; then
+        local latestTag=$(jq -r '.tag_name' ${m_fileReleaseInfo})
+        local url="https://raw.githubusercontent.com/nvm-sh/nvm/${latestTag}/install.sh"
+        printf "NVM script will be updated using URL: ${url}\n"
+
+        curl -o- ${url} | bash
+
+    else
+        printf "No NVM script update have been performed\n"
+    fi
+}
+
+##########################
+# Scripts functions
 # LAMP (Linux, Apache, MySQL,PHP)
 ##########################
 
@@ -660,6 +689,7 @@ alias maj-flatpak='flatpak update'
 alias maj-firmware='update-host-fw'
 alias maj-arduino-cli-bin='_arduino-cli-binary-update'
 alias maj-python='pipx upgrade-all'
+alias maj-nvm='_node-nvm-update'
 
 # To uninstall a package and all dependencies not used elsewhere (source : https://askubuntu.com/questions/151941/how-can-you-completely-remove-a-package)
 alias apt-uninstall="sudo apt purge --autoremove"
@@ -766,6 +796,12 @@ alias tio-edit-cfg-file='code ${_FILE_TIO_CFG}'
 
 # Create alias to python tools
 alias py-b4='${HOME}/.local/bin/b4'
+
+# Create alias to NVM tools
+alias nvm-install-node-latest='nvm install node'
+alias nvm-install-node-specific='nvm install'
+alias nvm-use-node='nvm use'
+alias nvm-list-nodes='nvm list'
 
 ##
 # Applications build ourself
