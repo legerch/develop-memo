@@ -3,7 +3,7 @@
 > [!NOTE]
 > See [bash aliases documentation](https://github.com/legerch/develop-memo/blob/master/Operating%20System/Linux/Common/linux-terminal.md) for more details
 
-Saved from : Ubuntu 24.04.4 LTS - Kernel 7.0.0-31-generic - 10/09/2026 :
+Saved from : Ubuntu 26.04.1 LTS - Kernel 7.0.0-42-generic - 28/10/2026 :
 
 ```shell
 ##########################
@@ -815,9 +815,10 @@ alias custom-raw2rgbpnm='${_DIR_WORKSPACES}/workspace-vscode/raw2rgbpnm/raw2rgbp
 alias memo-yavta='printf "raw10: yavta -f SGRBG16 -s 648x648 -c8 -F/tmp/frame-#.bin /dev/video0\nraw8: yavta -f SGRBG8 -s 640x640 -c8 -F/tmp/frame-#.bin /dev/video0\nyuyv: yavta -f YUYV -s 640x640 -c8 -F/tmp/frame-#.bin /dev/video0\n"'
 alias memo-raw2rgbpnm='printf "raw10: raw2rgbpnm -s 648x648 -f SGRBG10 frame-000000.bin frame-000000.ppm\nraw8: raw2rgbpnm -s 640x640 -f SGRBG8 frame-000000.bin frame-000000.ppm\nyuyv: raw2rgbpnm -s 640x640 -f YUYV frame-000000.bin frame-000000.ppm\n"'
 
-alias custom-qt-creator-13.0.2='${_DIR_PACKAGES_STANDALONE}/qtcreator-13.0.2/bin/qtcreator'
 alias custom-caesium='${_DIR_PACKAGES_STANDALONE}/caesium/Caesium_Image_Compressor-x86_64_v2.6.0_ubu20_qt66.AppImage'
 alias custom-doxygen='${_BIN_DOXYGEN_CUSTOM}'
+alias custom-klogg='${_DIR_PACKAGES_STANDALONE}/klogg/klogg-24.11.0.1685-x86_64.AppImage'
+alias custom-qt-creator-13.0.2='${_DIR_PACKAGES_STANDALONE}/qtcreator-13.0.2/bin/qtcreator'
 
 ##
 # Pi specific aliases
